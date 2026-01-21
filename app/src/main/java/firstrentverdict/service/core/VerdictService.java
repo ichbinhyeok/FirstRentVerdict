@@ -3,6 +3,7 @@ package firstrentverdict.service.core;
 import firstrentverdict.model.dtos.*;
 import firstrentverdict.model.verdict.*;
 import firstrentverdict.repository.VerdictDataRepository;
+import firstrentverdict.service.verdict.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,9 +14,16 @@ import java.util.Optional;
 public class VerdictService {
 
     private final VerdictDataRepository repository;
+    private final BottleneckAnalyzer bottleneckAnalyzer;
+    private final VerdictTextGenerator textGenerator;
 
-    public VerdictService(VerdictDataRepository repository) {
+    public VerdictService(
+            VerdictDataRepository repository,
+            BottleneckAnalyzer bottleneckAnalyzer,
+            VerdictTextGenerator textGenerator) {
         this.repository = repository;
+        this.bottleneckAnalyzer = bottleneckAnalyzer;
+        this.textGenerator = textGenerator;
     }
 
     public VerdictResult assessVerdict(VerdictInput input) {
@@ -106,29 +114,45 @@ public class VerdictService {
         }
 
         // ==========================================================================
-        // PHASE 1 STUB: Populate new 4-layer fields with temporary values
-        // TODO Phase 2: Replace with BottleneckAnalyzer + VerdictTextGenerator
+        // PHASE 2: Smart Verdict Generation with BottleneckAnalyzer & TextGenerator
         // ==========================================================================
 
-        // Layer 2: Why This Verdict (STUB - hardcoded for now)
-        String whyThisVerdict = generateWhyThisVerdictStub(verdict, remainingCash, recommendedBuffer);
-        String primaryBottleneck = primaryDistress != null ? primaryDistress : "APPROVED";
+        // Create financial snapshot for analysis
+        FinancialSnapshot snapshot = new FinancialSnapshot(
+                input.monthlyRent(),
+                input.availableCash(),
+                totalUpfront,
+                remainingCash,
+                recommendedBuffer,
+                verdict);
 
-        // Layer 3: Contributing Factors (STUB - using existing riskFactors temporarily)
+        // Identify primary bottleneck
+        BottleneckType bottleneck = bottleneckAnalyzer.analyze(snapshot);
+        String primaryBottleneck = bottleneckAnalyzer.toDisplayText(bottleneck);
+
+        // Generate contextual "Why This Verdict" text
+        VerdictContext context = new VerdictContext(
+                verdict,
+                bottleneck,
+                remainingCash,
+                recommendedBuffer,
+                input.city());
+        String whyThisVerdict = textGenerator.generate(context);
+
+        // Layer 3: Contributing Factors (using existing riskFactors for now)
         List<String> contributingFactors = riskFactors.size() > 3
                 ? riskFactors.subList(0, 3)
                 : new ArrayList<>(riskFactors);
 
-        // Layer 4: Regional Context (STUB)
+        // Layer 4: Regional Context (stub - to be enhanced in future)
         RegionalContext regionalContext = new RegionalContext(
                 input.city() + ", " + input.state(),
                 List.of(
                         "This market typically requires strong upfront liquidity",
                         "Rental competition favors financially prepared applicants"),
-                totalUpfront > 5000 // Simple heuristic
-        );
+                totalUpfront > 5000);
 
-        // Safety Gap (CALCULATED)
+        // Safety Gap (calculated)
         int gapAmount = remainingCash - recommendedBuffer;
         String actionPrompt = gapAmount < 0
                 ? "Reduce rent or increase available cash"
@@ -153,32 +177,7 @@ public class VerdictService {
                 legalNote);
     }
 
-    /**
-     * PHASE 1 STUB: Temporary text generation
-     * TODO Phase 2: Replace with VerdictTextGenerator
-     */
-    private String generateWhyThisVerdictStub(Verdict verdict, int remaining, int recommended) {
-        // ENFORCE 250 char limit
-        if (verdict == Verdict.APPROVED) {
-            return "You have sufficient buffer to cover upfront costs and maintain financial safety. " +
-                    "This move is financially viable based on current data.";
-        } else if (verdict == Verdict.BORDERLINE) {
-            return "Your upfront costs will consume most available cash, leaving minimal safety margin. " +
-                    "This creates vulnerability to unexpected expenses.";
-        } else {
-            if (remaining < 0) {
-                return String.format(
-                        "Your upfront requirement exceeds available funds by $%,d. " +
-                                "This creates immediate insolvency with no recovery path.",
-                        Math.abs(remaining));
-            } else {
-                return String.format(
-                        "While you can cover upfront costs, only $%,d remains—far below the $%,d safety threshold. " +
-                                "One emergency could trigger financial crisis.",
-                        remaining, recommended);
-            }
-        }
-    }
+    // REMOVED: generateWhyThisVerdictStub() - replaced by VerdictTextGenerator
 
     private String generateSummary(Verdict verdict, int remaining, int recommended) {
         if (verdict == Verdict.APPROVED) {
