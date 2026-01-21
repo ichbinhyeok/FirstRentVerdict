@@ -52,6 +52,34 @@
             </div>
         @endif
 
+        @if(result.contributingFactors() != null && !result.contributingFactors().isEmpty())
+            <div class="verdict-contributing" style="margin-bottom: 3rem;">
+                <h4 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">Contributing Factors</h4>
+                <ul style="list-style: none; padding: 0;">
+                    @for(String factor : result.contributingFactors())
+                        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative; color: var(--text-secondary);">
+                            <span style="position: absolute; left: 0; color: var(--text-tertiary);">→</span>
+                            ${factor}
+                        </li>
+                    @endfor
+                </ul>
+            </div>
+        @endif
+
+        @if(result.regionalContext() != null)
+            <details class="verdict-regional" style="margin-top: 3rem; margin-bottom: 3rem; padding: 1.5rem; background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 4px;">
+                <summary style="cursor: pointer; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); user-select: none;">Regional Context: ${result.regionalContext().cityName()}</summary>
+                <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+                    @for(String context : result.regionalContext().contextFactors())
+                        <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative; font-size: 0.95rem; color: var(--text-secondary);">
+                            <span style="position: absolute; left: 0; color: var(--text-tertiary);">•</span>
+                            ${context}
+                        </li>
+                    @endfor
+                </ul>
+            </details>
+        @endif
+
         <div style="margin-bottom: 3rem;">
             <p style="font-size: 1.25rem; line-height: 1.5; color: var(--text-primary);">
                 ${result.summary()}

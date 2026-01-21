@@ -3,7 +3,7 @@ import firstrentverdict.model.verdict.VerdictResult;
 import firstrentverdict.model.verdict.Verdict;
 public final class JteresultGenerated {
 	public static final String JTE_NAME = "pages/result.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,5,5,5,5,16,16,18,18,20,20,22,22,25,25,26,26,28,28,28,29,29,29,31,31,33,33,33,34,34,34,36,36,37,37,39,39,43,43,43,45,45,48,48,48,50,50,52,52,56,56,56,60,60,63,63,63,65,65,73,73,73,77,77,79,79,79,81,81,83,83,83,85,85,99,99,99,100,100,100,3,3,3,3};
+	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,5,5,5,5,16,16,18,18,20,20,22,22,25,25,26,26,28,28,28,29,29,29,31,31,33,33,33,34,34,34,36,36,37,37,39,39,43,43,43,45,45,48,48,48,50,50,52,52,54,54,58,58,61,61,61,63,63,66,66,68,68,70,70,70,72,72,75,75,75,77,77,80,80,84,84,84,88,88,91,91,91,93,93,101,101,101,105,105,107,107,107,109,109,111,111,111,113,113,127,127,127,128,128,128,3,3,3,3};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, VerdictResult result) {
 		jteOutput.writeContent("\r\n");
 		gg.jte.generated.ondemand.layout.JtemainGenerated.render(jteOutput, jteHtmlInterceptor, new gg.jte.html.HtmlContent() {
@@ -51,6 +51,31 @@ public final class JteresultGenerated {
 						jteOutput.writeContent("</span>\r\n                    </div>\r\n                ");
 					}
 					jteOutput.writeContent("\r\n            </div>\r\n        ");
+				}
+				jteOutput.writeContent("\r\n\r\n        ");
+				if (result.contributingFactors() != null && !result.contributingFactors().isEmpty()) {
+					jteOutput.writeContent("\r\n            <div class=\"verdict-contributing\" style=\"margin-bottom: 3rem;\">\r\n                <h4 style=\"font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;\">Contributing Factors</h4>\r\n                <ul style=\"list-style: none; padding: 0;\">\r\n                    ");
+					for (String factor : result.contributingFactors()) {
+						jteOutput.writeContent("\r\n                        <li style=\"margin-bottom: 1rem; padding-left: 1.5rem; position: relative; color: var(--text-secondary);\">\r\n                            <span style=\"position: absolute; left: 0; color: var(--text-tertiary);\">→</span>\r\n                            ");
+						jteOutput.setContext("li", null);
+						jteOutput.writeUserContent(factor);
+						jteOutput.writeContent("\r\n                        </li>\r\n                    ");
+					}
+					jteOutput.writeContent("\r\n                </ul>\r\n            </div>\r\n        ");
+				}
+				jteOutput.writeContent("\r\n\r\n        ");
+				if (result.regionalContext() != null) {
+					jteOutput.writeContent("\r\n            <details class=\"verdict-regional\" style=\"margin-top: 3rem; margin-bottom: 3rem; padding: 1.5rem; background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 4px;\">\r\n                <summary style=\"cursor: pointer; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); user-select: none;\">Regional Context: ");
+					jteOutput.setContext("summary", null);
+					jteOutput.writeUserContent(result.regionalContext().cityName());
+					jteOutput.writeContent("</summary>\r\n                <ul style=\"list-style: none; padding: 0; margin-top: 1rem;\">\r\n                    ");
+					for (String context : result.regionalContext().contextFactors()) {
+						jteOutput.writeContent("\r\n                        <li style=\"margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative; font-size: 0.95rem; color: var(--text-secondary);\">\r\n                            <span style=\"position: absolute; left: 0; color: var(--text-tertiary);\">•</span>\r\n                            ");
+						jteOutput.setContext("li", null);
+						jteOutput.writeUserContent(context);
+						jteOutput.writeContent("\r\n                        </li>\r\n                    ");
+					}
+					jteOutput.writeContent("\r\n                </ul>\r\n            </details>\r\n        ");
 				}
 				jteOutput.writeContent("\r\n\r\n        <div style=\"margin-bottom: 3rem;\">\r\n            <p style=\"font-size: 1.25rem; line-height: 1.5; color: var(--text-primary);\">\r\n                ");
 				jteOutput.setContext("p", null);
