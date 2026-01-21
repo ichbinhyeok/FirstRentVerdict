@@ -105,14 +105,79 @@ public class VerdictService {
             legalNote = String.format("State law limits deposits to %.1fx rent.", depositData.legalCapMultiplier());
         }
 
+        // ==========================================================================
+        // PHASE 1 STUB: Populate new 4-layer fields with temporary values
+        // TODO Phase 2: Replace with BottleneckAnalyzer + VerdictTextGenerator
+        // ==========================================================================
+
+        // Layer 2: Why This Verdict (STUB - hardcoded for now)
+        String whyThisVerdict = generateWhyThisVerdictStub(verdict, remainingCash, recommendedBuffer);
+        String primaryBottleneck = primaryDistress != null ? primaryDistress : "APPROVED";
+
+        // Layer 3: Contributing Factors (STUB - using existing riskFactors temporarily)
+        List<String> contributingFactors = riskFactors.size() > 3
+                ? riskFactors.subList(0, 3)
+                : new ArrayList<>(riskFactors);
+
+        // Layer 4: Regional Context (STUB)
+        RegionalContext regionalContext = new RegionalContext(
+                input.city() + ", " + input.state(),
+                List.of(
+                        "This market typically requires strong upfront liquidity",
+                        "Rental competition favors financially prepared applicants"),
+                totalUpfront > 5000 // Simple heuristic
+        );
+
+        // Safety Gap (CALCULATED)
+        int gapAmount = remainingCash - recommendedBuffer;
+        String actionPrompt = gapAmount < 0
+                ? "Reduce rent or increase available cash"
+                : "Maintain this buffer for emergencies";
+        SafetyGap safetyGap = new SafetyGap(gapAmount, actionPrompt, verdict == Verdict.APPROVED);
+
+        // ==========================================================================
+
         return new VerdictResult(
                 verdict,
+                whyThisVerdict,
+                primaryBottleneck,
+                contributingFactors,
+                regionalContext,
+                safetyGap,
+                new VerdictResult.Financials(totalUpfront, remainingCash, recommendedBuffer),
+                // DEPRECATED fields (keep for backward compatibility)
                 summary,
                 breakdown,
                 riskFactors,
-                new VerdictResult.Financials(totalUpfront, remainingCash, recommendedBuffer),
                 primaryDistress,
                 legalNote);
+    }
+
+    /**
+     * PHASE 1 STUB: Temporary text generation
+     * TODO Phase 2: Replace with VerdictTextGenerator
+     */
+    private String generateWhyThisVerdictStub(Verdict verdict, int remaining, int recommended) {
+        // ENFORCE 250 char limit
+        if (verdict == Verdict.APPROVED) {
+            return "You have sufficient buffer to cover upfront costs and maintain financial safety. " +
+                    "This move is financially viable based on current data.";
+        } else if (verdict == Verdict.BORDERLINE) {
+            return "Your upfront costs will consume most available cash, leaving minimal safety margin. " +
+                    "This creates vulnerability to unexpected expenses.";
+        } else {
+            if (remaining < 0) {
+                return String.format(
+                        "Your upfront requirement exceeds available funds by $%,d. " +
+                                "This creates immediate insolvency with no recovery path.",
+                        Math.abs(remaining));
+            } else {
+                return String.format(
+                        "While you can cover upfront costs, only $%,d remains—far below the $%,d safety threshold. " +
+                                "One emergency could trigger financial crisis.",
+                        remaining, recommended);
+            }
+        }
     }
 
     private String generateSummary(Verdict verdict, int remaining, int recommended) {
