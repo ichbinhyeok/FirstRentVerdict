@@ -1,0 +1,1779 @@
+{
+    "version": "2026-01-21",
+    "unit": "multiplier_of_monthly_rent",
+    "notes": "Security deposit laws and typical practices in major US cities. All values represent multipliers of one month's rent.",
+    "state_laws": [
+        {
+            "state": "NY",
+            "legal_cap_multiplier": 1,
+            "effective_date": "2019-06-14",
+            "exceptions": "None (Applies to all residential units)",
+            "sources": [
+                "New York State Attorney General - Tenant Rights"
+            ]
+        },
+        {
+            "state": "CA",
+            "legal_cap_multiplier": 1,
+            "effective_date": "2024-07-01",
+            "exceptions": "Small landlords (max 2 units) may collect up to 2 months",
+            "sources": [
+                "California AB 12 (Legislative Update)"
+            ]
+        },
+        {
+            "state": "IL",
+            "legal_cap_multiplier": null,
+            "effective_date": null,
+            "exceptions": "No statewide limit; check city ordinances (e.g., Chicago RLTO)",
+            "sources": [
+                "Illinois General Assembly - Security Deposit Return Act"
+            ]
+        },
+        {
+            "state": "TX",
+            "legal_cap_multiplier": null,
+            "effective_date": null,
+            "exceptions": "No statewide limit on deposit amount",
+            "sources": [
+                "Texas Property Code Title 8"
+            ]
+        }
+    ],
+    "cities": [
+        {
+            "city": "New York",
+            "state": "NY",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Strictly limited to 1 month by state law since 2019. No additional prepaid rent allowed."
+            },
+            "sources": [
+                "NY Housing Stability and Tenant Protection Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Los Angeles",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "AB 12 recently reduced the cap from 2 to 1 for most landlords regardless of furniture."
+            },
+            "sources": [
+                "LA Housing Department Rent Stabilization"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Chicago",
+            "state": "IL",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1.5,
+                    2
+                ],
+                "notes": "Landlords often charge a non-refundable move-in fee instead of a security deposit to avoid strict interest payment laws."
+            },
+            "sources": [
+                "Chicago Residential Landlord and Tenant Ordinance (RLTO)"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Houston",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1.5,
+                    2
+                ],
+                "notes": "No legal cap in Texas; amount is usually determined by the tenant's credit score."
+            },
+            "sources": [
+                "Texas Tenant Advisor"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Phoenix",
+            "state": "AZ",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    1.5
+                ],
+                "notes": "Landlords cannot require more than 1.5 times the monthly rent for a deposit per state law."
+            },
+            "sources": [
+                "Arizona Residential Landlord and Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Philadelphia",
+            "state": "PA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Capped at 2 months for the first year of the lease and 1 month for subsequent years."
+            },
+            "sources": [
+                "PA Landlord and Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Antonio",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1.5,
+                    2
+                ],
+                "notes": "Standard practice follows Texas law with no specific city-level cap."
+            },
+            "sources": [
+                "SA Housing Authority Guidance"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Diego",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Under CA AB 12, security deposits are now limited to one month's rent for most properties."
+            },
+            "sources": [
+                "CA Dept of Real Estate"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Dallas",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "No state cap; standard practice is one month's rent but can be higher for low credit."
+            },
+            "sources": [
+                "Texas Apartment Association"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Jose",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Follows California state mandate limiting deposits to one month of rent."
+            },
+            "sources": [
+                "San Jose Housing Department"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Austin",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Highly competitive market; some properties offer deposit insurance as an alternative to cash deposits."
+            },
+            "sources": [
+                "Austin Tenants Council"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Jacksonville",
+            "state": "FL",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Florida has no statutory limit on security deposit amounts for residential leases."
+            },
+            "sources": [
+                "Florida Statutes Chapter 83"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Fort Worth",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1.5,
+                    2
+                ],
+                "notes": "Follows general Texas property code without additional municipal limits."
+            },
+            "sources": [
+                "Texas Property Code"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Columbus",
+            "state": "OH",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1.5,
+                    2
+                ],
+                "notes": "Ohio law does not cap the deposit, but interest must be paid if it exceeds one month's rent."
+            },
+            "sources": [
+                "Ohio Revised Code 5321"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Indianapolis",
+            "state": "IN",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Indiana does not have a legal limit on the amount of security deposit collected."
+            },
+            "sources": [
+                "Indiana Code Title 32"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Charlotte",
+            "state": "NC",
+            "city_practice": {
+                "typical_multipliers": [
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Capped at 1.5x for month-to-month and 2x for leases longer than two months."
+            },
+            "sources": [
+                "NC General Statutes Chapter 42"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Francisco",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Historically high, but now strictly limited to 1x rent due to new state legislation."
+            },
+            "sources": [
+                "SF Rent Board"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Seattle",
+            "state": "WA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "City law requires landlords to allow tenants to pay deposits and fees in installments."
+            },
+            "sources": [
+                "Seattle Municipal Code 7.24"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Denver",
+            "state": "CO",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Colorado law does not cap the deposit amount; market standard is usually one month."
+            },
+            "sources": [
+                "Colorado Landlord-Tenant Handbook"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Oklahoma City",
+            "state": "OK",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1.5,
+                    2
+                ],
+                "notes": "Oklahoma law provides no maximum limit for security deposits."
+            },
+            "sources": [
+                "Oklahoma Residential Landlord and Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Nashville",
+            "state": "TN",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1.5,
+                    2
+                ],
+                "notes": "Tennessee has no statutory limit on security deposits, but one month is standard practice."
+            },
+            "sources": [
+                "Tennessee Code Title 66"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "El Paso",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1.5,
+                    2
+                ],
+                "notes": "Follows general Texas law with no cap; deposits are often tied to credit screening results."
+            },
+            "sources": [
+                "Texas Property Code"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Washington",
+            "state": "DC",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "D.C. law strictly limits security deposits to a maximum of one month's rent."
+            },
+            "sources": [
+                "District of Columbia Municipal Regulations (DCMR)"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Las Vegas",
+            "state": "NV",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    3
+                ],
+                "notes": "Nevada law limits security deposits to a maximum of three months' rent."
+            },
+            "sources": [
+                "Nevada Revised Statutes Chapter 118A"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Boston",
+            "state": "MA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Massachusetts law limits the security deposit to one month's rent and requires interest payments."
+            },
+            "sources": [
+                "Massachusetts General Laws Chapter 186"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Portland",
+            "state": "OR",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "No state cap, but landlords must provide a written list of all deposits and fees."
+            },
+            "sources": [
+                "Oregon Revised Statutes Chapter 90"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Louisville",
+            "state": "KY",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Kentucky has no limit on the deposit amount, but funds must be held in a separate account."
+            },
+            "sources": [
+                "Kentucky Revised Statutes Chapter 383"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Memphis",
+            "state": "TN",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Standard practice in Memphis is a deposit equal to one month's rent."
+            },
+            "sources": [
+                "TN Landlord-Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Detroit",
+            "state": "MI",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    1.5
+                ],
+                "notes": "Michigan law limits security deposits to 1.5 times the monthly rent."
+            },
+            "sources": [
+                "Michigan Compiled Laws Section 554.602"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Baltimore",
+            "state": "MD",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Maryland law limits security deposits to two months' rent; exceeding this allows for triple damages."
+            },
+            "sources": [
+                "Maryland Real Property Code Section 8-203"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Milwaukee",
+            "state": "WI",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Wisconsin law does not set a maximum limit for security deposits."
+            },
+            "sources": [
+                "Wisconsin Statutes Chapter 704"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Albuquerque",
+            "state": "NM",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Limited to one month for leases under a year; interest must be paid for deposits exceeding one month."
+            },
+            "sources": [
+                "New Mexico Statutes Chapter 47"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Tucson",
+            "state": "AZ",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    1.5
+                ],
+                "notes": "Subject to Arizona's state-wide 1.5x monthly rent cap."
+            },
+            "sources": [
+                "AZ Residential Landlord and Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Fresno",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Follows California AB 12, limiting deposits to one month's rent as of July 2024."
+            },
+            "sources": [
+                "California AB 12"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Sacramento",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "New state law applies; landlords are limited to 1x rent for security deposits."
+            },
+            "sources": [
+                "California Civil Code Section 1950.5"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Kansas City",
+            "state": "MO",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Missouri law limits security deposits to a maximum of two months' rent."
+            },
+            "sources": [
+                "Missouri Revised Statutes Section 535.300"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Mesa",
+            "state": "AZ",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    1.5
+                ],
+                "notes": "Regulated by the Arizona state cap of 1.5 times the monthly rent."
+            },
+            "sources": [
+                "AZ Landlord-Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Atlanta",
+            "state": "GA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Georgia has no legal limit on security deposit amounts."
+            },
+            "sources": [
+                "Georgia Landlord Tenant Handbook"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Omaha",
+            "state": "NE",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Nebraska law limits security deposits to a maximum of one month's rent."
+            },
+            "sources": [
+                "Nebraska Uniform Residential Landlord and Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Colorado Springs",
+            "state": "CO",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Colorado law does not cap the deposit amount; standard practice is one month's rent."
+            },
+            "sources": [
+                "CO Dept of Local Affairs"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Raleigh",
+            "state": "NC",
+            "city_practice": {
+                "typical_multipliers": [
+                    1.5,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "North Carolina law limits deposits to 2x rent for terms longer than month-to-month."
+            },
+            "sources": [
+                "NC General Statutes Chapter 42"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Long Beach",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Subject to California's new AB 12 mandate limiting all residential deposits to 1 month."
+            },
+            "sources": [
+                "California Civil Code 1950.5"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Virginia Beach",
+            "state": "VA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Virginia law limits security deposits to a maximum of two months' rent."
+            },
+            "sources": [
+                "Virginia Residential Landlord and Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Miami",
+            "state": "FL",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    3
+                ],
+                "notes": "Florida has no statutory limit; it is common for landlords to request first, last, and security."
+            },
+            "sources": [
+                "Florida Statutes Chapter 83"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Oakland",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Adheres to the 2024 CA statewide cap of one month's rent for security deposits."
+            },
+            "sources": [
+                "CA AB 12 Legislation"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Minneapolis",
+            "state": "MN",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Minnesota has no legal limit on deposit amounts, but interest must be paid to tenants."
+            },
+            "sources": [
+                "Minnesota Statutes Section 504B.178"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Tulsa",
+            "state": "OK",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Oklahoma state law does not impose a maximum limit on security deposits."
+            },
+            "sources": [
+                "Oklahoma Residential Landlord and Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Bakersfield",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Regulated by California's 1-month rent cap for residential properties."
+            },
+            "sources": [
+                "California Dept of Consumer Affairs"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Wichita",
+            "state": "KS",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1.5
+                ],
+                "notes": "Kansas law limits unfurnished units to 1 month and furnished units to 1.5 months."
+            },
+            "sources": [
+                "Kansas Residential Landlord and Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Arlington",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Standard Texas practice applies; no legal cap exists at the state or city level."
+            },
+            "sources": [
+                "Texas Property Code"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Aurora",
+            "state": "CO",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Colorado does not cap security deposits; market norms dictate a 1-month standard."
+            },
+            "sources": [
+                "Colorado Landlord Tenant Laws"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Tampa",
+            "state": "FL",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "No state-wide limit in Florida; landlords have full discretion on the amount."
+            },
+            "sources": [
+                "FL Dept of Agriculture and Consumer Services"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "New Orleans",
+            "state": "LA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Louisiana law does not limit the amount a landlord can charge for a security deposit."
+            },
+            "sources": [
+                "Louisiana Revised Statutes Title 9"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Cleveland",
+            "state": "OH",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Ohio has no statutory limit; 1 month is the most common requirement."
+            },
+            "sources": [
+                "Ohio Revised Code Section 5321.16"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Honolulu",
+            "state": "HI",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Hawaii law limits the security deposit to a maximum of one month's rent."
+            },
+            "sources": [
+                "Hawaii Residential Landlord-Tenant Code"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Anaheim",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Adheres to California Civil Code limiting deposits to one month of rent."
+            },
+            "sources": [
+                "California Civil Code Section 1950.5"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Lexington",
+            "state": "KY",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "No legal limit on security deposit amounts in the state of Kentucky."
+            },
+            "sources": [
+                "Kentucky Landlord-Tenant Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Stockton",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "New California laws limit the deposit to 1x rent for nearly all residential units."
+            },
+            "sources": [
+                "CA AB 12 Update"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Corpus Christi",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Follows general Texas law; no cap is placed on security deposit amounts."
+            },
+            "sources": [
+                "Texas Tenant Rights Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Henderson",
+            "state": "NV",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    3
+                ],
+                "notes": "Subject to Nevada's state cap of 3 months' rent for security deposits."
+            },
+            "sources": [
+                "Nevada Revised Statutes 118A.242"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Riverside",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "In accordance with California AB 12, the security deposit is capped at one month's rent for residential leases."
+            },
+            "sources": [
+                "California Civil Code Section 1950.5"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Newark",
+            "state": "NJ",
+            "city_practice": {
+                "typical_multipliers": [
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    1.5
+                ],
+                "notes": "New Jersey state law strictly limits security deposits to a maximum of 1.5 times the monthly rent."
+            },
+            "sources": [
+                "New Jersey Security Deposit Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Saint Paul",
+            "state": "MN",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Minnesota law has no maximum limit on deposit amounts; one month is the prevailing market standard."
+            },
+            "sources": [
+                "Minnesota Statutes Section 504B.178"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Santa Ana",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Effective July 2024, California law prohibits security deposits exceeding one month's rent for most landlords."
+            },
+            "sources": [
+                "California AB 12"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Cincinnati",
+            "state": "OH",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Ohio does not cap the security deposit amount. Interest is required if the deposit exceeds one month's rent."
+            },
+            "sources": [
+                "Ohio Revised Code 5321.16"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Irvine",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Managed properties in Irvine strictly follow the new CA state-wide 1-month rent deposit cap."
+            },
+            "sources": [
+                "CA Department of Consumer Affairs"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Orlando",
+            "state": "FL",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Florida state law provides no limit on security deposit amounts; often depends on the landlord's policy."
+            },
+            "sources": [
+                "Florida Statutes Chapter 83"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Pittsburgh",
+            "state": "PA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Pennsylvania law limits deposits to 2 months' rent for the first year and 1 month for subsequent years."
+            },
+            "sources": [
+                "PA Landlord and Tenant Act of 1951"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "St. Louis",
+            "state": "MO",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Missouri law limits security deposits to a maximum of two months' rent."
+            },
+            "sources": [
+                "Missouri Revised Statutes Section 535.300"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Greensboro",
+            "state": "NC",
+            "city_practice": {
+                "typical_multipliers": [
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "North Carolina law caps security deposits at 2 months' rent for leases longer than month-to-month."
+            },
+            "sources": [
+                "NC General Statutes 42-51"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Jersey City",
+            "state": "NJ",
+            "city_practice": {
+                "typical_multipliers": [
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    1.5
+                ],
+                "notes": "Jersey City landlords are bound by the state-wide 1.5 month security deposit maximum."
+            },
+            "sources": [
+                "NJ Department of Community Affairs"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Anchorage",
+            "state": "AK",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Alaska law limits deposits to 2 months' rent unless the monthly rent exceeds $2,000."
+            },
+            "sources": [
+                "Alaska Statutes 34.03.070"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Lincoln",
+            "state": "NE",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Nebraska law restricts security deposits to a maximum of one month's rent."
+            },
+            "sources": [
+                "Nebraska Residential Landlord and Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Plano",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "In Plano, there is no legal limit on deposits; corporate landlords usually require one month."
+            },
+            "sources": [
+                "Texas Property Code"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Durham",
+            "state": "NC",
+            "city_practice": {
+                "typical_multipliers": [
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Regulated by North Carolina state law which allows up to 2 months' rent for security."
+            },
+            "sources": [
+                "NC Tenant Security Deposit Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Buffalo",
+            "state": "NY",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "State-wide New York law limits security deposits to one month's rent for all residential leases."
+            },
+            "sources": [
+                "NY State Attorney General Housing Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Chandler",
+            "state": "AZ",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    1.5
+                ],
+                "notes": "Chandler landlords must adhere to the Arizona state cap of 1.5 times the monthly rent."
+            },
+            "sources": [
+                "Arizona Landlord-Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Chula Vista",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "As part of California, security deposits are limited to 1 month's rent per the 2024 AB 12 legislation."
+            },
+            "sources": [
+                "CA Civil Code 1950.5"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Toledo",
+            "state": "OH",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "No statutory cap on security deposits in Ohio; 1 month's rent is the typical market requirement."
+            },
+            "sources": [
+                "Ohio Landlord-Tenant Law"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Madison",
+            "state": "WI",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Wisconsin law does not impose a limit on the amount of security deposit landlords can charge."
+            },
+            "sources": [
+                "Wisconsin Statutes Chapter 704"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Gilbert",
+            "state": "AZ",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    1.5
+                ],
+                "notes": "Bound by Arizona state law which limits security deposits to 1.5 times the monthly rent."
+            },
+            "sources": [
+                "Arizona Residential Landlord and Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Reno",
+            "state": "NV",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    3
+                ],
+                "notes": "Nevada law permits landlords to charge up to 3 months of rent as a security deposit."
+            },
+            "sources": [
+                "Nevada Revised Statutes Chapter 118A"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Fort Wayne",
+            "state": "IN",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "No state-wide limit on security deposit amounts in Indiana; market standard is 1 month."
+            },
+            "sources": [
+                "Indiana Code Title 32"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "North Las Vegas",
+            "state": "NV",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    3
+                ],
+                "notes": "Subject to the Nevada state cap of 3 months' rent for all residential security deposits."
+            },
+            "sources": [
+                "NV Revised Statutes 118A.242"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "St. Petersburg",
+            "state": "FL",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Florida has no legal cap on security deposits. Landlords typically request 1-2 months based on credit."
+            },
+            "sources": [
+                "Florida Statutes Chapter 83"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Lubbock",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "No statutory limit in Texas; amount varies by property management company policies."
+            },
+            "sources": [
+                "Texas Property Code Title 8"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Irving",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Standard practice in Irving is one month's rent for qualified applicants with no legal state cap."
+            },
+            "sources": [
+                "Texas Apartment Association"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Laredo",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Follows general Texas law where there is no maximum limit for security deposits."
+            },
+            "sources": [
+                "Texas Tenant Advisor"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Winston-Salem",
+            "state": "NC",
+            "city_practice": {
+                "typical_multipliers": [
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "North Carolina law limits security deposits to 2 months' rent for standard lease terms."
+            },
+            "sources": [
+                "NC General Statutes 42-51"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Chesapeake",
+            "state": "VA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Virginia state law limits the security deposit to a maximum of two months' rent."
+            },
+            "sources": [
+                "Virginia Residential Landlord and Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Glendale",
+            "state": "AZ",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    1.5
+                ],
+                "notes": "Strictly adheres to the Arizona state cap of 1.5 months' rent for residential security deposits."
+            },
+            "sources": [
+                "Arizona Landlord-Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Garland",
+            "state": "TX",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "No legal limit on deposit amounts in Garland; depends on the landlord's screening criteria."
+            },
+            "sources": [
+                "Texas Property Code"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Scottsdale",
+            "state": "AZ",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    1.5
+                ],
+                "high_risk_multipliers": [
+                    1.5
+                ],
+                "notes": "Regulated by Arizona law limiting deposits to 1.5x monthly rent."
+            },
+            "sources": [
+                "AZ Dept of Housing"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Norfolk",
+            "state": "VA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Norfolk landlords must comply with the Virginia state cap of 2 months' rent."
+            },
+            "sources": [
+                "Virginia Code Section 55.1-1204"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Boise",
+            "state": "ID",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Idaho law does not limit the security deposit amount. 1 month is standard."
+            },
+            "sources": [
+                "Idaho Office of the Attorney General"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Fremont",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Subject to California AB 12, capping all residential security deposits at 1 month's rent."
+            },
+            "sources": [
+                "California Civil Code Section 1950.5"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Spokane",
+            "state": "WA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Washington has no state cap, but Spokane landlords typically follow the 1-month market standard."
+            },
+            "sources": [
+                "Washington Residential Landlord-Tenant Act"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Santa Clarita",
+            "state": "CA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    1
+                ],
+                "notes": "Complies with the 2024 California law limiting security deposits to a maximum of 1 month's rent."
+            },
+            "sources": [
+                "California AB 12 Update"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Baton Rouge",
+            "state": "LA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Louisiana law provides no upper limit on the amount landlords can charge for deposits."
+            },
+            "sources": [
+                "Louisiana Landlord-Tenant Law"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Richmond",
+            "state": "VA",
+            "city_practice": {
+                "typical_multipliers": [
+                    1,
+                    2
+                ],
+                "high_risk_multipliers": [
+                    2
+                ],
+                "notes": "Adheres to Virginia state law limiting security deposits to two months' rent."
+            },
+            "sources": [
+                "Virginia Residential Landlord and Tenant Act"
+            ],
+            "missing_reason": null
+        }
+    ]
+}

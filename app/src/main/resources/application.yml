@@ -1,0 +1,10 @@
+gg:
+  jte:
+    templateLocation: src/main/jte
+    developmentMode: true
+spring:
+  application:
+    name: FirstRentVerdict
+server:
+  servlet:
+    context-path: /RentVerdict

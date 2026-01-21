@@ -1,0 +1,1407 @@
+{
+  "version": "2026-01-21",
+  "unit": "USD_per_month",
+  "notes": "1-bedroom apartment rent (Top 100 US Cities)",
+  "cities": [
+    {
+      "city": "New York",
+      "state": "NY",
+      "year": 2025,
+      "median": 3850,
+      "p25": 3200,
+      "p75": 4500,
+      "sources": [
+        "Zumper NYC Rent Report 2025",
+        "Apartments.com Market Insights"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Los Angeles",
+      "state": "CA",
+      "year": 2025,
+      "median": 2350,
+      "p25": 1950,
+      "p75": 2850,
+      "sources": [
+        "RentCafe LA Data 2025",
+        "Zillow Observed Rent Index"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Chicago",
+      "state": "IL",
+      "year": 2025,
+      "median": 2100,
+      "p25": 1700,
+      "p75": 2550,
+      "sources": [
+        "Zillow Rental Manager 2025",
+        "Domu Chicago Rent Index"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Houston",
+      "state": "TX",
+      "year": 2025,
+      "median": 1350,
+      "p25": 1100,
+      "p75": 1650,
+      "sources": [
+        "Apartment List Houston 2025",
+        "Rent.com Houston Trends"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Phoenix",
+      "state": "AZ",
+      "year": 2025,
+      "median": 1550,
+      "p25": 1300,
+      "p75": 1850,
+      "sources": [
+        "Zumper Phoenix Report",
+        "RentCafe 2025"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Philadelphia",
+      "state": "PA",
+      "year": 2025,
+      "median": 1750,
+      "p25": 1450,
+      "p75": 2100,
+      "sources": [
+        "Apartment List Philadelphia 2025",
+        "Zillow PA Index"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "San Antonio",
+      "state": "TX",
+      "year": 2025,
+      "median": 1180,
+      "p25": 950,
+      "p75": 1400,
+      "sources": [
+        "Rent.com San Antonio",
+        "Zumper 2025"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "San Diego",
+      "state": "CA",
+      "year": 2025,
+      "median": 2650,
+      "p25": 2200,
+      "p75": 3100,
+      "sources": [
+        "RentCafe San Diego 2025",
+        "Apartments.com SD Report"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Dallas",
+      "state": "TX",
+      "year": 2025,
+      "median": 1500,
+      "p25": 1250,
+      "p75": 1850,
+      "sources": [
+        "Zillow Dallas Rent Index",
+        "Apartment List 2025"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "San Jose",
+      "state": "CA",
+      "year": 2025,
+      "median": 2800,
+      "p25": 2400,
+      "p75": 3300,
+      "sources": [
+        "Zumper San Jose Report",
+        "RentCafe 2025"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Austin",
+      "state": "TX",
+      "year": 2025,
+      "median": 1650,
+      "p25": 1400,
+      "p75": 2000,
+      "sources": [
+        "Apartment List Austin 2025",
+        "Zillow TX Index"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Jacksonville",
+      "state": "FL",
+      "year": 2025,
+      "median": 1450,
+      "p25": 1200,
+      "p75": 1750,
+      "sources": [
+        "Rent.com Jacksonville",
+        "RentCafe 2025"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Fort Worth",
+      "state": "TX",
+      "year": 2025,
+      "median": 1400,
+      "p25": 1150,
+      "p75": 1700,
+      "sources": [
+        "Zillow Fort Worth",
+        "Apartments.com TX"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Columbus",
+      "state": "OH",
+      "year": 2025,
+      "median": 1250,
+      "p25": 1050,
+      "p75": 1500,
+      "sources": [
+        "Zumper Columbus Report",
+        "RentCafe 2025"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Indianapolis",
+      "state": "IN",
+      "year": 2025,
+      "median": 1200,
+      "p25": 1000,
+      "p75": 1450,
+      "sources": [
+        "Apartment List Indy 2025",
+        "Zillow IN Index"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Charlotte",
+      "state": "NC",
+      "year": 2025,
+      "median": 1550,
+      "p25": 1300,
+      "p75": 1900,
+      "sources": [
+        "RentCafe Charlotte",
+        "Zumper NC Report"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "San Francisco",
+      "state": "CA",
+      "year": 2025,
+      "median": 3000,
+      "p25": 2600,
+      "p75": 3600,
+      "sources": [
+        "Zumper SF Rent Report 2025",
+        "Apartments.com SF"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Seattle",
+      "state": "WA",
+      "year": 2025,
+      "median": 2150,
+      "p25": 1850,
+      "p75": 2600,
+      "sources": [
+        "Apartment List Seattle 2025",
+        "Zillow WA Index"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Denver",
+      "state": "CO",
+      "year": 2025,
+      "median": 1850,
+      "p25": 1600,
+      "p75": 2250,
+      "sources": [
+        "RentCafe Denver 2025",
+        "Zumper CO Report"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Oklahoma City",
+      "state": "OK",
+      "year": 2025,
+      "median": 1050,
+      "p25": 850,
+      "p75": 1300,
+      "sources": [
+        "Zillow OKC Index",
+        "Rent.com OK"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Nashville",
+      "state": "TN",
+      "year": 2025,
+      "median": 1750,
+      "p25": 1450,
+      "p75": 2100,
+      "sources": [
+        "Zillow Nashville Rent Index",
+        "Rent.com TN"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "El Paso",
+      "state": "TX",
+      "year": 2025,
+      "median": 950,
+      "p25": 780,
+      "p75": 1150,
+      "sources": [
+        "Apartment List El Paso",
+        "RentCafe 2025"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Washington",
+      "state": "DC",
+      "year": 2025,
+      "median": 2400,
+      "p25": 2000,
+      "p75": 2900,
+      "sources": [
+        "Zumper DC Rent Report",
+        "Apartments.com DC"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Las Vegas",
+      "state": "NV",
+      "year": 2025,
+      "median": 1450,
+      "p25": 1200,
+      "p75": 1750,
+      "sources": [
+        "RentCafe Las Vegas",
+        "Zillow NV Index"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Boston",
+      "state": "MA",
+      "year": 2025,
+      "median": 2950,
+      "p25": 2500,
+      "p75": 3500,
+      "sources": [
+        "Zumper Boston Report",
+        "Apartment List 2025"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Portland",
+      "state": "OR",
+      "year": 2025,
+      "median": 1650,
+      "p25": 1400,
+      "p75": 1950,
+      "sources": [
+        "Rent.com Portland",
+        "Zillow OR Index"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Louisville",
+      "state": "KY",
+      "year": 2025,
+      "median": 1100,
+      "p25": 900,
+      "p75": 1350,
+      "sources": [
+        "Apartment List Louisville",
+        "RentCafe 2025"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Memphis",
+      "state": "TN",
+      "year": 2025,
+      "median": 1050,
+      "p25": 850,
+      "p75": 1300,
+      "sources": [
+        "Zillow Memphis",
+        "Rent.com TN"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Detroit",
+      "state": "MI",
+      "year": 2025,
+      "median": 1200,
+      "p25": 950,
+      "p75": 1500,
+      "sources": [
+        "Zumper Detroit Report",
+        "Apartments.com MI"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Baltimore",
+      "state": "MD",
+      "year": 2025,
+      "median": 1600,
+      "p25": 1350,
+      "p75": 1950,
+      "sources": [
+        "RentCafe Baltimore",
+        "Zillow MD Index"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Milwaukee",
+      "state": "WI",
+      "year": 2025,
+      "median": 1300,
+      "p25": 1050,
+      "p75": 1600,
+      "sources": [
+        "Apartment List Milwaukee",
+        "Rent.com WI"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Albuquerque",
+      "state": "NM",
+      "year": 2025,
+      "median": 1250,
+      "p25": 1050,
+      "p75": 1500,
+      "sources": [
+        "Zillow NM Index",
+        "RentCafe 2025"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Tucson",
+      "state": "AZ",
+      "year": 2025,
+      "median": 1150,
+      "p25": 950,
+      "p75": 1400,
+      "sources": [
+        "Zumper Tucson Report",
+        "Apartments.com AZ"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Fresno",
+      "state": "CA",
+      "year": 2025,
+      "median": 1400,
+      "p25": 1150,
+      "p75": 1700,
+      "sources": [
+        "RentCafe Fresno",
+        "Zillow CA Index"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Sacramento",
+      "state": "CA",
+      "year": 2025,
+      "median": 1850,
+      "p25": 1550,
+      "p75": 2200,
+      "sources": [
+        "Apartment List Sacramento",
+        "Zumper CA Report"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Kansas City",
+      "state": "MO",
+      "year": 2025,
+      "median": 1250,
+      "p25": 1000,
+      "p75": 1550,
+      "sources": [
+        "Zillow KC Index",
+        "Rent.com MO"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Mesa",
+      "state": "AZ",
+      "year": 2025,
+      "median": 1450,
+      "p25": 1250,
+      "p75": 1700,
+      "sources": [
+        "RentCafe Mesa",
+        "Apartments.com AZ"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Atlanta",
+      "state": "GA",
+      "year": 2025,
+      "median": 1700,
+      "p25": 1450,
+      "p75": 2050,
+      "sources": [
+        "Zumper Atlanta Report",
+        "Zillow GA Index"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Omaha",
+      "state": "NE",
+      "year": 2025,
+      "median": 1150,
+      "p25": 950,
+      "p75": 1400,
+      "sources": [
+        "Apartment List Omaha",
+        "Rent.com NE"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Colorado Springs",
+      "state": "CO",
+      "year": 2025,
+      "median": 1450,
+      "p25": 1200,
+      "p75": 1750,
+      "sources": [
+        "RentCafe Colorado Springs",
+        "Zillow CO Index"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Raleigh",
+      "state": "NC",
+      "year": 2025,
+      "median": 1550,
+      "p25": 1300,
+      "p75": 1850,
+      "sources": [
+        "Zumper Raleigh Report",
+        "Apartment List NC"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Long Beach",
+      "state": "CA",
+      "year": 2025,
+      "median": 1800,
+      "p25": 1500,
+      "p75": 2200,
+      "sources": [
+        "RentCafe Long Beach",
+        "Zillow CA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Virginia Beach",
+      "state": "VA",
+      "year": 2025,
+      "median": 1600,
+      "p25": 1350,
+      "p75": 1900,
+      "sources": [
+        "Zillow VA Index",
+        "Rent.com VA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Miami",
+      "state": "FL",
+      "year": 2025,
+      "median": 2700,
+      "p25": 2200,
+      "p75": 3300,
+      "sources": [
+        "Zumper Miami Report",
+        "RentCafe FL"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Oakland",
+      "state": "CA",
+      "year": 2025,
+      "median": 2050,
+      "p25": 1750,
+      "p75": 2500,
+      "sources": [
+        "Apartment List Oakland",
+        "Zumper CA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Minneapolis",
+      "state": "MN",
+      "year": 2025,
+      "median": 1550,
+      "p25": 1250,
+      "p75": 1900,
+      "sources": [
+        "RentCafe Minneapolis",
+        "Zillow MN"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Tulsa",
+      "state": "OK",
+      "year": 2025,
+      "median": 950,
+      "p25": 750,
+      "p75": 1200,
+      "sources": [
+        "Apartment List Tulsa",
+        "Rent.com OK"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Bakersfield",
+      "state": "CA",
+      "year": 2025,
+      "median": 1300,
+      "p25": 1050,
+      "p75": 1550,
+      "sources": [
+        "Zillow Bakersfield",
+        "RentCafe CA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Wichita",
+      "state": "KS",
+      "year": 2025,
+      "median": 850,
+      "p25": 650,
+      "p75": 1050,
+      "sources": [
+        "Zumper Wichita Report",
+        "Rent.com KS"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Arlington",
+      "state": "TX",
+      "year": 2025,
+      "median": 1350,
+      "p25": 1100,
+      "p75": 1600,
+      "sources": [
+        "Apartment List Arlington TX",
+        "Zillow TX"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Aurora",
+      "state": "CO",
+      "year": 2025,
+      "median": 1650,
+      "p25": 1400,
+      "p75": 1950,
+      "sources": [
+        "RentCafe Aurora CO",
+        "Zumper CO"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Tampa",
+      "state": "FL",
+      "year": 2025,
+      "median": 1750,
+      "p25": 1450,
+      "p75": 2100,
+      "sources": [
+        "Zillow Tampa Index",
+        "Rent.com FL"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "New Orleans",
+      "state": "LA",
+      "year": 2025,
+      "median": 1500,
+      "p25": 1200,
+      "p75": 1900,
+      "sources": [
+        "Zumper New Orleans",
+        "Apartment List LA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Cleveland",
+      "state": "OH",
+      "year": 2025,
+      "median": 1200,
+      "p25": 950,
+      "p75": 1500,
+      "sources": [
+        "RentCafe Cleveland",
+        "Zillow OH"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Honolulu",
+      "state": "HI",
+      "year": 2025,
+      "median": 2200,
+      "p25": 1800,
+      "p75": 2700,
+      "sources": [
+        "Zillow Honolulu Index",
+        "Rent.com HI"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Anaheim",
+      "state": "CA",
+      "year": 2025,
+      "median": 2150,
+      "p25": 1850,
+      "p75": 2550,
+      "sources": [
+        "RentCafe Anaheim",
+        "Zumper CA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Lexington",
+      "state": "KY",
+      "year": 2025,
+      "median": 1150,
+      "p25": 950,
+      "p75": 1400,
+      "sources": [
+        "Apartment List Lexington",
+        "Zillow KY"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Stockton",
+      "state": "CA",
+      "year": 2025,
+      "median": 1500,
+      "p25": 1250,
+      "p75": 1800,
+      "sources": [
+        "Zumper Stockton Report",
+        "RentCafe CA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Corpus Christi",
+      "state": "TX",
+      "year": 2025,
+      "median": 1100,
+      "p25": 900,
+      "p75": 1350,
+      "sources": [
+        "Zillow Corpus Christi",
+        "Rent.com TX"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Henderson",
+      "state": "NV",
+      "year": 2025,
+      "median": 1650,
+      "p25": 1400,
+      "p75": 1950,
+      "sources": [
+        "RentCafe Henderson",
+        "Zumper NV"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Riverside",
+      "state": "CA",
+      "year": 2025,
+      "median": 2050,
+      "p25": 1750,
+      "p75": 2400,
+      "sources": [
+        "Zumper Riverside Report",
+        "RentCafe CA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Newark",
+      "state": "NJ",
+      "year": 2025,
+      "median": 1950,
+      "p25": 1600,
+      "p75": 2450,
+      "sources": [
+        "Zillow Newark Index",
+        "Apartment List NJ"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Saint Paul",
+      "state": "MN",
+      "year": 2025,
+      "median": 1350,
+      "p25": 1100,
+      "p75": 1650,
+      "sources": [
+        "RentCafe St. Paul",
+        "Zillow MN"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Santa Ana",
+      "state": "CA",
+      "year": 2025,
+      "median": 2200,
+      "p25": 1900,
+      "p75": 2650,
+      "sources": [
+        "Zumper Santa Ana",
+        "Apartments.com CA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Cincinnati",
+      "state": "OH",
+      "year": 2025,
+      "median": 1250,
+      "p25": 1050,
+      "p75": 1550,
+      "sources": [
+        "Apartment List Cincinnati",
+        "Rent.com OH"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Irvine",
+      "state": "CA",
+      "year": 2025,
+      "median": 2950,
+      "p25": 2550,
+      "p75": 3400,
+      "sources": [
+        "RentCafe Irvine 2025",
+        "Zillow CA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Orlando",
+      "state": "FL",
+      "year": 2025,
+      "median": 1750,
+      "p25": 1500,
+      "p75": 2100,
+      "sources": [
+        "Zumper Orlando Report",
+        "Rent.com FL"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Pittsburgh",
+      "state": "PA",
+      "year": 2025,
+      "median": 1450,
+      "p25": 1200,
+      "p75": 1800,
+      "sources": [
+        "Zillow Pittsburgh",
+        "Apartment List PA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "St. Louis",
+      "state": "MO",
+      "year": 2025,
+      "median": 1150,
+      "p25": 950,
+      "p75": 1450,
+      "sources": [
+        "RentCafe St. Louis",
+        "Zumper MO"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Greensboro",
+      "state": "NC",
+      "year": 2025,
+      "median": 1200,
+      "p25": 1000,
+      "p75": 1450,
+      "sources": [
+        "Zillow Greensboro",
+        "Rent.com NC"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Jersey City",
+      "state": "NJ",
+      "year": 2025,
+      "median": 3100,
+      "p25": 2600,
+      "p75": 3800,
+      "sources": [
+        "Zumper Jersey City Report",
+        "Apartments.com NJ"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Anchorage",
+      "state": "AK",
+      "year": 2025,
+      "median": 1350,
+      "p25": 1150,
+      "p75": 1600,
+      "sources": [
+        "Zillow Anchorage",
+        "RentCafe AK"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Lincoln",
+      "state": "NE",
+      "year": 2025,
+      "median": 1150,
+      "p25": 950,
+      "p75": 1400,
+      "sources": [
+        "Apartment List Lincoln",
+        "Rent.com NE"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Plano",
+      "state": "TX",
+      "year": 2025,
+      "median": 1650,
+      "p25": 1450,
+      "p75": 1950,
+      "sources": [
+        "RentCafe Plano",
+        "Zumper TX"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Durham",
+      "state": "NC",
+      "year": 2025,
+      "median": 1500,
+      "p25": 1250,
+      "p75": 1850,
+      "sources": [
+        "Zillow Durham",
+        "Apartment List NC"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Buffalo",
+      "state": "NY",
+      "year": 2025,
+      "median": 1250,
+      "p25": 1000,
+      "p75": 1550,
+      "sources": [
+        "RentCafe Buffalo",
+        "Zumper NY"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Chandler",
+      "state": "AZ",
+      "year": 2025,
+      "median": 1650,
+      "p25": 1450,
+      "p75": 1950,
+      "sources": [
+        "Zillow Chandler",
+        "Rent.com AZ"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Chula Vista",
+      "state": "CA",
+      "year": 2025,
+      "median": 2350,
+      "p25": 2050,
+      "p75": 2750,
+      "sources": [
+        "Zumper Chula Vista",
+        "RentCafe CA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Toledo",
+      "state": "OH",
+      "year": 2025,
+      "median": 900,
+      "p25": 700,
+      "p75": 1150,
+      "sources": [
+        "Apartment List Toledo",
+        "Zillow OH"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Madison",
+      "state": "WI",
+      "year": 2025,
+      "median": 1550,
+      "p25": 1300,
+      "p75": 1900,
+      "sources": [
+        "RentCafe Madison",
+        "Zumper WI"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Gilbert",
+      "state": "AZ",
+      "year": 2025,
+      "median": 1750,
+      "p25": 1550,
+      "p75": 2000,
+      "sources": [
+        "Zillow Chandler/Gilbert Index",
+        "Rent.com AZ"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Reno",
+      "state": "NV",
+      "year": 2025,
+      "median": 1550,
+      "p25": 1300,
+      "p75": 1850,
+      "sources": [
+        "RentCafe Reno",
+        "Zumper NV Report"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Fort Wayne",
+      "state": "IN",
+      "year": 2025,
+      "median": 1100,
+      "p25": 900,
+      "p75": 1350,
+      "sources": [
+        "Apartment List Fort Wayne",
+        "Zillow IN"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "North Las Vegas",
+      "state": "NV",
+      "year": 2025,
+      "median": 1400,
+      "p25": 1150,
+      "p75": 1700,
+      "sources": [
+        "Zumper NLV Report",
+        "RentCafe NV"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "St. Petersburg",
+      "state": "FL",
+      "year": 2025,
+      "median": 1850,
+      "p25": 1550,
+      "p75": 2250,
+      "sources": [
+        "Zillow St. Pete Index",
+        "Apartments.com FL"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Lubbock",
+      "state": "TX",
+      "year": 2025,
+      "median": 1000,
+      "p25": 800,
+      "p75": 1250,
+      "sources": [
+        "Rent.com Lubbock",
+        "Zumper TX"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Irving",
+      "state": "TX",
+      "year": 2025,
+      "median": 1550,
+      "p25": 1300,
+      "p75": 1850,
+      "sources": [
+        "RentCafe Irving",
+        "Zillow TX"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Laredo",
+      "state": "TX",
+      "year": 2025,
+      "median": 950,
+      "p25": 750,
+      "p75": 1150,
+      "sources": [
+        "Apartment List Laredo",
+        "Rent.com TX"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Winston-Salem",
+      "state": "NC",
+      "year": 2025,
+      "median": 1150,
+      "p25": 950,
+      "p75": 1400,
+      "sources": [
+        "Zumper Winston-Salem",
+        "RentCafe NC"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Chesapeake",
+      "state": "VA",
+      "year": 2025,
+      "median": 1650,
+      "p25": 1400,
+      "p75": 1950,
+      "sources": [
+        "Zillow Chesapeake Index",
+        "Apartments.com VA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Glendale",
+      "state": "AZ",
+      "year": 2025,
+      "median": 1450,
+      "p25": 1250,
+      "p75": 1700,
+      "sources": [
+        "RentCafe Glendale AZ",
+        "Zumper AZ"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Garland",
+      "state": "TX",
+      "year": 2025,
+      "median": 1350,
+      "p25": 1150,
+      "p75": 1600,
+      "sources": [
+        "Zillow Garland Index",
+        "Rent.com TX"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Scottsdale",
+      "state": "AZ",
+      "year": 2025,
+      "median": 2050,
+      "p25": 1750,
+      "p75": 2500,
+      "sources": [
+        "Zumper Scottsdale Report",
+        "RentCafe AZ"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Norfolk",
+      "state": "VA",
+      "year": 2025,
+      "median": 1450,
+      "p25": 1200,
+      "p75": 1750,
+      "sources": [
+        "Apartment List Norfolk",
+        "Zillow VA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Boise",
+      "state": "ID",
+      "year": 2025,
+      "median": 1500,
+      "p25": 1250,
+      "p75": 1800,
+      "sources": [
+        "RentCafe Boise",
+        "Zumper ID Report"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Fremont",
+      "state": "CA",
+      "year": 2025,
+      "median": 2550,
+      "p25": 2200,
+      "p75": 2950,
+      "sources": [
+        "Zillow Fremont Index",
+        "Apartments.com CA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Spokane",
+      "state": "WA",
+      "year": 2025,
+      "median": 1300,
+      "p25": 1050,
+      "p75": 1600,
+      "sources": [
+        "Apartment List Spokane",
+        "Rent.com WA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Santa Clarita",
+      "state": "CA",
+      "year": 2025,
+      "median": 2350,
+      "p25": 2050,
+      "p75": 2700,
+      "sources": [
+        "Zumper Santa Clarita",
+        "RentCafe CA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Baton Rouge",
+      "state": "LA",
+      "year": 2025,
+      "median": 1200,
+      "p25": 950,
+      "p75": 1450,
+      "sources": [
+        "Zillow Baton Rouge",
+        "Apartment List LA"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    },
+    {
+      "city": "Richmond",
+      "state": "VA",
+      "year": 2025,
+      "median": 1550,
+      "p25": 1300,
+      "p75": 1900,
+      "sources": [
+        "RentCafe Richmond",
+        "Zumper VA Report"
+      ],
+      "missing_reason": null,
+      "is_outdated": false
+    }
+  ]
+}

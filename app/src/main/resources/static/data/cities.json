@@ -1,0 +1,406 @@
+{
+  "version": "2026-01-21",
+  "source_note": "Top 100 US cities by population",
+  "cities": [
+    {
+      "city": "New York",
+      "state": "NY"
+    },
+    {
+      "city": "Los Angeles",
+      "state": "CA"
+    },
+    {
+      "city": "Chicago",
+      "state": "IL"
+    },
+    {
+      "city": "Houston",
+      "state": "TX"
+    },
+    {
+      "city": "Phoenix",
+      "state": "AZ"
+    },
+    {
+      "city": "Philadelphia",
+      "state": "PA"
+    },
+    {
+      "city": "San Antonio",
+      "state": "TX"
+    },
+    {
+      "city": "San Diego",
+      "state": "CA"
+    },
+    {
+      "city": "Dallas",
+      "state": "TX"
+    },
+    {
+      "city": "San Jose",
+      "state": "CA"
+    },
+    {
+      "city": "Austin",
+      "state": "TX"
+    },
+    {
+      "city": "Jacksonville",
+      "state": "FL"
+    },
+    {
+      "city": "Fort Worth",
+      "state": "TX"
+    },
+    {
+      "city": "Columbus",
+      "state": "OH"
+    },
+    {
+      "city": "Indianapolis",
+      "state": "IN"
+    },
+    {
+      "city": "Charlotte",
+      "state": "NC"
+    },
+    {
+      "city": "San Francisco",
+      "state": "CA"
+    },
+    {
+      "city": "Seattle",
+      "state": "WA"
+    },
+    {
+      "city": "Denver",
+      "state": "CO"
+    },
+    {
+      "city": "Oklahoma City",
+      "state": "OK"
+    },
+    {
+      "city": "Nashville",
+      "state": "TN"
+    },
+    {
+      "city": "El Paso",
+      "state": "TX"
+    },
+    {
+      "city": "Washington",
+      "state": "DC"
+    },
+    {
+      "city": "Las Vegas",
+      "state": "NV"
+    },
+    {
+      "city": "Boston",
+      "state": "MA"
+    },
+    {
+      "city": "Portland",
+      "state": "OR"
+    },
+    {
+      "city": "Louisville",
+      "state": "KY"
+    },
+    {
+      "city": "Memphis",
+      "state": "TN"
+    },
+    {
+      "city": "Detroit",
+      "state": "MI"
+    },
+    {
+      "city": "Baltimore",
+      "state": "MD"
+    },
+    {
+      "city": "Milwaukee",
+      "state": "WI"
+    },
+    {
+      "city": "Albuquerque",
+      "state": "NM"
+    },
+    {
+      "city": "Tucson",
+      "state": "AZ"
+    },
+    {
+      "city": "Fresno",
+      "state": "CA"
+    },
+    {
+      "city": "Sacramento",
+      "state": "CA"
+    },
+    {
+      "city": "Kansas City",
+      "state": "MO"
+    },
+    {
+      "city": "Mesa",
+      "state": "AZ"
+    },
+    {
+      "city": "Atlanta",
+      "state": "GA"
+    },
+    {
+      "city": "Omaha",
+      "state": "NE"
+    },
+    {
+      "city": "Colorado Springs",
+      "state": "CO"
+    },
+    {
+      "city": "Raleigh",
+      "state": "NC"
+    },
+    {
+      "city": "Long Beach",
+      "state": "CA"
+    },
+    {
+      "city": "Virginia Beach",
+      "state": "VA"
+    },
+    {
+      "city": "Miami",
+      "state": "FL"
+    },
+    {
+      "city": "Oakland",
+      "state": "CA"
+    },
+    {
+      "city": "Minneapolis",
+      "state": "MN"
+    },
+    {
+      "city": "Tulsa",
+      "state": "OK"
+    },
+    {
+      "city": "Bakersfield",
+      "state": "CA"
+    },
+    {
+      "city": "Wichita",
+      "state": "KS"
+    },
+    {
+      "city": "Arlington",
+      "state": "TX"
+    },
+    {
+      "city": "Aurora",
+      "state": "CO"
+    },
+    {
+      "city": "Tampa",
+      "state": "FL"
+    },
+    {
+      "city": "New Orleans",
+      "state": "LA"
+    },
+    {
+      "city": "Cleveland",
+      "state": "OH"
+    },
+    {
+      "city": "Honolulu",
+      "state": "HI"
+    },
+    {
+      "city": "Anaheim",
+      "state": "CA"
+    },
+    {
+      "city": "Lexington",
+      "state": "KY"
+    },
+    {
+      "city": "Stockton",
+      "state": "CA"
+    },
+    {
+      "city": "Corpus Christi",
+      "state": "TX"
+    },
+    {
+      "city": "Henderson",
+      "state": "NV"
+    },
+    {
+      "city": "Riverside",
+      "state": "CA"
+    },
+    {
+      "city": "Newark",
+      "state": "NJ"
+    },
+    {
+      "city": "Saint Paul",
+      "state": "MN"
+    },
+    {
+      "city": "Santa Ana",
+      "state": "CA"
+    },
+    {
+      "city": "Cincinnati",
+      "state": "OH"
+    },
+    {
+      "city": "Irvine",
+      "state": "CA"
+    },
+    {
+      "city": "Orlando",
+      "state": "FL"
+    },
+    {
+      "city": "Pittsburgh",
+      "state": "PA"
+    },
+    {
+      "city": "St. Louis",
+      "state": "MO"
+    },
+    {
+      "city": "Greensboro",
+      "state": "NC"
+    },
+    {
+      "city": "Jersey City",
+      "state": "NJ"
+    },
+    {
+      "city": "Anchorage",
+      "state": "AK"
+    },
+    {
+      "city": "Lincoln",
+      "state": "NE"
+    },
+    {
+      "city": "Plano",
+      "state": "TX"
+    },
+    {
+      "city": "Durham",
+      "state": "NC"
+    },
+    {
+      "city": "Buffalo",
+      "state": "NY"
+    },
+    {
+      "city": "Chandler",
+      "state": "AZ"
+    },
+    {
+      "city": "Chula Vista",
+      "state": "CA"
+    },
+    {
+      "city": "Toledo",
+      "state": "OH"
+    },
+    {
+      "city": "Madison",
+      "state": "WI"
+    },
+    {
+      "city": "Gilbert",
+      "state": "AZ"
+    },
+    {
+      "city": "Reno",
+      "state": "NV"
+    },
+    {
+      "city": "Fort Wayne",
+      "state": "IN"
+    },
+    {
+      "city": "North Las Vegas",
+      "state": "NV"
+    },
+    {
+      "city": "St. Petersburg",
+      "state": "FL"
+    },
+    {
+      "city": "Lubbock",
+      "state": "TX"
+    },
+    {
+      "city": "Irving",
+      "state": "TX"
+    },
+    {
+      "city": "Laredo",
+      "state": "TX"
+    },
+    {
+      "city": "Winston-Salem",
+      "state": "NC"
+    },
+    {
+      "city": "Chesapeake",
+      "state": "VA"
+    },
+    {
+      "city": "Glendale",
+      "state": "AZ"
+    },
+    {
+      "city": "Garland",
+      "state": "TX"
+    },
+    {
+      "city": "Scottsdale",
+      "state": "AZ"
+    },
+    {
+      "city": "Norfolk",
+      "state": "VA"
+    },
+    {
+      "city": "Boise",
+      "state": "ID"
+    },
+    {
+      "city": "Fremont",
+      "state": "CA"
+    },
+    {
+      "city": "Spokane",
+      "state": "WA"
+    },
+    {
+      "city": "Santa Clarita",
+      "state": "CA"
+    },
+    {
+      "city": "Baton Rouge",
+      "state": "LA"
+    },
+    {
+      "city": "Richmond",
+      "state": "VA"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+Reusing configuration cache.
+> Task :app:processTestResources NO-SOURCE
+> Task :app:processResources UP-TO-DATE
+> Task :app:compileJava UP-TO-DATE
+> Task :app:classes UP-TO-DATE
+> Task :app:compileTestJava
+> Task :app:testClasses
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+
+> Task :app:test
+
+VerdictControllerTest > testVerdictSubmission_Approved() FAILED
+    java.lang.AssertionError at VerdictControllerTest.java:55
+
+VerdictControllerTest > testIndexPageLoads() FAILED
+    java.lang.AssertionError at VerdictControllerTest.java:39
+
+VerdictControllerTest > testVerdictSubmission_Denied() FAILED
+    java.lang.AssertionError at VerdictControllerTest.java:71
+
+3 tests completed, 3 failed
+
+> Task :app:test FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':app:test'.
+> There were failing tests. See the report at: file:///C:/Development/Owner/FirstRentVerdict/app/build/reports/tests/test/index.html
+
+* Try:
+> Run with --scan to generate a Build Scan (powered by Develocity).
+
+BUILD FAILED in 5s
+4 actionable tasks: 2 executed, 2 up-to-date
+Configuration cache entry reused.
