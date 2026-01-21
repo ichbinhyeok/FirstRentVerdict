@@ -9,11 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>First Rent Verdict</title>
     <link rel="stylesheet" href="/RentVerdict/css/style.css">
-    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" type="image/png" href="/RentVerdict/images/favicon.png">
+    <meta name="theme-color" content="#ffffff">
 </head>
 <body>
-    <main>
+    @template.layout.header()
+    <main style="flex: 1;">
         ${content}
     </main>
+    @template.layout.footer()
 </body>
 </html>
