@@ -3,13 +3,6 @@ pluginManagement {
         gradlePluginPortal()
         mavenCentral()
     }
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.id == 'gg.jte') {
-                useModule("gg.jte:jte-gradle-plugin:${requested.version}")
-            }
-        }
-    }
 }
 
 plugins {
