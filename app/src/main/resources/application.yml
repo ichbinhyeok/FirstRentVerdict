@@ -1,7 +1,7 @@
-gg:
-  jte:
-    templateLocation: src/main/jte
-    developmentMode: true
+# gg:
+#   jte:
+#     templateLocation: src/main/jte
+#     developmentMode: false
 spring:
   application:
     name: FirstRentVerdict

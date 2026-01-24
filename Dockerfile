@@ -9,7 +9,7 @@ RUN ./gradlew :app:bootJar --no-daemon
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
-# Copy the built jar from the build stage
+# Copy the built jar
 COPY --from=build /home/gradle/project/app/build/libs/*.jar app.jar
 
 # JVM options requested by user

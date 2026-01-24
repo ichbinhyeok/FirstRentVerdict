@@ -2,6 +2,7 @@ plugins {
     id 'application'
     id 'org.springframework.boot' version '3.4.1'
     id 'io.spring.dependency-management' version '1.1.7'
+    id 'gg.jte' version '3.1.12'
 }
 
 repositories {
@@ -27,6 +28,10 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+}
+
+jte {
+    generate()
 }
 
 application {
