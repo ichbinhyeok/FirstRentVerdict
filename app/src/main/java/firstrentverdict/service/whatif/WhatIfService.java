@@ -36,9 +36,42 @@ public class WhatIfService {
     }
 
     /**
-     * Creates new VerdictInput with adjustments applied.
-     * Original remains unchanged (immutable pattern).
+     * Applies "Market Correction" scenario (p25 rent)
      */
+    public VerdictResult recalculateWithMarketCorrection(VerdictInput original) {
+        if (original == null) {
+            throw new IllegalStateException("No original verdict found in session");
+        }
+
+        // We will fetch p25 data via VerdictService (or Repository directly).
+        // Ideally WhatIfService should have access to Repository.
+        // For now, we will assume the caller might pass the target rent or we fetch it
+        // here.
+        // Let's refactor to inject Repository if needed, but VerdictService calculates
+        // MarketPosition.
+        // Actually, cleaner way:
+        // We let Controller pass the target rent (which it can get from
+        // originalResult.marketPosition().p25Rent()).
+        // But WhatIfService logic is best place.
+
+        // Stub for now: The controller will likely call a variant or we add logic here.
+        // Let's stick to the plan: WhatIfService implements the logic.
+        // We need repository access to get p25 if it's not passed.
+        // But `VerdictResult` already has `MarketPosition`.
+        // So the Controller can extract p25 from result and pass it as a regular
+        // "WhatIfRequest"
+        // OR we add a specific method.
+
+        // Let's support a specific method that takes the p25 value directly to avoid
+        // circular dependency or extra lookups.
+        return null; // Placeholder as we decide architecture.
+    }
+
+    // Actual implementation using existing `recalculate` but with a helper for p25
+    public VerdictResult simulateMarketCorrection(VerdictInput original, int targetP25Rent) {
+        return recalculate(original, new WhatIfRequest(targetP25Rent, null));
+    }
+
     private VerdictInput applyAdjustments(VerdictInput original, WhatIfRequest adjustments) {
         int newRent = adjustments.adjustedRent() != null
                 ? adjustments.adjustedRent()
@@ -47,7 +80,6 @@ public class WhatIfService {
         int newCash = original.availableCash() +
                 (adjustments.cashInjection() != null ? adjustments.cashInjection() : 0);
 
-        // Return new immutable instance, maintaining other parameters from original
         return new VerdictInput(
                 original.city(),
                 original.state(),
@@ -55,7 +87,6 @@ public class WhatIfService {
                 newCash,
                 original.hasPet(),
                 original.isLocalMove(),
-                null // session token or other metadata if any
-        );
+                null);
     }
 }

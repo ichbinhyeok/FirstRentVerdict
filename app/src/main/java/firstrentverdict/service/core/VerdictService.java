@@ -135,13 +135,113 @@ public class VerdictService {
                 totalUpfront > 5000);
 
         // Safety Gap (calculated)
-        int gapAmount = remainingCash - recommendedBuffer;
-        String actionPrompt = gapAmount < 0
-                ? "Reduce rent or increase available cash"
-                : "Maintain this buffer for emergencies";
+        // Safety Gap (Canonical Value Rule)
+        // IF verdict == DENIED AND bottleneck == IMMEDIATE_INSOLVENCY:
+        // gapAmount = remainingCash (negative canonical value)
+        // ELSE:
+        // gapAmount = remainingCash - recommendedBuffer (gap to safety)
+
+        int gapAmount;
+        if (verdict == Verdict.DENIED && bottleneck == BottleneckType.IMMEDIATE_INSOLVENCY) {
+            gapAmount = remainingCash;
+        } else {
+            gapAmount = remainingCash - recommendedBuffer;
+        }
+
+        String actionPrompt;
+        if (bottleneck == BottleneckType.IMMEDIATE_INSOLVENCY) {
+            actionPrompt = "Lower rent or add cash to remove insolvency risk";
+        } else {
+            actionPrompt = gapAmount < 0
+                    ? "Reduce rent or increase available cash"
+                    : "Maintain this buffer for emergencies";
+        }
+
         SafetyGap safetyGap = new SafetyGap(gapAmount, actionPrompt, verdict == Verdict.APPROVED);
 
         // ==========================================================================
+
+        // Calculate data for Financials
+        // Base multiplier = 1 (first month rent) + deposit multiplier
+        // Calculate data for Financials
+        // Base multiplier = 1 (first month rent) + deposit multiplier
+        double baseMultiplier = 1.0 + multiplier;
+        int staticCosts = movingCost + petOneTime;
+
+        // ==========================================================================
+        // Smart Receipt Logic: Calculate Costs with Annotations
+        // ==========================================================================
+
+        List<FinancialLineItem> costBreakdown = new ArrayList<>();
+
+        // 1. First Month Rent
+        costBreakdown.add(new FinancialLineItem(
+                "First Month Rent",
+                input.monthlyRent(),
+                "Applied Baseline: User Input"));
+
+        // 2. Security Deposit
+        String depositAnnotation;
+        if (depositData.legalCapMultiplier() != null && cappedByLaw) {
+            depositAnnotation = "Rule: Legal Cap " + depositData.legalCapMultiplier() + "x Rent (" + input.state()
+                    + " Law)";
+        } else {
+            depositAnnotation = "Applied Standard: " + multiplier + "x Rent";
+        }
+        costBreakdown.add(new FinancialLineItem(
+                "Security Deposit",
+                depositCost,
+                depositAnnotation));
+
+        // 3. Moving Costs
+        costBreakdown.add(new FinancialLineItem(
+                "Moving Costs",
+                movingCost,
+                "Applied Baseline: Local Move Criteria"));
+
+        // 4. Pet Fees
+        if (input.hasPet()) {
+            String petAnnotation;
+            // Check if "Non-refundable" is explicitly mentioned in notes (stub logic based
+            // on known data pattern)
+            // In a real DB we would have a structured flag. Here we check the note string.
+            boolean isNonRefundable = petData.oneTime().notes() != null &&
+                    (petData.oneTime().notes().toLowerCase().contains("non-refundable") ||
+                            petData.oneTime().notes().toLowerCase().contains("fee"));
+
+            if (isNonRefundable) {
+                petAnnotation = "Rule: Non-refundable (Market Norm)";
+            } else {
+                petAnnotation = "Applied Baseline: Market Rate";
+            }
+            costBreakdown.add(new FinancialLineItem(
+                    "Pet Fees",
+                    petOneTime,
+                    petAnnotation));
+        }
+
+        // ==========================================================================
+        // Market Radar Logic
+        // ==========================================================================
+        RentData.CityRent rentData = repository.getRent(input.city(), input.state()).orElse(
+                new RentData.CityRent(input.city(), input.state(), 2024, input.monthlyRent(), input.monthlyRent(),
+                        input.monthlyRent(), List.of(), null, false));
+
+        String marketZone;
+        if (input.monthlyRent() <= rentData.p25()) {
+            marketZone = "Below Market";
+        } else if (input.monthlyRent() >= rentData.p75()) {
+            marketZone = "Premium Range";
+        } else {
+            marketZone = "Market Standard";
+        }
+
+        MarketPosition marketPosition = new MarketPosition(
+                rentData.p25(),
+                rentData.median(),
+                rentData.p75(),
+                input.monthlyRent(),
+                marketZone);
 
         return new VerdictResult(
                 verdict,
@@ -150,6 +250,14 @@ public class VerdictService {
                 contributingFactors,
                 regionalContext,
                 safetyGap,
-                new VerdictResult.Financials(input.monthlyRent(), totalUpfront, remainingCash, recommendedBuffer));
+                new VerdictResult.Financials(
+                        input.monthlyRent(),
+                        totalUpfront,
+                        remainingCash,
+                        recommendedBuffer,
+                        baseMultiplier, // e.g. 2.5 (1 + deposit multiplier)
+                        staticCosts, // moving + pet + fees
+                        costBreakdown),
+                marketPosition);
     }
 }

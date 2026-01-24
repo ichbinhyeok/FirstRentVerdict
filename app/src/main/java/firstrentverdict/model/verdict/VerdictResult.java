@@ -32,12 +32,22 @@ public record VerdictResult(
                 SafetyGap safetyGap,
 
                 // ========== Financial Data ==========
-                Financials financials) {
+                Financials financials,
+
+                // ========== Market Position ==========
+                MarketPosition marketPosition) {
 
         /**
          * Validation enforced at construction time
          */
         public VerdictResult {
+                if (verdict == null)
+                        throw new IllegalArgumentException("Verdict cannot be null");
+                if (financials == null)
+                        throw new IllegalArgumentException("Financials cannot be null");
+                if (marketPosition == null)
+                        throw new IllegalArgumentException("MarketPosition cannot be null");
+
                 // Layer 2 validation: 250 char limit
                 if (whyThisVerdict != null && whyThisVerdict.length() > 250) {
                         throw new IllegalArgumentException(
@@ -61,6 +71,9 @@ public record VerdictResult(
                         int monthlyRent,
                         int totalUpfrontCost,
                         int remainingBuffer,
-                        int recommendedBuffer) {
+                        int recommendedBuffer,
+                        double upfrontBaseMultiplier, // e.g. 2.5 (1 + deposit multiplier)
+                        int staticCosts, // moving + pet + fees
+                        List<FinancialLineItem> costBreakdown) {
         }
 }
