@@ -9,6 +9,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class App {
     public static void main(String[] args) {
+        // Dynamic JTE Template Path Resolution
+        // When running from root (e.g. via VSC), 'src/main/jte' might not be found.
+        // We check for 'app/src/main/jte' and set the property manually if needed.
+        java.io.File jteDir = new java.io.File("src/main/jte");
+        if (!jteDir.exists()) {
+            java.io.File appJteDir = new java.io.File("app/src/main/jte");
+            if (appJteDir.exists()) {
+                System.setProperty("gg.jte.templateLocation", "app/src/main/jte");
+                System.out.println(">> ANTIGRAVITY FIX: Set gg.jte.templateLocation to 'app/src/main/jte'");
+            }
+        }
+
         SpringApplication.run(App.class, args);
     }
 }

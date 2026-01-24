@@ -70,6 +70,7 @@ public record VerdictResult(
         public record Financials(
                         int monthlyRent,
                         int totalUpfrontCost,
+                        int availableCash, // Needed for Math Proof
                         int remainingBuffer,
                         int recommendedBuffer,
                         double upfrontBaseMultiplier, // e.g. 2.5 (1 + deposit multiplier)

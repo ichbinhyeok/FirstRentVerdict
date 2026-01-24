@@ -157,7 +157,14 @@ public class VerdictService {
                     : "Maintain this buffer for emergencies";
         }
 
-        SafetyGap safetyGap = new SafetyGap(gapAmount, actionPrompt, verdict == Verdict.APPROVED);
+        String displayText;
+        if (verdict == Verdict.APPROVED) {
+            displayText = String.format("+$%,d Safety Buffer", gapAmount);
+        } else {
+            displayText = String.format("$%,d Short of Safety", Math.abs(gapAmount));
+        }
+
+        SafetyGap safetyGap = new SafetyGap(gapAmount, actionPrompt, displayText, verdict == Verdict.APPROVED);
 
         // ==========================================================================
 
@@ -186,7 +193,7 @@ public class VerdictService {
             depositAnnotation = "Rule: Legal Cap " + depositData.legalCapMultiplier() + "x Rent (" + input.state()
                     + " Law)";
         } else {
-            depositAnnotation = "Applied Standard: " + multiplier + "x Rent";
+            depositAnnotation = "Applied Standard · Required by Lease Terms";
         }
         costBreakdown.add(new FinancialLineItem(
                 "Security Deposit",
@@ -197,7 +204,7 @@ public class VerdictService {
         costBreakdown.add(new FinancialLineItem(
                 "Moving Costs",
                 movingCost,
-                "Applied Baseline: Local Move Criteria"));
+                "Applied Baseline · Required Execution Cost"));
 
         // 4. Pet Fees
         if (input.hasPet()) {
@@ -210,7 +217,7 @@ public class VerdictService {
                             petData.oneTime().notes().toLowerCase().contains("fee"));
 
             if (isNonRefundable) {
-                petAnnotation = "Rule: Non-refundable (Market Norm)";
+                petAnnotation = "Rule: Non-refundable Fee (Market Norm)";
             } else {
                 petAnnotation = "Applied Baseline: Market Rate";
             }
@@ -224,7 +231,7 @@ public class VerdictService {
         // Market Radar Logic
         // ==========================================================================
         RentData.CityRent rentData = repository.getRent(input.city(), input.state()).orElse(
-                new RentData.CityRent(input.city(), input.state(), 2024, input.monthlyRent(), input.monthlyRent(),
+                new RentData.CityRent(input.city(), input.state(), 2026, input.monthlyRent(), input.monthlyRent(),
                         input.monthlyRent(), List.of(), null, false));
 
         String marketZone;
@@ -253,6 +260,7 @@ public class VerdictService {
                 new VerdictResult.Financials(
                         input.monthlyRent(),
                         totalUpfront,
+                        input.availableCash(),
                         remainingCash,
                         recommendedBuffer,
                         baseMultiplier, // e.g. 2.5 (1 + deposit multiplier)

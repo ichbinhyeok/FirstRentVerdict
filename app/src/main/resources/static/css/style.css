@@ -334,3 +334,364 @@ input[type="range"] {
     opacity: 0.5;
     transition: opacity 0.2s;
 }
+/* =========================================
+   Stage 1 Refactor: Result Page Components
+   ========================================= */
+
+/* Back Link */
+.back-link-container {
+    margin-bottom: 4rem;
+}
+
+.back-link {
+    text-decoration: none;
+    color: var(--text-tertiary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Verdict Badge */
+.verdict-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.verdict-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.verdict-text {
+    font-size: 4.5rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+}
+
+.verdict-approved {
+    color: #2d5016;
+}
+
+.verdict-borderline {
+    color: #947600;
+    text-decoration: underline;
+}
+
+.verdict-denied {
+    color: var(--signal-error);
+}
+
+/* Safety Gap (Sticky) */
+.safety-gap-card {
+    position: sticky;
+    top: 60px;
+    padding: 1.5rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    z-index: 100;
+    background: var(--bg-body);
+}
+
+.safety-gap-approved {
+    border: 2px solid #2d5016;
+}
+
+.safety-gap-denied {
+    border: 2px solid var(--signal-error);
+    background-color: rgba(205, 44, 37, 0.03);
+}
+
+.safety-gap-amount {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.safety-gap-action {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Why This Verdict */
+.why-verdict-section {
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: var(--bg-panel);
+    border-left: 4px solid var(--text-primary);
+}
+
+.section-title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.why-text {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    max-width: 65ch;
+    color: var(--text-primary);
+}
+
+.bottleneck-container {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-subtle);
+}
+
+.bottleneck-label {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.bottleneck-value {
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+/* Contributing Factors */
+.contributing-section {
+    margin-bottom: 3rem;
+}
+
+.contributing-title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-bottom: 0.5rem;
+}
+
+.contributing-list {
+    list-style: none;
+    padding: 0;
+}
+
+.contributing-item {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--text-secondary);
+}
+
+.contributing-bullet {
+    position: absolute;
+    left: 0;
+    color: var(--text-tertiary);
+}
+
+/* Regional Context */
+.regional-details {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 1.5rem;
+    background: var(--bg-body);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+}
+
+.regional-summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    user-select: none;
+}
+
+/* Recovery Hint */
+.recovery-hint-box {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: var(--bg-body);
+    border: 2px solid var(--text-tertiary);
+    border-radius: 4px;
+    text-align: left;
+}
+
+/* Financial Grid */
+.financial-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+.financial-label-sm {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-bottom: 0.25rem;
+}
+
+.financial-value-lg {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+/* Market Radar (Enhanced Visiblity, Neutral Tone) */
+.market-radar-container {
+    margin-bottom: 2rem;
+    padding: 1.5rem; /* Increased padding */
+    background: var(--bg-body);
+    border: 1px solid var(--border-subtle);
+    border-radius: 4px;
+}
+
+.radar-title {
+    font-size: 0.9rem; /* Increased size */
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+}
+
+.radar-track {
+    position: relative;
+    height: 16px; /* 2x Height */
+    background: #e0e0e0;
+    border-radius: 8px;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.radar-range {
+    position: absolute;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    /* Neutral Gradient: Grey to Subtle Green to Grey */
+    background: linear-gradient(90deg, #e0e0e0 0%, #d1e7dd 25%, #d1e7dd 75%, #e0e0e0 100%);
+    border-radius: 8px;
+}
+
+.radar-marker {
+    position: absolute;
+    top: -8px; /* Extends above */
+    width: 4px;
+    height: 32px; /* Extends below */
+    background: var(--text-primary);
+    border: 1px solid #fff;
+    z-index: 10;
+}
+
+.radar-label {
+    position: absolute;
+    top: -24px;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.radar-legend {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+/* Market Correction Button */
+.market-correction-btn {
+    background-color: transparent;
+    border: 1px solid var(--text-primary);
+    border-radius: 4px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.market-correction-btn:hover {
+    background-color: var(--text-primary);
+    color: var(--bg-body);
+}
+
+/* New Assessment Button */
+.new-assessment-section {
+    text-align: center;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 3rem;
+}
+
+
+/* =========================================
+   Stage 2 & 3: Visual Proof & Data Footnote
+   ========================================= */
+
+/* Math Proof Header */
+.math-proof {
+    font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: var(--text-secondary); /* Grey */
+    background: var(--bg-panel);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 0.25rem;
+    letter-spacing: -0.02em;
+}
+
+/* Locked Receipt Items */
+.receipt-item-locked {
+    color: var(--text-secondary);
+}
+
+.receipt-annotation-locked::before {
+    content: ' ';
+    font-size: 0.75rem;
+}
+
+/* Guardrail Text */
+.receipt-guardrail {
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    font-style: italic;
+    border-top: 1px dotted var(--border-subtle);
+    padding-top: 0.5rem;
+}
+
+/* Methodology Footnote */
+.methodology-footnote {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+    border-top: 1px solid var(--border-subtle);
+    padding-top: 1rem;
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+}
+
+.methodology-footnote summary {
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    outline: none;
+}
+
+.methodology-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.5rem;
+}
+
+.methodology-list li {
+    margin-bottom: 0.25rem;
+}
+

@@ -7,63 +7,71 @@
 @template.layout.main(content = @`
     <div style="max-width: 720px; margin: 4rem auto; padding: 0 2rem;">
         
-        <div style="margin-bottom: 4rem;">
-            <a href="/RentVerdict/" style="text-decoration: none; color: var(--text-tertiary); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">
+        <div class="back-link-container">
+            <a href="/RentVerdict/" class="back-link">
                 &larr; Return to Engine
             </a>
         </div>
 
-        <div style="text-align: center; margin-bottom: 2rem;">
-            <h3 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 0.5rem;">Final Decision</h3>
+        <div class="verdict-section">
+            <h3 class="verdict-label">Final Decision</h3>
             <div id="verdict-badge">
                 @if(result.verdict() == Verdict.APPROVED)
-                    <div style="font-size: 4.5rem; font-weight: 900; color: #2d5016; letter-spacing: -0.05em; line-height: 0.9;">APPROVED</div>
+                    <div class="verdict-text verdict-approved">APPROVED</div>
                 @elseif(result.verdict() == Verdict.BORDERLINE)
-                    <div style="font-size: 4.5rem; font-weight: 900; color: #947600; letter-spacing: -0.05em; line-height: 0.9; text-decoration: underline;">BORDERLINE</div>
+                    <div class="verdict-text verdict-borderline">BORDERLINE</div>
                 @else
-                    <div style="font-size: 4.5rem; font-weight: 900; color: var(--signal-error); letter-spacing: -0.05em; line-height: 0.9;">DENIED</div>
+                    <div class="verdict-text verdict-denied">DENIED</div>
                 @endif
             </div>
+
+            <!-- MATH PROOF: Now Integrated into Safety Gap Card -->
+            @if(result.verdict() != Verdict.APPROVED)
+               <!-- Proof moved to Safety Gap -->
+            @endif
         </div>
 
         <div id="safety-gap-container">
             @if(result.safetyGap() != null)
                 @if(result.safetyGap().isApproved())
-                    <div style="position: sticky; top: 60px; background: var(--bg-body); border: 2px solid #2d5016; padding: 1.5rem; margin-bottom: 3rem; text-align: center; z-index: 100;">
-                        <div id="safety-gap-amount" style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">${result.safetyGap().toDisplayText()}</div>
-                        <div id="safety-gap-action" style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">${result.safetyGap().actionPrompt()}</div>
+                    <div class="safety-gap-card safety-gap-approved">
+                        <div id="safety-gap-amount" class="safety-gap-amount">${result.safetyGap().displayText()}</div>
+                        <div id="safety-gap-action" class="safety-gap-action">${result.safetyGap().actionPrompt()}</div>
                     </div>
                 @else
-                    <div style="position: sticky; top: 60px; background: var(--bg-body); border: 2px solid var(--signal-error); padding: 1.5rem; margin-bottom: 3rem; text-align: center; z-index: 100; background-color: rgba(205, 44, 37, 0.03);">
-                        <div id="safety-gap-amount" style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">${result.safetyGap().toDisplayText()}</div>
-                        <div id="safety-gap-action" style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">${result.safetyGap().actionPrompt()}</div>
+                    <div class="safety-gap-card safety-gap-denied">
+                        <div id="safety-gap-amount" class="safety-gap-amount">${result.safetyGap().displayText()}</div>
+                        <!-- REPLACED Action Prompt with MATH PROOF -->
+                         <div class="math-proof" style="background: transparent; padding: 0; color: var(--signal-error); font-weight: 500; font-size: 0.85rem;">
+                            Total Upfront $${String.format("%,d", result.financials().totalUpfrontCost())} — Available Cash $${String.format("%,d", result.financials().availableCash())}
+                        </div>
                     </div>
                 @endif
             @endif
         </div>
 
         @if(result.whyThisVerdict() != null)
-            <div style="margin-bottom: 4rem; padding: 2rem; background: var(--bg-panel); border-left: 4px solid var(--text-primary);">
-                <h3 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 1rem;">Why This Verdict</h3>
-                <p id="why-text" style="font-size: 1.25rem; line-height: 1.6; max-width: 65ch; color: var(--text-primary);">
+            <div class="why-verdict-section">
+                <h3 class="section-title" style="font-weight: 700; letter-spacing: 0.02em;">WHY THIS VERDICT</h3>
+                <p id="why-text" class="why-text" style="font-weight: 400; color: var(--text-primary);">
                     ${result.whyThisVerdict()}
                 </p>
                 @if(result.primaryBottleneck() != null)
-                    <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
-                        <span style="font-size: 0.85rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em;">Primary Bottleneck:</span>
-                        <span id="bottleneck-text" style="font-weight: 600; margin-left: 0.5rem;">${result.primaryBottleneck()}</span>
+                    <div class="bottleneck-container">
+                        <span class="bottleneck-label">Primary Bottleneck:</span>
+                        <span id="bottleneck-text" class="bottleneck-value">${result.primaryBottleneck()}</span>
                     </div>
                 @endif
             </div>
         @endif
 
         @if(result.contributingFactors() != null && !result.contributingFactors().isEmpty())
-            <div class="verdict-contributing" style="margin-bottom: 3rem;">
-                <h4 style="font-size: 1rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 1rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">Contributing Factors</h4>
-                <ul style="list-style: none; padding: 0;">
+            <div class="contributing-section">
+                <h4 class="contributing-title" style="font-weight: 700; letter-spacing: 0.02em;">CONTRIBUTING FACTORS</h4>
+                <ul class="contributing-list">
                     @for(String factor : result.contributingFactors())
-                        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative; color: var(--text-secondary);">
-                            <span style="position: absolute; left: 0; color: var(--text-tertiary);">→</span>
+                        <li class="contributing-item">
+                            <span class="contributing-bullet">→</span>
                             ${factor}
                         </li>
                     @endfor
@@ -72,12 +80,15 @@
         @endif
 
         @if(result.regionalContext() != null)
-            <details class="verdict-regional" style="margin-top: 3rem; margin-bottom: 3rem; padding: 1.5rem; background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 4px;">
-                <summary style="cursor: pointer; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); user-select: none;">Regional Context: ${result.regionalContext().cityName()}</summary>
-                <ul style="list-style: none; padding: 0; margin-top: 1rem;">
+            <details class="regional-details">
+                <summary class="regional-summary">REGION: ${result.regionalContext().cityName().toUpperCase()}</summary>
+                <div class="market-warning" style="display: ${result.verdict() == Verdict.DENIED && result.marketPosition().marketZone().equals("Below Market") ? "block" : "none"}; margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">
+                    <strong>Market Position: Below Market.</strong> However, affordability fails due to upfront cash constraints.
+                </div>
+                <ul class="contributing-list" style="margin-top: 1rem;">
                     @for(String context : result.regionalContext().contextFactors())
-                        <li style="margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative; font-size: 0.95rem; color: var(--text-secondary);">
-                            <span style="position: absolute; left: 0; color: var(--text-tertiary);">•</span>
+                        <li class="contributing-item" style="font-size: 0.95rem;">
+                            <span class="contributing-bullet">•</span>
                             ${context}
                         </li>
                     @endfor
@@ -87,25 +98,35 @@
 
 
         <!-- Recovery Hint Box (Deterministic) -->
-        <div id="recovery-hint" style="margin-bottom: 2rem; padding: 1.5rem; background: var(--bg-body); border: 2px solid var(--text-tertiary); border-radius: 4px; display: ${result.verdict() != Verdict.APPROVED ? "block" : "none"}; text-align: left;">
-            <h4 style="margin: 0 0 1rem 0; font-size: 0.9rem; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.05em;">To Reach Approved Status:</h4>
+        <div id="recovery-hint" class="recovery-hint-box" style="display: ${result.verdict() != Verdict.APPROVED ? "block" : "none"};">
+            <h4 class="verdict-label" style="margin-bottom: 1rem;">To Reach Approved Status:</h4>
             <div style="font-size: 1rem; color: var(--text-primary); line-height: 1.5;">
                 You must meet <strong>ONE</strong> of the following conditions:
                 <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem;">
                     <li style="margin-bottom: 0.5rem;">
-                         Reduce rent to <strong>$<span id="target-rent">
-                         ${String.format("%,d", (int) Math.floor((result.financials().remainingBuffer() + result.financials().totalUpfrontCost() - result.financials().staticCosts() - result.financials().recommendedBuffer()) / result.financials().upfrontBaseMultiplier()))}
-                         </span></strong> or lower
+                        @if(((result.financials().availableCash() - result.financials().staticCosts() - result.financials().recommendedBuffer()) / result.financials().upfrontBaseMultiplier()) < 0)
+                             Reduce rent to <strong>Option Unavailable</strong>
+                             <div style="color: var(--signal-error); font-size: 0.85rem; margin-top: 0.5rem;">
+                                Current cash level cannot support any rental scenario.
+                            </div>
+                        @else
+                             Reduce rent to <strong>$<span id="target-rent">
+                             ${String.format("%,d", (int) Math.floor((result.financials().availableCash() - result.financials().staticCosts() - result.financials().recommendedBuffer()) / result.financials().upfrontBaseMultiplier()))}
+                             </span></strong> or lower
+                        @endif
                     </li>
                     <li>
                         Add <strong>$<span id="target-cash">
                         ${String.format("%,d", Math.max(0, result.financials().recommendedBuffer() - result.financials().remainingBuffer()))}
                         </span></strong> in available cash
+                        <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.2rem;">
+                            (Includes upfront shortfall + required post-move safety buffer)
+                        </div>
                     </li>
                 </ul>
             </div>
              <div id="target-rent-error" style="display:none; color: var(--signal-error); font-size: 0.85rem; margin-top: 0.5rem;">
-                No viable rent at current cash level.
+                Current cash level cannot support any rental scenario.
             </div>
         </div>
 
@@ -115,8 +136,8 @@
                 <div class="control-group">
                     <label>Monthly Rent: $<span id="rent-val">${result.financials().monthlyRent()}</span></label>
                     <input type="range" id="rent-slider" 
-                           min="${Math.max(500, result.financials().monthlyRent() - 1000)}" 
-                           max="${result.financials().monthlyRent() + 1000}" 
+                           min="500" 
+                           max="${(int)Math.max(3000, Math.max(result.financials().monthlyRent() * 1.5, result.marketPosition().p75Rent() * 1.5))}" 
                            value="${result.financials().monthlyRent()}" 
                            step="50">
                     <div class="control-info">Slide to see impact of different rent levels</div>
@@ -134,12 +155,12 @@
         </div>
 
         <div style="margin-bottom: 4rem;">
-            <h3 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-secondary); margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.5rem;">Financial Data Points</h3>
+            <h3 class="contributing-title" style="margin-bottom: 1.5rem; font-weight: 700; letter-spacing: 0.02em;">FINANCIAL DATA POINTS</h3>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+            <div class="financial-grid">
                 <div>
-                    <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-bottom: 0.25rem;">Total Upfront Cost</div>
-                    <div id="total-upfront-cost" style="font-size: 2rem; font-weight: 600; letter-spacing: -0.02em;">$${String.format("%,d", result.financials().totalUpfrontCost())}</div>
+                    <div class="financial-label-sm">Total Upfront Cost</div>
+                    <div id="total-upfront-cost" class="financial-value-lg">$${String.format("%,d", result.financials().totalUpfrontCost())}</div>
                     
                     <!-- Legend for Annotations -->
                     <div style="font-size: 0.7rem; color: var(--text-tertiary); margin-top: 1rem; font-style: italic;">
@@ -153,30 +174,33 @@
                                 <li style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem;">
                                     <div>
                                         <div style="font-weight: 500; color: var(--text-secondary);">${item.label()}</div>
-                                        <div style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 0.1rem;">${item.annotation()}</div>
+                                        <div class="receipt-annotation-locked" style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 0.1rem;">${item.annotation()}</div>
                                     </div>
                                     <div style="font-weight: 600; color: var(--text-primary);">$${String.format("%,d", item.amount())}</div>
                                 </li>
                              @endfor
                         </ul>
+                        <div class="receipt-guardrail">
+                            Locked items represent requirements under the selected scenario.
+                        </div>
                     </div>
                 </div>
                 <div>
                      <!-- Market Radar (New Section before Buffer) -->
-                     <div style="margin-bottom: 2rem; padding: 1rem; background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 4px;">
-                        <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 0.5rem; letter-spacing: 0.05em;">Market Radar: ${result.marketPosition().marketZone()}</div>
+                     <div class="market-radar-container">
+                        <div class="radar-title">Market Radar: <span id="radar-title-text">${result.marketPosition().marketZone()}</span></div>
                         <!-- Simple Bar Chart -->
-                        <div style="position: relative; height: 8px; background: #e0e0e0; border-radius: 4px; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+                        <div class="radar-track">
                             <!-- Range P25 to P75 -->
-                             <div style="position: absolute; left: 0%; width: 100%; height: 100%; background: linear-gradient(90deg, #e0e0e0 0%, #d1e7dd 25%, #d1e7dd 75%, #e0e0e0 100%); border-radius: 4px;"></div>
+                             <div class="radar-range"></div>
                              
                              <!-- User Dot -->
                              <%-- Calculate left position relative to median * 1.5 --%>
                              <%-- P25 is approx 25%, P75 is 75% on a relative scale --%>
-                             <div style="position: absolute; left: ${Math.min(100.0, Math.max(0.0, (double)result.financials().monthlyRent() / (result.marketPosition().medianRent() * 1.5) * 100.0)) + "%"}; top: -6px; width: 4px; height: 20px; background: var(--text-primary); border: 1px solid #fff;"></div>
-                             <div style="position: absolute; left: ${Math.min(100.0, Math.max(0.0, (double)result.financials().monthlyRent() / (result.marketPosition().medianRent() * 1.5) * 100.0)) + "%"}; top: -20px; transform: translateX(-50%); font-size: 0.7rem; font-weight: 700;">YOU</div>
+                             <div id="radar-marker" class="radar-marker" style="left: ${Math.min(100.0, Math.max(0.0, (double)result.financials().monthlyRent() / (result.marketPosition().medianRent() * 1.5) * 100.0)) + "%"};"></div>
+                             <div id="radar-label" class="radar-label" style="left: ${Math.min(100.0, Math.max(0.0, (double)result.financials().monthlyRent() / (result.marketPosition().medianRent() * 1.5) * 100.0)) + "%"};">YOU</div>
                         </div>
-                        <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-tertiary);">
+                        <div class="radar-legend">
                             <span>Lower ($${result.marketPosition().p25Rent()})</span>
                             <span>Median</span>
                             <span>Higher</span>
@@ -186,26 +210,35 @@
                     <!-- Market Correction Simulation Action -->
                      @if(result.marketPosition().userRent() > result.marketPosition().p25Rent())
                         <div style="margin-bottom: 2rem; text-align: center;">
-                             <button onclick="simulateMarketCorrection(${result.marketPosition().p25Rent()})" style="background-color: transparent; border: 1px solid var(--text-primary); border-radius: 4px; padding: 0.5rem 1rem; font-size: 0.8rem; cursor: pointer; color: var(--text-primary);">
+                             <button onclick="simulateMarketCorrection(${result.marketPosition().p25Rent()})" class="market-correction-btn">
                                  Simulate Market Correction (Rent $${result.marketPosition().p25Rent()})
                              </button>
                         </div>
                      @endif
 
-                    <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-bottom: 0.25rem;">Remaining Buffer</div>
-                    <div id="remaining-buffer" style="font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; color: ${result.financials().remainingBuffer() < result.financials().recommendedBuffer() ? "var(--signal-error)" : "var(--text-primary)"};">
+                    <div class="financial-label-sm">Remaining Buffer</div>
+                    <div id="remaining-buffer" class="financial-value-lg" style="color: ${result.financials().remainingBuffer() < result.financials().recommendedBuffer() ? "var(--signal-error)" : "var(--text-primary)"};">
                         $${String.format("%,d", result.financials().remainingBuffer())}
                     </div>
                 </div>
             </div>
         </div>
 
-        <div style="text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 3rem;">
+        <!-- Data Footnote (Stage 3: Data Authority) -->
+        <details class="methodology-footnote">
+             <summary>Methodology & Data Sources</summary>
+             <ul class="methodology-list">
+                 <li><strong>Data Source:</strong> 2026 Q1 Regional Market Index (${result.regionalContext().cityName()})</li>
+                 <li><strong>Compliance:</strong> State Security Deposit Regulations (Local Compliance)</li>
+                 <li><strong>Benchmarks:</strong> Standardized Moving Cost Baselines</li>
+             </ul>
+        </details>
+
+        <div class="new-assessment-section">
            <p style="font-size: 0.8rem; color: var(--text-tertiary); margin-bottom: 2rem;">
-               This verdict is an automated assessment based on provided parameters.<br>
-               Adjust variables in the Simulation Lab to see alternative outcomes.
+               This scenario fails due to cash constraints, not rent level.
            </p>
-           <a href="/RentVerdict/" class="btn-primary" style="display: inline-block; text-decoration: none; width: auto; min-width: 200px;">Initialize New Assessment</a>
+           <a href="/RentVerdict/" class="btn-primary" style="display: inline-block; text-decoration: none; width: auto; min-width: 200px;">Run a New Scenario</a>
         </div>
 
     </div>
@@ -234,33 +267,45 @@
             // 1. Verdict Badge
             const badge = document.getElementById('verdict-badge');
             let badgeHtml = '';
-            if (result.verdict === 'APPROVED') {
+            // FALLBACK if verdict is somehow missing
+            const verdict = result.verdict || 'DENIED'; 
+            
+            if (verdict === 'APPROVED') {
                 badgeHtml = '<div style="font-size: 4.5rem; font-weight: 900; color: #2d5016; letter-spacing: -0.05em; line-height: 0.9;">APPROVED</div>';
-            } else if (result.verdict === 'BORDERLINE') {
+            } else if (verdict === 'BORDERLINE') {
                 badgeHtml = '<div style="font-size: 4.5rem; font-weight: 900; color: #947600; letter-spacing: -0.05em; line-height: 0.9; text-decoration: underline;">BORDERLINE</div>';
             } else {
                 badgeHtml = '<div style="font-size: 4.5rem; font-weight: 900; color: var(--signal-error); letter-spacing: -0.05em; line-height: 0.9;">DENIED</div>';
             }
             badge.innerHTML = badgeHtml;
 
-            // 2. Safety Gap (Canonical Logic in Backend, UI just renders)
+            // 2. Safety Gap (Uses displayText field)
             const sgContainer = document.getElementById('safety-gap-container');
             if (result.safetyGap) {
                 const isPositive = result.safetyGap.isApproved;
                 const color = isPositive ? "var(--signal-success)" : "var(--signal-error)";
                 const bgColor = isPositive ? "var(--bg-body)" : "rgba(205, 44, 37, 0.03)";
                 
+                // Fallback for missing displayText
+                const displayTxt = result.safetyGap.displayText || "Risk Detected";
+                const actionPrmpt = result.safetyGap.actionPrompt || "Action Required";
+
                 sgContainer.innerHTML = 
                     '<div style="position: sticky; top: 60px; background: var(--bg-body); border: 2px solid ' + color + '; padding: 1.5rem; margin-bottom: 3rem; text-align: center; z-index: 100; background-color: ' + bgColor + ';">' +
-                        '<div id="safety-gap-amount" style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">' + result.safetyGap.toDisplayText + '</div>' + 
-                        '<div id="safety-gap-action" style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">' + result.safetyGap.actionPrompt + '</div>' +
+                        '<div id="safety-gap-amount" style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">' + displayTxt + '</div>' + 
+                        '<div id="safety-gap-action" style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">' + actionPrmpt + '</div>' +
                     '</div>';
 
             }
 
             // 3. Why & Bottleneck
-            document.getElementById('why-text').innerText = result.whyThisVerdict;
-            document.getElementById('bottleneck-text').innerText = result.primaryBottleneck;
+            // Fallback for missing Why text
+            const whyText = result.whyThisVerdict || "Financial assessment indicates unacceptable risk level for this move.";
+            document.getElementById('why-text').innerText = whyText;
+            
+            if (result.primaryBottleneck) {
+                 document.getElementById('bottleneck-text').innerText = result.primaryBottleneck;
+            }
 
             // 4. Financials
             document.getElementById('total-upfront-cost').innerText = '$' + financials.totalUpfrontCost.toLocaleString();
@@ -269,7 +314,7 @@
             remBuffer.style.color = financials.remainingBuffer < financials.recommendedBuffer ? 'var(--signal-error)' : 'var(--text-primary)';
             
             // 5. Recovery Hint Logic
-            if (result.verdict !== 'APPROVED') {
+            if (verdict !== 'APPROVED') {
                 recoveryHint.style.display = 'block';
                 
                 // Needed Cash = max(0, recommendedBuffer - remainingBuffer)
@@ -281,10 +326,15 @@
                 const maxRent = Math.floor((currentAvailable - financials.staticCosts - financials.recommendedBuffer) / financials.upfrontBaseMultiplier);
                 
                 if (maxRent < 0) {
-                     targetRentSpan.innerText = "N/A";
+                     targetRentSpan.innerText = "Option Unavailable";
+                     targetRentSpan.style.fontSize = "0.9em"; 
+                     targetRentSpan.style.color = "var(--text-tertiary)";
+                     targetRentError.innerText = "Current cash level cannot support any rental scenario.";
                      targetRentError.style.display = 'block';
                 } else {
                      targetRentSpan.innerText = formatCurrency(maxRent);
+                     targetRentSpan.style.fontSize = "inherit";
+                     targetRentSpan.style.color = "inherit";
                      targetRentError.style.display = 'none';
                 }
 
@@ -292,13 +342,29 @@
                 recoveryHint.style.display = 'none';
             }
 
+            // 6. Market Radar Dynamic Update
+            const marketPos = result.marketPosition;
+            if (marketPos) {
+                document.getElementById('radar-title-text').innerText = marketPos.marketZone;
+                
+                // Calculate position percentage
+                // Logic must match server-side: Math.min(100, Math.max(0, rent / (median * 1.5) * 100))
+                const percentage = Math.min(100.0, Math.max(0.0, (financials.monthlyRent / (marketPos.medianRent * 1.5)) * 100.0));
+                
+                const marker = document.getElementById('radar-marker');
+                const label = document.getElementById('radar-label');
+                
+                marker.style.left = percentage + '%';
+                label.style.left = percentage + '%';
+            }
+
             simStatus.style.display = 'none';
-            document.querySelectorAll('.simulation-lab, #verdict-badge, #safety-gap-container, #why-text, #bottleneck-text').forEach(el => el.classList.remove('updating'));
+            document.querySelectorAll('.simulation-lab, .verdict-text, .safety-gap-card, .why-text, .bottleneck-value').forEach(el => el.classList.remove('updating'));
         }
 
         function simulateMarketCorrection(targetRent) {
             simStatus.style.display = 'block';
-            document.querySelectorAll('#verdict-badge, #safety-gap-container, #why-text, #bottleneck-text').forEach(el => el.classList.add('updating'));
+            document.querySelectorAll('.verdict-text, .safety-gap-card, .why-text, .bottleneck-value').forEach(el => el.classList.add('updating'));
             
             // Sync slider UI so they stay consistent
             rentSlider.value = targetRent;
@@ -324,7 +390,7 @@
 
         function runSimulation() {
             simStatus.style.display = 'block';
-            document.querySelectorAll('#verdict-badge, #safety-gap-container, #why-text, #bottleneck-text').forEach(el => el.classList.add('updating'));
+            document.querySelectorAll('.verdict-text, .safety-gap-card, .why-text, .bottleneck-value').forEach(el => el.classList.add('updating'));
             
             const payload = {
                 adjustedRent: parseInt(rentSlider.value),

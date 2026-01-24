@@ -39,12 +39,12 @@
 
                     <div class="form-group">
                         <label for="monthlyRent">Base Monthly Liability (Rent)</label>
-                        <input type="number" id="monthlyRent" name="monthlyRent" placeholder="0.00" min="100" required>
+                        <input type="text" id="monthlyRent" name="monthlyRent" placeholder="0" inputmode="numeric" required>
                     </div>
 
                     <div class="form-group">
                         <label for="availableCash">Liquid Assets (Cash on Hand)</label>
-                        <input type="number" id="availableCash" name="availableCash" placeholder="0.00" min="0" required>
+                        <input type="text" id="availableCash" name="availableCash" placeholder="0" inputmode="numeric" required>
                     </div>
 
                     <div class="checkbox-group">
@@ -59,6 +59,45 @@
                     </div>
 
                     <button type="submit" class="btn-primary">Execute Verdict Analysis</button>
+                    
+                    <script>
+                        document.addEventListener('DOMContentLoaded', () => {
+                            const currencyInputs = ['monthlyRent', 'availableCash'];
+                            
+                            currencyInputs.forEach(id => {
+                                const input = document.getElementById(id);
+                                
+                                // Format on input
+                                input.addEventListener('input', (e) => {
+                                    // Remove non-digits
+                                    let value = e.target.value.replace(/[^0-9]/g, '');
+                                    
+                                    if (value) {
+                                        // Add commas
+                                        const parsed = parseInt(value);
+                                        if (!isNaN(parsed)) {
+                                            e.target.value = parsed.toLocaleString();
+                                        } else {
+                                            e.target.value = '';
+                                        }
+                                    } else {
+                                        e.target.value = '';
+                                    }
+                                });
+
+                                // Clean before submit (handled by form submit event typically, 
+                                // but here we might need to intercept or rely on backend to handle simple strings.
+                                // However, standard Spring binding expects int. We must strip commas before submit.)
+                            });
+
+                            document.querySelector('form').addEventListener('submit', (e) => {
+                                currencyInputs.forEach(id => {
+                                    const input = document.getElementById(id);
+                                    input.value = input.value.replace(/,/g, '');
+                                });
+                            });
+                        });
+                    </script>
                     
                     <p style="text-align: center; margin-top: 2rem; font-size: 0.75rem; color: var(--text-tertiary);">
                         Simulation ID: ${java.util.UUID.randomUUID().toString().substring(0,8).toUpperCase()}
