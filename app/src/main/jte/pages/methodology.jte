@@ -1,7 +1,7 @@
 @template.layout.main(
     title = "Methodology - How We Assess Risk",
     description = "Understanding the 50/30/20 rule and liquidity analysis behind your Rent Verdict.",
-    canonical = "https://lifeverdict.com/methodology",
+    canonical = "https://movecostinfo.com/methodology",
     content = @`
     <div style="max-width: 700px; margin: 4rem auto; padding: 0 1.5rem;">
         <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem;">Methodology</h1>

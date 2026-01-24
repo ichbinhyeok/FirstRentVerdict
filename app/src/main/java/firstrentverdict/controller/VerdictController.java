@@ -19,6 +19,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @Controller
+@RequestMapping("/RentVerdict")
 public class VerdictController {
 
     public static final String SESSION_KEY_ORIGINAL_INPUT = "originalVerdictInput";

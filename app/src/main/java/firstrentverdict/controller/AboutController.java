@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 
 @Controller
+@org.springframework.web.bind.annotation.RequestMapping("/RentVerdict")
 public class AboutController {
 
     @GetMapping("/about")

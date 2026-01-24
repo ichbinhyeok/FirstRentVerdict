@@ -72,7 +72,7 @@ public final class JtemainGenerated {
 			jteOutput.writeContent(">\r\n    ");
 		}
 		jteOutput.writeContent("\r\n    <meta property=\"og:site_name\" content=\"First Rent Verdict\">\r\n    <meta property=\"og:locale\" content=\"en_US\">\r\n    <meta property=\"og:image\" content=\"https://lifeverdict.com/images/og-card.png\"> ");
-		jteOutput.writeContent("\r\n\r\n    <link rel=\"stylesheet\" href=\"/RentVerdict/css/style.css\">\r\n    <link rel=\"icon\" type=\"image/png\" href=\"/RentVerdict/images/favicon.png\">\r\n    <meta name=\"theme-color\" content=\"#ffffff\">\r\n\r\n    ");
+		jteOutput.writeContent("\r\n\r\n    <link rel=\"stylesheet\" href=\"/css/style.css\">\r\n    <link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\">\r\n    <meta name=\"theme-color\" content=\"#ffffff\">\r\n\r\n    ");
 		jteOutput.writeContent("\r\n    ");
 		jteOutput.writeContent("\r\n</head>\r\n<body>\r\n    ");
 		gg.jte.generated.ondemand.layout.JteheaderGenerated.render(jteOutput, jteHtmlInterceptor);

@@ -30,10 +30,10 @@ public class SitemapController {
         xml.append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
 
         // 1. Static Pages
-        addUrl(xml, "https://lifeverdict.com/", "1.0");
-        addUrl(xml, "https://lifeverdict.com/about", "0.8");
-        addUrl(xml, "https://lifeverdict.com/methodology", "0.8");
-        addUrl(xml, "https://lifeverdict.com/guide/rent-affordability-rule", "0.9"); // Anchor Article
+        addUrl(xml, "https://movecostinfo.com/", "1.0");
+        addUrl(xml, "https://movecostinfo.com/about", "0.8");
+        addUrl(xml, "https://movecostinfo.com/methodology", "0.8");
+        addUrl(xml, "https://movecostinfo.com/guide/rent-affordability-rule", "0.9"); // Anchor Article
 
         // 2. City Pages (pSEO)
         // Using current date as lastmod since data is "2026 updated"
@@ -41,7 +41,7 @@ public class SitemapController {
 
         for (CitiesData.CityEntry city : cities) {
             String slug = city.city().toLowerCase().replace(" ", "-") + "-" + city.state().toLowerCase();
-            String location = "https://lifeverdict.com/verdict/" + slug;
+            String location = "https://movecostinfo.com/verdict/" + slug;
 
             xml.append("  <url>\n");
             xml.append("    <loc>").append(location).append("</loc>\n");

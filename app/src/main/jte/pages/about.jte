@@ -1,7 +1,7 @@
 @template.layout.main(
     title = "About First Rent Verdict - Our Mission",
     description = "First Rent Verdict provides objective, data-driven financial analysis for tenants. We believe in transparency and mathematically sound rental decisions.",
-    canonical = "https://lifeverdict.com/about",
+    canonical = "https://movecostinfo.com/about",
     content = @`
     <div style="max-width: 700px; margin: 4rem auto; padding: 0 1.5rem;">
         <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem;">About Us</h1>

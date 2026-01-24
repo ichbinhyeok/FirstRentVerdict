@@ -1,7 +1,7 @@
 @template.layout.main(
     title = "Guide: The 50/30/20 Rule for Renters (2026 Edition)",
     description = "How to apply the 50/30/20 rule to your rent budget. Understand why liquid cash flow matters more than gross income.",
-    canonical = "https://lifeverdict.com/guide/rent-affordability-rule",
+    canonical = "https://movecostinfo.com/guide/rent-affordability-rule",
     content = @`
     <div style="max-width: 700px; margin: 4rem auto; padding: 0 1.5rem;">
         <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 2rem; line-height: 1.2;">The 50/30/20 Rule: A Renter's Liquidity Framework</h1>

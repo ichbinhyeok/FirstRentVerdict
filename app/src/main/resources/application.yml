@@ -5,6 +5,6 @@ gg:
 spring:
   application:
     name: FirstRentVerdict
-server:
-  servlet:
-    context-path: /RentVerdict
+# server:
+#   servlet:
+#     context-path: /RentVerdict

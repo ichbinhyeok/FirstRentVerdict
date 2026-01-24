@@ -32,10 +32,10 @@
     @endif
     <meta property="og:site_name" content="First Rent Verdict">
     <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://lifeverdict.com/images/og-card.png"> <!-- Placeholder/Default -->
+    <meta property="og:image" content="https://movecostinfo.com/images/og-card.png"> <!-- Placeholder/Default -->
 
-    <link rel="stylesheet" href="/RentVerdict/css/style.css">
-    <link rel="icon" type="image/png" href="/RentVerdict/images/favicon.png">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
     <meta name="theme-color" content="#ffffff">
 
     <!-- Google Search Console Verification -->

@@ -5,7 +5,7 @@
 @template.layout.main(
     title = pageData.pageTitle(),
     description = pageData.metaDescription(),
-    canonical = "https://lifeverdict.com/verdict/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase(),
+    canonical = "https://movecostinfo.com/verdict/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase(),
     content = @`
     <div style="max-width: 800px; margin: 4rem auto; padding: 0 1.5rem;">
         
@@ -22,6 +22,16 @@
                 Objective financial requirements for prospective tenants, based on local economic indicators.
             </p>
         </header>
+
+        <!-- Soft Verdict / Market Insight Box (Pre-Verdict Context) -->
+        <div style="background: var(--bg-surface); border-left: 4px solid var(--text-primary); padding: 2rem; margin-bottom: 3rem; border-radius: 4px; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+            <h2 style="font-size: 1.4rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem; line-height: 1.3;">
+                ${pageData.preVerdictHeadline()}
+            </h2>
+            <p style="font-size: 1.05rem; color: var(--text-secondary); line-height: 1.6;">
+                ${pageData.riskNarrative()}
+            </p>
+        </div>
 
         <!-- Feature Grid (Data Blocks) -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
@@ -56,6 +66,26 @@
                     <strong>Moving Costs</strong> (~$${pageData.typicalMoving()}).
                 </div>
             </div>
+        </div>
+
+        <!-- Common Questions (QnA Section) -->
+        <div style="margin-bottom: 4rem;">
+            <h3 style="font-size: 0.9rem; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 2rem; letter-spacing: 0.05em;">
+                Common Moving Questions
+            </h3>
+            
+            @if(pageData.commonQuestions() != null)
+                @for(firstrentverdict.service.seo.CityContentGenerator.QnA qna : pageData.commonQuestions())
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
+                            ${qna.question()}
+                        </h4>
+                        <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.6;">
+                            ${qna.answer()}
+                        </p>
+                    </div>
+                @endfor
+            @endif
         </div>
 
         <!-- Block 3: Market Context -->
