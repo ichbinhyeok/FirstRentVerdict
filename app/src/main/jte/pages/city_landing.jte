@@ -5,7 +5,7 @@
 @template.layout.main(
     title = pageData.pageTitle(),
     description = pageData.metaDescription(),
-    canonical = "https://movecostinfo.com/verdict/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase(),
+    canonical = "https://movecostinfo.com/RentVerdict/verdict/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase(),
     content = @`
     <div style="max-width: 800px; margin: 4rem auto; padding: 0 1.5rem;">
         

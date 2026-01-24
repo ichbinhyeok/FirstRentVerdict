@@ -1,6 +1,7 @@
 @template.layout.main(
     title = "LifeVerdict - Financial Decision Platform",
     description = "The central hub for objective financial risk assessments. Access First Rent Verdict and future modules.",
+    canonical = "https://movecostinfo.com/",
     content = @`
     <div style="background-color: var(--bg-body); min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem;">
         

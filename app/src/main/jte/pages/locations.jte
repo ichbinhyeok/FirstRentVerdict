@@ -7,6 +7,7 @@
 @template.layout.main(
     title = "Available Jurisdictions - First Rent Verdict",
     description = "Complete index of supported cities for rent affordability analysis.",
+    canonical = "https://movecostinfo.com/RentVerdict/cities",
     content = @`
     <div style="max-width: 1000px; margin: 4rem auto; padding: 0 2rem;">
         <div style="text-align: center; margin-bottom: 4rem;">

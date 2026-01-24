@@ -3,7 +3,9 @@
 
 @param List<CityEntry> cities
 
-@template.layout.main(content = @`
+@template.layout.main(
+    canonical = "https://movecostinfo.com/RentVerdict/",
+    content = @`
     <div class="split-layout">
         <!-- LEFT: Identity & Authority -->
         <div class="split-left animate-entry">

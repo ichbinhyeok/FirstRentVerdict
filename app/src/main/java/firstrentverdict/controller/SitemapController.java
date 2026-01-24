@@ -43,7 +43,7 @@ public class SitemapController {
 
         for (CitiesData.CityEntry city : cities) {
             String slug = city.city().toLowerCase().replace(" ", "-") + "-" + city.state().toLowerCase();
-            String location = "https://movecostinfo.com/verdict/" + slug;
+            String location = "https://movecostinfo.com/RentVerdict/verdict/" + slug;
 
             xml.append("  <url>\n");
             xml.append("    <loc>").append(location).append("</loc>\n");
