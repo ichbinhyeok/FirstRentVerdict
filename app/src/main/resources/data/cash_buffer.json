@@ -1,0 +1,53 @@
+{
+    "version": "1.0",
+    "unit": "USD",
+    "formula": "3-6 months non-rent essentials + emergency fund",
+    "notes": "Simplified recommended buffer",
+    "cities": [
+        {
+            "city": "Austin",
+            "state": "TX",
+            "year": 2024,
+            "monthly_non_rent_essentials": 1500,
+            "recommended_post_move_buffer": 5000,
+            "granularity": "City",
+            "essentials_sources": [
+                "Numbeo"
+            ],
+            "heuristic_sources": [
+                "FinancialAdvisors"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "New York",
+            "state": "NY",
+            "year": 2024,
+            "monthly_non_rent_essentials": 2500,
+            "recommended_post_move_buffer": 10000,
+            "granularity": "City",
+            "essentials_sources": [
+                "Numbeo"
+            ],
+            "heuristic_sources": [
+                "FinancialAdvisors"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Francisco",
+            "state": "CA",
+            "year": 2024,
+            "monthly_non_rent_essentials": 2200,
+            "recommended_post_move_buffer": 8000,
+            "granularity": "City",
+            "essentials_sources": [
+                "Numbeo"
+            ],
+            "heuristic_sources": [
+                "FinancialAdvisors"
+            ],
+            "missing_reason": null
+        }
+    ]
+}

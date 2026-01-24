@@ -1,0 +1,39 @@
+[
+    {
+        "city": "Austin",
+        "state": "TX",
+        "legalCapMultiplier": null,
+        "typicalMultipliers": [
+            1.0
+        ],
+        "highRiskMultipliers": [
+            1.5,
+            2.0
+        ],
+        "notes": "No state cap."
+    },
+    {
+        "city": "New York",
+        "state": "NY",
+        "legalCapMultiplier": 1.0,
+        "typicalMultipliers": [
+            1.0
+        ],
+        "highRiskMultipliers": [
+            1.0
+        ],
+        "notes": "Strict 1 month cap."
+    },
+    {
+        "city": "San Francisco",
+        "state": "CA",
+        "legalCapMultiplier": 2.0,
+        "typicalMultipliers": [
+            1.0
+        ],
+        "highRiskMultipliers": [
+            2.0
+        ],
+        "notes": "Cap is 2x rent for unfurnished."
+    }
+]

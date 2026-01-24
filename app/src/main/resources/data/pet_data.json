@@ -1,0 +1,70 @@
+{
+    "version": "1.0",
+    "unit": "USD",
+    "notes": "One-time fees and monthly rent",
+    "cities": [
+        {
+            "city": "Austin",
+            "state": "TX",
+            "year": 2024,
+            "one_time": {
+                "avg": 400,
+                "low": 200,
+                "high": 600,
+                "notes": "Non-refundable fee + deposit"
+            },
+            "monthly_pet_rent": {
+                "avg": 25,
+                "low": 15,
+                "high": 50,
+                "notes": "Per pet"
+            },
+            "sources": [
+                "Apartments.com"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "New York",
+            "state": "NY",
+            "year": 2024,
+            "one_time": {
+                "avg": 0,
+                "low": 0,
+                "high": 500,
+                "notes": "Illegal to charge pet fees in some rent-stabilized units, but common elsewhere."
+            },
+            "monthly_pet_rent": {
+                "avg": 50,
+                "low": 25,
+                "high": 100,
+                "notes": "Common"
+            },
+            "sources": [
+                "Streeteasy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Francisco",
+            "state": "CA",
+            "year": 2024,
+            "one_time": {
+                "avg": 500,
+                "low": 0,
+                "high": 1000,
+                "notes": "Deposit must fit within 2x rent cap"
+            },
+            "monthly_pet_rent": {
+                "avg": 50,
+                "low": 30,
+                "high": 75,
+                "notes": "Common"
+            },
+            "sources": [
+                "Zillow"
+            ],
+            "missing_reason": null
+        }
+    ]
+}

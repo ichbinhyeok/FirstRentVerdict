@@ -21,7 +21,7 @@ class DataIntegrationTest {
         // Rent
         Optional<RentData.CityRent> rent = repository.getRent("New York", "NY");
         assertTrue(rent.isPresent(), "Rent data for NY should exist");
-        assertEquals(3850, rent.get().median());
+        assertEquals(4200, rent.get().median());
 
         // Security Deposit (Merged Logic Check)
         Optional<SecurityDepositData> deposit = repository.getSecurityDeposit("New York", "NY");
@@ -40,8 +40,8 @@ class DataIntegrationTest {
 
     @Test
     void verifyDataLoading_TexasWithoutCap() {
-        // Texas has no legal cap, check if null or logic handled
-        Optional<SecurityDepositData> deposit = repository.getSecurityDeposit("Houston", "TX");
+        // Texas (Austin) has no legal cap, check if null or logic handled
+        Optional<SecurityDepositData> deposit = repository.getSecurityDeposit("Austin", "TX");
         assertTrue(deposit.isPresent());
         assertNull(deposit.get().legalCapMultiplier(), "TX Legal Cap should be null (no cap)");
     }

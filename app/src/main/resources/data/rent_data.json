@@ -1,0 +1,46 @@
+{
+    "version": "1.0",
+    "unit": "USD",
+    "notes": "Sample data for testing",
+    "cities": [
+        {
+            "city": "Austin",
+            "state": "TX",
+            "year": 2024,
+            "median": 1800,
+            "p25": 1400,
+            "p75": 2400,
+            "sources": [
+                "Zillow"
+            ],
+            "missing_reason": null,
+            "is_outdated": false
+        },
+        {
+            "city": "New York",
+            "state": "NY",
+            "year": 2024,
+            "median": 4200,
+            "p25": 3000,
+            "p75": 5500,
+            "sources": [
+                "StreetEasy"
+            ],
+            "missing_reason": null,
+            "is_outdated": false
+        },
+        {
+            "city": "San Francisco",
+            "state": "CA",
+            "year": 2024,
+            "median": 3500,
+            "p25": 2800,
+            "p75": 4500,
+            "sources": [
+                "Zumper"
+            ],
+            "missing_reason": null,
+            "is_outdated": false
+        }
+    ]
+}

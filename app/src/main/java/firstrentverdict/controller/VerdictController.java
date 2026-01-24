@@ -39,10 +39,6 @@ public class VerdictController {
 
     @GetMapping("/")
     public String index(Model model) {
-        // We need a way to get all cities.
-        // Since I haven't added `getAllCities` to repo yet, I will do it in the next
-        // tool call.
-        // For now, let's write the controller logic assuming the repository has it.
         List<CitiesData.CityEntry> sortedCities = repository.getAllCities();
         sortedCities.sort(Comparator.comparing(CitiesData.CityEntry::city));
 
@@ -50,13 +46,18 @@ public class VerdictController {
         return "pages/index";
     }
 
+    @GetMapping("/verdict")
+    public String verdictRedirect() {
+        return "redirect:/";
+    }
+
     @PostMapping("/verdict")
     public String getVerdict(
-            @RequestParam String cityState, // Format: City|State
-            @RequestParam int monthlyRent,
-            @RequestParam int availableCash,
-            @RequestParam(defaultValue = "false") boolean hasPet,
-            @RequestParam(defaultValue = "false") boolean isLocalMove,
+            @RequestParam("cityState") String cityState, // Format: City|State
+            @RequestParam("monthlyRent") int monthlyRent,
+            @RequestParam("availableCash") int availableCash,
+            @RequestParam(value = "hasPet", defaultValue = "false") boolean hasPet,
+            @RequestParam(value = "isLocalMove", defaultValue = "false") boolean isLocalMove,
             Model model,
             HttpSession session) {
         String[] parts = cityState.split("\\|");

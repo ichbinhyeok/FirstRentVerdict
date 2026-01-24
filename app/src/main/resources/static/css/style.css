@@ -284,3 +284,53 @@ footer {
 .verdict-regional summary:hover {
     color: var(--text-secondary);
 }
+
+/* Phase 5: Simulation Lab */
+.simulation-lab {
+    background: #fbfbfb;
+    border: 1px dashed var(--border-subtle);
+    padding: 2rem;
+    margin: 4rem 0;
+    border-radius: 8px;
+}
+
+.simulation-lab h4 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-tertiary);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.sim-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+}
+
+.control-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.control-info {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-top: 0.5rem;
+}
+
+input[type="range"] {
+    width: 100%;
+    accent-color: var(--text-primary);
+    cursor: pointer;
+}
+
+/* Dynamic updates styles */
+.updating {
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}

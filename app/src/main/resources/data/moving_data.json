@@ -1,0 +1,47 @@
+{
+    "version": "1.0",
+    "unit": "USD",
+    "move_type": "Local (Intra-city)",
+    "notes": "Estimated for 1-bedroom apartment",
+    "cities": [
+        {
+            "city": "Austin",
+            "state": "TX",
+            "year": 2024,
+            "typical": 500,
+            "low": 300,
+            "high": 800,
+            "assumptions": "2 movers, 4 hours",
+            "sources": [
+                "Thumbtack"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "New York",
+            "state": "NY",
+            "year": 2024,
+            "typical": 1200,
+            "low": 800,
+            "high": 1800,
+            "assumptions": "2 movers, 4 hours, stairs",
+            "sources": [
+                "Thumbtack"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Francisco",
+            "state": "CA",
+            "year": 2024,
+            "typical": 1000,
+            "low": 600,
+            "high": 1500,
+            "assumptions": "2 movers, 4 hours",
+            "sources": [
+                "Thumbtack"
+            ],
+            "missing_reason": null
+        }
+    ]
+}

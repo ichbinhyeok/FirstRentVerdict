@@ -89,29 +89,11 @@ public class VerdictService {
         }
 
         // 5. Build Result
-        List<String> breakdown = new ArrayList<>();
-        breakdown.add(String.format("First Month Rent: $%d", input.monthlyRent()));
-        breakdown.add(String.format("Security Deposit: $%d (%.1fx rent)", depositCost, multiplier));
-        breakdown.add(String.format("Moving Cost: ~$%,d", movingCost));
-        if (input.hasPet())
-            breakdown.add(String.format("Pet Fees: ~$%,d", petOneTime));
-
         List<String> riskFactors = new ArrayList<>();
         if (input.hasPet())
             riskFactors.add("Pet owners face limited housing options and non-refundable fees.");
         if (remainingCash < recommendedBuffer)
             riskFactors.add("Post-move cash buffer is below recommended safety levels.");
-
-        String summary = generateSummary(verdict, remainingCash, recommendedBuffer);
-
-        String legalNote = null;
-        if (cappedByLaw) {
-            legalNote = String.format(
-                    "Note: Deposit strictly limited to %.1fx rent by state law. Without this protection, market rates might be higher.",
-                    depositData.legalCapMultiplier());
-        } else if (depositData.legalCapMultiplier() != null) {
-            legalNote = String.format("State law limits deposits to %.1fx rent.", depositData.legalCapMultiplier());
-        }
 
         // ==========================================================================
         // PHASE 2: Smart Verdict Generation with BottleneckAnalyzer & TextGenerator
@@ -139,7 +121,7 @@ public class VerdictService {
                 input.city());
         String whyThisVerdict = textGenerator.generate(context);
 
-        // Layer 3: Contributing Factors (using existing riskFactors for now)
+        // Layer 3: Contributing Factors (using riskFactors for now)
         List<String> contributingFactors = riskFactors.size() > 3
                 ? riskFactors.subList(0, 3)
                 : new ArrayList<>(riskFactors);
@@ -168,24 +150,6 @@ public class VerdictService {
                 contributingFactors,
                 regionalContext,
                 safetyGap,
-                new VerdictResult.Financials(totalUpfront, remainingCash, recommendedBuffer),
-                // DEPRECATED fields (keep for backward compatibility)
-                summary,
-                breakdown,
-                riskFactors,
-                primaryDistress,
-                legalNote);
-    }
-
-    // REMOVED: generateWhyThisVerdictStub() - replaced by VerdictTextGenerator
-
-    private String generateSummary(Verdict verdict, int remaining, int recommended) {
-        if (verdict == Verdict.APPROVED) {
-            return "You are in a strong financial position. Your estimated entry costs leave you with a healthy safety buffer.";
-        } else if (verdict == Verdict.BORDERLINE) {
-            return "You can technically afford to move in, but your remaining cash reserves will be dangerously low. You are one minor emergency away from stress.";
-        } else {
-            return "This move poses a high financial risk. You likely do not have enough cash to cover upfront costs and maintain a basic safety net.";
-        }
+                new VerdictResult.Financials(input.monthlyRent(), totalUpfront, remainingCash, recommendedBuffer));
     }
 }

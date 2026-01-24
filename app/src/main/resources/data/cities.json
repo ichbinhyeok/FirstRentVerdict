@@ -1,0 +1,17 @@
+{
+    "version": "1.0",
+    "cities": [
+        {
+            "city": "Austin",
+            "state": "TX"
+        },
+        {
+            "city": "New York",
+            "state": "NY"
+        },
+        {
+            "city": "San Francisco",
+            "state": "CA"
+        }
+    ]
+}

@@ -32,45 +32,33 @@ public record VerdictResult(
                 SafetyGap safetyGap,
 
                 // ========== Financial Data ==========
-                Financials financials,
+                Financials financials) {
 
-                // ========== DEPRECATED (Backward Compatibility) ==========
-                @Deprecated String summary,
-                @Deprecated List<String> breakdown,
-                @Deprecated List<String> riskFactors,
-                @Deprecated String primaryDistressFactor,
-                @Deprecated String legalProtectionNote) {
         /**
          * Validation enforced at construction time
-         * TEMPORARILY DISABLED FOR DEBUGGING 500 ERROR
          */
         public VerdictResult {
-                /*
-                 * // Layer 2 validation: 250 char limit
-                 * if (whyThisVerdict != null && whyThisVerdict.length() > 250) {
-                 * throw new IllegalArgumentException(
-                 * "Why This Verdict must be <= 250 chars (got: " + whyThisVerdict.length() +
-                 * ")");
-                 * }
-                 * 
-                 * // Layer 3 validation: max 3 contributing factors
-                 * if (contributingFactors != null && contributingFactors.size() > 3) {
-                 * throw new IllegalArgumentException(
-                 * "Contributing Factors limited to 3 items max (got: "
-                 * + contributingFactors.size() + ")");
-                 * }
-                 * 
-                 * // Primary bottleneck required for non-approved verdicts
-                 * if (verdict != Verdict.APPROVED && (primaryBottleneck == null ||
-                 * primaryBottleneck.isBlank())) {
-                 * throw new
-                 * IllegalArgumentException("Primary bottleneck required for non-approved verdicts"
-                 * );
-                 * }
-                 */
+                // Layer 2 validation: 250 char limit
+                if (whyThisVerdict != null && whyThisVerdict.length() > 250) {
+                        throw new IllegalArgumentException(
+                                        "Why This Verdict must be <= 250 chars (got: " + whyThisVerdict.length() + ")");
+                }
+
+                // Layer 3 validation: max 3 contributing factors
+                if (contributingFactors != null && contributingFactors.size() > 3) {
+                        throw new IllegalArgumentException(
+                                        "Contributing Factors limited to 3 items max (got: "
+                                                        + contributingFactors.size() + ")");
+                }
+
+                // Primary bottleneck required for non-approved verdicts
+                if (verdict != Verdict.APPROVED && (primaryBottleneck == null || primaryBottleneck.isBlank())) {
+                        throw new IllegalArgumentException("Primary bottleneck required for non-approved verdicts");
+                }
         }
 
         public record Financials(
+                        int monthlyRent,
                         int totalUpfrontCost,
                         int remainingBuffer,
                         int recommendedBuffer) {

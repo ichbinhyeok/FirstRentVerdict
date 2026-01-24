@@ -1,6 +1,6 @@
 gg:
   jte:
-    templateLocation: src/main/jte
+    templateLocation: app/src/main/jte
     developmentMode: true
 spring:
   application:
