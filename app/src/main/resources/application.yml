@@ -1,7 +1,7 @@
-# gg:
-#   jte:
-#     templateLocation: src/main/jte
-#     developmentMode: false
+gg:
+  jte:
+    usePrecompiledTemplates: true
+    # developmentMode: true # Set to true for local development if not using precompiled templates
 spring:
   application:
     name: FirstRentVerdict
