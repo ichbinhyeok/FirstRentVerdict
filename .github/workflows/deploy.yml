@@ -1,0 +1,69 @@
+name: CI/CD to OCI ARM64
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: actions/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: actions/setup-buildx-action@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/arm64
+          push: true
+          tags: shinhyeok22/movecostinfo:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Execute remote ssh
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.OCI_HOST }}
+          username: ${{ secrets.OCI_USERNAME }}
+          key: ${{ secrets.OCI_KEY }}
+          script: |
+            mkdir -p ~/deploy/movecostinfo
+            cd ~/deploy/movecostinfo
+            
+            # Create/Update docker-compose.yml on the server
+            cat <<EOF > docker-compose.yml
+            version: '3.8'
+            services:
+              movecostinfo:
+                image: shinhyeok22/movecostinfo:latest
+                container_name: movecostinfo
+                ports:
+                  - "8085:8080"
+                environment:
+                  - JAVA_OPTS=-XX:+UseSerialGC -Xms128m -Xmx256m -Xss512k
+                restart: always
+            EOF
+            
+            # Deploy using 'docker compose'
+            docker compose pull
+            docker compose up -d --build
+            
+            # Clean up old images
+            docker image prune -f
