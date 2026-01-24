@@ -27,14 +27,17 @@ public class VerdictController {
     private final VerdictDataRepository repository;
     private final VerdictService verdictService;
     private final WhatIfService whatIfService;
+    private final firstrentverdict.service.seo.CityContentGenerator cityContentGenerator;
 
     public VerdictController(
             VerdictDataRepository repository,
             VerdictService verdictService,
-            WhatIfService whatIfService) {
+            WhatIfService whatIfService,
+            firstrentverdict.service.seo.CityContentGenerator cityContentGenerator) {
         this.repository = repository;
         this.verdictService = verdictService;
         this.whatIfService = whatIfService;
+        this.cityContentGenerator = cityContentGenerator;
     }
 
     @GetMapping("/")
@@ -76,6 +79,55 @@ public class VerdictController {
         model.addAttribute("result", result);
 
         return "pages/result";
+    }
+
+    @GetMapping("/verdict/{slug}")
+    public String cityPage(@PathVariable("slug") String slug, Model model) {
+        // Parse slug: e.g. "austin-tx" -> city="Austin", state="TX"
+        if (slug == null || slug.length() < 3) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid city URL");
+        }
+
+        String state = slug.substring(slug.lastIndexOf('-') + 1).toUpperCase();
+        String citySlug = slug.substring(0, slug.lastIndexOf('-'));
+        // Capitalize words: "new-york" -> "New York"
+        String city = java.util.Arrays.stream(citySlug.split("-"))
+                .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1))
+                .collect(java.util.stream.Collectors.joining(" "));
+
+        if (!repository.isValidCity(city, state)) {
+            // Try fallback (maybe basic casing issue, though repository checks exact key
+            // usually)
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not supported: " + city + ", " + state);
+        }
+
+        firstrentverdict.service.seo.CityContentGenerator.CityPageContent content = cityContentGenerator.generate(
+                city,
+                state,
+                repository.getRent(city, state).orElseThrow(),
+                repository.getSecurityDeposit(city, state).orElse(null),
+                repository.getMoving(city, state).orElse(null));
+
+        model.addAttribute("pageData", content);
+        return "pages/city_landing";
+    }
+
+    @GetMapping("/cities")
+    public String allCities(Model model) {
+        var allCities = repository.getAllCities();
+
+        // Group by State
+        java.util.Map<String, java.util.List<firstrentverdict.model.dtos.CitiesData.CityEntry>> citiesByState = new java.util.TreeMap<>(
+                allCities.stream()
+                        .collect(java.util.stream.Collectors
+                                .groupingBy(firstrentverdict.model.dtos.CitiesData.CityEntry::state)));
+
+        // Sort cities within each state
+        citiesByState.forEach((state, list) -> list
+                .sort(java.util.Comparator.comparing(firstrentverdict.model.dtos.CitiesData.CityEntry::city)));
+
+        model.addAttribute("citiesByState", citiesByState);
+        return "pages/locations";
     }
 
     /**

@@ -72,6 +72,8 @@ body {
 .form-container {
     width: 100%;
     max-width: 480px;
+    position: relative;
+    z-index: 10;
 }
 
 /* Typography */
@@ -334,6 +336,7 @@ input[type="range"] {
     opacity: 0.5;
     transition: opacity 0.2s;
 }
+
 /* =========================================
    Stage 1 Refactor: Result Page Components
    ========================================= */
@@ -544,14 +547,16 @@ input[type="range"] {
 /* Market Radar (Enhanced Visiblity, Neutral Tone) */
 .market-radar-container {
     margin-bottom: 2rem;
-    padding: 1.5rem; /* Increased padding */
+    padding: 1.5rem;
+    /* Increased padding */
     background: var(--bg-body);
     border: 1px solid var(--border-subtle);
     border-radius: 4px;
 }
 
 .radar-title {
-    font-size: 0.9rem; /* Increased size */
+    font-size: 0.9rem;
+    /* Increased size */
     text-transform: uppercase;
     color: var(--text-secondary);
     margin-bottom: 1rem;
@@ -561,7 +566,8 @@ input[type="range"] {
 
 .radar-track {
     position: relative;
-    height: 16px; /* 2x Height */
+    height: 16px;
+    /* 2x Height */
     background: #e0e0e0;
     border-radius: 8px;
     margin-top: 1.5rem;
@@ -580,12 +586,15 @@ input[type="range"] {
 
 .radar-marker {
     position: absolute;
-    top: -8px; /* Extends above */
+    top: -8px;
+    /* Extends above */
     width: 4px;
-    height: 32px; /* Extends below */
+    height: 32px;
+    /* Extends below */
     background: var(--text-primary);
     border: 1px solid #fff;
     z-index: 10;
+    transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .radar-label {
@@ -595,6 +604,7 @@ input[type="range"] {
     font-size: 0.75rem;
     font-weight: 700;
     color: var(--text-primary);
+    transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .radar-legend {
@@ -637,7 +647,8 @@ input[type="range"] {
 .math-proof {
     font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
     font-size: 0.9rem;
-    color: var(--text-secondary); /* Grey */
+    color: var(--text-secondary);
+    /* Grey */
     background: var(--bg-panel);
     padding: 0.3rem 0.6rem;
     border-radius: 4px;
@@ -694,4 +705,3 @@ input[type="range"] {
 .methodology-list li {
     margin-bottom: 0.25rem;
 }
-

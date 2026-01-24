@@ -1,8 +1,7 @@
 package gg.jte.generated.ondemand.layout;
-import gg.jte.Content;
 public final class JtemainGenerated {
 	public static final String JTE_NAME = "layout/main.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,1,1,12,12,12,12,13,13,14,14,14,14,14,14,14,14,14,15,15,16,16,17,17,17,17,17,17,17,17,17,18,18,18,18,18,18,18,18,18,19,19,20,20,22,22,24,24,26,28,28,28,28,28,28,28,28,28,29,29,30,30,30,30,30,30,30,30,30,31,31,34,40,41,44,44,46,46,46,48,48,51,51,51,1,2,3,4,5,5,5,5};
+	public static final int[] JTE_LINE_INFO = {0,0,0,0,11,11,11,11,12,12,13,13,13,13,13,13,13,13,13,14,14,15,15,16,16,16,16,16,16,16,16,16,17,17,17,17,17,17,17,17,17,18,18,19,19,21,21,23,23,25,27,27,27,27,27,27,27,27,27,28,28,29,29,29,29,29,29,29,29,29,30,30,33,39,40,43,43,45,45,45,47,47,50,50,50,0,1,2,3,4,4,4,4};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, Content content, String title, String description, String canonical, boolean noindex) {
 		jteOutput.writeContent("\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>");
 		jteOutput.setContext("title", null);

@@ -3,8 +3,12 @@
 @import firstrentverdict.model.verdict.MarketPosition
 
 @param VerdictResult result
+@param boolean noindex = true
 
-@template.layout.main(content = @`
+@template.layout.main(
+    title = "Your Rent Verdict Result - Confidential",
+    noindex = true,
+    content = @`
     <div style="max-width: 720px; margin: 4rem auto; padding: 0 2rem;">
         
         <div class="back-link-container">
@@ -50,20 +54,16 @@
             @endif
         </div>
 
-        @if(result.whyThisVerdict() != null)
-            <div class="why-verdict-section">
-                <h3 class="section-title" style="font-weight: 700; letter-spacing: 0.02em;">WHY THIS VERDICT</h3>
-                <p id="why-text" class="why-text" style="font-weight: 400; color: var(--text-primary);">
-                    ${result.whyThisVerdict()}
-                </p>
-                @if(result.primaryBottleneck() != null)
-                    <div class="bottleneck-container">
-                        <span class="bottleneck-label">Primary Bottleneck:</span>
-                        <span id="bottleneck-text" class="bottleneck-value">${result.primaryBottleneck()}</span>
-                    </div>
-                @endif
+        <div class="why-verdict-section" style="display: ${result.whyThisVerdict() != null ? "block" : "none"};">
+            <h3 class="section-title" style="font-weight: 700; letter-spacing: 0.02em;">WHY THIS VERDICT</h3>
+            <p id="why-text" class="why-text" style="font-weight: 400; color: var(--text-primary);">
+                ${result.whyThisVerdict() != null ? result.whyThisVerdict() : ""}
+            </p>
+            <div id="bottleneck-container" class="bottleneck-container" style="display: ${result.primaryBottleneck() != null ? "block" : "none"};">
+                <span class="bottleneck-label">Primary Bottleneck:</span>
+                <span id="bottleneck-text" class="bottleneck-value">${result.primaryBottleneck() != null ? result.primaryBottleneck() : ""}</span>
             </div>
-        @endif
+        </div>
 
         @if(result.contributingFactors() != null && !result.contributingFactors().isEmpty())
             <div class="contributing-section">
@@ -189,32 +189,26 @@
                      <!-- Market Radar (New Section before Buffer) -->
                      <div class="market-radar-container">
                         <div class="radar-title">Market Radar: <span id="radar-title-text">${result.marketPosition().marketZone()}</span></div>
-                        <!-- Simple Bar Chart -->
                         <div class="radar-track">
-                            <!-- Range P25 to P75 -->
                              <div class="radar-range"></div>
-                             
-                             <!-- User Dot -->
-                             <%-- Calculate left position relative to median * 1.5 --%>
-                             <%-- P25 is approx 25%, P75 is 75% on a relative scale --%>
-                             <div id="radar-marker" class="radar-marker" style="left: ${Math.min(100.0, Math.max(0.0, (double)result.financials().monthlyRent() / (result.marketPosition().medianRent() * 1.5) * 100.0)) + "%"};"></div>
-                             <div id="radar-label" class="radar-label" style="left: ${Math.min(100.0, Math.max(0.0, (double)result.financials().monthlyRent() / (result.marketPosition().medianRent() * 1.5) * 100.0)) + "%"};">YOU</div>
+                             <div id="radar-marker" class="radar-marker" style="left: ${Math.min(100.0, Math.max(0.0, (double)result.financials().monthlyRent() / (result.marketPosition().medianRent() * 2.0) * 100.0)) + "%"};"></div>
+                             <div id="radar-label" class="radar-label" style="left: ${Math.min(100.0, Math.max(0.0, (double)result.financials().monthlyRent() / (result.marketPosition().medianRent() * 2.0) * 100.0)) + "%"}; white-space: nowrap;">
+                                YOU ($${String.format("%,d", result.financials().monthlyRent())})
+                             </div>
                         </div>
-                        <div class="radar-legend">
-                            <span>Lower ($${result.marketPosition().p25Rent()})</span>
-                            <span>Median</span>
-                            <span>Higher</span>
+                        <div class="radar-legend" style="display: grid; grid-template-columns: 1fr 1fr 1fr; position: relative;">
+                            <span style="text-align: left;">Lower ($${result.marketPosition().p25Rent()})</span>
+                            <span style="text-align: center;">Median ($${result.marketPosition().medianRent()})</span>
+                            <span style="text-align: right;">Higher ($${result.marketPosition().p75Rent()})</span>
                         </div>
                      </div>
                      
                     <!-- Market Correction Simulation Action -->
-                     @if(result.marketPosition().userRent() > result.marketPosition().p25Rent())
-                        <div style="margin-bottom: 2rem; text-align: center;">
-                             <button onclick="simulateMarketCorrection(${result.marketPosition().p25Rent()})" class="market-correction-btn">
-                                 Simulate Market Correction (Rent $${result.marketPosition().p25Rent()})
-                             </button>
-                        </div>
-                     @endif
+                     <div id="market-correction-container" style="margin-bottom: 2rem; text-align: center;">
+                          <button onclick="simulateMarketCorrection(${result.marketPosition().p25Rent()})" class="market-correction-btn">
+                              Simulate Market Correction (Rent $${result.marketPosition().p25Rent()})
+                          </button>
+                     </div>
 
                     <div class="financial-label-sm">Remaining Buffer</div>
                     <div id="remaining-buffer" class="financial-value-lg" style="color: ${result.financials().remainingBuffer() < result.financials().recommendedBuffer() ? "var(--signal-error)" : "var(--text-primary)"};">
@@ -299,19 +293,31 @@
             }
 
             // 3. Why & Bottleneck
+            // 3. Why & Bottleneck
             // Fallback for missing Why text
             const whyText = result.whyThisVerdict || "Financial assessment indicates unacceptable risk level for this move.";
-            document.getElementById('why-text').innerText = whyText;
+            const whyTextEl = document.getElementById('why-text');
+            if (whyTextEl) whyTextEl.innerText = whyText;
             
+            const bottleneckContainer = document.getElementById('bottleneck-container');
+            const bottleneckTextEl = document.getElementById('bottleneck-text');
+
             if (result.primaryBottleneck) {
-                 document.getElementById('bottleneck-text').innerText = result.primaryBottleneck;
+                 if (bottleneckTextEl) bottleneckTextEl.innerText = result.primaryBottleneck;
+                 if (bottleneckContainer) bottleneckContainer.style.display = 'block';
+            } else {
+                 if (bottleneckContainer) bottleneckContainer.style.display = 'none';
             }
 
             // 4. Financials
-            document.getElementById('total-upfront-cost').innerText = '$' + financials.totalUpfrontCost.toLocaleString();
+            const totalUpfrontEl = document.getElementById('total-upfront-cost');
+            if (totalUpfrontEl) totalUpfrontEl.innerText = '$' + financials.totalUpfrontCost.toLocaleString();
+
             const remBuffer = document.getElementById('remaining-buffer');
-            remBuffer.innerText = '$' + financials.remainingBuffer.toLocaleString();
-            remBuffer.style.color = financials.remainingBuffer < financials.recommendedBuffer ? 'var(--signal-error)' : 'var(--text-primary)';
+            if (remBuffer) {
+                remBuffer.innerText = '$' + financials.remainingBuffer.toLocaleString();
+                remBuffer.style.color = financials.remainingBuffer < financials.recommendedBuffer ? 'var(--signal-error)' : 'var(--text-primary)';
+            }
             
             // 5. Recovery Hint Logic
             if (verdict !== 'APPROVED') {
@@ -326,16 +332,22 @@
                 const maxRent = Math.floor((currentAvailable - financials.staticCosts - financials.recommendedBuffer) / financials.upfrontBaseMultiplier);
                 
                 if (maxRent < 0) {
-                     targetRentSpan.innerText = "Option Unavailable";
-                     targetRentSpan.style.fontSize = "0.9em"; 
-                     targetRentSpan.style.color = "var(--text-tertiary)";
-                     targetRentError.innerText = "Current cash level cannot support any rental scenario.";
-                     targetRentError.style.display = 'block';
+                     if (targetRentSpan) {
+                         targetRentSpan.innerText = "Option Unavailable";
+                         targetRentSpan.style.fontSize = "0.9em"; 
+                         targetRentSpan.style.color = "var(--text-tertiary)";
+                     }
+                     if (targetRentError) {
+                        targetRentError.innerText = "Current cash level cannot support any rental scenario.";
+                        targetRentError.style.display = 'block';
+                     }
                 } else {
-                     targetRentSpan.innerText = formatCurrency(maxRent);
-                     targetRentSpan.style.fontSize = "inherit";
-                     targetRentSpan.style.color = "inherit";
-                     targetRentError.style.display = 'none';
+                     if (targetRentSpan) {
+                         targetRentSpan.innerText = formatCurrency(maxRent);
+                         targetRentSpan.style.fontSize = "inherit";
+                         targetRentSpan.style.color = "inherit";
+                     }
+                     if (targetRentError) targetRentError.style.display = 'none';
                 }
 
             } else {
@@ -344,18 +356,25 @@
 
             // 6. Market Radar Dynamic Update
             const marketPos = result.marketPosition;
-            if (marketPos) {
-                document.getElementById('radar-title-text').innerText = marketPos.marketZone;
+            if (marketPos && financials) {
+                const titleEl = document.getElementById('radar-title-text');
+                if (titleEl) titleEl.innerText = marketPos.marketZone;
                 
-                // Calculate position percentage
-                // Logic must match server-side: Math.min(100, Math.max(0, rent / (median * 1.5) * 100))
-                const percentage = Math.min(100.0, Math.max(0.0, (financials.monthlyRent / (marketPos.medianRent * 1.5)) * 100.0));
+                const userRent = financials.monthlyRent;
+                const median = marketPos.medianRent;
+                
+                // Define scale: 0 to 2x Median
+                const maxScale = median * 2.0;
+                const percentage = Math.min(100.0, Math.max(0.0, (userRent / maxScale) * 100.0));
                 
                 const marker = document.getElementById('radar-marker');
                 const label = document.getElementById('radar-label');
                 
-                marker.style.left = percentage + '%';
-                label.style.left = percentage + '%';
+                if (marker) marker.style.left = percentage + '%';
+                if (label) {
+                    label.style.left = percentage + '%';
+                    label.innerHTML = 'YOU ($' + userRent.toLocaleString() + ')';
+                }
             }
 
             simStatus.style.display = 'none';
@@ -388,7 +407,14 @@
             });
         }
 
+        let abortController;
+
         function runSimulation() {
+            if (abortController) {
+                abortController.abort();
+            }
+            abortController = new AbortController();
+
             simStatus.style.display = 'block';
             document.querySelectorAll('.verdict-text, .safety-gap-card, .why-text, .bottleneck-value').forEach(el => el.classList.add('updating'));
             
@@ -400,26 +426,34 @@
             fetch('/RentVerdict/what-if', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
+                signal: abortController.signal
             })
-            .then(response => response.json())
+            .then(async response => {
+                if (!response.ok) {
+                    const errorData = await response.text();
+                    throw new Error('Server responded with ' + response.status + ': ' + errorData);
+                }
+                return response.json();
+            })
             .then(data => updateUI(data))
             .catch(err => {
+                if (err.name === 'AbortError') return;
                 console.error('Simulation failed:', err);
-                simStatus.innerText = 'Error updating simulation.';
+                simStatus.innerText = 'Error updating simulation: ' + err.message;
             });
         }
 
-        rentSlider.addEventListener('input', () => {
-            rentVal.innerText = rentSlider.value;
+        rentSlider.addEventListener('input', (e) => {
+            rentVal.innerText = e.target.value;
             clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(runSimulation, 300);
+            debounceTimer = setTimeout(runSimulation, 200);
         });
 
-        cashSlider.addEventListener('input', () => {
-            cashVal.innerText = cashSlider.value;
+        cashSlider.addEventListener('input', (e) => {
+            cashVal.innerText = e.target.value;
             clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(runSimulation, 300);
+            debounceTimer = setTimeout(runSimulation, 200);
         });
     </script>
 `)

@@ -1,0 +1,24 @@
+package firstrentverdict.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+
+@Controller
+public class AboutController {
+
+    @GetMapping("/about")
+    public String about(Model model) {
+        return "pages/about";
+    }
+
+    @GetMapping("/methodology")
+    public String methodology(Model model) {
+        return "pages/methodology";
+    }
+
+    @GetMapping("/guide/rent-affordability-rule")
+    public String anchorGuide(Model model) {
+        return "pages/guide_rent_rule";
+    }
+}
