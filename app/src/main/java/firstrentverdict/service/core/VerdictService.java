@@ -56,14 +56,18 @@ public class VerdictService {
         // supported non-local.
         int movingCost = movingData.typical();
 
-        // Pet Cost
+        // Pet Cost (One-time + First Month's Pet Rent)
         int petOneTime = 0;
+        int petMonthlyRent = 0;
         if (input.hasPet()) {
             petOneTime = petData.oneTime().avg();
+            if (petData.monthlyPetRent() != null) {
+                petMonthlyRent = petData.monthlyPetRent().avg();
+            }
         }
 
-        // Total Upfront
-        int totalUpfront = input.monthlyRent() + depositCost + movingCost + petOneTime;
+        // Total Upfront (includes first month pet rent)
+        int totalUpfront = input.monthlyRent() + depositCost + movingCost + petOneTime + petMonthlyRent;
         int remainingCash = input.availableCash() - totalUpfront;
         int recommendedBuffer = bufferData.recommendedPostMoveBuffer();
 
@@ -162,7 +166,7 @@ public class VerdictService {
         // Calculate data for Financials
         // Base multiplier = 1 (first month rent) + deposit multiplier
         double baseMultiplier = 1.0 + depositMult;
-        int staticCosts = movingCost + petOneTime;
+        int staticCosts = movingCost + petOneTime + petMonthlyRent;
 
         // ==========================================================================
         // Smart Receipt Logic: Calculate Costs with Annotations
@@ -191,31 +195,35 @@ public class VerdictService {
                 depositCost,
                 depositAnnotation));
 
-        // 3. Moving Costs
+        // 3. Moving Costs (with range info)
+        String movingAnnotation = String.format("Range: $%,d - $%,d · %s",
+                movingData.low(), movingData.high(),
+                movingData.assumptions() != null ? movingData.assumptions() : "Local Move");
         costBreakdown.add(new FinancialLineItem(
                 "Moving Costs",
                 movingCost,
-                "Applied Baseline · Required Execution Cost"));
+                movingAnnotation));
 
-        // 4. Pet Fees
+        // 4. Pet Fees (One-time)
         if (input.hasPet()) {
-            String petAnnotation;
-            // Check if "Non-refundable" is explicitly mentioned in notes (stub logic based
-            // on known data pattern)
-            // In a real DB we would have a structured flag. Here we check the note string.
-            boolean isNonRefundable = petData.oneTime().notes() != null &&
-                    (petData.oneTime().notes().toLowerCase().contains("non-refundable") ||
-                            petData.oneTime().notes().toLowerCase().contains("fee"));
-
-            if (isNonRefundable) {
-                petAnnotation = "Rule: Non-refundable Fee (Market Norm)";
-            } else {
-                petAnnotation = "Applied Baseline: Market Rate";
-            }
+            String petOneTimeAnnotation = String.format("Range: $%,d - $%,d · %s",
+                    petData.oneTime().low(), petData.oneTime().high(),
+                    petData.oneTime().notes() != null ? petData.oneTime().notes() : "One-time deposit/fee");
             costBreakdown.add(new FinancialLineItem(
-                    "Pet Fees",
+                    "Pet Deposit/Fee",
                     petOneTime,
-                    petAnnotation));
+                    petOneTimeAnnotation));
+
+            // 5. Pet Monthly Rent (first month)
+            if (petMonthlyRent > 0) {
+                String petMonthlyAnnotation = String.format("$%d/month ongoing · Range: $%,d - $%,d/mo",
+                        petMonthlyRent,
+                        petData.monthlyPetRent().low(), petData.monthlyPetRent().high());
+                costBreakdown.add(new FinancialLineItem(
+                        "Pet Rent (1st Month)",
+                        petMonthlyRent,
+                        petMonthlyAnnotation));
+            }
         }
 
         // ==========================================================================

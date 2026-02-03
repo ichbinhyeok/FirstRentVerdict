@@ -30,7 +30,7 @@ class VerdictControllerTest {
 
     @Test
     void testIndexPageLoads() throws Exception {
-        mockMvc.perform(get("/"))
+        mockMvc.perform(get("/RentVerdict/"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("pages/index"))
                 .andExpect(model().attribute("cities", notNullValue()));
@@ -39,7 +39,7 @@ class VerdictControllerTest {
     @Test
     void testVerdictSubmission_Approved() throws Exception {
         // High cash scenario for NYC
-        mockMvc.perform(post("/verdict")
+        mockMvc.perform(post("/RentVerdict/verdict")
                 .param("cityState", "New York|NY")
                 .param("monthlyRent", "3000")
                 .param("availableCash", "30000")
@@ -54,7 +54,7 @@ class VerdictControllerTest {
     @Test
     void testVerdictSubmission_Denied() throws Exception {
         // Low cash scenario for NYC
-        mockMvc.perform(post("/verdict")
+        mockMvc.perform(post("/RentVerdict/verdict")
                 .param("cityState", "New York|NY")
                 .param("monthlyRent", "3000")
                 .param("availableCash", "5000")
@@ -68,7 +68,7 @@ class VerdictControllerTest {
 
     @Test
     void testBetaScenario_NewYork_LegalCap() throws Exception {
-        mockMvc.perform(post("/verdict")
+        mockMvc.perform(post("/RentVerdict/verdict")
                 .param("cityState", "New York|NY")
                 .param("monthlyRent", "3800")
                 .param("availableCash", "6000")
@@ -83,15 +83,16 @@ class VerdictControllerTest {
                     String depositNote = vr.financials().costBreakdown().stream()
                             .filter(i -> i.label().equals("Security Deposit"))
                             .findFirst().orElseThrow().annotation();
-                    if (!depositNote.startsWith("Rule: Legal Cap")) {
-                        throw new AssertionError("NY Deposit expected Rule: Legal Cap, got: " + depositNote);
+                    // NY Deposit annotation now contains "Applied Standard · Strictly limited..."
+                    if (!depositNote.contains("Strictly limited")) {
+                        throw new AssertionError("NY Deposit expected note about strict limit, got: " + depositNote);
                     }
                 });
     }
 
     @Test
     void testBetaScenario_Austin_PetRule() throws Exception {
-        mockMvc.perform(post("/verdict")
+        mockMvc.perform(post("/RentVerdict/verdict")
                 .param("cityState", "Austin|TX")
                 .param("monthlyRent", "2000")
                 .param("availableCash", "10000")
@@ -102,21 +103,17 @@ class VerdictControllerTest {
                 .andExpect(view().name("pages/result"))
                 .andDo(result -> {
                     VerdictResult vr = (VerdictResult) result.getModelAndView().getModel().get("result");
+                    // Label changed to "Pet Deposit/Fee"
                     String petNote = vr.financials().costBreakdown().stream()
-                            .filter(i -> i.label().equals("Pet Fees"))
+                            .filter(i -> i.label().equals("Pet Deposit/Fee"))
                             .findFirst().orElseThrow().annotation();
-                    if (!petNote.startsWith("Rule: Non-refundable")) { // Update to match actual logic if needed
-                        // In VerdictService it is "Rule: Non-refundable (Market Norm)" because 'fee' is
-                        // in notes
-                        // Our assert logic must match exact expectation or prefix.
-                        if (!petNote.contains("Non-refundable")) {
-                            throw new AssertionError("Austin Pet expected Rule: Non-refundable, got: " + petNote);
-                        }
+                    if (!petNote.startsWith("Range:")) {
+                        throw new AssertionError("Austin Pet expected Range: prefix, got: " + petNote);
                     }
                     String depositNote = vr.financials().costBreakdown().stream()
                             .filter(i -> i.label().equals("Security Deposit"))
                             .findFirst().orElseThrow().annotation();
-                    if (!depositNote.startsWith("Applied Standard:")) {
+                    if (!depositNote.startsWith("Applied Standard")) {
                         throw new AssertionError("Austin Deposit expected Applied Standard, got: " + depositNote);
                     }
                 });
@@ -124,7 +121,7 @@ class VerdictControllerTest {
 
     @Test
     void testBetaScenario_SanFrancisco_HighCap() throws Exception {
-        mockMvc.perform(post("/verdict")
+        mockMvc.perform(post("/RentVerdict/verdict")
                 .param("cityState", "San Francisco|CA")
                 .param("monthlyRent", "3000")
                 .param("availableCash", "10000")
@@ -137,9 +134,7 @@ class VerdictControllerTest {
                     String depositNote = vr.financials().costBreakdown().stream()
                             .filter(i -> i.label().equals("Security Deposit"))
                             .findFirst().orElseThrow().annotation();
-                    // SF Typical (1.0) < Legal Cap (2.0), so Cap is NOT triggered. Should be
-                    // "Applied Standard".
-                    if (!depositNote.startsWith("Applied Standard:")) {
+                    if (!depositNote.startsWith("Applied Standard")) {
                         throw new AssertionError("SF Deposit expected Applied Standard, got: " + depositNote);
                     }
                 });

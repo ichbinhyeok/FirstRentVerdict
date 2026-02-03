@@ -30,12 +30,65 @@
 
     <div class="container" style="max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem;">
         
-        <!-- Hero Section -->
+        <!-- Breadcrumbs (SEO & Navigation) -->
+        <nav style="margin-bottom: 2rem; font-size: 0.85rem; color: var(--text-tertiary);">
+            <a href="/RentVerdict/" style="color: inherit; text-decoration: none; transition: color 0.2s;">Home</a> 
+            <span style="margin: 0 0.5rem;">/</span> 
+            <a href="/RentVerdict/cities" style="color: inherit; text-decoration: none; transition: color 0.2s;">Cities</a> 
+            <span style="margin: 0 0.5rem;">/</span> 
+            <span style="color: var(--text-secondary);">${pageData.city()}, ${pageData.state()}</span>
+        </nav>
+
+        <!-- JSON-LD Breadcrumb Schema -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://movecostinfo.com/RentVerdict/"
+          },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Cities",
+            "item": "https://movecostinfo.com/RentVerdict/cities"
+          },{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "${pageData.city()}, ${pageData.state()}",
+            "item": "https://movecostinfo.com/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}"
+          }]
+        }
+        </script>
         <div style="text-align: center; margin-bottom: 4rem;">
             <div class="badge-subtle" style="margin-bottom: 1rem;">2026 Rental Market Audit</div>
             <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2;">
                 ${pageData.pageTitle()}
             </h1>
+            
+            <!-- Affordability Tier Badge (Thin Content Prevention) -->
+            <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
+                @if(pageData.affordabilityTier().equals("High-Cost"))
+                    <span style="background: rgba(220, 38, 38, 0.1); color: #dc2626; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">⚠️ High-Cost Market</span>
+                @elseif(pageData.affordabilityTier().equals("Affordable"))
+                    <span style="background: rgba(22, 163, 74, 0.1); color: #16a34a; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">✓ Affordable Market</span>
+                @else
+                    <span style="background: rgba(202, 138, 4, 0.1); color: #ca8a04; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">● Moderate Market</span>
+                @endif
+                
+                @if(pageData.nationalComparison() >= 0)
+                    <span style="background: var(--bg-surface); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; color: var(--text-secondary);">
+                        +${pageData.nationalComparison()}% vs National Avg
+                    </span>
+                @else
+                    <span style="background: var(--bg-surface); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; color: var(--text-secondary);">
+                        ${pageData.nationalComparison()}% vs National Avg
+                    </span>
+                @endif
+            </div>
+            
             <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto;">
                 ${pageData.marketContextText()}
             </p>
@@ -133,8 +186,33 @@
             </p>
         </div>
 
+        <!-- Local Insight Section (Thin Content Prevention) -->
+        <div style="margin-bottom: 4rem; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 51, 234, 0.05) 100%); border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.1);">
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text-primary);">
+                📍 Local Insight: ${pageData.city()}, ${pageData.state()}
+            </h3>
+            <p style="font-size: 1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 1rem;">
+                ${pageData.localInsight()}
+            </p>
+            
+            <!-- Legal Summary -->
+            <div style="padding-top: 1rem; border-top: 1px dashed rgba(59, 130, 246, 0.2);">
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-tertiary);">⚖️ LEGAL NOTE:</span>
+                <span style="font-size: 0.9rem; color: var(--text-secondary);">${pageData.legalSummary()}</span>
             </div>
         </div>
+
+        <!-- Data Sources (E-E-A-T) -->
+        @if(pageData.dataSources() != null && !pageData.dataSources().isEmpty())
+        <div style="margin-bottom: 4rem; padding: 1.5rem; background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 8px;">
+            <h4 style="font-size: 0.8rem; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.75rem; letter-spacing: 0.05em;">Data Sources</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                @for(String source : pageData.dataSources())
+                    <li style="font-size: 0.8rem; color: var(--text-secondary); background: var(--bg-surface); padding: 0.25rem 0.75rem; border-radius: 12px;">${source}</li>
+                @endfor
+            </ul>
+        </div>
+        @endif
 
         <!-- Common Questions (QnA Section) -->
         <div style="margin-bottom: 4rem;">

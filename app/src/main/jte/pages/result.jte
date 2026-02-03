@@ -218,6 +218,87 @@
             </div>
         </div>
 
+        <!-- Next Steps / Action Plan (Decision Support Enhancement) -->
+        <div style="margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(16, 185, 129, 0.03) 100%); border-radius: 12px; border: 1px solid var(--border-subtle);">
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-primary);">
+                📋 Your Next Steps
+            </h3>
+            
+            @if(result.verdict() == Verdict.APPROVED)
+                <div style="display: grid; gap: 1rem;">
+                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="background: rgba(22, 163, 74, 0.1); color: #16a34a; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">1</span>
+                        <div>
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Prepare Documentation</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Gather pay stubs (2-3 months), bank statements, and photo ID before applying.</div>
+                        </div>
+                    </div>
+                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="background: rgba(22, 163, 74, 0.1); color: #16a34a; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">2</span>
+                        <div>
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Check Credit Report</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Review your credit score and dispute any errors before landlords pull it.</div>
+                        </div>
+                    </div>
+                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="background: rgba(22, 163, 74, 0.1); color: #16a34a; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">3</span>
+                        <div>
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Keep Buffer Intact</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Your $${String.format("%,d", result.safetyGap().gapAmount())} buffer is your safety net—don't spend it on move-in extras.</div>
+                        </div>
+                    </div>
+                </div>
+            @elseif(result.verdict() == Verdict.BORDERLINE)
+                <div style="display: grid; gap: 1rem;">
+                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="background: rgba(202, 138, 4, 0.1); color: #ca8a04; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">1</span>
+                        <div>
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Negotiate Lower Rent</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Ask for a reduced rate, especially if you can show income stability or sign a longer lease.</div>
+                        </div>
+                    </div>
+                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="background: rgba(202, 138, 4, 0.1); color: #ca8a04; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">2</span>
+                        <div>
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Delay Move by 30-60 Days</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">An extra month of savings could move you from BORDERLINE to APPROVED.</div>
+                        </div>
+                    </div>
+                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="background: rgba(202, 138, 4, 0.1); color: #ca8a04; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">3</span>
+                        <div>
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Consider Roommates</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Splitting rent can free up cash for a safer financial buffer.</div>
+                        </div>
+                    </div>
+                </div>
+            @else
+                <div style="display: grid; gap: 1rem;">
+                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="background: rgba(220, 38, 38, 0.1); color: #dc2626; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">1</span>
+                        <div>
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Build Your Cash Reserve</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">You need $${String.format("%,d", Math.abs(result.safetyGap().gapAmount()))} more before this move is financially safe.</div>
+                        </div>
+                    </div>
+                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="background: rgba(220, 38, 38, 0.1); color: #dc2626; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">2</span>
+                        <div>
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Look for Lower-Cost Areas</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Use the slider above to see what rent level would make this move safe for you.</div>
+                        </div>
+                    </div>
+                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                        <span style="background: rgba(220, 38, 38, 0.1); color: #dc2626; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">3</span>
+                        <div>
+                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Cut Moving Costs</div>
+                            <div style="font-size: 0.9rem; color: var(--text-secondary);">DIY moving, asking friends for help, or selling furniture can save $300-800+.</div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
+
         <!-- Data Footnote (Stage 3: Data Authority) -->
         <details class="methodology-footnote">
              <summary>Methodology & Data Sources</summary>

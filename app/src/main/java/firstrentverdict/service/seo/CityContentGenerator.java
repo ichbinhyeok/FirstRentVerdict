@@ -38,16 +38,16 @@ public class CityContentGenerator {
                 int movingLow = (movingData != null) ? movingData.low() : 300;
                 int movingHigh = (movingData != null) ? movingData.high() : 1000;
 
-                // 2. SEO Title & Meta (Intent Matching)
-                String pageTitle = String.format("Average Rent in %s %s 2026: Cost & Move-in Guide", city, state);
+                // 2. SEO Title & Meta (Intent Matching with Numbers for CTR)
+                String pageTitle = String.format("%s %s Rent: $%,d/mo + $%,d Move-In (2026 Data)",
+                                city, state, avgRent, upfrontTotal);
 
                 String metaDescription = String.format(
-                                "Average rent in %s is $%s/month. Move-in costs range from $%s to $%s. See full breakdown, deposit rules, and check affordability with our free calculator.",
+                                "Average rent in %s is $%s/month. Need $%s-$%s to move in (deposit + moving + first month). Free calculator to check if you can afford it.",
                                 city,
                                 String.format("%,d", avgRent),
-                                String.format("%,d", upfrontTotal - 500), // simplistic lower bound estimate for click
-                                                                          // appeal of range
-                                String.format("%,d", upfrontTotal + 500));
+                                String.format("%,d", (int) (upfrontTotal * 0.85)),
+                                String.format("%,d", (int) (upfrontTotal * 1.25)));
 
                 // 3. Generate Narratives
                 String marketContext;
@@ -100,18 +100,100 @@ public class CityContentGenerator {
                 // Remove duplicates and limit
                 sources = sources.stream().distinct().limit(5).collect(java.util.stream.Collectors.toList());
 
-                // 5. QnA
+                // 5. QnA (Expanded to 5 for better FAQ Schema and unique content)
                 java.util.List<QnA> qnaList = new java.util.ArrayList<>();
+
+                // Q1: Income requirement
                 qnaList.add(new QnA(
                                 String.format("Is $%s/year enough to live in %s?",
                                                 String.format("%,d", requiredIncomeYearly), city),
-                                String.format("Mathematically, yes. This meets the standard 3x requirement. However, if you have student loans or car payments, we recommend targeting a 'Safe Floor' of $%s/year.",
+                                String.format("Mathematically, yes. This meets the standard 3x requirement for a $%s/month apartment. However, if you have student loans, car payments, or other debts, we recommend targeting a 'Safe Floor' of $%s/year to maintain financial stability.",
+                                                String.format("%,d", avgRent),
                                                 String.format("%,d", (int) (requiredIncomeYearly * 1.2)))));
 
+                // Q2: Move-in cash
                 qnaList.add(new QnA(
                                 String.format("How much cash do I need to move to %s?", city),
-                                String.format("You should aim for at least $%s in liquid savings. This covers your first month, security deposit, and local moving costs, plus a minimal emergency buffer.",
-                                                String.format("%,d", (int) (upfrontTotal * 1.2)))));
+                                String.format("You should aim for at least $%s in liquid savings. This breaks down to: first month rent ($%s), security deposit ($%s), moving costs (~$%s), plus an emergency buffer. Without this, you risk immediate financial stress.",
+                                                String.format("%,d", (int) (upfrontTotal * 1.2)),
+                                                String.format("%,d", avgRent),
+                                                String.format("%,d", deposit),
+                                                String.format("%,d", moving))));
+
+                // Q3: Security deposit rules (city-specific)
+                String depositNote = (depositData != null && depositData.city_practice() != null
+                                && depositData.city_practice().notes() != null)
+                                                ? depositData.city_practice().notes()
+                                                : "typically 1 month's rent";
+                qnaList.add(new QnA(
+                                String.format("What is the security deposit in %s, %s?", city, state),
+                                String.format("In %s, the security deposit is %s. For a median apartment at $%s/month, expect to pay around $%s upfront as a deposit. This is usually refundable if you leave the unit in good condition.",
+                                                city, depositNote,
+                                                String.format("%,d", avgRent),
+                                                String.format("%,d", deposit))));
+
+                // Q4: Compare to national average
+                int nationalAvgRent = 1500;
+                String comparison = avgRent > nationalAvgRent * 1.1 ? "above"
+                                : (avgRent < nationalAvgRent * 0.9 ? "below" : "close to");
+                int percentDiff = (int) Math.abs(((double) (avgRent - nationalAvgRent) / nationalAvgRent) * 100);
+                qnaList.add(new QnA(
+                                String.format("Is %s expensive compared to other US cities?", city),
+                                String.format("%s rent ($%s/month) is %s the national average by about %d%%. %s",
+                                                city, String.format("%,d", avgRent), comparison, percentDiff,
+                                                avgRent > nationalAvgRent
+                                                                ? "This means you'll need higher income and more savings to move here safely."
+                                                                : "This makes it more accessible for first-time renters with moderate savings.")));
+
+                // Q5: First-time renter tips
+                qnaList.add(new QnA(
+                                String.format("Tips for first-time renters in %s?", city),
+                                String.format("1) Have at least $%s saved before signing. 2) Your income should be 3x the rent ($%s/month or $%s/year). 3) Check your credit score beforehand. 4) Budget for moving costs ($%s-%s locally). 5) Keep 1-2 months rent as emergency fund after moving.",
+                                                String.format("%,d", (int) (upfrontTotal * 1.2)),
+                                                String.format("%,d", requiredIncomeMonthly),
+                                                String.format("%,d", requiredIncomeYearly),
+                                                String.format("%,d", movingLow),
+                                                String.format("%,d", movingHigh))));
+
+                // Calculate Thin Content Prevention fields
+                String affordabilityTier;
+                if (avgRent > nationalRef * 1.2) {
+                        affordabilityTier = "High-Cost";
+                } else if (avgRent < nationalRef * 0.8) {
+                        affordabilityTier = "Affordable";
+                } else {
+                        affordabilityTier = "Moderate";
+                }
+
+                int nationalComparison = (int) (((double) (avgRent - nationalRef) / nationalRef) * 100);
+
+                String legalSummary;
+                if (depositData != null && depositData.city_practice() != null
+                                && depositData.city_practice().notes() != null) {
+                        legalSummary = depositData.city_practice().notes();
+                } else {
+                        legalSummary = "Standard security deposit rules apply. Check local regulations.";
+                }
+
+                // Generate city-specific local insight based on data patterns
+                String localInsight;
+                if (avgRent > 2500) {
+                        localInsight = String.format(
+                                        "%s is among the most expensive rental markets in the US. First-time renters often need a co-signer or 6+ months of savings.",
+                                        city);
+                } else if (depositMult > 1.5) {
+                        localInsight = String.format(
+                                        "Landlords in %s commonly require higher security deposits. Budget for 2+ months rent upfront.",
+                                        city);
+                } else if (movingHigh > 1000) {
+                        localInsight = String.format(
+                                        "Moving costs in %s can vary significantly. DIY moves average $%d, while full-service movers run $%d+.",
+                                        city, movingLow, movingHigh);
+                } else {
+                        localInsight = String.format(
+                                        "%s offers relatively accessible entry for first-time renters, but upfront cash requirements still catch many off-guard.",
+                                        city);
+                }
 
                 return new CityPageContent(
                                 pageTitle,
@@ -134,8 +216,15 @@ public class CityContentGenerator {
                                 riskNarrative,
                                 qnaList,
                                 sources,
-                                (depositData != null) ? depositData.city_practice().notes() : "Standard 1 month rent.",
-                                (movingData != null) ? movingData.assumptions() : "Standard local move.");
+                                (depositData != null && depositData.city_practice() != null)
+                                                ? depositData.city_practice().notes()
+                                                : "Standard 1 month rent.",
+                                (movingData != null) ? movingData.assumptions() : "Standard local move.",
+                                // New fields
+                                affordabilityTier,
+                                nationalComparison,
+                                legalSummary,
+                                localInsight);
         }
 
         public record CityPageContent(
@@ -160,7 +249,12 @@ public class CityContentGenerator {
                         java.util.List<QnA> commonQuestions,
                         java.util.List<String> dataSources, // Links for E-E-A-T
                         String depositNotes, // Legal context
-                        String movingAssumptions // Context
+                        String movingAssumptions, // Context
+                        // NEW: Thin Content Prevention Fields
+                        String affordabilityTier, // "High-Cost", "Moderate", "Affordable"
+                        int nationalComparison, // percentage vs national avg (e.g., +20, -15)
+                        String legalSummary, // One-line legal highlight
+                        String localInsight // City-specific unique fact
         ) {
         }
 

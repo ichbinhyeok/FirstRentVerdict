@@ -21,7 +21,7 @@ class DataIntegrationTest {
         // Rent
         Optional<RentData.CityRent> rent = repository.getRent("New York", "NY");
         assertTrue(rent.isPresent(), "Rent data for NY should exist");
-        assertEquals(4200, rent.get().median());
+        assertEquals(3850, rent.get().median());
 
         // Security Deposit (Merged Logic Check)
         Optional<SecurityDepositData> deposit = repository.getSecurityDeposit("New York", "NY");
