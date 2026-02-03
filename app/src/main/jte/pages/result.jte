@@ -194,8 +194,8 @@
                         </div>
                      </div>
 
-                     <!-- Cash Slider (New!) -->
-                     <div class="form-group mb-0">
+                     <!-- Cash Slider -->
+                     <div class="form-group mb-4">
                         <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2); font-weight: 600;">
                             <span style="font-size: 0.875rem; color: var(--text-secondary);">Your Cash</span>
                             <span id="sim-cash-display" style="color: var(--text-primary); font-size: 1.125rem;">$${String.format("%,d", result.financials().availableCash())}</span>
@@ -207,6 +207,29 @@
                                max="${(int)Math.max(result.financials().availableCash() + 5000, result.financials().availableCash() * 1.5)}" 
                                value="${result.financials().availableCash()}" 
                                step="100">
+                     </div>
+
+                     <!-- Credit Score Toggle (NEW!) -->
+                     <div class="form-group mb-0" style="padding: var(--space-3); background: var(--bg-secondary); border-radius: var(--radius-sm); border: 1px solid var(--border-default);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <span style="font-size: 0.875rem; font-weight: 600; color: var(--text-primary);">Credit Score</span>
+                                <p style="font-size: 0.75rem; color: var(--text-tertiary); margin: 2px 0 0 0;">Affects deposit requirements</p>
+                            </div>
+                            <div style="display: flex; gap: var(--space-2);">
+                                <button type="button" id="credit-good" class="credit-btn credit-active" 
+                                        style="padding: 6px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1px solid var(--success); background: rgba(22, 163, 74, 0.1); color: var(--success);">
+                                    Good+
+                                </button>
+                                <button type="button" id="credit-poor" class="credit-btn"
+                                        style="padding: 6px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1px solid var(--border-default); background: transparent; color: var(--text-secondary);">
+                                    Fair/Poor
+                                </button>
+                            </div>
+                        </div>
+                        <div id="credit-warning" style="display: none; margin-top: var(--space-2); padding: var(--space-2); background: rgba(220, 38, 38, 0.05); border-radius: var(--radius-sm); font-size: 0.75rem; color: var(--danger);">
+                            ⚠️ Lower credit scores often require higher security deposits
+                        </div>
                      </div>
                      
                      <div id="sim-feedback" style="margin-top: var(--space-4); padding: var(--space-3); background: var(--bg-primary); border-radius: var(--radius-sm); font-size: 0.875rem; display: none; border-left: 3px solid var(--text-secondary);">
@@ -238,9 +261,44 @@
                     @endif
                 </div>
 
+                <!-- Share This Insight (Viral Loop) -->
+                <div style="margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--border-default);">
+                    <h4 style="font-size: 0.875rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--space-3); text-transform: uppercase; letter-spacing: 0.05em;">Share This Tool</h4>
+                    <div style="display: flex; gap: var(--space-3);">
+                        <button onclick="shareTwitter()" class="btn btn-secondary btn-sm" style="flex: 1;">
+                            Twitter
+                        </button>
+                        <button onclick="copyLink()" class="btn btn-secondary btn-sm" style="flex: 1;">
+                            Copy Link
+                        </button>
+                    </div>
+                    <script>
+                        function shareTwitter() {
+                            const text = "Checking my move-in costs for ${result.regionalContext().cityName()} with First Rent Verdict. The hidden costs are real! 🏠💸";
+                            const url = "https://movecostinfo.com/RentVerdict";
+                            window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(url), "_blank");
+                        }
+                        function copyLink() {
+                            navigator.clipboard.writeText("https://movecostinfo.com/RentVerdict");
+                            alert("Link copied to clipboard!");
+                        }
+                    </script>
+                </div>
+
             </div>
         </div>
         
+        <!-- Mobile Sticky Bar for Scenarios -->
+        <div id="sticky-sim-bar" class="sim-sticky-bar">
+            <div>
+                <div class="sticky-label">Remaining Buffer</div>
+                <div id="sticky-buffer-val" class="sticky-value">$0</div>
+            </div>
+            <div id="sticky-status-badge" class="sticky-status" style="background: var(--bg-tertiary);">
+                Checking...
+            </div>
+        </div>
+
         <!-- Data Injection with Dual Deposit Logic -->
         <div id="sim-data" 
              data-cash="${result.financials().availableCash()}"
@@ -331,6 +389,16 @@
             const simFeedback = document.getElementById('sim-feedback');
             const simNewBuffer = document.getElementById('sim-new-buffer');
             
+            // Credit Score Toggle Elements
+            const creditGoodBtn = document.getElementById('credit-good');
+            const creditPoorBtn = document.getElementById('credit-poor');
+            const creditWarning = document.getElementById('credit-warning');
+            
+            // Sticky Bar Elements
+            const stickyBar = document.getElementById('sticky-sim-bar');
+            const stickyVal = document.getElementById('sticky-buffer-val');
+            const stickyStatus = document.getElementById('sticky-status-badge');
+
             if (!rentSlider || !cashSlider || !dataEl) return;
 
             const staticCosts = parseInt(dataEl.dataset.staticCosts);
@@ -338,8 +406,38 @@
             const depHigh = parseFloat(dataEl.dataset.depHigh); 
             const recBuffer = parseInt(dataEl.dataset.recBuffer);
             const medianRent = parseInt(dataEl.dataset.medianRent);
+            
+            // Track credit score selection (default: good)
+            let isCreditPoor = false;
 
             const fmt = (n) => '$' + Math.floor(n).toLocaleString();
+            
+            // Credit Score Toggle Handlers
+            if (creditGoodBtn && creditPoorBtn) {
+                creditGoodBtn.addEventListener('click', () => {
+                    isCreditPoor = false;
+                    creditGoodBtn.style.border = '1px solid var(--success)';
+                    creditGoodBtn.style.background = 'rgba(22, 163, 74, 0.1)';
+                    creditGoodBtn.style.color = 'var(--success)';
+                    creditPoorBtn.style.border = '1px solid var(--border-default)';
+                    creditPoorBtn.style.background = 'transparent';
+                    creditPoorBtn.style.color = 'var(--text-secondary)';
+                    if (creditWarning) creditWarning.style.display = 'none';
+                    updateSimulation();
+                });
+                
+                creditPoorBtn.addEventListener('click', () => {
+                    isCreditPoor = true;
+                    creditPoorBtn.style.border = '1px solid var(--danger)';
+                    creditPoorBtn.style.background = 'rgba(220, 38, 38, 0.1)';
+                    creditPoorBtn.style.color = 'var(--danger)';
+                    creditGoodBtn.style.border = '1px solid var(--border-default)';
+                    creditGoodBtn.style.background = 'transparent';
+                    creditGoodBtn.style.color = 'var(--text-secondary)';
+                    if (creditWarning) creditWarning.style.display = 'block';
+                    updateSimulation();
+                });
+            }
             
             // Helper to update everything
             function updateSimulation() {
@@ -350,11 +448,21 @@
                 cashDisplay.innerText = fmt(newCash);
                 dispCash.innerText = fmt(newCash); 
                 
-                // Dynamic Risk Logic: If Cash < Rent * 3 => High Risk
-                const isHighRisk = newCash < (newRent * 3);
+                // Dynamic Risk Logic: 
+                // 1. If Credit is Poor/Fair -> always High Risk
+                // 2. Else if Cash < Rent * 3 -> High Risk (cash-based)
+                const isCashHighRisk = newCash < (newRent * 3);
+                const isHighRisk = isCreditPoor || isCashHighRisk;
                 const currentDepMult = isHighRisk ? depHigh : depTyp;
-                const riskLabel = isHighRisk && depHigh > depTyp ? "Risk-Adjusted" : "Standard";
-                const noteVal = `${riskLabel} (${currentDepMult.toFixed(1)}x Rent)`;
+                
+                // Label reflects why
+                let riskLabel = "Standard";
+                if (isCreditPoor && depHigh > depTyp) {
+                    riskLabel = "Credit-Adjusted";
+                } else if (isCashHighRisk && depHigh > depTyp) {
+                    riskLabel = "Risk-Adjusted";
+                }
+                const noteVal = riskLabel + " (" + currentDepMult.toFixed(1) + "x Rent)";
 
                 // Update Rent Line
                 const rentValEl = document.getElementById('val-FirstMonthRent');
@@ -368,7 +476,6 @@
                 // Update Deposit Note in Receipt (Visual Feedback!)
                 const depositNoteEl = document.getElementById('note-SecurityDeposit');
                 if(depositNoteEl) {
-                    // Start of the note
                     depositNoteEl.innerText = noteVal;
                     if(isHighRisk) depositNoteEl.style.color = "var(--danger)";
                     else depositNoteEl.style.color = "var(--text-tertiary)";
@@ -409,6 +516,24 @@
                     lblBuffer.innerText = "Safety Buffer";
                     lblBufferStatus.innerText = "Healthy Reserve";
                 }
+
+                // Update Sticky Bar (Mobile)
+                if(stickyBar && stickyVal && stickyStatus) {
+                    stickyVal.innerText = (newBuffer < 0 ? "-" : "") + fmt(Math.abs(newBuffer));
+                    if(newBuffer < 0) {
+                        stickyStatus.innerText = "Insolvency Risk";
+                        stickyStatus.style.background = "var(--danger-bg)";
+                        stickyStatus.style.color = "var(--danger)";
+                    } else if(newBuffer < recBuffer) {
+                        stickyStatus.innerText = "Low Buffer";
+                        stickyStatus.style.background = "var(--warning-bg)";
+                        stickyStatus.style.color = "#a16207";
+                    } else {
+                        stickyStatus.innerText = "Safe";
+                        stickyStatus.style.background = "var(--success-bg)";
+                        stickyStatus.style.color = "var(--success)";
+                    }
+                }
                 
                 const maxRadar = medianRent * 2.0;
                 let pct = (newRent / maxRadar) * 100;
@@ -424,6 +549,29 @@
 
             rentSlider.addEventListener('input', updateSimulation);
             cashSlider.addEventListener('input', updateSimulation);
+
+            // Mobile Sticky Bar Observer
+            // Show sticky bar only when Simulation Card is visible/active
+            const simCard = document.querySelector('.sim-card');
+            if(simCard && stickyBar && window.innerWidth <= 768) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        // If sim card is intersecting (even slightly), show sticky bar
+                        // Or maybe better: if card is in viewport.
+                        // Let's optimize: Show when card is visibly focused.
+                        if (entry.isIntersecting) {
+                            stickyBar.style.display = 'flex';
+                        } else {
+                             stickyBar.style.display = 'none';
+                        }
+                    });
+                }, { threshold: 0.1 });
+                
+                observer.observe(simCard);
+            }
+
+            // Initial calculation to set defaults
+            updateSimulation();
         });
     </script>
 `)

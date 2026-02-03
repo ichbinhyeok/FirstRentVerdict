@@ -224,15 +224,18 @@ a:hover {
 /* ==================
    5. Header & Footer
    ================== */
+/* ==================
+   5. Header & Footer
+   ================== */
 .site-header {
     height: 60px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-default);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 var(--space-6);
+    padding: 0 var(--space-4);
     position: sticky;
     top: 0;
     z-index: 100;
@@ -244,6 +247,14 @@ a:hover {
     color: var(--text-primary);
     text-decoration: none;
     letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+}
+
+.header-brand svg {
+    width: 20px;
+    height: 20px;
 }
 
 .header-nav {
@@ -261,6 +272,74 @@ a:hover {
 
 .header-nav a:hover {
     color: var(--text-primary);
+}
+
+@media (max-width: 640px) {
+    .header-nav {
+        gap: var(--space-3);
+    }
+
+    .header-nav a {
+        font-size: 0.8rem;
+    }
+
+    /* Hide non-essential links on mobile to prevent overflow */
+    .header-nav a[href*="methodology"],
+    .header-nav a[href*="cities"] {
+        display: none;
+    }
+}
+
+/* ==================
+   5.1 Simulation Sticky Bar (Mobile Only)
+   ================== */
+.sim-sticky-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border-default);
+    padding: var(--space-3) var(--space-4);
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+    display: none;
+    /* Hidden by default, shown via JS */
+    z-index: 999;
+    align-items: center;
+    justify-content: space-between;
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.sticky-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.sticky-value {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.sticky-status {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
 }
 
 .site-footer {

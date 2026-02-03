@@ -5,6 +5,10 @@ import firstrentverdict.model.dtos.SecurityDepositData;
 import firstrentverdict.model.dtos.MovingData;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class CityContentGenerator {
 
@@ -89,7 +93,7 @@ public class CityContentGenerator {
                 }
 
                 // 4. Aggregate Sources
-                java.util.List<String> sources = new java.util.ArrayList<>();
+                List<String> sources = new ArrayList<>();
                 if (rentData.sources() != null)
                         sources.addAll(rentData.sources());
                 if (depositData != null && depositData.sources() != null)
@@ -98,23 +102,25 @@ public class CityContentGenerator {
                         sources.addAll(movingData.sources());
 
                 // Remove duplicates and limit
-                sources = sources.stream().distinct().limit(5).collect(java.util.stream.Collectors.toList());
+                sources = sources.stream().distinct().limit(5).collect(Collectors.toList());
 
                 // 5. QnA (Expanded to 5 for better FAQ Schema and unique content)
-                java.util.List<QnA> qnaList = new java.util.ArrayList<>();
+                List<QnA> qnaList = new ArrayList<>();
 
                 // Q1: Income requirement
                 qnaList.add(new QnA(
                                 String.format("Is $%s/year enough to live in %s?",
                                                 String.format("%,d", requiredIncomeYearly), city),
-                                String.format("Mathematically, yes. This meets the standard 3x requirement for a $%s/month apartment. However, if you have student loans, car payments, or other debts, we recommend targeting a 'Safe Floor' of $%s/year to maintain financial stability.",
+                                String.format(
+                                                "Mathematically, yes. This meets the standard 3x requirement for a $%s/month apartment. However, if you have student loans, car payments, or other debts, we recommend targeting a 'Safe Floor' of $%s/year to maintain financial stability.",
                                                 String.format("%,d", avgRent),
                                                 String.format("%,d", (int) (requiredIncomeYearly * 1.2)))));
 
                 // Q2: Move-in cash
                 qnaList.add(new QnA(
                                 String.format("How much cash do I need to move to %s?", city),
-                                String.format("You should aim for at least $%s in liquid savings. This breaks down to: first month rent ($%s), security deposit ($%s), moving costs (~$%s), plus an emergency buffer. Without this, you risk immediate financial stress.",
+                                String.format(
+                                                "You should aim for at least $%s in liquid savings. This breaks down to: first month rent ($%s), security deposit ($%s), moving costs (~$%s), plus an emergency buffer. Without this, you risk immediate financial stress.",
                                                 String.format("%,d", (int) (upfrontTotal * 1.2)),
                                                 String.format("%,d", avgRent),
                                                 String.format("%,d", deposit),
@@ -127,7 +133,8 @@ public class CityContentGenerator {
                                                 : "typically 1 month's rent";
                 qnaList.add(new QnA(
                                 String.format("What is the security deposit in %s, %s?", city, state),
-                                String.format("In %s, the security deposit is %s. For a median apartment at $%s/month, expect to pay around $%s upfront as a deposit. This is usually refundable if you leave the unit in good condition.",
+                                String.format(
+                                                "In %s, the security deposit is %s. For a median apartment at $%s/month, expect to pay around $%s upfront as a deposit. This is usually refundable if you leave the unit in good condition.",
                                                 city, depositNote,
                                                 String.format("%,d", avgRent),
                                                 String.format("%,d", deposit))));
@@ -148,7 +155,8 @@ public class CityContentGenerator {
                 // Q5: First-time renter tips
                 qnaList.add(new QnA(
                                 String.format("Tips for first-time renters in %s?", city),
-                                String.format("1) Have at least $%s saved before signing. 2) Your income should be 3x the rent ($%s/month or $%s/year). 3) Check your credit score beforehand. 4) Budget for moving costs ($%s-%s locally). 5) Keep 1-2 months rent as emergency fund after moving.",
+                                String.format(
+                                                "1) Have at least $%s saved before signing. 2) Your income should be 3x the rent ($%s/month or $%s/year). 3) Check your credit score beforehand. 4) Budget for moving costs ($%s-%s locally). 5) Keep 1-2 months rent as emergency fund after moving.",
                                                 String.format("%,d", (int) (upfrontTotal * 1.2)),
                                                 String.format("%,d", requiredIncomeMonthly),
                                                 String.format("%,d", requiredIncomeYearly),
@@ -246,8 +254,8 @@ public class CityContentGenerator {
                         String incomeLogicText,
                         String preVerdictHeadline,
                         String riskNarrative,
-                        java.util.List<QnA> commonQuestions,
-                        java.util.List<String> dataSources, // Links for E-E-A-T
+                        List<QnA> commonQuestions,
+                        List<String> dataSources, // Links for E-E-A-T
                         String depositNotes, // Legal context
                         String movingAssumptions, // Context
                         // NEW: Thin Content Prevention Fields

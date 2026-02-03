@@ -23,12 +23,24 @@
     <meta property="og:url" content="${canonical}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="First Rent Verdict">
+    <meta property="og:image" content="https://movecostinfo.com/images/og-rent-verdict-v1.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="${title}">
+    <meta name="twitter:description" content="${description}">
+    <meta name="twitter:image" content="https://movecostinfo.com/images/og-rent-verdict-v1.png">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
+
     <!-- Styles -->
     <link rel="stylesheet" href="/css/style.css">
 

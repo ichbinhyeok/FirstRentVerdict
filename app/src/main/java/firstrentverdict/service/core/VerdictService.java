@@ -8,9 +8,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class VerdictService {
+
+    // Cities that typically require broker fees (10-15% of rent)
+    private static final Set<String> BROKER_FEE_CITIES = Set.of(
+            "New York", "Boston", "Jersey City", "Hoboken");
+    private static final double BROKER_FEE_PERCENT = 0.10; // Conservative 10%
 
     private final VerdictDataRepository repository;
     private final BottleneckAnalyzer bottleneckAnalyzer;
@@ -31,29 +37,24 @@ public class VerdictService {
             throw new IllegalArgumentException("Unsupported city: " + input.city() + ", " + input.state());
         }
 
-        // 2. Load Data
+        // 2. Load All City Data
         SecurityDepositData depositData = repository.getSecurityDeposit(input.city(), input.state()).orElseThrow();
         MovingData.CityMoving movingData = repository.getMoving(input.city(), input.state()).orElseThrow();
         PetData.CityPet petData = repository.getPet(input.city(), input.state()).orElseThrow();
         CashBufferData.CityBuffer bufferData = repository.getCashBuffer(input.city(), input.state()).orElseThrow();
+        RentData.CityRent rentData = repository.getRent(input.city(), input.state()).orElseThrow();
 
-        // 3. Calculate Components
-
-        // Security Deposit Logic: Strict Legal Cap
-        // If state has a cap, we use Math.min(typical, cap).
-        // Security Deposit Logic: Dynamic Risk Assessment
-        // If available cash is tight (< 3x rent), landlords may perceive higher risk.
-        // We simulate this by checking 'high_risk_multipliers' if available in data.
-
+        // 3. Calculate Security Deposit with Risk Assessment
         double depositMult = 1.0;
         String depositRiskNote = "Standard Rate";
         boolean isHighRisk = input.availableCash() < (input.monthlyRent() * 3);
+        String depositLegalNote = null;
 
         if (depositData != null && depositData.city_practice() != null) {
             var practice = depositData.city_practice();
+            depositLegalNote = practice.notes();
 
             if (isHighRisk && practice.highRiskMultipliers() != null && !practice.highRiskMultipliers().isEmpty()) {
-                // Use the highest multiplier for conservative estimation
                 depositMult = practice.highRiskMultipliers().stream()
                         .mapToDouble(Double::doubleValue)
                         .max()
@@ -66,12 +67,10 @@ public class VerdictService {
         }
         int depositCost = (int) (input.monthlyRent() * depositMult);
 
-        // Moving Cost
-        // Use 'typical' for now. Could act on input.isLocalMove() later if data
-        // supported non-local.
+        // 4. Moving Cost
         int movingCost = movingData.typical();
 
-        // Pet Cost (One-time + First Month's Pet Rent)
+        // 5. Pet Costs
         int petOneTime = 0;
         int petMonthlyRent = 0;
         if (input.hasPet()) {
@@ -81,12 +80,18 @@ public class VerdictService {
             }
         }
 
-        // Total Upfront (includes first month pet rent)
-        int totalUpfront = input.monthlyRent() + depositCost + movingCost + petOneTime + petMonthlyRent;
+        // 6. Broker Fee (NYC, Boston, etc.)
+        int brokerFee = 0;
+        if (BROKER_FEE_CITIES.contains(input.city())) {
+            brokerFee = (int) (input.monthlyRent() * BROKER_FEE_PERCENT);
+        }
+
+        // 7. Total Upfront Calculation
+        int totalUpfront = input.monthlyRent() + depositCost + movingCost + petOneTime + petMonthlyRent + brokerFee;
         int remainingCash = input.availableCash() - totalUpfront;
         int recommendedBuffer = bufferData.recommendedPostMoveBuffer();
 
-        // 4. Determine Verdict
+        // 8. Determine Verdict
         Verdict verdict;
         if (remainingCash < 0) {
             verdict = Verdict.DENIED;
@@ -98,59 +103,223 @@ public class VerdictService {
             verdict = Verdict.APPROVED;
         }
 
-        // 5. Build Result
-        List<String> riskFactors = new ArrayList<>();
-        if (input.hasPet())
-            riskFactors.add("Pet owners face limited housing options and non-refundable fees.");
-        if (remainingCash < recommendedBuffer)
-            riskFactors.add("Post-move cash buffer is below recommended safety levels.");
+        // 9. Calculate Market Tier
+        VerdictContext.MarketTier marketTier = calculateMarketTier(rentData.median());
 
-        // ==========================================================================
-        // PHASE 2: Smart Verdict Generation with BottleneckAnalyzer & TextGenerator
-        // ==========================================================================
+        // 10. Build Enhanced Cost Breakdown
+        List<FinancialLineItem> costBreakdown = buildCostBreakdown(
+                input, depositCost, depositRiskNote, depositLegalNote,
+                movingData, petData, petOneTime, petMonthlyRent, brokerFee);
 
-        // Create financial snapshot for analysis
+        // 11. Bottleneck Analysis
         FinancialSnapshot snapshot = new FinancialSnapshot(
-                input.monthlyRent(),
-                input.availableCash(),
-                totalUpfront,
-                remainingCash,
-                recommendedBuffer,
-                verdict);
-
-        // Identify primary bottleneck
+                input.monthlyRent(), input.availableCash(), totalUpfront,
+                remainingCash, recommendedBuffer, verdict);
         BottleneckType bottleneck = bottleneckAnalyzer.analyze(snapshot);
         String primaryBottleneck = bottleneckAnalyzer.toDisplayText(bottleneck);
 
-        // Generate contextual "Why This Verdict" text
+        // 12. Generate WHY text with Enhanced Context
         VerdictContext context = new VerdictContext(
-                verdict,
-                bottleneck,
-                remainingCash,
-                recommendedBuffer,
-                input.city());
+                verdict, bottleneck, remainingCash, recommendedBuffer,
+                input.city(), input.state(), marketTier, depositLegalNote,
+                input.hasPet(), isHighRisk, depositMult);
         String whyThisVerdict = textGenerator.generate(context);
 
-        // Layer 3: Contributing Factors (using riskFactors for now)
-        List<String> contributingFactors = riskFactors.size() > 3
-                ? riskFactors.subList(0, 3)
-                : new ArrayList<>(riskFactors);
+        // 13. Build DYNAMIC Contributing Factors (from actual data)
+        List<String> contributingFactors = buildContributingFactors(
+                input, isHighRisk, depositLegalNote, remainingCash, recommendedBuffer, brokerFee);
 
-        // Layer 4: Regional Context (stub - to be enhanced in future)
-        RegionalContext regionalContext = new RegionalContext(
-                input.city() + ", " + input.state(),
-                List.of(
-                        "This market typically requires strong upfront liquidity",
-                        "Rental competition favors financially prepared applicants"),
-                totalUpfront > 5000);
+        // 14. Build DYNAMIC Regional Context (no more hardcoding!)
+        RegionalContext regionalContext = buildRegionalContext(
+                input, rentData, depositData, marketTier, totalUpfront);
 
-        // Safety Gap (calculated)
-        // Safety Gap (Canonical Value Rule)
-        // IF verdict == DENIED AND bottleneck == IMMEDIATE_INSOLVENCY:
-        // gapAmount = remainingCash (negative canonical value)
-        // ELSE:
-        // gapAmount = remainingCash - recommendedBuffer (gap to safety)
+        // 15. Safety Gap Calculation
+        SafetyGap safetyGap = calculateSafetyGap(verdict, bottleneck, remainingCash, recommendedBuffer);
 
+        // 16. Market Position for Radar
+        MarketPosition marketPosition = buildMarketPosition(input, rentData);
+
+        // 17. Calculate simulation multipliers
+        double simTypicalMult = getTypicalMultiplier(depositData);
+        double simHighRiskMult = getHighRiskMultiplier(depositData, simTypicalMult);
+
+        // 18. Build Final Result
+        int staticCosts = movingCost + petOneTime + petMonthlyRent + brokerFee;
+        double baseMultiplier = 1.0 + depositMult;
+
+        return new VerdictResult(
+                verdict,
+                whyThisVerdict,
+                primaryBottleneck,
+                contributingFactors,
+                regionalContext,
+                safetyGap,
+                new VerdictResult.Financials(
+                        input.monthlyRent(), totalUpfront, input.availableCash(),
+                        remainingCash, recommendedBuffer, baseMultiplier,
+                        simTypicalMult, simHighRiskMult, staticCosts, costBreakdown),
+                marketPosition);
+    }
+
+    // ========================================================================
+    // HELPER METHODS
+    // ========================================================================
+
+    private VerdictContext.MarketTier calculateMarketTier(int medianRent) {
+        if (medianRent >= 2000)
+            return VerdictContext.MarketTier.HIGH_COST;
+        if (medianRent >= 1200)
+            return VerdictContext.MarketTier.MODERATE;
+        return VerdictContext.MarketTier.AFFORDABLE;
+    }
+
+    /**
+     * Builds itemized cost breakdown with annotations from source data
+     */
+    private List<FinancialLineItem> buildCostBreakdown(
+            VerdictInput input, int depositCost, String depositRiskNote, String depositLegalNote,
+            MovingData.CityMoving movingData, PetData.CityPet petData,
+            int petOneTime, int petMonthlyRent, int brokerFee) {
+
+        List<FinancialLineItem> items = new ArrayList<>();
+
+        // First Month Rent
+        items.add(new FinancialLineItem(
+                "First Month Rent", input.monthlyRent(), "Applied Baseline: User Input"));
+
+        // Security Deposit with legal context
+        String depositAnnotation = depositRiskNote;
+        if (depositLegalNote != null && !depositLegalNote.isEmpty()) {
+            depositAnnotation += " · " + truncate(depositLegalNote, 80);
+        }
+        items.add(new FinancialLineItem("Security Deposit", depositCost, depositAnnotation));
+
+        // Moving Costs with range
+        String movingAnnotation = String.format("Range: $%,d - $%,d · %s",
+                movingData.low(), movingData.high(),
+                movingData.assumptions() != null ? movingData.assumptions() : "Local Move");
+        items.add(new FinancialLineItem("Moving Costs", movingData.typical(), movingAnnotation));
+
+        // Broker Fee (if applicable)
+        if (brokerFee > 0) {
+            items.add(new FinancialLineItem(
+                    "Est. Broker Fee",
+                    brokerFee,
+                    "Common in this market (10-15% typical) · May vary by listing"));
+        }
+
+        // Pet Fees
+        if (input.hasPet()) {
+            String petAnnotation = String.format("Range: $%,d - $%,d · %s",
+                    petData.oneTime().low(), petData.oneTime().high(),
+                    petData.oneTime().notes() != null ? petData.oneTime().notes() : "One-time deposit/fee");
+            items.add(new FinancialLineItem("Pet Deposit/Fee", petOneTime, petAnnotation));
+
+            if (petMonthlyRent > 0) {
+                String petMonthlyAnnotation = String.format("$%d/month ongoing · Range: $%,d - $%,d/mo",
+                        petMonthlyRent, petData.monthlyPetRent().low(), petData.monthlyPetRent().high());
+                items.add(new FinancialLineItem("Pet Rent (1st Month)", petMonthlyRent, petMonthlyAnnotation));
+            }
+        }
+
+        return items;
+    }
+
+    /**
+     * Builds contributing factors from ACTUAL data (no hardcoding)
+     */
+    private List<String> buildContributingFactors(
+            VerdictInput input, boolean isHighRisk, String depositLegalNote,
+            int remainingCash, int recommendedBuffer, int brokerFee) {
+
+        List<String> factors = new ArrayList<>();
+
+        // High-risk deposit assessment
+        if (isHighRisk) {
+            factors.add("Low cash-to-rent ratio may trigger higher deposit requirements");
+        }
+
+        // Pet-related factor
+        if (input.hasPet()) {
+            factors.add("Pet owners face additional fees and limited housing options");
+        }
+
+        // Broker fee market
+        if (brokerFee > 0) {
+            factors.add("This market commonly requires broker fees at move-in");
+        }
+
+        // Buffer status
+        if (remainingCash < recommendedBuffer && remainingCash >= 0) {
+            factors.add("Post-move reserves fall below recommended safety threshold");
+        } else if (remainingCash < 0) {
+            factors.add("Available funds insufficient for total move-in costs");
+        }
+
+        // State-specific deposit law (from data)
+        if (depositLegalNote != null && depositLegalNote.length() > 10) {
+            // Only add if it's meaningful legal context
+            if (depositLegalNote.toLowerCase().contains("law") ||
+                    depositLegalNote.toLowerCase().contains("cap") ||
+                    depositLegalNote.toLowerCase().contains("limit")) {
+                factors.add("State law affects deposit limits in this area");
+            }
+        }
+
+        // Limit to 3 max
+        return factors.size() > 3 ? factors.subList(0, 3) : factors;
+    }
+
+    /**
+     * Builds DYNAMIC regional context based on actual market data
+     */
+    private RegionalContext buildRegionalContext(
+            VerdictInput input, RentData.CityRent rentData, SecurityDepositData depositData,
+            VerdictContext.MarketTier marketTier, int totalUpfront) {
+
+        List<String> contextFactors = new ArrayList<>();
+        String cityStateName = input.city() + ", " + input.state();
+
+        // Market tier context
+        switch (marketTier) {
+            case HIGH_COST -> contextFactors.add(
+                    "High-cost market: Landlords expect strong financial profiles");
+            case MODERATE -> contextFactors.add(
+                    "Competitive market: Well-prepared applicants have advantages");
+            case AFFORDABLE -> contextFactors.add(
+                    "Accessible market: But upfront costs still require planning");
+        }
+
+        // State-specific deposit context (from actual data)
+        if (depositData != null && depositData.city_practice() != null &&
+                depositData.city_practice().notes() != null) {
+            String note = depositData.city_practice().notes();
+            if (note.toLowerCase().contains("law") || note.toLowerCase().contains("cap")) {
+                contextFactors.add("Deposit regulated by state/local law");
+            } else if (note.toLowerCase().contains("credit")) {
+                contextFactors.add("Credit score impacts deposit requirements here");
+            }
+        }
+
+        // Rent percentile context
+        if (rentData.p75() > 0) {
+            double rentRatio = (double) rentData.median() / rentData.p75();
+            if (rentRatio < 0.7) {
+                contextFactors.add("Wide rent variance: Room to negotiate or find deals");
+            }
+        }
+
+        // Limit to 3
+        if (contextFactors.size() > 3) {
+            contextFactors = contextFactors.subList(0, 3);
+        }
+
+        boolean isHighCost = marketTier == VerdictContext.MarketTier.HIGH_COST || totalUpfront > 5000;
+        return new RegionalContext(cityStateName, contextFactors, isHighCost);
+    }
+
+    private SafetyGap calculateSafetyGap(Verdict verdict, BottleneckType bottleneck,
+            int remainingCash, int recommendedBuffer) {
         int gapAmount;
         if (verdict == Verdict.DENIED && bottleneck == BottleneckType.IMMEDIATE_INSOLVENCY) {
             gapAmount = remainingCash;
@@ -174,81 +343,10 @@ public class VerdictService {
             displayText = String.format("$%,d Short of Safety", Math.abs(gapAmount));
         }
 
-        SafetyGap safetyGap = new SafetyGap(gapAmount, actionPrompt, displayText, verdict == Verdict.APPROVED);
+        return new SafetyGap(gapAmount, actionPrompt, displayText, verdict == Verdict.APPROVED);
+    }
 
-        // ==========================================================================
-
-        // Calculate data for Financials
-        // Base multiplier = 1 (first month rent) + deposit multiplier
-        double baseMultiplier = 1.0 + depositMult;
-        int staticCosts = movingCost + petOneTime + petMonthlyRent;
-
-        // ==========================================================================
-        // Smart Receipt Logic: Calculate Costs with Annotations
-        // ==========================================================================
-
-        List<FinancialLineItem> costBreakdown = new ArrayList<>();
-
-        // 1. First Month Rent
-        costBreakdown.add(new FinancialLineItem(
-                "First Month Rent",
-                input.monthlyRent(),
-                "Applied Baseline: User Input"));
-
-        // 2. Security Deposit
-        // 2. Security Deposit
-        String depositAnnotation;
-        String sourceNote = (depositData != null && depositData.city_practice() != null
-                && depositData.city_practice().notes() != null)
-                        ? depositData.city_practice().notes()
-                        : "Required by Lease Terms";
-
-        // Prioritize the Risk Note we calculated earlier
-        depositAnnotation = depositRiskNote + " · " + sourceNote;
-
-        costBreakdown.add(new FinancialLineItem(
-                "Security Deposit",
-                depositCost,
-                depositAnnotation));
-
-        // 3. Moving Costs (with range info)
-        String movingAnnotation = String.format("Range: $%,d - $%,d · %s",
-                movingData.low(), movingData.high(),
-                movingData.assumptions() != null ? movingData.assumptions() : "Local Move");
-        costBreakdown.add(new FinancialLineItem(
-                "Moving Costs",
-                movingCost,
-                movingAnnotation));
-
-        // 4. Pet Fees (One-time)
-        if (input.hasPet()) {
-            String petOneTimeAnnotation = String.format("Range: $%,d - $%,d · %s",
-                    petData.oneTime().low(), petData.oneTime().high(),
-                    petData.oneTime().notes() != null ? petData.oneTime().notes() : "One-time deposit/fee");
-            costBreakdown.add(new FinancialLineItem(
-                    "Pet Deposit/Fee",
-                    petOneTime,
-                    petOneTimeAnnotation));
-
-            // 5. Pet Monthly Rent (first month)
-            if (petMonthlyRent > 0) {
-                String petMonthlyAnnotation = String.format("$%d/month ongoing · Range: $%,d - $%,d/mo",
-                        petMonthlyRent,
-                        petData.monthlyPetRent().low(), petData.monthlyPetRent().high());
-                costBreakdown.add(new FinancialLineItem(
-                        "Pet Rent (1st Month)",
-                        petMonthlyRent,
-                        petMonthlyAnnotation));
-            }
-        }
-
-        // ==========================================================================
-        // Market Radar Logic
-        // ==========================================================================
-        RentData.CityRent rentData = repository.getRent(input.city(), input.state()).orElse(
-                new RentData.CityRent(input.city(), input.state(), 2026, input.monthlyRent(), input.monthlyRent(),
-                        input.monthlyRent(), List.of(), null, false));
-
+    private MarketPosition buildMarketPosition(VerdictInput input, RentData.CityRent rentData) {
         String marketZone;
         if (input.monthlyRent() <= rentData.p25()) {
             marketZone = "Below Market";
@@ -258,48 +356,37 @@ public class VerdictService {
             marketZone = "Market Standard";
         }
 
-        MarketPosition marketPosition = new MarketPosition(
-                rentData.p25(),
-                rentData.median(),
-                rentData.p75(),
-                input.monthlyRent(),
-                marketZone);
+        return new MarketPosition(
+                rentData.p25(), rentData.median(), rentData.p75(),
+                input.monthlyRent(), marketZone);
+    }
 
-        // Calculate simulation multipliers
-        double simTypicalMult = (depositData != null && depositData.city_practice() != null
+    private double getTypicalMultiplier(SecurityDepositData depositData) {
+        if (depositData != null && depositData.city_practice() != null
                 && depositData.city_practice().typicalMultipliers() != null
-                && !depositData.city_practice().typicalMultipliers().isEmpty())
-                        ? depositData.city_practice().typicalMultipliers().get(0)
-                        : 1.0;
+                && !depositData.city_practice().typicalMultipliers().isEmpty()) {
+            return depositData.city_practice().typicalMultipliers().get(0);
+        }
+        return 1.0;
+    }
 
-        double simHighRiskMult = simTypicalMult;
+    private double getHighRiskMultiplier(SecurityDepositData depositData, double fallback) {
         if (depositData != null && depositData.city_practice() != null
                 && depositData.city_practice().highRiskMultipliers() != null
                 && !depositData.city_practice().highRiskMultipliers().isEmpty()) {
-            simHighRiskMult = depositData.city_practice().highRiskMultipliers().stream()
+            return depositData.city_practice().highRiskMultipliers().stream()
                     .mapToDouble(Double::doubleValue)
                     .max()
-                    .orElse(simTypicalMult);
+                    .orElse(fallback);
         }
+        return fallback;
+    }
 
-        return new VerdictResult(
-                verdict,
-                whyThisVerdict,
-                primaryBottleneck,
-                contributingFactors,
-                regionalContext,
-                safetyGap,
-                new VerdictResult.Financials(
-                        input.monthlyRent(),
-                        totalUpfront,
-                        input.availableCash(),
-                        remainingCash,
-                        recommendedBuffer,
-                        baseMultiplier, // e.g. 2.5 (1 + deposit multiplier)
-                        simTypicalMult,
-                        simHighRiskMult,
-                        staticCosts, // moving + pet + fees
-                        costBreakdown),
-                marketPosition);
+    private String truncate(String text, int maxLen) {
+        if (text == null)
+            return "";
+        if (text.length() <= maxLen)
+            return text;
+        return text.substring(0, maxLen - 3) + "...";
     }
 }

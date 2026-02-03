@@ -29,41 +29,36 @@ public class SitemapController {
         xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
         xml.append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
 
+        // SEO Strategy: Use 1st day of current month to signal stable, monthly updates
+        // instead of daily changes which can be flagged as artificial.
+        String monthlyMod = LocalDate.now().withDayOfMonth(1).format(DateTimeFormatter.ISO_DATE);
+
         // 1. Static Pages
-        addUrl(xml, "https://movecostinfo.com/", "1.0"); // Hub Root
-        addUrl(xml, "https://movecostinfo.com/RentVerdict/", "1.0"); // Engine Home
-        addUrl(xml, "https://movecostinfo.com/RentVerdict/cities", "0.9"); // All Cities List
-        addUrl(xml, "https://movecostinfo.com/RentVerdict/about", "0.6");
-        addUrl(xml, "https://movecostinfo.com/RentVerdict/methodology", "0.6");
-        addUrl(xml, "https://movecostinfo.com/RentVerdict/guide/rent-affordability-rule", "0.9"); // Anchor Article
-        addUrl(xml, "https://movecostinfo.com/RentVerdict/privacy", "0.4");
-        addUrl(xml, "https://movecostinfo.com/RentVerdict/terms", "0.5");
+        addUrl(xml, "https://movecostinfo.com/", "1.0", monthlyMod); // Hub Root
+        addUrl(xml, "https://movecostinfo.com/RentVerdict/", "1.0", monthlyMod); // Engine Home
+        addUrl(xml, "https://movecostinfo.com/RentVerdict/cities", "0.9", monthlyMod); // All Cities List
+        addUrl(xml, "https://movecostinfo.com/RentVerdict/about", "0.6", monthlyMod);
+        addUrl(xml, "https://movecostinfo.com/RentVerdict/methodology", "0.6", monthlyMod);
+        addUrl(xml, "https://movecostinfo.com/RentVerdict/guide/rent-affordability-rule", "0.9", monthlyMod); // Anchor
+                                                                                                              // Article
+        addUrl(xml, "https://movecostinfo.com/RentVerdict/privacy", "0.4", monthlyMod);
+        addUrl(xml, "https://movecostinfo.com/RentVerdict/terms", "0.5", monthlyMod);
 
         // 2. City Pages (pSEO)
-        // Using current date as lastmod since data is "2026 updated"
-        String today = LocalDate.now().format(DateTimeFormatter.ISO_DATE);
-
         for (CitiesData.CityEntry city : cities) {
             String slug = city.city().toLowerCase().replace(" ", "-") + "-" + city.state().toLowerCase();
             String location = "https://movecostinfo.com/RentVerdict/verdict/" + slug;
-
-            xml.append("  <url>\n");
-            xml.append("    <loc>").append(location).append("</loc>\n");
-            xml.append("    <lastmod>").append(today).append("</lastmod>\n");
-            xml.append("    <changefreq>weekly</changefreq>\n");
-            xml.append("    <priority>0.8</priority>\n");
-            xml.append("  </url>\n");
+            addUrl(xml, location, "0.8", monthlyMod);
         }
 
         xml.append("</urlset>");
         return xml.toString();
     }
 
-    private void addUrl(StringBuilder xml, String loc, String priority) {
-        String today = LocalDate.now().format(DateTimeFormatter.ISO_DATE);
+    private void addUrl(StringBuilder xml, String loc, String priority, String lastmod) {
         xml.append("  <url>\n");
         xml.append("    <loc>").append(loc).append("</loc>\n");
-        xml.append("    <lastmod>").append(today).append("</lastmod>\n");
+        xml.append("    <lastmod>").append(lastmod).append("</lastmod>\n");
         xml.append("    <changefreq>monthly</changefreq>\n");
         xml.append("    <priority>").append(priority).append("</priority>\n");
         xml.append("  </url>\n");
