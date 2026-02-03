@@ -1,70 +1,2107 @@
 {
-    "version": "1.0",
-    "unit": "USD",
-    "notes": "One-time fees and monthly rent",
-    "cities": [
-        {
-            "city": "Austin",
-            "state": "TX",
-            "year": 2024,
-            "one_time": {
-                "avg": 400,
-                "low": 200,
-                "high": 600,
-                "notes": "Non-refundable fee + deposit"
-            },
-            "monthly_pet_rent": {
-                "avg": 25,
-                "low": 15,
-                "high": 50,
-                "notes": "Per pet"
-            },
-            "sources": [
-                "Apartments.com"
-            ],
-            "missing_reason": null
-        },
-        {
-            "city": "New York",
-            "state": "NY",
-            "year": 2024,
-            "one_time": {
-                "avg": 0,
-                "low": 0,
-                "high": 500,
-                "notes": "Illegal to charge pet fees in some rent-stabilized units, but common elsewhere."
-            },
-            "monthly_pet_rent": {
-                "avg": 50,
-                "low": 25,
-                "high": 100,
-                "notes": "Common"
-            },
-            "sources": [
-                "Streeteasy"
-            ],
-            "missing_reason": null
-        },
-        {
-            "city": "San Francisco",
-            "state": "CA",
-            "year": 2024,
-            "one_time": {
-                "avg": 500,
-                "low": 0,
-                "high": 1000,
-                "notes": "Deposit must fit within 2x rent cap"
-            },
-            "monthly_pet_rent": {
-                "avg": 50,
-                "low": 30,
-                "high": 75,
-                "notes": "Common"
-            },
-            "sources": [
-                "Zillow"
-            ],
-            "missing_reason": null
-        }
-    ]
+  "version": "2026-01-21",
+  "unit": "USD",
+  "notes": "Average pet-related housing costs including one-time fees/deposits and monthly pet rent. Values are estimates for 1-bedroom apartments.",
+  "cities": [
+    {
+      "city": "New York",
+      "state": "NY",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Often a mix of non-refundable fees and refundable deposits. High-end buildings may charge more."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 25,
+        "high": 100
+      },
+      "sources": [
+        "RentCafe NYC Pet Policy Survey",
+        "Zillow NY Pet Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Los Angeles",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 400,
+        "low": 250,
+        "high": 600,
+        "notes": "California law allows pet deposits but total security deposit (including pet) is now capped at 1x rent by AB 12."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 30,
+        "high": 75
+      },
+      "sources": [
+        "Apartments.com LA Pet Fee Report",
+        "Zumper CA Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Chicago",
+      "state": "IL",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 500,
+        "notes": "Commonly charged as a non-refundable pet fee rather than a deposit."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 20,
+        "high": 60
+      },
+      "sources": [
+        "RentCafe Chicago Market Analysis",
+        "Zillow IL Pet Rent Trends"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Houston",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 500,
+        "notes": "Standard practice often includes a $200 fee and $100-200 deposit."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "Houston Apartment Association Data",
+        "Rent.com TX Pet Fees"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Phoenix",
+      "state": "AZ",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 450,
+        "notes": "Pet deposits are typically half-refundable depending on the landlord."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 50
+      },
+      "sources": [
+        "Zumper Phoenix Pet Cost Guide",
+        "Apartments.com AZ"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Philadelphia",
+      "state": "PA",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Many older buildings have strict weight limits but lower monthly rent."
+      },
+      "monthly_pet_rent": {
+        "avg": 40,
+        "low": 25,
+        "high": 75
+      },
+      "sources": [
+        "RentCafe Philadelphia Report",
+        "Zillow PA Pet Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "San Antonio",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 400,
+        "notes": "Often categorized as a 'Pet Administration Fee'."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 35
+      },
+      "sources": [
+        "San Antonio Renters Guide",
+        "Apartment List TX"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "San Diego",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 500,
+        "low": 300,
+        "high": 750,
+        "notes": "One of the most expensive cities for pet deposits in CA."
+      },
+      "monthly_pet_rent": {
+        "avg": 55,
+        "low": 40,
+        "high": 85
+      },
+      "sources": [
+        "RentCafe San Diego Pet Study",
+        "Zillow SD Trends"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Dallas",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Standard $250-400 fee is common in suburban luxury apartments."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 50
+      },
+      "sources": [
+        "Apartments.com Dallas Pet Fees",
+        "Rent.com TX"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "San Jose",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 500,
+        "low": 350,
+        "high": 800,
+        "notes": "Large management companies often have a set $500 pet deposit."
+      },
+      "monthly_pet_rent": {
+        "avg": 65,
+        "low": 50,
+        "high": 100
+      },
+      "sources": [
+        "Zumper San Jose Pet Data",
+        "RentCafe CA Report"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Austin",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 250,
+        "high": 500,
+        "notes": "Pet fees are common; very few apartments allow pets for free."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 50
+      },
+      "sources": [
+        "Austin Tenants Council Pet Data",
+        "Apartment List TX"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Jacksonville",
+      "state": "FL",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 450,
+        "notes": "Pet rent is almost universal in newer Florida developments."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 45
+      },
+      "sources": [
+        "Rent.com Jacksonville Pet Fees",
+        "Zillow FL Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Fort Worth",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 450,
+        "notes": "Standard Texas pet addendum applies to most leases."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "Apartments.com Fort Worth",
+        "Zumper TX"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Columbus",
+      "state": "OH",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "Relatively affordable pet fees compared to national averages."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 45
+      },
+      "sources": [
+        "RentCafe Columbus Pet Data",
+        "Zillow OH"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Indianapolis",
+      "state": "IN",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 100,
+        "high": 350,
+        "notes": "Some landlords waive pet rent for small cats or senior pets."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "Apartment List Indy Pet Fees",
+        "Rent.com IN"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Charlotte",
+      "state": "NC",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Pet DNA testing fees (for waste enforcement) are becoming common here."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 25,
+        "high": 55
+      },
+      "sources": [
+        "RentCafe Charlotte Pet Analysis",
+        "Zumper NC"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "San Francisco",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 500,
+        "low": 300,
+        "high": 800,
+        "notes": "Extremely high upfront costs; many units are pet-friendly due to local competition."
+      },
+      "monthly_pet_rent": {
+        "avg": 75,
+        "low": 50,
+        "high": 120
+      },
+      "sources": [
+        "SF Rent Board Pet Fee Data",
+        "Zillow SF Pet Trends"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Seattle",
+      "state": "WA",
+      "year": 2025,
+      "one_time": {
+        "avg": 400,
+        "low": 250,
+        "high": 600,
+        "notes": "Seattle law requires pet deposits to be refundable if no damage occurs."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 35,
+        "high": 75
+      },
+      "sources": [
+        "Seattle Tenants Union Pet Policy",
+        "Apartments.com WA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Denver",
+      "state": "CO",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 450,
+        "notes": "Colorado recently passed laws limiting pet rent to $35/mo or 1.5% of rent (whichever is greater)."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 25,
+        "high": 35
+      },
+      "sources": [
+        "Colorado HB23-1068 (Pet Rent Cap)",
+        "RentCafe Denver"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Oklahoma City",
+      "state": "OK",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "Typical OK lease includes a pet addendum with modest one-time fees."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "Zillow OKC Pet Cost Data",
+        "Rent.com OK"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Nashville",
+      "state": "TN",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Large management firms in Nashville commonly require a $300 non-refundable fee per pet."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 20,
+        "high": 60
+      },
+      "sources": [
+        "Zillow Nashville Pet Data",
+        "Rent.com TN"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "El Paso",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "One-time fees are relatively low compared to other major Texas cities."
+      },
+      "monthly_pet_rent": {
+        "avg": 20,
+        "low": 15,
+        "high": 35
+      },
+      "sources": [
+        "Apartments.com El Paso",
+        "Rent.com TX"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Washington",
+      "state": "DC",
+      "year": 2025,
+      "one_time": {
+        "avg": 450,
+        "low": 300,
+        "high": 600,
+        "notes": "Luxury buildings often charge a higher 'pet amenity fee' instead of a traditional deposit."
+      },
+      "monthly_pet_rent": {
+        "avg": 60,
+        "low": 40,
+        "high": 100
+      },
+      "sources": [
+        "Zumper DC Pet Rent Survey",
+        "RentCafe DC Report"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Las Vegas",
+      "state": "NV",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 250,
+        "high": 500,
+        "notes": "Non-refundable pet fees are the norm in most Clark County apartment complexes."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 25,
+        "high": 50
+      },
+      "sources": [
+        "Apartments.com Las Vegas",
+        "Zillow NV Pet Fees"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Boston",
+      "state": "MA",
+      "year": 2025,
+      "one_time": {
+        "avg": 0,
+        "low": 0,
+        "high": 0,
+        "notes": "Under Massachusetts law, landlords are generally prohibited from charging pet fees/deposits other than first/last month rent, security deposit, and lock fee."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 25,
+        "high": 100
+      },
+      "sources": [
+        "Massachusetts General Laws Chapter 186",
+        "Boston Tenant Rights Guide"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Portland",
+      "state": "OR",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 500,
+        "notes": "Pet deposits are more common than non-refundable pet fees in Portland."
+      },
+      "monthly_pet_rent": {
+        "avg": 40,
+        "low": 25,
+        "high": 65
+      },
+      "sources": [
+        "Portland Housing Bureau",
+        "Rent.com OR Pet Fees"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Louisville",
+      "state": "KY",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "Standard KY leases include a $200-$300 one-time pet fee."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 45
+      },
+      "sources": [
+        "Apartments.com Louisville",
+        "Zillow KY"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Memphis",
+      "state": "TN",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 400,
+        "notes": "Typical pet fees are flat rates regardless of pet size in most developments."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "Zumper Memphis Report",
+        "Rent.com TN"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Detroit",
+      "state": "MI",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "Pet rent is less common in smaller multi-family units compared to large complexes."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 15,
+        "high": 50
+      },
+      "sources": [
+        "Rent.com Detroit Pet Trends",
+        "Zillow MI"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Baltimore",
+      "state": "MD",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Maryland law treats pet deposits as part of the total security deposit, which is capped at 2x rent."
+      },
+      "monthly_pet_rent": {
+        "avg": 40,
+        "low": 30,
+        "high": 70
+      },
+      "sources": [
+        "Maryland AG Consumer Protection",
+        "RentCafe Baltimore"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Milwaukee",
+      "state": "WI",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 350,
+        "notes": "Many Milwaukee landlords allow cats for a lower fee than dogs."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 45
+      },
+      "sources": [
+        "Zillow Milwaukee Pet Data",
+        "Rent.com WI"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Albuquerque",
+      "state": "NM",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "One-time pet fees are generally half-refundable in the local market."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "Apartments.com Albuquerque",
+        "Zumper NM"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Tucson",
+      "state": "AZ",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "Tucson is very pet-friendly; many older units have large yards but charge pet rent."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "RentCafe Tucson Pet Study",
+        "Zillow AZ"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Fresno",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Follows California state law regarding deposit caps."
+      },
+      "monthly_pet_rent": {
+        "avg": 40,
+        "low": 25,
+        "high": 60
+      },
+      "sources": [
+        "Apartments.com Fresno",
+        "Rent.com CA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Sacramento",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 400,
+        "low": 250,
+        "high": 600,
+        "notes": "Pet deposits are typically higher in the downtown area complexes."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 35,
+        "high": 75
+      },
+      "sources": [
+        "Zumper Sacramento Pet Report",
+        "RentCafe CA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Kansas City",
+      "state": "MO",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 450,
+        "notes": "Common for buildings to charge both a pet fee and a pet deposit."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 50
+      },
+      "sources": [
+        "Apartments.com KC Pet Fees",
+        "Zillow MO"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Mesa",
+      "state": "AZ",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 450,
+        "notes": "Standard Arizona practices apply; 1.5x rent cap includes pet deposits."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 50
+      },
+      "sources": [
+        "Zillow Mesa Pet Data",
+        "Rent.com AZ"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Atlanta",
+      "state": "GA",
+      "year": 2025,
+      "one_time": {
+        "avg": 400,
+        "low": 250,
+        "high": 600,
+        "notes": "Higher average fees in Buckhead and Midtown compared to suburban Atlanta."
+      },
+      "monthly_pet_rent": {
+        "avg": 45,
+        "low": 30,
+        "high": 75
+      },
+      "sources": [
+        "RentCafe Atlanta Pet Analysis",
+        "Zumper GA Report"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Omaha",
+      "state": "NE",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "Pet rent is standard in nearly all professionally managed properties in Omaha."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 45
+      },
+      "sources": [
+        "Apartments.com Omaha",
+        "Rent.com NE"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Colorado Springs",
+      "state": "CO",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 450,
+        "notes": "Subject to Colorado's new pet rent cap law ($35 or 1.5% of rent)."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 25,
+        "high": 35
+      },
+      "sources": [
+        "Colorado HB23-1068",
+        "Zillow CO Pet Trends"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Raleigh",
+      "state": "NC",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 250,
+        "high": 500,
+        "notes": "Non-refundable pet fees are highly common in the Research Triangle area, often starting at $300."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 20,
+        "high": 50
+      },
+      "sources": [
+        "Zillow Raleigh Pet Listings 2025",
+        "RentCafe NC Market Study"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Long Beach",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 400,
+        "low": 250,
+        "high": 600,
+        "notes": "Pet deposits are frequent, but must be factored into California's total 1-month security deposit cap."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 30,
+        "high": 75
+      },
+      "sources": [
+        "Apartments.com Long Beach",
+        "Zillow CA Pet Trends"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Virginia Beach",
+      "state": "VA",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 500,
+        "notes": "Many beachfront rentals have specific 'sand and pet' deep cleaning fees."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 25,
+        "high": 60
+      },
+      "sources": [
+        "RentCafe Virginia Beach",
+        "Zumper VA Pet Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Miami",
+      "state": "FL",
+      "year": 2025,
+      "one_time": {
+        "avg": 500,
+        "low": 250,
+        "high": 1000,
+        "notes": "In Downtown Miami, pet deposits for large dogs can reach as high as 50% of one month's rent."
+      },
+      "monthly_pet_rent": {
+        "avg": 75,
+        "low": 40,
+        "high": 100
+      },
+      "sources": [
+        "Hemlane Florida Pet Rent Guide 2025",
+        "Zillow Miami Pet Trends"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Oakland",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 400,
+        "low": 250,
+        "high": 600,
+        "notes": "Pet rent is almost universally charged in mid-to-large size apartment complexes."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 35,
+        "high": 75
+      },
+      "sources": [
+        "RentCafe Oakland Pet Policy",
+        "Apartments.com CA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Minneapolis",
+      "state": "MN",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 500,
+        "notes": "Large management groups in Minneapolis typically charge a $300 refundable pet deposit."
+      },
+      "monthly_pet_rent": {
+        "avg": 40,
+        "low": 25,
+        "high": 60
+      },
+      "sources": [
+        "Zillow Minneapolis Market Analysis",
+        "Vesi Apartments Policy"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Tulsa",
+      "state": "OK",
+      "year": 2025,
+      "one_time": {
+        "avg": 450,
+        "low": 250,
+        "high": 650,
+        "notes": "One-time pet costs are surprisingly high in Tulsa compared to local rent levels."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 50
+      },
+      "sources": [
+        "RentCafe Tulsa Pet Housing Stats",
+        "Rent.com OK"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Bakersfield",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 500,
+        "notes": "Standard Central Valley pet fees; pet rent is slightly lower than coastal CA."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 45
+      },
+      "sources": [
+        "Apartments.com Bakersfield",
+        "Zumper CA Pet Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Wichita",
+      "state": "KS",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "Wichita remains one of the more affordable cities for pet owners regarding upfront fees."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 35
+      },
+      "sources": [
+        "Zillow Wichita Pet Data",
+        "Rent.com KS"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Arlington",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Standard DFW pet addendums typically mandate both a fee and a deposit."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "Apartment List Arlington TX",
+        "RentCafe TX Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Aurora",
+      "state": "CO",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 450,
+        "notes": "Colorado's pet rent cap applies, limiting monthly charges significantly for newer leases."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 25,
+        "high": 35
+      },
+      "sources": [
+        "Colorado HB23-1068 Legislation",
+        "Zillow CO"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Tampa",
+      "state": "FL",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 600,
+        "notes": "Pet rent of $30-$50 per pet is standard in the Tampa Bay rental market."
+      },
+      "monthly_pet_rent": {
+        "avg": 40,
+        "low": 25,
+        "high": 60
+      },
+      "sources": [
+        "Urban Place Apartments Tampa Policy",
+        "RentCafe FL Pet Study"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "New Orleans",
+      "state": "LA",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 550,
+        "notes": "Historic properties may charge higher deposits due to original wood flooring concerns."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 50
+      },
+      "sources": [
+        "Zumper New Orleans Pet Report",
+        "Apartment List LA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Cleveland",
+      "state": "OH",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "Cleveland pet fees are generally stable with moderate annual pet rent."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 45
+      },
+      "sources": [
+        "Zillow Cleveland Pet Trends",
+        "Rent.com OH"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Honolulu",
+      "state": "HI",
+      "year": 2025,
+      "one_time": {
+        "avg": 500,
+        "low": 300,
+        "high": 800,
+        "notes": "Limited pet-friendly inventory leads to higher pet deposits in Honolulu."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 35,
+        "high": 80
+      },
+      "sources": [
+        "Honolulu Rent Survey",
+        "Zillow HI Pet Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Anaheim",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 400,
+        "low": 250,
+        "high": 600,
+        "notes": "Anaheim apartments frequently charge pet rent on a per-pet basis."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 30,
+        "high": 75
+      },
+      "sources": [
+        "RentCafe Anaheim Pet Analysis",
+        "Apartments.com CA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Lexington",
+      "state": "KY",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "Lexington market follows standard mid-size city pet fee patterns."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "Zillow Lexington Pet Data",
+        "Rent.com KY"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Stockton",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 500,
+        "notes": "Pet deposits are typically required; pet rent is common in larger complexes."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 20,
+        "high": 55
+      },
+      "sources": [
+        "Zumper Stockton Pet Report",
+        "Apartments.com CA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Corpus Christi",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 450,
+        "notes": "Upfront fees often include a non-refundable pet administration charge."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "RentCafe Corpus Christi",
+        "Zillow TX Pet Trends"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Henderson",
+      "state": "NV",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Standard NV pet fees apply; many units are pet-friendly with small yards."
+      },
+      "monthly_pet_rent": {
+        "avg": 40,
+        "low": 25,
+        "high": 60
+      },
+      "sources": [
+        "Zumper Henderson Pet Policy Study",
+        "Rent.com NV"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Riverside",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Commonly requires a pet deposit; pet rent is standard in Inland Empire complexes."
+      },
+      "monthly_pet_rent": {
+        "avg": 45,
+        "low": 30,
+        "high": 60
+      },
+      "sources": [
+        "Zillow Riverside Pet Trends",
+        "RentCafe CA Report"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Newark",
+      "state": "NJ",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Many luxury buildings near Penn Station charge a one-time pet 'amenity fee'."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 35,
+        "high": 75
+      },
+      "sources": [
+        "Zumper Newark Pet Rent Study",
+        "Apartments.com NJ"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Saint Paul",
+      "state": "MN",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 450,
+        "notes": "St. Paul landlords often prefer refundable pet deposits over non-refundable fees."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 25,
+        "high": 55
+      },
+      "sources": [
+        "RentCafe St. Paul Pet Policy Analysis",
+        "Zillow MN"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Santa Ana",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 400,
+        "low": 250,
+        "high": 600,
+        "notes": "Subject to CA deposit caps; pet rent is ubiquitous in newer mid-rise developments."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 35,
+        "high": 75
+      },
+      "sources": [
+        "Apartments.com Santa Ana",
+        "Zumper CA Pet Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Cincinnati",
+      "state": "OH",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "Average pet fees in Cincinnati remain among the most affordable for major OH cities."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 50
+      },
+      "sources": [
+        "Rent.com Cincinnati Pet Fees",
+        "Zillow OH"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Irvine",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 500,
+        "low": 300,
+        "high": 800,
+        "notes": "High upfront pet deposits are common in master-planned communities like Irvine."
+      },
+      "monthly_pet_rent": {
+        "avg": 65,
+        "low": 50,
+        "high": 100
+      },
+      "sources": [
+        "Irvine Company Pet Policy Data",
+        "RentCafe CA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Orlando",
+      "state": "FL",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Pet rent is almost universal in Orlando's professionally managed apartments."
+      },
+      "monthly_pet_rent": {
+        "avg": 40,
+        "low": 25,
+        "high": 65
+      },
+      "sources": [
+        "Zillow Orlando Pet Trends",
+        "Apartments.com FL"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Pittsburgh",
+      "state": "PA",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 450,
+        "notes": "Standard pet fees apply, though many older row houses charge lower pet rent."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 20,
+        "high": 60
+      },
+      "sources": [
+        "RentCafe Pittsburgh Pet Data",
+        "Zumper PA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "St. Louis",
+      "state": "MO",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "Often categorized as a pet 'privilege' fee in Missouri leases."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 50
+      },
+      "sources": [
+        "Zillow St. Louis Pet Cost Study",
+        "Rent.com MO"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Greensboro",
+      "state": "NC",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 450,
+        "notes": "Pet rent is typically stable, averaging around $30 per pet."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 45
+      },
+      "sources": [
+        "Apartment List Greensboro",
+        "Zumper NC Pet Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Jersey City",
+      "state": "NJ",
+      "year": 2025,
+      "one_time": {
+        "avg": 500,
+        "low": 300,
+        "high": 750,
+        "notes": "One-time fees are high due to competition and proximity to NYC."
+      },
+      "monthly_pet_rent": {
+        "avg": 65,
+        "low": 50,
+        "high": 100
+      },
+      "sources": [
+        "RentCafe Jersey City Pet Policy",
+        "Zillow NJ"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Anchorage",
+      "state": "AK",
+      "year": 2025,
+      "one_time": {
+        "avg": 400,
+        "low": 250,
+        "high": 600,
+        "notes": "Limited pet-friendly options in Alaska often lead to higher pet deposits."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 30,
+        "high": 75
+      },
+      "sources": [
+        "Anchorage Renters Guide",
+        "Apartments.com AK"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Lincoln",
+      "state": "NE",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 350,
+        "notes": "Lincoln is known for being very pet-friendly with relatively low pet rent."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "RentCafe Lincoln Pet Trends",
+        "Zumper NE"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Plano",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 250,
+        "high": 500,
+        "notes": "Most Plano complexes require both a non-refundable fee and a pet deposit."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 50
+      },
+      "sources": [
+        "Apartments.com Plano Pet Fees",
+        "Rent.com TX"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Durham",
+      "state": "NC",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Pet rent is becoming a standard feature in Durham's booming rental market."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 20,
+        "high": 55
+      },
+      "sources": [
+        "Zillow Durham Pet Cost Data",
+        "RentCafe NC"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Buffalo",
+      "state": "NY",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 100,
+        "high": 400,
+        "notes": "Upfront pet costs are moderate, but pet rent is common in renovated lofts."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 15,
+        "high": 50
+      },
+      "sources": [
+        "Zumper Buffalo Pet Report",
+        "Apartments.com NY"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Chandler",
+      "state": "AZ",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 450,
+        "notes": "Standard Arizona pet addendums apply to Chandler apartment leases."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 25,
+        "high": 50
+      },
+      "sources": [
+        "RentCafe Chandler Pet Data",
+        "Zillow AZ"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Chula Vista",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 400,
+        "low": 250,
+        "high": 600,
+        "notes": "Pet deposits are typically required and often non-negotiable."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 35,
+        "high": 75
+      },
+      "sources": [
+        "Zillow Chula Vista Pet Trends",
+        "Rent.com CA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Toledo",
+      "state": "OH",
+      "year": 2025,
+      "one_time": {
+        "avg": 200,
+        "low": 100,
+        "high": 350,
+        "notes": "Toledo is consistently one of the most affordable cities for pet owners."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "Apartment List Toledo",
+        "Zumper OH Pet Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Madison",
+      "state": "WI",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 450,
+        "notes": "Pet rent is almost always charged in Madison's student-heavy rental market."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 20,
+        "high": 55
+      },
+      "sources": [
+        "RentCafe Madison Pet Policy Study",
+        "Zillow WI"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Gilbert",
+      "state": "AZ",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 500,
+        "notes": "Refundable pet deposits are often combined with a non-refundable pet fee in Gilbert's suburban complexes."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 25,
+        "high": 50
+      },
+      "sources": [
+        "RentCafe Gilbert Pet Housing Trends",
+        "Apartments.com AZ"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Reno",
+      "state": "NV",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 500,
+        "notes": "Reno shows high availability for pet-friendly units with an average pet rent around $35."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 20,
+        "high": 60
+      },
+      "sources": [
+        "RentCafe 2025 Pet Statistics",
+        "Zillow NV Pet Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Fort Wayne",
+      "state": "IN",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 400,
+        "notes": "Standard Indiana market rates for pet fees are relatively affordable compared to coastal cities."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 15,
+        "high": 45
+      },
+      "sources": [
+        "Zumper Fort Wayne Pet Report",
+        "Rent.com IN"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "North Las Vegas",
+      "state": "NV",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Pet fees are often non-refundable; NV state cap for total deposits applies."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 25,
+        "high": 55
+      },
+      "sources": [
+        "Apartments.com North Las Vegas",
+        "Zillow NV Trends"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "St. Petersburg",
+      "state": "FL",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 600,
+        "notes": "Known for high pet-friendliness; many properties offer specialized pet amenities for a fee."
+      },
+      "monthly_pet_rent": {
+        "avg": 40,
+        "low": 25,
+        "high": 65
+      },
+      "sources": [
+        "WalletHub Pet-Friendly Cities 2025",
+        "RentCafe FL"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Lubbock",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 400,
+        "notes": "Standard Texas pet addendum typically requires a $200-300 non-refundable fee."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "Rent.com Lubbock Pet Costs",
+        "Zillow TX"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Irving",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 350,
+        "low": 200,
+        "high": 500,
+        "notes": "Irving follows DFW market trends with pet rent averaging $30 per pet."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 50
+      },
+      "sources": [
+        "Apartments.com Irving",
+        "RentCafe TX Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Laredo",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 250,
+        "low": 150,
+        "high": 350,
+        "notes": "Laredo remains more affordable for pet owners than Dallas or Austin."
+      },
+      "monthly_pet_rent": {
+        "avg": 20,
+        "low": 15,
+        "high": 35
+      },
+      "sources": [
+        "Rent.com Laredo Pet Fees",
+        "Zumper TX"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Winston-Salem",
+      "state": "NC",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 450,
+        "notes": "Pet rent is becoming a standard recurring charge in North Carolina's mid-size cities."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 45
+      },
+      "sources": [
+        "Zillow Winston-Salem Pet Data",
+        "RentCafe NC"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Chesapeake",
+      "state": "VA",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 500,
+        "notes": "Pet fees are standard; Virginia's new 2025 fee disclosure laws apply."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 25,
+        "high": 55
+      },
+      "sources": [
+        "Virginia 2025 Rental Fee Disclosure Laws",
+        "Zillow VA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Glendale",
+      "state": "AZ",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 450,
+        "notes": "Glendale properties usually charge both a one-time fee and pet rent."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 45
+      },
+      "sources": [
+        "Apartments.com Glendale AZ",
+        "RentCafe AZ"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Garland",
+      "state": "TX",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 400,
+        "notes": "Most Garland rentals require a pet deposit; fees are often tied to credit score."
+      },
+      "monthly_pet_rent": {
+        "avg": 25,
+        "low": 15,
+        "high": 40
+      },
+      "sources": [
+        "Zillow Garland Pet Trends",
+        "Rent.com TX"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Scottsdale",
+      "state": "AZ",
+      "year": 2025,
+      "one_time": {
+        "avg": 450,
+        "low": 250,
+        "high": 750,
+        "notes": "Scottsdale is ranked top for pet-friendliness but commands premium fees and pet rent."
+      },
+      "monthly_pet_rent": {
+        "avg": 60,
+        "low": 40,
+        "high": 100
+      },
+      "sources": [
+        "WalletHub 2025 Pet-Friendly City Study",
+        "Zillow Scottsdale"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Norfolk",
+      "state": "VA",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 500,
+        "notes": "Norfolk has a high concentration of pet-friendly military-adjacent housing."
+      },
+      "monthly_pet_rent": {
+        "avg": 35,
+        "low": 25,
+        "high": 50
+      },
+      "sources": [
+        "Apartments.com Norfolk",
+        "Zumper VA Pet Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Boise",
+      "state": "ID",
+      "year": 2025,
+      "one_time": {
+        "avg": 400,
+        "low": 250,
+        "high": 600,
+        "notes": "Boise has seen a rise in pet costs alongside general rent increases."
+      },
+      "monthly_pet_rent": {
+        "avg": 40,
+        "low": 25,
+        "high": 60
+      },
+      "sources": [
+        "RentCafe Boise Pet Policy Analysis",
+        "Zillow ID"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Fremont",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 500,
+        "low": 300,
+        "high": 800,
+        "notes": "Silicon Valley proximity results in some of the highest pet deposits in the Bay Area."
+      },
+      "monthly_pet_rent": {
+        "avg": 65,
+        "low": 45,
+        "high": 90
+      },
+      "sources": [
+        "Apartments.com Fremont",
+        "Zillow CA Pet Trends"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Spokane",
+      "state": "WA",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 450,
+        "notes": "Pet fees are standard in Spokane's growing multi-family market."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 20,
+        "high": 45
+      },
+      "sources": [
+        "RentCafe Spokane Market Study",
+        "Zumper WA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Santa Clarita",
+      "state": "CA",
+      "year": 2025,
+      "one_time": {
+        "avg": 400,
+        "low": 250,
+        "high": 600,
+        "notes": "Family-oriented rentals in Santa Clarita usually allow pets for a deposit and rent."
+      },
+      "monthly_pet_rent": {
+        "avg": 50,
+        "low": 35,
+        "high": 75
+      },
+      "sources": [
+        "Zillow Santa Clarita Pet Trends",
+        "Rent.com CA"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Baton Rouge",
+      "state": "LA",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 150,
+        "high": 450,
+        "notes": "Most Baton Rouge complexes require a non-refundable pet fee at lease signing."
+      },
+      "monthly_pet_rent": {
+        "avg": 30,
+        "low": 15,
+        "high": 45
+      },
+      "sources": [
+        "Apartments.com Baton Rouge",
+        "Zumper LA Pet Data"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Richmond",
+      "state": "VA",
+      "year": 2025,
+      "one_time": {
+        "avg": 300,
+        "low": 200,
+        "high": 500,
+        "notes": "Richmond is ranked high for pet-friendliness; pet rent is a primary burden for renters."
+      },
+      "monthly_pet_rent": {
+        "avg": 45,
+        "low": 25,
+        "high": 75
+      },
+      "sources": [
+        "Pets and Housing Data 2025 Edition",
+        "RentCafe Richmond VA"
+      ],
+      "missing_reason": null
+    }
+  ]
 }

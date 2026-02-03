@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class VerdictService {
@@ -70,17 +69,12 @@ public class VerdictService {
 
         // 4. Determine Verdict
         Verdict verdict;
-        String primaryDistress = null;
-
         if (remainingCash < 0) {
             verdict = Verdict.DENIED;
-            primaryDistress = "Immediate Insolvency (Cannot pay upfront costs)";
         } else if (remainingCash < (recommendedBuffer * 0.5)) {
             verdict = Verdict.DENIED;
-            primaryDistress = "Critical Liquidity Risk (<50% of Safe Buffer)";
         } else if (remainingCash < recommendedBuffer) {
             verdict = Verdict.BORDERLINE;
-            primaryDistress = "Thin Buffer Warning (50-99% of Safe Buffer)";
         } else {
             verdict = Verdict.APPROVED;
         }
@@ -185,7 +179,7 @@ public class VerdictService {
         // 2. Security Deposit
         String depositAnnotation;
         // Simplified annotation logic as legal cap data is now in notes
-        if (depositData.city_practice() != null && depositData.city_practice().notes() != null
+        if (depositData != null && depositData.city_practice() != null && depositData.city_practice().notes() != null
                 && !depositData.city_practice().notes().isEmpty()) {
             depositAnnotation = "Applied Standard · " + depositData.city_practice().notes();
         } else {

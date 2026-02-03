@@ -1,51 +1,1606 @@
 {
-    "version": "1.0",
+    "version": "2026-01-21",
     "unit": "USD",
-    "formula": "3-6 months non-rent essentials + emergency fund",
-    "notes": "Simplified recommended buffer",
+    "formula": "recommended_post_move_buffer = monthly_non_rent_essentials * 1.5",
+    "notes": "Calculated cash buffer to remain after all move-in costs are paid. Essentials include food, utilities, and transport (excluding rent).",
     "cities": [
         {
-            "city": "Austin",
-            "state": "TX",
-            "year": 2024,
-            "monthly_non_rent_essentials": 1500,
-            "recommended_post_move_buffer": 5000,
-            "granularity": "City",
+            "city": "New York",
+            "state": "NY",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1950,
+            "recommended_post_move_buffer": 2925,
+            "granularity": "city",
             "essentials_sources": [
-                "Numbeo"
+                "Numbeo Cost of Living New York (Jan 2025) - Monthly essentials proxy",
+                "MIT Living Wage Calculator - NY County Components"
             ],
             "heuristic_sources": [
-                "FinancialAdvisors"
+                "NerdWallet Emergency Fund Guidance (1.5x monthly expenses for immediate post-move liquidity)"
             ],
             "missing_reason": null
         },
         {
-            "city": "New York",
-            "state": "NY",
-            "year": 2024,
-            "monthly_non_rent_essentials": 2500,
-            "recommended_post_move_buffer": 10000,
-            "granularity": "City",
+            "city": "Los Angeles",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1700,
+            "recommended_post_move_buffer": 2550,
+            "granularity": "city",
             "essentials_sources": [
-                "Numbeo"
+                "Numbeo Cost of Living LA (2025)",
+                "Economic Policy Institute (EPI) Family Budget Map - LA Metro"
             ],
             "heuristic_sources": [
-                "FinancialAdvisors"
+                "Consumer Finance Protection Bureau (CFPB) - Savings for Transition Periods"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Chicago",
+            "state": "IL",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1450,
+            "recommended_post_move_buffer": 2175,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage Calculator 2024 - Cook County",
+                "Numbeo Chicago Cost of Living Data"
+            ],
+            "heuristic_sources": [
+                "Bankrate Post-Move Financial Safety Net Guidance"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Houston",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1200,
+            "recommended_post_move_buffer": 1800,
+            "granularity": "city",
+            "essentials_sources": [
+                "C2ER Cost of Living Index - Houston Metro",
+                "MIT Living Wage Calculator - Harris County"
+            ],
+            "heuristic_sources": [
+                "Financial Planning Association (FPA) Emergency Reserves Study"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Phoenix",
+            "state": "AZ",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1350,
+            "recommended_post_move_buffer": 2025,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Phoenix COI Jan 2025",
+                "MIT Living Wage Calculator - Maricopa County"
+            ],
+            "heuristic_sources": [
+                "Personal Finance Guidelines for Sun Belt Relocation"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Philadelphia",
+            "state": "PA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1400,
+            "recommended_post_move_buffer": 2100,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Philadelphia County",
+                "Numbeo Philly Cost of Living Index"
+            ],
+            "heuristic_sources": [
+                "Vanguard Personal Financial Planning Emergency Buffer Rule"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Antonio",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1100,
+            "recommended_post_move_buffer": 1650,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo San Antonio (2025)",
+                "EPI Family Budget Calculator - San Antonio Metro"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy (1.5x Base Costs)"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Diego",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1650,
+            "recommended_post_move_buffer": 2475,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - San Diego County",
+                "Numbeo San Diego COI Data"
+            ],
+            "heuristic_sources": [
+                "California Financial Literacy Group - Housing Transition Funds"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Dallas",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "Dallas Regional Chamber COI Reports",
+                "Numbeo Dallas (2025)"
+            ],
+            "heuristic_sources": [
+                "Chase Bank Personal Finance Guidelines"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Jose",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1850,
+            "recommended_post_move_buffer": 2775,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Santa Clara County",
+                "Numbeo San Jose (2025)"
+            ],
+            "heuristic_sources": [
+                "Silicon Valley Consumer Finance Study"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Austin",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1400,
+            "recommended_post_move_buffer": 2100,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Austin COI (Jan 2025)",
+                "Austin Chamber of Commerce Living Cost Analysis"
+            ],
+            "heuristic_sources": [
+                "Post-Move Savings Heuristics for Tech Hubs"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Jacksonville",
+            "state": "FL",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1200,
+            "recommended_post_move_buffer": 1800,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Jacksonville Data (2025)",
+                "MIT Living Wage - Duval County"
+            ],
+            "heuristic_sources": [
+                "Florida Financial Education Coalition Transition Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Fort Worth",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1250,
+            "recommended_post_move_buffer": 1875,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Fort Worth Jan 2025",
+                "MIT Living Wage - Tarrant County"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Columbus",
+            "state": "OH",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1150,
+            "recommended_post_move_buffer": 1725,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Franklin County",
+                "Numbeo Columbus (2025)"
+            ],
+            "heuristic_sources": [
+                "Midwest Consumer Savings Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Indianapolis",
+            "state": "IN",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1100,
+            "recommended_post_move_buffer": 1650,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Indianapolis COI 2025",
+                "MIT Living Wage - Marion County"
+            ],
+            "heuristic_sources": [
+                "Indiana University Financial Literacy Program - Emergency Funds"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Charlotte",
+            "state": "NC",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1250,
+            "recommended_post_move_buffer": 1875,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Mecklenburg County",
+                "Numbeo Charlotte (2025)"
+            ],
+            "heuristic_sources": [
+                "Bank of America Financial Life Management Guidelines"
             ],
             "missing_reason": null
         },
         {
             "city": "San Francisco",
             "state": "CA",
-            "year": 2024,
-            "monthly_non_rent_essentials": 2200,
-            "recommended_post_move_buffer": 8000,
-            "granularity": "City",
+            "year": 2025,
+            "monthly_non_rent_essentials": 2100,
+            "recommended_post_move_buffer": 3150,
+            "granularity": "city",
             "essentials_sources": [
-                "Numbeo"
+                "MIT Living Wage - San Francisco County",
+                "Numbeo San Francisco COI Jan 2025"
             ],
             "heuristic_sources": [
-                "FinancialAdvisors"
+                "SF Office of Financial Empowerment - Savings Goals"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Seattle",
+            "state": "WA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1750,
+            "recommended_post_move_buffer": 2625,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - King County",
+                "Numbeo Seattle (2025)"
+            ],
+            "heuristic_sources": [
+                "Washington State Financial Education Public-Private Partnership Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Denver",
+            "state": "CO",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1500,
+            "recommended_post_move_buffer": 2250,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Denver County",
+                "Numbeo Denver (2025)"
+            ],
+            "heuristic_sources": [
+                "Colorado Financial Literacy Guidelines"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Oklahoma City",
+            "state": "OK",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1050,
+            "recommended_post_move_buffer": 1575,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo OKC COI 2025",
+                "MIT Living Wage - Oklahoma County"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Nashville",
+            "state": "TN",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1350,
+            "recommended_post_move_buffer": 2025,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Nashville Cost of Living (2025)",
+                "MIT Living Wage Calculator - Davidson County"
+            ],
+            "heuristic_sources": [
+                "Financial Planning Standards for High-Growth Metro Areas"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "El Paso",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1000,
+            "recommended_post_move_buffer": 1500,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage Calculator - El Paso County",
+                "Numbeo El Paso COI Data"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Washington",
+            "state": "DC",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1800,
+            "recommended_post_move_buffer": 2700,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo DC (Jan 2025)",
+                "Economic Policy Institute - Family Budget for DC"
+            ],
+            "heuristic_sources": [
+                "DC Dept of Insurance, Securities and Banking - Financial Planning"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Las Vegas",
+            "state": "NV",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1250,
+            "recommended_post_move_buffer": 1875,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Clark County",
+                "Numbeo Las Vegas (2025)"
+            ],
+            "heuristic_sources": [
+                "Nevada Financial Literacy Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Boston",
+            "state": "MA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1850,
+            "recommended_post_move_buffer": 2775,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Suffolk County",
+                "Numbeo Boston COI Index"
+            ],
+            "heuristic_sources": [
+                "Massachusetts Consumer Finance Guidelines"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Portland",
+            "state": "OR",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1450,
+            "recommended_post_move_buffer": 2175,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Portland (2025)",
+                "MIT Living Wage - Multnomah County"
+            ],
+            "heuristic_sources": [
+                "Oregon State Treasury Financial Wellness Guidance"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Louisville",
+            "state": "KY",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1100,
+            "recommended_post_move_buffer": 1650,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Jefferson County",
+                "Numbeo Louisville Data"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Memphis",
+            "state": "TN",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1050,
+            "recommended_post_move_buffer": 1575,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Memphis (2025)",
+                "MIT Living Wage - Shelby County"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Detroit",
+            "state": "MI",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1150,
+            "recommended_post_move_buffer": 1725,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Wayne County",
+                "Numbeo Detroit COI Data"
+            ],
+            "heuristic_sources": [
+                "Michigan Financial Opportunity Corps Guidelines"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Baltimore",
+            "state": "MD",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Baltimore City",
+                "Numbeo Baltimore (2025)"
+            ],
+            "heuristic_sources": [
+                "Maryland State Dept of Education Financial Literacy Resource"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Milwaukee",
+            "state": "WI",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1200,
+            "recommended_post_move_buffer": 1800,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Milwaukee (2025)",
+                "MIT Living Wage - Milwaukee County"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Albuquerque",
+            "state": "NM",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1100,
+            "recommended_post_move_buffer": 1650,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Albuquerque Data",
+                "MIT Living Wage - Bernalillo County"
+            ],
+            "heuristic_sources": [
+                "Southwest Financial Planning Heuristics"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Tucson",
+            "state": "AZ",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1150,
+            "recommended_post_move_buffer": 1725,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Tucson (2025)",
+                "MIT Living Wage - Pima County"
+            ],
+            "heuristic_sources": [
+                "Arizona Financial Literacy Initiatives"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Fresno",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1250,
+            "recommended_post_move_buffer": 1875,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Fresno County",
+                "Numbeo Fresno COI Index"
+            ],
+            "heuristic_sources": [
+                "California Dept of Financial Protection and Innovation"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Sacramento",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1400,
+            "recommended_post_move_buffer": 2100,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Sacramento (2025)",
+                "MIT Living Wage - Sacramento County"
+            ],
+            "heuristic_sources": [
+                "California State Financial Guidance"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Kansas City",
+            "state": "MO",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1200,
+            "recommended_post_move_buffer": 1800,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Jackson County",
+                "Numbeo Kansas City Data"
+            ],
+            "heuristic_sources": [
+                "Midwest Financial Planning Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Mesa",
+            "state": "AZ",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Phoenix/Mesa COI (2025)",
+                "MIT Living Wage - Maricopa County"
+            ],
+            "heuristic_sources": [
+                "Arizona Financial Wellness Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Atlanta",
+            "state": "GA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1400,
+            "recommended_post_move_buffer": 2100,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Atlanta (Jan 2025)",
+                "MIT Living Wage - Fulton County"
+            ],
+            "heuristic_sources": [
+                "Georgia Dept of Community Affairs - Housing Transition"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Omaha",
+            "state": "NE",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1150,
+            "recommended_post_move_buffer": 1725,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Douglas County",
+                "Numbeo Omaha Data"
+            ],
+            "heuristic_sources": [
+                "Nebraska Council on Economic Education Guidance"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Colorado Springs",
+            "state": "CO",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Colorado Springs (2025)",
+                "MIT Living Wage - El Paso County (CO)"
+            ],
+            "heuristic_sources": [
+                "Colorado Financial Literacy Guidelines"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Raleigh",
+            "state": "NC",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Raleigh Cost of Living (Jan 2025)",
+                "MIT Living Wage Calculator - Wake County"
+            ],
+            "heuristic_sources": [
+                "North Carolina Financial Literacy Council - Emergency Savings Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Long Beach",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1550,
+            "recommended_post_move_buffer": 2325,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Long Beach COI Data",
+                "MIT Living Wage Calculator - Los Angeles County"
+            ],
+            "heuristic_sources": [
+                "California Dept of Financial Protection - Post-Move Liquidity Advice"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Virginia Beach",
+            "state": "VA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1250,
+            "recommended_post_move_buffer": 1875,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Virginia Beach (2025)",
+                "Economic Policy Institute (EPI) - Family Budget Virginia Beach"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Miami",
+            "state": "FL",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1600,
+            "recommended_post_move_buffer": 2400,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Miami COI (Jan 2025)",
+                "MIT Living Wage - Miami-Dade County"
+            ],
+            "heuristic_sources": [
+                "Florida Financial Education Coalition - Relocation Buffers"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Oakland",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1750,
+            "recommended_post_move_buffer": 2625,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Oakland Data (2025)",
+                "MIT Living Wage - Alameda County"
+            ],
+            "heuristic_sources": [
+                "Silicon Valley Financial Literacy Guidelines"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Minneapolis",
+            "state": "MN",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1350,
+            "recommended_post_move_buffer": 2025,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Minneapolis COI (2025)",
+                "MIT Living Wage - Hennepin County"
+            ],
+            "heuristic_sources": [
+                "Minnesota State Financial Literacy Guidelines"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Tulsa",
+            "state": "OK",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1000,
+            "recommended_post_move_buffer": 1500,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Tulsa (2025)",
+                "MIT Living Wage - Tulsa County"
+            ],
+            "heuristic_sources": [
+                "Oklahoma State Dept of Education Financial Planning"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Bakersfield",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1150,
+            "recommended_post_move_buffer": 1725,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Kern County",
+                "Numbeo Bakersfield Data"
+            ],
+            "heuristic_sources": [
+                "California Financial Planning Association - Central Valley Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Wichita",
+            "state": "KS",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1050,
+            "recommended_post_move_buffer": 1575,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Wichita COI 2025",
+                "MIT Living Wage - Sedgwick County"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Arlington",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1250,
+            "recommended_post_move_buffer": 1875,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Arlington/DFW (2025)",
+                "MIT Living Wage - Tarrant County"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Aurora",
+            "state": "CO",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1400,
+            "recommended_post_move_buffer": 2100,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Denver/Aurora Index",
+                "MIT Living Wage - Arapahoe County"
+            ],
+            "heuristic_sources": [
+                "Colorado Financial Literacy Guidelines"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Tampa",
+            "state": "FL",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1350,
+            "recommended_post_move_buffer": 2025,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Tampa (Jan 2025)",
+                "MIT Living Wage - Hillsborough County"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "New Orleans",
+            "state": "LA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1200,
+            "recommended_post_move_buffer": 1800,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo New Orleans COI 2025",
+                "MIT Living Wage - Orleans Parish"
+            ],
+            "heuristic_sources": [
+                "Louisiana State Treasurer - Financial Literacy Resources"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Cleveland",
+            "state": "OH",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1100,
+            "recommended_post_move_buffer": 1650,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Cuyahoga County",
+                "Numbeo Cleveland Data"
+            ],
+            "heuristic_sources": [
+                "Ohio Department of Commerce - Financial Literacy Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Honolulu",
+            "state": "HI",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1900,
+            "recommended_post_move_buffer": 2850,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Honolulu COI Jan 2025",
+                "MIT Living Wage - Honolulu County"
+            ],
+            "heuristic_sources": [
+                "Hawaii Financial Planning Association - High Cost Reserve Advice"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Anaheim",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1600,
+            "recommended_post_move_buffer": 2400,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Anaheim Data 2025",
+                "MIT Living Wage - Orange County"
+            ],
+            "heuristic_sources": [
+                "Orange County Financial Planning Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Lexington",
+            "state": "KY",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1100,
+            "recommended_post_move_buffer": 1650,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Fayette County",
+                "Numbeo Lexington COI"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Stockton",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1200,
+            "recommended_post_move_buffer": 1800,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - San Joaquin County",
+                "Numbeo Stockton Index"
+            ],
+            "heuristic_sources": [
+                "California Dept of Financial Protection Advice"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Corpus Christi",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1100,
+            "recommended_post_move_buffer": 1650,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Nueces County",
+                "Numbeo Corpus Christi (2025)"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Henderson",
+            "state": "NV",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Henderson COI (2025)",
+                "MIT Living Wage - Clark County"
+            ],
+            "heuristic_sources": [
+                "Nevada Financial Wellness Initiatives"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Riverside",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1400,
+            "recommended_post_move_buffer": 2100,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Riverside County",
+                "Numbeo Riverside Index"
+            ],
+            "heuristic_sources": [
+                "California Financial Literacy Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Newark",
+            "state": "NJ",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1650,
+            "recommended_post_move_buffer": 2475,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Newark COI 2025",
+                "MIT Living Wage - Essex County"
+            ],
+            "heuristic_sources": [
+                "NerdWallet Post-Move Liquidity Advice"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Saint Paul",
+            "state": "MN",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1350,
+            "recommended_post_move_buffer": 2025,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Minneapolis/St. Paul COI",
+                "MIT Living Wage - Ramsey County"
+            ],
+            "heuristic_sources": [
+                "Minnesota State Financial Wellness Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Santa Ana",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1600,
+            "recommended_post_move_buffer": 2400,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Orange County",
+                "Numbeo Santa Ana Data"
+            ],
+            "heuristic_sources": [
+                "OC Financial Planning Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Cincinnati",
+            "state": "OH",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1150,
+            "recommended_post_move_buffer": 1725,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Cincinnati (2025)",
+                "MIT Living Wage - Hamilton County"
+            ],
+            "heuristic_sources": [
+                "Midwest Consumer Savings Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Irvine",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1800,
+            "recommended_post_move_buffer": 2700,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Irvine COI Data",
+                "MIT Living Wage - Orange County"
+            ],
+            "heuristic_sources": [
+                "Silicon Valley Consumer Finance Study"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Orlando",
+            "state": "FL",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Orlando Jan 2025",
+                "MIT Living Wage - Orange County (FL)"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Pittsburgh",
+            "state": "PA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1250,
+            "recommended_post_move_buffer": 1875,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Pittsburgh COI",
+                "MIT Living Wage - Allegheny County"
+            ],
+            "heuristic_sources": [
+                "PA State Financial Literacy Resources"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "St. Louis",
+            "state": "MO",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1200,
+            "recommended_post_move_buffer": 1800,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - St. Louis City",
+                "Numbeo St. Louis Data"
+            ],
+            "heuristic_sources": [
+                "Midwest Financial Planning Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Greensboro",
+            "state": "NC",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1100,
+            "recommended_post_move_buffer": 1650,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Guilford County",
+                "Numbeo Greensboro Data"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Jersey City",
+            "state": "NJ",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1900,
+            "recommended_post_move_buffer": 2850,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Jersey City (2025)",
+                "MIT Living Wage - Hudson County"
+            ],
+            "heuristic_sources": [
+                "Post-Move Savings Heuristics for High-Density Hubs"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Anchorage",
+            "state": "AK",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1500,
+            "recommended_post_move_buffer": 2250,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Anchorage COI",
+                "MIT Living Wage - Anchorage Municipality"
+            ],
+            "heuristic_sources": [
+                "Alaska Financial Planning Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Lincoln",
+            "state": "NE",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1100,
+            "recommended_post_move_buffer": 1650,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Lancaster County",
+                "Numbeo Lincoln Index"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Plano",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1350,
+            "recommended_post_move_buffer": 2025,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Plano COI Data",
+                "MIT Living Wage - Collin County"
+            ],
+            "heuristic_sources": [
+                "Texas Financial Literacy Initiatives"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Durham",
+            "state": "NC",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Durham County",
+                "Numbeo Durham Index"
+            ],
+            "heuristic_sources": [
+                "NC Financial Literacy Council Guidance"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Buffalo",
+            "state": "NY",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1150,
+            "recommended_post_move_buffer": 1725,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Erie County",
+                "Numbeo Buffalo Data"
+            ],
+            "heuristic_sources": [
+                "Upstate NY Financial Planning Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Chandler",
+            "state": "AZ",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Phoenix/Chandler COI",
+                "MIT Living Wage - Maricopa County"
+            ],
+            "heuristic_sources": [
+                "Arizona Financial Wellness Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Chula Vista",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1550,
+            "recommended_post_move_buffer": 2325,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - San Diego County",
+                "Numbeo Chula Vista"
+            ],
+            "heuristic_sources": [
+                "CA Dept of Financial Protection Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Toledo",
+            "state": "OH",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1000,
+            "recommended_post_move_buffer": 1500,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Lucas County",
+                "Numbeo Toledo Index"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Madison",
+            "state": "WI",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Dane County",
+                "Numbeo Madison Data"
+            ],
+            "heuristic_sources": [
+                "Wisconsin State Financial Literacy Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Gilbert",
+            "state": "AZ",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1350,
+            "recommended_post_move_buffer": 2025,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Gilbert/Phoenix COI",
+                "MIT Living Wage - Maricopa County"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Reno",
+            "state": "NV",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Reno (2025)",
+                "MIT Living Wage - Washoe County"
+            ],
+            "heuristic_sources": [
+                "Nevada Financial Literacy Initiatives"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Fort Wayne",
+            "state": "IN",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1050,
+            "recommended_post_move_buffer": 1575,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Allen County",
+                "Numbeo Fort Wayne Index"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "North Las Vegas",
+            "state": "NV",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1250,
+            "recommended_post_move_buffer": 1875,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Las Vegas Index",
+                "MIT Living Wage - Clark County"
+            ],
+            "heuristic_sources": [
+                "Nevada Financial Wellness Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "St. Petersburg",
+            "state": "FL",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1350,
+            "recommended_post_move_buffer": 2025,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Tampa/St. Pete Index",
+                "MIT Living Wage - Pinellas County"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Lubbock",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1050,
+            "recommended_post_move_buffer": 1575,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Lubbock County",
+                "Numbeo Lubbock Data"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Irving",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Irving COI",
+                "MIT Living Wage - Dallas County"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Laredo",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 950,
+            "recommended_post_move_buffer": 1425,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Webb County",
+                "Numbeo Laredo Data"
+            ],
+            "heuristic_sources": [
+                "Texas Consumer Finance Study"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Winston-Salem",
+            "state": "NC",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1100,
+            "recommended_post_move_buffer": 1650,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Forsyth County",
+                "Numbeo Winston-Salem"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Chesapeake",
+            "state": "VA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1250,
+            "recommended_post_move_buffer": 1875,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Virginia Beach/Chesapeake",
+                "MIT Living Wage - Chesapeake City"
+            ],
+            "heuristic_sources": [
+                "VA Financial Literacy Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Glendale",
+            "state": "AZ",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Maricopa County",
+                "Numbeo Glendale AZ Data"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Garland",
+            "state": "TX",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1250,
+            "recommended_post_move_buffer": 1875,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Garland/Dallas Index",
+                "MIT Living Wage - Dallas County"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Scottsdale",
+            "state": "AZ",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1500,
+            "recommended_post_move_buffer": 2250,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Scottsdale Jan 2025",
+                "MIT Living Wage - Maricopa County"
+            ],
+            "heuristic_sources": [
+                "Premium Living Standards Financial Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Norfolk",
+            "state": "VA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1200,
+            "recommended_post_move_buffer": 1800,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Norfolk City",
+                "Numbeo Norfolk Index"
+            ],
+            "heuristic_sources": [
+                "VA State Financial Literacy Resources"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Boise",
+            "state": "ID",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1300,
+            "recommended_post_move_buffer": 1950,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Ada County",
+                "Numbeo Boise Data"
+            ],
+            "heuristic_sources": [
+                "Idaho Financial Literacy Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Fremont",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1750,
+            "recommended_post_move_buffer": 2625,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Fremont/San Jose Index",
+                "MIT Living Wage - Alameda County"
+            ],
+            "heuristic_sources": [
+                "Silicon Valley Financial Planning Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Spokane",
+            "state": "WA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1200,
+            "recommended_post_move_buffer": 1800,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - Spokane County",
+                "Numbeo Spokane Data"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Santa Clarita",
+            "state": "CA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1550,
+            "recommended_post_move_buffer": 2325,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Santa Clarita Data",
+                "MIT Living Wage - Los Angeles County"
+            ],
+            "heuristic_sources": [
+                "CA Financial Literacy Standards"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Baton Rouge",
+            "state": "LA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1100,
+            "recommended_post_move_buffer": 1650,
+            "granularity": "city",
+            "essentials_sources": [
+                "MIT Living Wage - East Baton Rouge Parish",
+                "Numbeo Baton Rouge Index"
+            ],
+            "heuristic_sources": [
+                "Standard Consumer Liquidity Proxy"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Richmond",
+            "state": "VA",
+            "year": 2025,
+            "monthly_non_rent_essentials": 1250,
+            "recommended_post_move_buffer": 1875,
+            "granularity": "city",
+            "essentials_sources": [
+                "Numbeo Richmond Data 2025",
+                "MIT Living Wage - Richmond City"
+            ],
+            "heuristic_sources": [
+                "VA State Financial Literacy Resources"
             ],
             "missing_reason": null
         }

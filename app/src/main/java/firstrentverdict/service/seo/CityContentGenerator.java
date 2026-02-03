@@ -3,7 +3,6 @@ package firstrentverdict.service.seo;
 import firstrentverdict.model.dtos.RentData;
 import firstrentverdict.model.dtos.SecurityDepositData;
 import firstrentverdict.model.dtos.MovingData;
-import firstrentverdict.model.dtos.CitiesData;
 import org.springframework.stereotype.Service;
 
 @Service

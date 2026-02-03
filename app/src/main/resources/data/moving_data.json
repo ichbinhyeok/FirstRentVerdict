@@ -1,47 +1,1407 @@
 {
-    "version": "1.0",
+    "version": "2026-01-21",
     "unit": "USD",
-    "move_type": "Local (Intra-city)",
-    "notes": "Estimated for 1-bedroom apartment",
+    "move_type": "local_same_metro_1br_apartment",
+    "notes": "Estimated costs for a local move (within 50 miles) of a 1-bedroom apartment. Includes labor (2 movers) and a truck.",
     "cities": [
         {
-            "city": "Austin",
-            "state": "TX",
-            "year": 2024,
-            "typical": 500,
-            "low": 300,
-            "high": 800,
-            "assumptions": "2 movers, 4 hours",
+            "city": "New York",
+            "state": "NY",
+            "year": 2025,
+            "typical": 1100,
+            "low": 600,
+            "high": 1800,
+            "assumptions": "2 movers, 4-6 hours, include travel fee and tolls; higher rates for walk-up buildings.",
             "sources": [
-                "Thumbtack"
+                "Airtasker 2025 NYC Moving Rates",
+                "Extra Space Storage NYC Guide"
             ],
             "missing_reason": null
         },
         {
-            "city": "New York",
-            "state": "NY",
-            "year": 2024,
-            "typical": 1200,
-            "low": 800,
-            "high": 1800,
-            "assumptions": "2 movers, 4 hours, stairs",
+            "city": "Los Angeles",
+            "state": "CA",
+            "year": 2025,
+            "typical": 850,
+            "low": 450,
+            "high": 1400,
+            "assumptions": "2 movers, 4-5 hours, includes basic equipment and fuel.",
             "sources": [
-                "Thumbtack"
+                "MoveBuddha LA Moving Cost Calculator",
+                "Stack Moves 2025 Report"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Chicago",
+            "state": "IL",
+            "year": 2025,
+            "typical": 750,
+            "low": 400,
+            "high": 1200,
+            "assumptions": "2 movers, 4 hours, includes truck rental and standard equipment.",
+            "sources": [
+                "Airtasker 2025 Chicago Rates",
+                "Angi Moving Cost Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Houston",
+            "state": "TX",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1000,
+            "assumptions": "2 movers, 3-5 hours; lower hourly rates compared to coastal cities.",
+            "sources": [
+                "LetsGetMovingUSA Houston Data",
+                "Airtasker 2025 Houston Rates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Phoenix",
+            "state": "AZ",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 3-4 hours, standard local residential move.",
+            "sources": [
+                "Airtasker 2025 Phoenix Rates",
+                "ConsumerAffairs 2026 Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Philadelphia",
+            "state": "PA",
+            "year": 2025,
+            "typical": 700,
+            "low": 400,
+            "high": 1100,
+            "assumptions": "2 movers, 4 hours, includes truck and basic insurance.",
+            "sources": [
+                "Last Stop Moving Philadelphia Guide",
+                "Airtasker 2025 Philly Rates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Antonio",
+            "state": "TX",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 900,
+            "assumptions": "2 movers, 3-4 hours, typical for Texas market.",
+            "sources": [
+                "Angi 1-Bedroom Moving Cost",
+                "HomeGuide City Rates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Diego",
+            "state": "CA",
+            "year": 2025,
+            "typical": 900,
+            "low": 500,
+            "high": 1500,
+            "assumptions": "2 movers, 4-5 hours, includes CA fuel surcharges.",
+            "sources": [
+                "Move Advisor 2026 Moving Cost Study",
+                "Angi CA Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Dallas",
+            "state": "TX",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1050,
+            "assumptions": "2 movers, 4 hours, standard metro DFW pricing.",
+            "sources": [
+                "Airtasker 2025 Moving Rates",
+                "LetsGetMovingUSA TX Data"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "San Jose",
+            "state": "CA",
+            "year": 2025,
+            "typical": 1050,
+            "low": 600,
+            "high": 1700,
+            "assumptions": "2 movers, 4-5 hours; high cost due to Bay Area labor rates.",
+            "sources": [
+                "MoveBuddha Bay Area Estimator",
+                "Angi 2026 Data"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Austin",
+            "state": "TX",
+            "year": 2025,
+            "typical": 700,
+            "low": 400,
+            "high": 1150,
+            "assumptions": "2 movers, 4 hours; rates higher than Houston/San Antonio.",
+            "sources": [
+                "Airtasker 2025 Austin Rates",
+                "HomeGuide TX Moving"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Jacksonville",
+            "state": "FL",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 3-5 hours, typical Florida rates.",
+            "sources": [
+                "MoveBuddha FL Guide",
+                "Angi 1-BR Moving Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Fort Worth",
+            "state": "TX",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 4 hours, follows general Tarrant County pricing.",
+            "sources": [
+                "LetsGetMovingUSA TX Report",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Columbus",
+            "state": "OH",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 900,
+            "assumptions": "2 movers, 3-4 hours, Ohio mid-market pricing.",
+            "sources": [
+                "Airtasker 2025 Midwest Rates",
+                "Angi 2026 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Indianapolis",
+            "state": "IN",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 850,
+            "assumptions": "2 movers, 3-4 hours, Indiana standard labor rates.",
+            "sources": [
+                "Last Stop Moving 2025 Cost Guide",
+                "Angi Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Charlotte",
+            "state": "NC",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1000,
+            "assumptions": "2 movers, 4 hours, typical for North Carolina growth markets.",
+            "sources": [
+                "MoveBuddha NC Estimates",
+                "Angi 1-BR Moving"
             ],
             "missing_reason": null
         },
         {
             "city": "San Francisco",
             "state": "CA",
-            "year": 2024,
-            "typical": 1000,
-            "low": 600,
-            "high": 1500,
-            "assumptions": "2 movers, 4 hours",
+            "year": 2025,
+            "typical": 1150,
+            "low": 650,
+            "high": 1900,
+            "assumptions": "2 movers, 4-5 hours; accounts for parking difficulty and hills.",
             "sources": [
-                "Thumbtack"
+                "MoveBuddha SF Cost Estimator",
+                "Airtasker 2025 CA Rates"
             ],
             "missing_reason": null
+        },
+        {
+            "city": "Seattle",
+            "state": "WA",
+            "year": 2025,
+            "typical": 950,
+            "low": 550,
+            "high": 1500,
+            "assumptions": "2 movers, 4-5 hours; high labor demand in the PNW.",
+            "sources": [
+                "Airtasker 2025 Seattle Rates",
+                "Apartment List 2025 Moving"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Denver",
+            "state": "CO",
+            "year": 2025,
+            "typical": 750,
+            "low": 450,
+            "high": 1200,
+            "assumptions": "2 movers, 4 hours, typical Denver metro pricing.",
+            "sources": [
+                "Airtasker 2025 Denver Rates",
+                "Angi 2026 Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Oklahoma City",
+            "state": "OK",
+            "year": 2025,
+            "typical": 500,
+            "low": 300,
+            "high": 800,
+            "assumptions": "2 movers, 3 hours, one of the most affordable metro moving rates.",
+            "sources": [
+                "MoveBuddha OK Guide",
+                "Angi 1-BR Moving Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Nashville",
+            "state": "TN",
+            "year": 2025,
+            "typical": 700,
+            "low": 400,
+            "high": 1100,
+            "assumptions": "2 movers, 4 hours; rates reflect increased demand in the Nashville metro area.",
+            "sources": [
+                "Airtasker 2025 Nashville Rates",
+                "Angi Moving Cost Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "El Paso",
+            "state": "TX",
+            "year": 2025,
+            "typical": 500,
+            "low": 300,
+            "high": 800,
+            "assumptions": "2 movers, 3 hours; lower labor costs characteristic of the region.",
+            "sources": [
+                "MoveBuddha TX Guide",
+                "HomeGuide 2025 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Washington",
+            "state": "DC",
+            "year": 2025,
+            "typical": 950,
+            "low": 550,
+            "high": 1600,
+            "assumptions": "2 movers, 4-5 hours; accounts for parking permits and complex building access.",
+            "sources": [
+                "Airtasker 2025 DC Rates",
+                "District Relocators Cost Study"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Las Vegas",
+            "state": "NV",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1050,
+            "assumptions": "2 movers, 3-4 hours; pricing remains competitive in the valley.",
+            "sources": [
+                "MoveBuddha NV Guide",
+                "Angi 2026 Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Boston",
+            "state": "MA",
+            "year": 2025,
+            "typical": 1000,
+            "low": 600,
+            "high": 1700,
+            "assumptions": "2 movers, 4-5 hours; higher rates due to narrow streets and historic building stairs.",
+            "sources": [
+                "Airtasker 2025 Boston Rates",
+                "Boston Moving Statistics"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Portland",
+            "state": "OR",
+            "year": 2025,
+            "typical": 850,
+            "low": 500,
+            "high": 1350,
+            "assumptions": "2 movers, 4 hours; includes standard PNW labor premiums.",
+            "sources": [
+                "MoveBuddha OR Guide",
+                "Angi 1-BR Moving Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Louisville",
+            "state": "KY",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 900,
+            "assumptions": "2 movers, 3-4 hours; standard Midwestern pricing.",
+            "sources": [
+                "Airtasker 2025 KY Rates",
+                "HomeGuide City Rates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Memphis",
+            "state": "TN",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 850,
+            "assumptions": "2 movers, 3-4 hours; competitive local labor market.",
+            "sources": [
+                "MoveBuddha TN Guide",
+                "Angi 2026 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Detroit",
+            "state": "MI",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 4 hours; reflects standard Michigan local rates.",
+            "sources": [
+                "Airtasker 2025 Detroit Rates",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Baltimore",
+            "state": "MD",
+            "year": 2025,
+            "typical": 750,
+            "low": 450,
+            "high": 1200,
+            "assumptions": "2 movers, 4 hours; pricing influenced by the Mid-Atlantic market.",
+            "sources": [
+                "MoveBuddha MD Guide",
+                "Angi 1-BR Moving"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Milwaukee",
+            "state": "WI",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 3-4 hours; consistent with regional averages.",
+            "sources": [
+                "Airtasker 2025 Milwaukee Rates",
+                "HomeGuide WI"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Albuquerque",
+            "state": "NM",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 850,
+            "assumptions": "2 movers, 3 hours; affordable labor in the Southwest.",
+            "sources": [
+                "MoveBuddha NM Guide",
+                "Angi Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Tucson",
+            "state": "AZ",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 900,
+            "assumptions": "2 movers, 3-4 hours; mirrors typical Arizona local rates.",
+            "sources": [
+                "Airtasker 2025 AZ Rates",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Fresno",
+            "state": "CA",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1050,
+            "assumptions": "2 movers, 4 hours; reflects Central Valley California labor costs.",
+            "sources": [
+                "MoveBuddha CA Guide",
+                "Angi 2026 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Sacramento",
+            "state": "CA",
+            "year": 2025,
+            "typical": 800,
+            "low": 450,
+            "high": 1300,
+            "assumptions": "2 movers, 4 hours; pricing impacted by NorCal labor market.",
+            "sources": [
+                "Airtasker 2025 Sacramento Rates",
+                "HomeGuide CA"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Kansas City",
+            "state": "MO",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 4 hours; standard pricing for the KC metro area.",
+            "sources": [
+                "MoveBuddha MO Guide",
+                "Angi 1-BR Moving"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Mesa",
+            "state": "AZ",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 3-4 hours; consistent with Phoenix-metro averages.",
+            "sources": [
+                "Airtasker 2025 Phoenix/Mesa Rates",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Atlanta",
+            "state": "GA",
+            "year": 2025,
+            "typical": 750,
+            "low": 400,
+            "high": 1250,
+            "assumptions": "2 movers, 4-5 hours; reflects traffic-related travel time in the metro area.",
+            "sources": [
+                "MoveBuddha GA Guide",
+                "Angi Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Omaha",
+            "state": "NE",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 850,
+            "assumptions": "2 movers, 3-4 hours; standard Nebraska labor pricing.",
+            "sources": [
+                "Airtasker 2025 Omaha Rates",
+                "HomeGuide NE"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Colorado Springs",
+            "state": "CO",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1000,
+            "assumptions": "2 movers, 3-4 hours; follows general Front Range cost trends.",
+            "sources": [
+                "MoveBuddha CO Guide",
+                "Angi 2026 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Raleigh",
+            "state": "NC",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 3-4 hours; pricing based on local North Carolina labor rates (approx. $105/hr).",
+            "sources": [
+                "GoodMigrations Raleigh Moving Cost 2025",
+                "Angi 1-BR Moving Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Long Beach",
+            "state": "CA",
+            "year": 2025,
+            "typical": 850,
+            "low": 450,
+            "high": 1400,
+            "assumptions": "2 movers, 4-5 hours; mirrors Los Angeles metro area labor and fuel costs.",
+            "sources": [
+                "MoveBuddha CA Guide",
+                "Stack Moves 2025 Report"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Virginia Beach",
+            "state": "VA",
+            "year": 2025,
+            "typical": 650,
+            "low": 400,
+            "high": 1100,
+            "assumptions": "2 movers, 4 hours; standard rates for the Hampton Roads region.",
+            "sources": [
+                "GoodMigrations Virginia Beach Guide",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Miami",
+            "state": "FL",
+            "year": 2025,
+            "typical": 800,
+            "low": 450,
+            "high": 1300,
+            "assumptions": "2 movers, 4 hours; includes premiums for high-rise building navigation and parking.",
+            "sources": [
+                "MoveBuddha FL Moving Calculator",
+                "Angi 2026 Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Oakland",
+            "state": "CA",
+            "year": 2025,
+            "typical": 1000,
+            "low": 600,
+            "high": 1600,
+            "assumptions": "2 movers, 4-5 hours; high labor rates consistent with Bay Area regional standards.",
+            "sources": [
+                "Extra Space Storage Oakland Moving Guide",
+                "MoveBuddha 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Minneapolis",
+            "state": "MN",
+            "year": 2025,
+            "typical": 700,
+            "low": 400,
+            "high": 1150,
+            "assumptions": "2 movers, 4 hours; standard Twin Cities labor rates.",
+            "sources": [
+                "MoveBuddha MN Local Rates",
+                "Angi 1-BR Moving Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Tulsa",
+            "state": "OK",
+            "year": 2025,
+            "typical": 500,
+            "low": 300,
+            "high": 800,
+            "assumptions": "2 movers, 3 hours; remains one of the most affordable markets for local labor.",
+            "sources": [
+                "MoveBuddha OK Guide",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Bakersfield",
+            "state": "CA",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 3-4 hours; standard Central Valley California pricing.",
+            "sources": [
+                "Angi 2026 Estimates",
+                "MoveBuddha CA Market Study"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Wichita",
+            "state": "KS",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 900,
+            "assumptions": "2 movers, 3-4 hours; stable Midwestern labor costs.",
+            "sources": [
+                "MoveBuddha KS Guide",
+                "HomeGuide City Rates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Arlington",
+            "state": "TX",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1050,
+            "assumptions": "2 movers, 4 hours; standard DFW metro pricing.",
+            "sources": [
+                "LetsGetMovingUSA TX Data",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Aurora",
+            "state": "CO",
+            "year": 2025,
+            "typical": 700,
+            "low": 400,
+            "high": 1150,
+            "assumptions": "2 movers, 4 hours; follows Denver metro regional pricing.",
+            "sources": [
+                "Airtasker 2025 Denver/Aurora Rates",
+                "Angi Moving Cost Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Tampa",
+            "state": "FL",
+            "year": 2025,
+            "typical": 700,
+            "low": 400,
+            "high": 1100,
+            "assumptions": "2 movers, 4 hours; reflects standard Tampa Bay area labor rates.",
+            "sources": [
+                "MoveBuddha FL Moving Calculator",
+                "Angi 2026 Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "New Orleans",
+            "state": "LA",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1050,
+            "assumptions": "2 movers, 4 hours; hourly rates approx. $140/hr for the local crew.",
+            "sources": [
+                "GoodMigrations Louisiana Moving Cost Study",
+                "MoveAdvisor 2026 Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Cleveland",
+            "state": "OH",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 900,
+            "assumptions": "2 movers, 3-4 hours; standard Ohio industrial-city labor rates.",
+            "sources": [
+                "Extra Space Storage Cleveland Guide",
+                "Angi 1-BR Moving"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Honolulu",
+            "state": "HI",
+            "year": 2025,
+            "typical": 950,
+            "low": 550,
+            "high": 1500,
+            "assumptions": "2 movers, 4 hours; high cost due to island logistics and limited competition.",
+            "sources": [
+                "MoveBuddha HI Guide",
+                "Angi 2026 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Anaheim",
+            "state": "CA",
+            "year": 2025,
+            "typical": 850,
+            "low": 450,
+            "high": 1400,
+            "assumptions": "2 movers, 4 hours; follows Orange County labor market standards.",
+            "sources": [
+                "MoveBuddha CA Guide",
+                "Angi 2026 Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Lexington",
+            "state": "KY",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 900,
+            "assumptions": "2 movers, 3-4 hours; pricing (approx. $140/hr) is standard for local KY crews.",
+            "sources": [
+                "Extra Space Storage Lexington Guide",
+                "MoveBuddha KY Rates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Stockton",
+            "state": "CA",
+            "year": 2025,
+            "typical": 700,
+            "low": 400,
+            "high": 1150,
+            "assumptions": "2 movers, 4 hours; pricing reflects Central Valley labor demand.",
+            "sources": [
+                "MoveBuddha CA Guide",
+                "Angi 1-BR Moving Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Corpus Christi",
+            "state": "TX",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 900,
+            "assumptions": "2 movers, 3-4 hours; standard Coastal Bend Texas pricing.",
+            "sources": [
+                "MoveBuddha TX Guide",
+                "HomeGuide 2025 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Henderson",
+            "state": "NV",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1050,
+            "assumptions": "2 movers, 3-4 hours; mirrors Las Vegas metro area averages.",
+            "sources": [
+                "MoveBuddha NV Guide",
+                "Angi 2026 Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Riverside",
+            "state": "CA",
+            "year": 2025,
+            "typical": 750,
+            "low": 400,
+            "high": 1200,
+            "assumptions": "2 movers, 4 hours; rates consistent with Inland Empire labor and fuel surcharges.",
+            "sources": [
+                "MoveBuddha CA Guide",
+                "Angi 2026 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Newark",
+            "state": "NJ",
+            "year": 2025,
+            "typical": 950,
+            "low": 550,
+            "high": 1600,
+            "assumptions": "2 movers, 4-5 hours; high labor costs influenced by the NY/NJ metro labor market.",
+            "sources": [
+                "MoveBuddha NJ Guide",
+                "GoodMigrations 2025 Study"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Saint Paul",
+            "state": "MN",
+            "year": 2025,
+            "typical": 700,
+            "low": 400,
+            "high": 1150,
+            "assumptions": "2 movers, 4 hours; mirrors Minneapolis-area Twin Cities labor rates.",
+            "sources": [
+                "MoveBuddha MN Local Rates",
+                "Angi 1-BR Moving Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Santa Ana",
+            "state": "CA",
+            "year": 2025,
+            "typical": 850,
+            "low": 450,
+            "high": 1400,
+            "assumptions": "2 movers, 4 hours; pricing reflects Orange County labor market standards.",
+            "sources": [
+                "MoveBuddha CA Guide",
+                "Stack Moves 2025 Report"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Cincinnati",
+            "state": "OH",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 900,
+            "assumptions": "2 movers, 3-4 hours; standard mid-market Ohio labor pricing.",
+            "sources": [
+                "Airtasker 2025 Midwest Rates",
+                "HomeGuide 2025 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Irvine",
+            "state": "CA",
+            "year": 2025,
+            "typical": 950,
+            "low": 550,
+            "high": 1500,
+            "assumptions": "2 movers, 4-5 hours; accounts for premium service rates in luxury OC developments.",
+            "sources": [
+                "MoveBuddha CA Guide",
+                "Angi 2026 Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Orlando",
+            "state": "FL",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1050,
+            "assumptions": "2 movers, 4 hours; consistent with Central Florida regional labor costs.",
+            "sources": [
+                "MoveBuddha FL Moving Calculator",
+                "HomeGuide City Rates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Pittsburgh",
+            "state": "PA",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1050,
+            "assumptions": "2 movers, 4 hours; accounts for unique hilly terrain and tight parking logistics.",
+            "sources": [
+                "Airtasker 2025 Philly/PA Rates",
+                "Angi 1-BR Moving"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "St. Louis",
+            "state": "MO",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 4 hours; reflects Missouri local market averages.",
+            "sources": [
+                "MoveBuddha MO Guide",
+                "HomeGuide 2025 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Greensboro",
+            "state": "NC",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 900,
+            "assumptions": "2 movers, 3-4 hours; standard labor pricing for the NC Piedmont region.",
+            "sources": [
+                "MoveBuddha NC Estimates",
+                "Angi Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Jersey City",
+            "state": "NJ",
+            "year": 2025,
+            "typical": 1050,
+            "low": 600,
+            "high": 1800,
+            "assumptions": "2 movers, 4-5 hours; high costs due to parking permit requirements and density.",
+            "sources": [
+                "MoveBuddha NJ Guide",
+                "Airtasker 2025 NY/NJ Rates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Anchorage",
+            "state": "AK",
+            "year": 2025,
+            "typical": 800,
+            "low": 450,
+            "high": 1300,
+            "assumptions": "2 movers, 4 hours; higher costs due to limited local competition and fuel.",
+            "sources": [
+                "MoveBuddha AK Guide",
+                "Angi 2026 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Lincoln",
+            "state": "NE",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 850,
+            "assumptions": "2 movers, 3-4 hours; mirrors typical Nebraska local market rates.",
+            "sources": [
+                "MoveBuddha NE Guide",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Plano",
+            "state": "TX",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1050,
+            "assumptions": "2 movers, 4 hours; standard North Texas/DFW metro pricing.",
+            "sources": [
+                "LetsGetMovingUSA TX Data",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Durham",
+            "state": "NC",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 3-4 hours; standard rates for the Research Triangle region.",
+            "sources": [
+                "MoveBuddha NC Estimates",
+                "Angi 1-BR Moving Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Buffalo",
+            "state": "NY",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 1000,
+            "assumptions": "2 movers, 4 hours; standard Upstate New York labor pricing.",
+            "sources": [
+                "GoodMigrations 2025 NY Study",
+                "HomeGuide 2025 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Chandler",
+            "state": "AZ",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 3-4 hours; consistent with Phoenix-metro labor rates.",
+            "sources": [
+                "Airtasker 2025 Phoenix/Chandler Rates",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Chula Vista",
+            "state": "CA",
+            "year": 2025,
+            "typical": 850,
+            "low": 450,
+            "high": 1400,
+            "assumptions": "2 movers, 4 hours; follows San Diego County labor and fuel surcharges.",
+            "sources": [
+                "MoveBuddha CA Guide",
+                "Angi 2026 Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Toledo",
+            "state": "OH",
+            "year": 2025,
+            "typical": 500,
+            "low": 300,
+            "high": 800,
+            "assumptions": "2 movers, 3 hours; remains one of the most affordable Ohio markets for labor.",
+            "sources": [
+                "MoveBuddha OH Guide",
+                "HomeGuide City Rates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Madison",
+            "state": "WI",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1000,
+            "assumptions": "2 movers, 4 hours; pricing reflects high student/professional relocation demand.",
+            "sources": [
+                "Airtasker 2025 Wisconsin Rates",
+                "HomeGuide WI"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Gilbert",
+            "state": "AZ",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 3-4 hours; standard labor rates for the Phoenix-East Valley region.",
+            "sources": [
+                "MoveBuddha AZ Guide",
+                "Angi 2026 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Reno",
+            "state": "NV",
+            "year": 2025,
+            "typical": 650,
+            "low": 400,
+            "high": 1100,
+            "assumptions": "2 movers, 4 hours; rates reflect demand in the Washoe County area.",
+            "sources": [
+                "Airtasker 2025 Reno Rates",
+                "HomeGuide NV"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Fort Wayne",
+            "state": "IN",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 850,
+            "assumptions": "2 movers, 3-4 hours; pricing is consistent with Northeast Indiana averages.",
+            "sources": [
+                "MoveBuddha IN Local Rates",
+                "Angi 1-BR Moving"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "North Las Vegas",
+            "state": "NV",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1050,
+            "assumptions": "2 movers, 3-4 hours; mirrors Las Vegas metro area labor costs.",
+            "sources": [
+                "Airtasker 2025 Las Vegas Rates",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "St. Petersburg",
+            "state": "FL",
+            "year": 2025,
+            "typical": 700,
+            "low": 400,
+            "high": 1150,
+            "assumptions": "2 movers, 4 hours; reflects Tampa Bay regional labor surcharges.",
+            "sources": [
+                "MoveBuddha FL Moving Calculator",
+                "Angi 2026 Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Lubbock",
+            "state": "TX",
+            "year": 2025,
+            "typical": 500,
+            "low": 300,
+            "high": 800,
+            "assumptions": "2 movers, 3 hours; lower labor costs characteristic of the West Texas region.",
+            "sources": [
+                "MoveBuddha TX Guide",
+                "HomeGuide 2025 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Irving",
+            "state": "TX",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1050,
+            "assumptions": "2 movers, 4 hours; standard pricing for the Dallas-Irving-Plano corridor.",
+            "sources": [
+                "LetsGetMovingUSA TX Data",
+                "Airtasker 2025 Dallas Rates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Laredo",
+            "state": "TX",
+            "year": 2025,
+            "typical": 450,
+            "low": 250,
+            "high": 750,
+            "assumptions": "2 movers, 3 hours; one of the most affordable labor markets in Texas.",
+            "sources": [
+                "MoveBuddha TX Guide",
+                "HomeGuide 2025 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Winston-Salem",
+            "state": "NC",
+            "year": 2025,
+            "typical": 550,
+            "low": 300,
+            "high": 900,
+            "assumptions": "2 movers, 3-4 hours; standard labor pricing for the NC Triad area.",
+            "sources": [
+                "Airtasker 2025 NC Rates",
+                "Angi Moving Cost Guide"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Chesapeake",
+            "state": "VA",
+            "year": 2025,
+            "typical": 650,
+            "low": 400,
+            "high": 1050,
+            "assumptions": "2 movers, 4 hours; mirrors typical Hampton Roads metro area labor rates.",
+            "sources": [
+                "MoveBuddha VA Guide",
+                "Angi 1-BR Moving"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Glendale",
+            "state": "AZ",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 3-4 hours; consistent with Phoenix-West Valley labor rates.",
+            "sources": [
+                "Airtasker 2025 Phoenix Rates",
+                "HomeGuide 2025 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Garland",
+            "state": "TX",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1050,
+            "assumptions": "2 movers, 4 hours; follows standard DFW metro pricing.",
+            "sources": [
+                "LetsGetMovingUSA TX Data",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Scottsdale",
+            "state": "AZ",
+            "year": 2025,
+            "typical": 700,
+            "low": 400,
+            "high": 1200,
+            "assumptions": "2 movers, 4 hours; accounts for premium service demand in the Scottsdale area.",
+            "sources": [
+                "MoveBuddha AZ Guide",
+                "Angi 2026 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Norfolk",
+            "state": "VA",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1100,
+            "assumptions": "2 movers, 4 hours; mirrors typical Virginia coastal market rates.",
+            "sources": [
+                "Airtasker 2025 VA Rates",
+                "HomeGuide 2025"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Boise",
+            "state": "ID",
+            "year": 2025,
+            "typical": 650,
+            "low": 400,
+            "high": 1050,
+            "assumptions": "2 movers, 3-4 hours; reflects increased labor demand in the Treasure Valley.",
+            "sources": [
+                "MoveBuddha ID Local Rates",
+                "Angi Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Fremont",
+            "state": "CA",
+            "year": 2025,
+            "typical": 1000,
+            "low": 600,
+            "high": 1600,
+            "assumptions": "2 movers, 4-5 hours; high labor costs consistent with Southern Alameda County standards.",
+            "sources": [
+                "MoveBuddha Bay Area Estimator",
+                "Angi 2026 Data"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Spokane",
+            "state": "WA",
+            "year": 2025,
+            "typical": 650,
+            "low": 350,
+            "high": 1000,
+            "assumptions": "2 movers, 4 hours; reflects local Eastern Washington labor market averages.",
+            "sources": [
+                "Airtasker 2025 WA Rates",
+                "Angi 1-BR Moving Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Santa Clarita",
+            "state": "CA",
+            "year": 2025,
+            "typical": 850,
+            "low": 450,
+            "high": 1400,
+            "assumptions": "2 movers, 4 hours; follows Northern Los Angeles County labor surcharges.",
+            "sources": [
+                "MoveBuddha CA Guide",
+                "Angi 2026 Moving Help"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Baton Rouge",
+            "state": "LA",
+            "year": 2025,
+            "typical": 600,
+            "low": 350,
+            "high": 950,
+            "assumptions": "2 movers, 4 hours; standard labor pricing for the Louisiana capital region.",
+            "sources": [
+                "Airtasker 2025 LA Rates",
+                "HomeGuide 2025 Estimates"
+            ],
+            "missing_reason": null
+        },
+        {
+            "city": "Richmond",
+            "state": "VA",
+            "year": 2025,
+            "typical": 650,
+            "low": 400,
+            "high": 1050,
+            "assumptions": "2 movers, 4 hours; consistent with Central Virginia regional labor costs.",
+            "sources": [
+                "GoodMigrations 2025 VA Study",
+                "HomeGuide City Rates"
+            ]
         }
     ]
 }

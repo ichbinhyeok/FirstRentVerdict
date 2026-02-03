@@ -1,6 +1,5 @@
 package firstrentverdict.service.data;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import firstrentverdict.model.dtos.*;
 import firstrentverdict.repository.VerdictDataRepository;
