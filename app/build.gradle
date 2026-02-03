@@ -32,7 +32,18 @@ java {
 
 jte {
     generate()
+    binaryStaticContent = true
 }
+
+sourceSets {
+    main {
+        java {
+            srcDirs += 'build/generated/sources/jte'
+        }
+    }
+}
+
+compileJava.dependsOn(generateJte)
 
 application {
     mainClass = 'firstrentverdict.App'
