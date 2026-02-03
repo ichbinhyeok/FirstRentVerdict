@@ -50,21 +50,26 @@ public class VerdictController {
         return "pages/index";
     }
 
-    @GetMapping("/verdict")
-    public String verdictRedirect() {
-        return "redirect:/";
-    }
-
-    @PostMapping("/verdict")
+    @RequestMapping(value = "/verdict", method = { RequestMethod.GET, RequestMethod.POST })
     public String getVerdict(
-            @RequestParam("cityState") String cityState, // Format: City|State
-            @RequestParam("monthlyRent") int monthlyRent,
-            @RequestParam("availableCash") int availableCash,
+            @RequestParam(value = "cityState", required = false) String cityState, // Format: City|State
+            @RequestParam(value = "monthlyRent", required = false) Integer monthlyRent,
+            @RequestParam(value = "availableCash", required = false) Integer availableCash,
             @RequestParam(value = "hasPet", defaultValue = "false") boolean hasPet,
             @RequestParam(value = "isLocalMove", defaultValue = "false") boolean isLocalMove,
             Model model,
             HttpSession session) {
+
+        // Validating Inputs: If core data is missing, redirect to home (Handle empty
+        // GET access)
+        if (cityState == null || monthlyRent == null || availableCash == null) {
+            return "redirect:/";
+        }
+
         String[] parts = cityState.split("\\|");
+        if (parts.length < 2) {
+            return "redirect:/";
+        }
         String city = parts[0];
         String state = parts[1];
 
@@ -77,6 +82,7 @@ public class VerdictController {
         session.setAttribute(SESSION_KEY_ORIGINAL_INPUT, input);
         session.setAttribute(SESSION_KEY_ORIGINAL_RESULT, result);
 
+        model.addAttribute("input", input);
         model.addAttribute("result", result);
         model.addAttribute("noindex", true);
 

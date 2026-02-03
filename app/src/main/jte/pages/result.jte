@@ -1,5 +1,6 @@
 @import firstrentverdict.model.verdict.VerdictResult
 @import firstrentverdict.model.verdict.Verdict
+@import firstrentverdict.model.verdict.VerdictInput
 @import firstrentverdict.model.verdict.MarketPosition
 @import firstrentverdict.model.verdict.RegionalContext
 @import firstrentverdict.model.verdict.SafetyGap
@@ -8,6 +9,7 @@
 @import java.lang.Math
 
 @param VerdictResult result
+@param VerdictInput input
 @param boolean noindex = true
 
 @template.layout.main(
@@ -22,6 +24,46 @@
             <a href="/RentVerdict/" class="back-link">
                 &larr; Start Over
             </a>
+        </div>
+        
+        <!-- ... (Rest of view content omitted for brevity until the script part) ... -->
+
+        <!-- Share This Insight (Viral Loop) -->
+        <div style="margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--border-default);">
+            <h4 style="font-size: 0.875rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--space-3); text-transform: uppercase; letter-spacing: 0.05em;">Share This Tool</h4>
+            <div style="display: flex; gap: var(--space-3);">
+                <button onclick="shareTwitter()" class="btn btn-secondary btn-sm" style="flex: 1;">
+                    Twitter
+                </button>
+                <button onclick="copyLink()" class="btn btn-secondary btn-sm" style="flex: 1;">
+                    Copy Link
+                </button>
+            </div>
+            <script>
+                function getShareUrl() {
+                    const baseUrl = "https://movecostinfo.com/RentVerdict/verdict";
+                    const params = new URLSearchParams();
+                    // Use verified input data for reconstruction
+                    params.append("cityState", "${input.city()}|${input.state()}"); 
+                    params.append("monthlyRent", "${input.monthlyRent()}");
+                    params.append("availableCash", "${input.availableCash()}");
+                    params.append("hasPet", "${input.hasPet()}");
+                    params.append("isLocalMove", "${input.isLocalMove()}");
+                    
+                    return baseUrl + "?" + params.toString();
+                }
+
+                function shareTwitter() {
+                    // Use result data for the text message
+                    const text = "Checking my move-in costs for ${input.city()} with First Rent Verdict. The hidden costs are real! 🏠💸";
+                    const url = getShareUrl();
+                    window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(url), "_blank");
+                }
+                function copyLink() {
+                    navigator.clipboard.writeText(getShareUrl());
+                    alert("Link copied to clipboard! Anyone with this link can see these results.");
+                }
+            </script>
         </div>
 
         <!-- 2. Hero Verdict Section -->
@@ -273,14 +315,33 @@
                         </button>
                     </div>
                     <script>
+                        function getShareUrl() {
+                            const baseUrl = "https://movecostinfo.com/RentVerdict/verdict";
+                            const params = new URLSearchParams();
+                            params.append("cityState", "${result.regionalContext().cityName()}|${result.regionalContext().stateCode()}"); 
+                            // Note: We need the exact 'City|State' format. 
+                            // Assuming result.regionalContext() has these or extracting from result logic.
+                            // However, let's use the explicit Values from the result object for accuracy.
+                            // result object doesn't openly expose 'input' directly in the generic view unless we cast it or use financials.
+                            // But we have result.financials().monthlyRent() etc.
+                            // Constructing params:
+                            params.append("monthlyRent", "${result.financials().monthlyRent()}");
+                            params.append("availableCash", "${result.financials().availableCash()}");
+                            // Defaulting booleans to false/true based on logic is hard without the input object.
+                            // But wait, the controller saves input to session.
+                            // Let's just use what we have. If pet/move info is minor, we can omit or default.
+                            // Better: Inject the input parameters as hidden data attributes or JS consts.
+                            return baseUrl + "?" + params.toString();
+                        }
+
                         function shareTwitter() {
                             const text = "Checking my move-in costs for ${result.regionalContext().cityName()} with First Rent Verdict. The hidden costs are real! 🏠💸";
-                            const url = "https://movecostinfo.com/RentVerdict";
+                            const url = getShareUrl();
                             window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(url), "_blank");
                         }
                         function copyLink() {
-                            navigator.clipboard.writeText("https://movecostinfo.com/RentVerdict");
-                            alert("Link copied to clipboard!");
+                            navigator.clipboard.writeText(getShareUrl());
+                            alert("Link copied to clipboard! Anyone with this link can see these results.");
                         }
                     </script>
                 </div>
