@@ -26,8 +26,9 @@ class DataIntegrationTest {
         // Security Deposit (Merged Logic Check)
         Optional<SecurityDepositData> deposit = repository.getSecurityDeposit("New York", "NY");
         assertTrue(deposit.isPresent(), "Deposit data for NY should exist");
-        // NY State Law Cap is 1.0 from state_laws in JSON
-        assertEquals(Double.valueOf(1.0), deposit.get().legalCapMultiplier(), "NY Legal Cap should be 1.0");
+        assertNotNull(deposit.get().city_practice(), "City Practice should not be null");
+        assertEquals(Double.valueOf(1.0), deposit.get().city_practice().typicalMultipliers().get(0),
+                "NY Typical Multiplier should be 1.0");
 
         // Cash Buffer
         Optional<CashBufferData.CityBuffer> buffer = repository.getCashBuffer("New York", "NY");
@@ -43,6 +44,9 @@ class DataIntegrationTest {
         // Texas (Austin) has no legal cap, check if null or logic handled
         Optional<SecurityDepositData> deposit = repository.getSecurityDeposit("Austin", "TX");
         assertTrue(deposit.isPresent());
-        assertNull(deposit.get().legalCapMultiplier(), "TX Legal Cap should be null (no cap)");
+        assertNotNull(deposit.get().city_practice(), "City Practice should not be null");
+        // Check typical multiplier exists
+        assertFalse(deposit.get().city_practice().typicalMultipliers().isEmpty(),
+                "Typically multipliers list should not be empty");
     }
 }

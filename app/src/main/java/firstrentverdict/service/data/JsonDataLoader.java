@@ -62,12 +62,17 @@ public class JsonDataLoader implements CommandLineRunner {
         ClassPathResource resource = new ClassPathResource("data/security_deposit.json");
         if (resource.exists()) {
             try (InputStream is = resource.getInputStream()) {
-                List<SecurityDepositData> list = objectMapper.readValue(is, new TypeReference<>() {
-                });
-                list.forEach(repository::addSecurityDeposit);
-                System.out.println("Loaded security deposit data for " + list.size() + " cities.");
+                SecurityDepositWrapper wrapper = objectMapper.readValue(is, SecurityDepositWrapper.class);
+                if (wrapper.cities() != null) {
+                    wrapper.cities().forEach(repository::addSecurityDeposit);
+                    System.out.println("Loaded security deposit data for " + wrapper.cities().size() + " cities.");
+                }
             }
         }
+    }
+
+    @com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown = true)
+    private record SecurityDepositWrapper(List<SecurityDepositData> cities) {
     }
 
     private void loadMovingData() throws Exception {

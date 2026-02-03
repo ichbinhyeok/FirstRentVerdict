@@ -1,12 +1,14 @@
 package gg.jte.generated.ondemand.layout;
+import gg.jte.Content;
 public final class JtemainGenerated {
 	public static final String JTE_NAME = "layout/main.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,0,0,11,11,11,11,12,12,13,13,13,13,13,13,13,13,13,14,14,15,15,16,16,16,16,16,16,16,16,16,17,17,17,17,17,17,17,17,17,18,18,19,19,21,21,23,23,25,27,27,27,27,27,27,27,27,27,28,28,29,29,29,29,29,29,29,29,29,30,30,33,39,40,43,43,45,45,45,47,47,50,50,50,0,1,2,3,4,4,4,4};
+	public static final int[] JTE_LINE_INFO = {0,0,1,1,1,12,12,12,12,14,23,23,24,24,24,24,24,24,24,24,24,25,25,26,26,27,27,27,27,27,27,27,27,27,28,28,28,28,28,28,28,28,28,29,29,30,30,32,32,34,34,36,38,38,38,38,38,38,38,38,38,39,39,40,40,40,40,40,40,40,40,40,41,41,44,50,51,54,54,56,56,56,58,58,61,61,61,1,2,3,4,5,5,5,5};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, Content content, String title, String description, String canonical, boolean noindex) {
 		jteOutput.writeContent("\r\n<!DOCTYPE html>\r\n<html lang=\"en\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\r\n    <title>");
 		jteOutput.setContext("title", null);
 		jteOutput.writeUserContent(title);
-		jteOutput.writeContent("</title>\r\n    ");
+		jteOutput.writeContent("</title>\r\n\r\n    ");
+		jteOutput.writeContent("\r\n    <script async src=\"https://www.googletagmanager.com/gtag/js?id=G-MK941K4W3S\"></script>\r\n    <script>\r\n      window.dataLayer = window.dataLayer || [];\r\n      function gtag(){dataLayer.push(arguments);}\r\n      gtag('js', new Date());\r\n\r\n      gtag('config', 'G-MK941K4W3S');\r\n    </script>\r\n    ");
 		if (description != null) {
 			jteOutput.writeContent("\r\n        <meta name=\"description\"");
 			var __jte_html_attribute_0 = description;
@@ -70,8 +72,8 @@ public final class JtemainGenerated {
 			}
 			jteOutput.writeContent(">\r\n    ");
 		}
-		jteOutput.writeContent("\r\n    <meta property=\"og:site_name\" content=\"First Rent Verdict\">\r\n    <meta property=\"og:locale\" content=\"en_US\">\r\n    <meta property=\"og:image\" content=\"https://lifeverdict.com/images/og-card.png\"> ");
-		jteOutput.writeContent("\r\n\r\n    <link rel=\"stylesheet\" href=\"/RentVerdict/css/style.css\">\r\n    <link rel=\"icon\" type=\"image/png\" href=\"/RentVerdict/images/favicon.png\">\r\n    <meta name=\"theme-color\" content=\"#ffffff\">\r\n\r\n    ");
+		jteOutput.writeContent("\r\n    <meta property=\"og:site_name\" content=\"First Rent Verdict\">\r\n    <meta property=\"og:locale\" content=\"en_US\">\r\n    <meta property=\"og:image\" content=\"https://movecostinfo.com/images/og-card.png\"> ");
+		jteOutput.writeContent("\r\n\r\n    <link rel=\"stylesheet\" href=\"/css/style.css\">\r\n    <link rel=\"icon\" type=\"image/png\" href=\"/images/favicon.png\">\r\n    <meta name=\"theme-color\" content=\"#ffffff\">\r\n\r\n    ");
 		jteOutput.writeContent("\r\n    ");
 		jteOutput.writeContent("\r\n</head>\r\n<body>\r\n    ");
 		gg.jte.generated.ondemand.layout.JteheaderGenerated.render(jteOutput, jteHtmlInterceptor);

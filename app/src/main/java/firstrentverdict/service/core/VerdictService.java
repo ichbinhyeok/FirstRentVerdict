@@ -42,18 +42,15 @@ public class VerdictService {
 
         // Security Deposit Logic: Strict Legal Cap
         // If state has a cap, we use Math.min(typical, cap).
-        // We prioritize legal cap if it exists.
-        double multiplier = depositData.typicalMultipliers().get(0); // Default to first typical
-        boolean cappedByLaw = false;
-
-        if (depositData.legalCapMultiplier() != null) {
-            if (multiplier >= depositData.legalCapMultiplier()) {
-                multiplier = depositData.legalCapMultiplier();
-                cappedByLaw = true;
+        // Security Deposit Logic
+        double depositMult = 1.0;
+        if (depositData != null && depositData.city_practice() != null) {
+            if (depositData.city_practice().typicalMultipliers() != null
+                    && !depositData.city_practice().typicalMultipliers().isEmpty()) {
+                depositMult = depositData.city_practice().typicalMultipliers().get(0);
             }
         }
-
-        int depositCost = (int) (input.monthlyRent() * multiplier);
+        int depositCost = (int) (input.monthlyRent() * depositMult);
 
         // Moving Cost
         // Use 'typical' for now. Could act on input.isLocalMove() later if data
@@ -170,9 +167,7 @@ public class VerdictService {
 
         // Calculate data for Financials
         // Base multiplier = 1 (first month rent) + deposit multiplier
-        // Calculate data for Financials
-        // Base multiplier = 1 (first month rent) + deposit multiplier
-        double baseMultiplier = 1.0 + multiplier;
+        double baseMultiplier = 1.0 + depositMult;
         int staticCosts = movingCost + petOneTime;
 
         // ==========================================================================
@@ -189,12 +184,14 @@ public class VerdictService {
 
         // 2. Security Deposit
         String depositAnnotation;
-        if (depositData.legalCapMultiplier() != null && cappedByLaw) {
-            depositAnnotation = "Rule: Legal Cap " + depositData.legalCapMultiplier() + "x Rent (" + input.state()
-                    + " Law)";
+        // Simplified annotation logic as legal cap data is now in notes
+        if (depositData.city_practice() != null && depositData.city_practice().notes() != null
+                && !depositData.city_practice().notes().isEmpty()) {
+            depositAnnotation = "Applied Standard · " + depositData.city_practice().notes();
         } else {
             depositAnnotation = "Applied Standard · Required by Lease Terms";
         }
+
         costBreakdown.add(new FinancialLineItem(
                 "Security Deposit",
                 depositCost,

@@ -22,4 +22,14 @@ public class AboutController {
     public String anchorGuide(Model model) {
         return "pages/guide_rent_rule";
     }
+
+    @GetMapping("/privacy")
+    public String privacy(Model model) {
+        return "pages/privacy";
+    }
+
+    @GetMapping("/terms")
+    public String terms(Model model) {
+        return "pages/terms";
+    }
 }

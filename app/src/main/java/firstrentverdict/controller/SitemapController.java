@@ -36,6 +36,8 @@ public class SitemapController {
         addUrl(xml, "https://movecostinfo.com/RentVerdict/about", "0.6");
         addUrl(xml, "https://movecostinfo.com/RentVerdict/methodology", "0.6");
         addUrl(xml, "https://movecostinfo.com/RentVerdict/guide/rent-affordability-rule", "0.9"); // Anchor Article
+        addUrl(xml, "https://movecostinfo.com/RentVerdict/privacy", "0.4");
+        addUrl(xml, "https://movecostinfo.com/RentVerdict/terms", "0.5");
 
         // 2. City Pages (pSEO)
         // Using current date as lastmod since data is "2026 updated"
