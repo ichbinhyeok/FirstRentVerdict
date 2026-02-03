@@ -92,9 +92,19 @@
                 @endif
             </div>
             
-            <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto;">
+            <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; margin-bottom: 2rem;">
                 ${pageData.marketContextText()}
             </p>
+
+            <div style="margin-top: 2.5rem;">
+                <a href="/RentVerdict/" class="btn btn-primary btn-lg" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);">
+                    <span>Run Personal Affordability Test</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+                <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-tertiary);">
+                    <span style="color: var(--success);">●</span> Live 2026 ${pageData.city()} Data Loaded
+                </div>
+            </div>
         </div>
 
         <!-- Key Financial Grid -->
@@ -237,6 +247,43 @@
             @endif
         </div>
 
+        <!-- MEGA CTA: The Main Product -->
+        <div style="margin-bottom: 4rem; background: linear-gradient(135deg, var(--bg-surface) 0%, rgba(59, 130, 246, 0.03) 100%); border: 2px solid var(--primary); border-radius: 24px; padding: 4rem 2rem; text-align: center; position: relative; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);">
+            <!-- Decorative Element -->
+            <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--primary); opacity: 0.05; border-radius: 50%;"></div>
+            
+            <div style="position: relative; z-index: 1;">
+                <div class="badge-accent" style="margin-bottom: 1.5rem; display: inline-block;">THE VERDICT ENGINE</div>
+                <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -0.02em;">
+                    Should you move to ${pageData.city()}?
+                </h2>
+                <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2.5rem; max-width: 550px; margin-left: auto; margin-right: auto; line-height: 1.6;">
+                    Don't guess with your savings. Our <strong>Real-time Simulator</strong> analyzes your cash vs. actual move-in costs in ${pageData.city()} to give you a definitive Approved or Denied judgment.
+                </p>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+                    <a href="/RentVerdict/" class="btn btn-primary btn-lg" style="text-decoration: none; padding: 1.25rem 3rem; font-size: 1.25rem; font-weight: 700; width: 100%; max-width: 400px; box-shadow: 0 20px 30px -10px rgba(59, 130, 246, 0.4);">
+                        Launch 2026 Calculator
+                    </a>
+                    
+                    <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            Free Forever
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            No Sign-up Required
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            100% Data Privacy
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Block 3: Market Context -->
         <div style="margin-bottom: 4rem;">
             <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Regional Market Context</h2>
@@ -273,14 +320,7 @@
             </div>
         </div>
 
-        <!-- Safe CTA -->
-        <div style="background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 3rem; text-align: center;">
-            <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem;">Check Your Specific Fit</h2>
-            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto;">
-                Every financial situation is unique. Use current 2026 market data to check if this move is safe for you.
-            </p>
-            <a href="/RentVerdict/" class="btn-primary" style="text-decoration: none; display: inline-block; padding: 1rem 2rem; font-size: 1.1rem;">Launch Financial Calculator</a>
-        </div>
+
 
     </div>
 `)

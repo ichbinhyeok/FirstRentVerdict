@@ -29,7 +29,7 @@
             <div class="verdict-label">OFFICIAL VERDICT</div>
             
             <!-- Verdict Badge -->
-            <div style="margin-bottom: var(--space-4);">
+            <div style="margin-bottom: var(--space-4);" id="verdict-badge-container">
                 @if(result.verdict() == Verdict.APPROVED)
                     <h1 class="verdict-text verdict-approved">APPROVED</h1>
                 @elseif(result.verdict() == Verdict.BORDERLINE)
@@ -48,14 +48,14 @@
                 </div>
                 <div>
                     <h3 style="font-size: 0.875rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Analyst's Summary</h3>
-                    <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.5;">
+                    <p id="main-advisor-text" style="font-size: 1rem; color: var(--text-secondary); line-height: 1.5;">
                         ${result.whyThisVerdict()}
                     </p>
                 </div>
             </div>
 
             <!-- Key Contributing Factors (The "PROOF") -->
-            <div class="factors-grid">
+            <div id="factors-container" class="factors-grid">
                 @for(String factor : result.contributingFactors())
                     <div class="factor-item">
                         <span style="color: var(--accent-primary); margin-right: var(--space-2);">✓</span>
@@ -241,13 +241,13 @@
                 </div>
 
                 <!-- Strategic Action Steps -->
-                <div class="step-list">
+                <div id="action-steps-container" class="step-list">
                     @if(result.verdict() != Verdict.APPROVED)
                         <div class="step-item">
                             <div class="step-number">1</div>
                             <div class="step-content">
                                 <h4>Bridge the Gap</h4>
-                                <p>You are approximately <strong>$${String.format("%,d", Math.abs(result.financials().remainingBuffer()))}</strong> short of a comfortable move. Consider a co-signer.</p>
+                                <p id="action-step-desc">You are approximately <strong>$${String.format("%,d", Math.abs(result.financials().remainingBuffer()))}</strong> short of a comfortable move. Consider a co-signer.</p>
                             </div>
                         </div>
                     @else
@@ -255,7 +255,7 @@
                             <div class="step-number" style="background: var(--success);">✓</div>
                             <div class="step-content">
                                 <h4>Application Ready</h4>
-                                <p>This rent is within your <strong>safe financial zone</strong>. Proceed with documentation.</p>
+                                <p id="action-step-desc">This rent is within your <strong>safe financial zone</strong>. Proceed with documentation.</p>
                             </div>
                         </div>
                     @endif
@@ -406,9 +406,11 @@
             const depHigh = parseFloat(dataEl.dataset.depHigh); 
             const recBuffer = parseInt(dataEl.dataset.recBuffer);
             const medianRent = parseInt(dataEl.dataset.medianRent);
+            const originalCash = parseInt(dataEl.dataset.cash);
             
             // Track credit score selection (default: good)
             let isCreditPoor = false;
+            let fetchDebounceTimer;
 
             const fmt = (n) => '$' + Math.floor(n).toLocaleString();
             
@@ -439,7 +441,65 @@
                 });
             }
             
-            // Helper to update everything
+            async function fetchFullVerdictUpdate(newRent, newCash) {
+                const cashDelta = newCash - originalCash;
+                const advisorText = document.getElementById('main-advisor-text');
+                if (advisorText) advisorText.style.opacity = '0.5';
+
+                try {
+                    const response = await fetch('/RentVerdict/what-if', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ adjustedRent: newRent, cashInjection: cashDelta })
+                    });
+                    
+                    if (!response.ok) return;
+                    const data = await response.json();
+                    const res = data.result;
+
+                    // 1. Badge
+                    const badgeContainer = document.getElementById('verdict-badge-container');
+                    if (badgeContainer) {
+                        badgeContainer.innerHTML = '<h1 class="verdict-text verdict-' + res.verdict.toLowerCase() + '">' + res.verdict + '</h1>';
+                    }
+
+                    // 2. Advisor Summary
+                    if (advisorText) {
+                        advisorText.innerText = res.whyThisVerdict;
+                        advisorText.style.opacity = '1';
+                    }
+
+                    // 3. Factors
+                    const fContainer = document.getElementById('factors-container');
+                    if (fContainer) {
+                        let html = '';
+                        res.contributingFactors.forEach(f => {
+                            html += '<div class="factor-item"><span style="color: var(--accent-primary); margin-right: var(--space-2);">✓</span>' + f + '</div>';
+                        });
+                        if (res.regionalContext && res.regionalContext.contextFactors) {
+                            res.regionalContext.contextFactors.forEach(rf => {
+                                html += '<div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);"><span style="color: var(--text-tertiary); margin-right: var(--space-2);">📍</span>' + rf + '</div>';
+                            });
+                        }
+                        fContainer.innerHTML = html;
+                    }
+
+                    // 4. Action Steps
+                    const actionContainer = document.getElementById('action-steps-container');
+                    if (actionContainer) {
+                        const isApproved = res.verdict === 'APPROVED';
+                        const gap = Math.abs(res.financials.remainingBuffer);
+                        const fmtGap = '$' + gap.toLocaleString();
+                        
+                        if (!isApproved) {
+                            actionContainer.innerHTML = '<div class="step-item"><div class="step-number">1</div><div class="step-content"><h4>Bridge the Gap</h4><p id="action-step-desc">You are approximately <strong>' + fmtGap + '</strong> short of a comfortable move. Consider a co-signer.</p></div></div>';
+                        } else {
+                            actionContainer.innerHTML = '<div class="step-item"><div class="step-number" style="background: var(--success);">✓</div><div class="step-content"><h4>Application Ready</h4><p id="action-step-desc">This rent is within your <strong>safe financial zone</strong>. Proceed with documentation.</p></div></div>';
+                        }
+                    }
+                } catch (e) { console.error(e); }
+            }
+
             function updateSimulation() {
                 const newRent = parseInt(rentSlider.value);
                 const newCash = parseInt(cashSlider.value);
@@ -448,14 +508,10 @@
                 cashDisplay.innerText = fmt(newCash);
                 dispCash.innerText = fmt(newCash); 
                 
-                // Dynamic Risk Logic: 
-                // 1. If Credit is Poor/Fair -> always High Risk
-                // 2. Else if Cash < Rent * 3 -> High Risk (cash-based)
                 const isCashHighRisk = newCash < (newRent * 3);
                 const isHighRisk = isCreditPoor || isCashHighRisk;
                 const currentDepMult = isHighRisk ? depHigh : depTyp;
                 
-                // Label reflects why
                 let riskLabel = "Standard";
                 if (isCreditPoor && depHigh > depTyp) {
                     riskLabel = "Credit-Adjusted";
@@ -464,16 +520,13 @@
                 }
                 const noteVal = riskLabel + " (" + currentDepMult.toFixed(1) + "x Rent)";
 
-                // Update Rent Line
                 const rentValEl = document.getElementById('val-FirstMonthRent');
                 if(rentValEl) rentValEl.innerText = fmt(newRent);
                 
-                // Update Deposit Line
                 const newDeposit = newRent * currentDepMult;
                 const depositValEl = document.getElementById('val-SecurityDeposit');
                 if(depositValEl) depositValEl.innerText = fmt(newDeposit);
                 
-                // Update Deposit Note in Receipt (Visual Feedback!)
                 const depositNoteEl = document.getElementById('note-SecurityDeposit');
                 if(depositNoteEl) {
                     depositNoteEl.innerText = noteVal;
@@ -481,12 +534,9 @@
                     else depositNoteEl.style.color = "var(--text-tertiary)";
                 }
 
-                // Total
                 const newTotalUpfront = newRent + newDeposit + staticCosts;
-                
                 dispRecTotal.innerText = fmt(newTotalUpfront);
                 dispTotalCost.innerText = fmt(newTotalUpfront);
-                
                 const newBuffer = newCash - newTotalUpfront;
                 
                 dispBuffer.innerText = (newBuffer < 0 ? "-" : "") + fmt(Math.abs(newBuffer));
@@ -499,7 +549,6 @@
                     cardBuffer.style.border = "1px solid var(--danger)";
                     cardBuffer.style.background = "#fff0f0";
                     simFeedback.style.borderLeftColor = "var(--danger)";
-                    
                     if (newBuffer < 0) {
                         lblBuffer.innerText = "Deficit";
                         lblBufferStatus.innerText = "Insolvency Risk";
@@ -517,7 +566,6 @@
                     lblBufferStatus.innerText = "Healthy Reserve";
                 }
 
-                // Update Sticky Bar (Mobile)
                 if(stickyBar && stickyVal && stickyStatus) {
                     stickyVal.innerText = (newBuffer < 0 ? "-" : "") + fmt(Math.abs(newBuffer));
                     if(newBuffer < 0) {
@@ -540,37 +588,27 @@
                 if(pct > 100) pct = 100;
                 if(pct < 0) pct = 0;
                 radarMarker.style.left = pct + "%";
-                
-                // Update Radar Label
                 if(newRent <= (medianRent * 0.8)) radarLabel.innerText = "Below Market";
                 else if(newRent >= (medianRent * 1.2)) radarLabel.innerText = "Premium Range";
                 else radarLabel.innerText = "Market Standard";
+
+                clearTimeout(fetchDebounceTimer);
+                fetchDebounceTimer = setTimeout(() => { fetchFullVerdictUpdate(newRent, newCash); }, 500);
             }
 
             rentSlider.addEventListener('input', updateSimulation);
             cashSlider.addEventListener('input', updateSimulation);
 
-            // Mobile Sticky Bar Observer
-            // Show sticky bar only when Simulation Card is visible/active
             const simCard = document.querySelector('.sim-card');
             if(simCard && stickyBar && window.innerWidth <= 768) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
-                        // If sim card is intersecting (even slightly), show sticky bar
-                        // Or maybe better: if card is in viewport.
-                        // Let's optimize: Show when card is visibly focused.
-                        if (entry.isIntersecting) {
-                            stickyBar.style.display = 'flex';
-                        } else {
-                             stickyBar.style.display = 'none';
-                        }
+                        if (entry.isIntersecting) { stickyBar.style.display = 'flex'; } 
+                        else { stickyBar.style.display = 'none'; }
                     });
                 }, { threshold: 0.1 });
-                
                 observer.observe(simCard);
             }
-
-            // Initial calculation to set defaults
             updateSimulation();
         });
     </script>

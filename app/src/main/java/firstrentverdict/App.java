@@ -15,9 +15,11 @@ public class App {
         if (jteDir.exists()) {
             System.setProperty("gg.jte.templateLocation", "app/src/main/jte");
             System.setProperty("gg.jte.developmentMode", "true");
+            System.setProperty("gg.jte.usePrecompiledTemplates", "false");
         } else if (new java.io.File("src/main/jte").exists()) {
             System.setProperty("gg.jte.templateLocation", "src/main/jte");
             System.setProperty("gg.jte.developmentMode", "true");
+            System.setProperty("gg.jte.usePrecompiledTemplates", "false");
         }
 
         SpringApplication.run(App.class, args);
