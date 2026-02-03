@@ -8,7 +8,7 @@
     description = "Free rent affordability calculator using 2026 market data. Calculate your move-in costs, security deposit, and cash buffer for 100+ US cities.",
     canonical = "https://movecostinfo.com/RentVerdict/",
     content = @`
-    <!-- WebApplication Schema for Search Engines -->
+    <!-- WebApplication Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -25,64 +25,79 @@
       }
     }
     </script>
+
     <div class="split-layout">
-        <!-- LEFT: Identity & Authority -->
-        <div class="split-left animate-entry">
-            <div style="max-width: 440px;">
-                <h1 class="hero-title">First Apartment<br>True Cost Verdict</h1>
+        <!-- LEFT: Hero -->
+        <div class="split-left">
+            <div style="max-width: 480px; position: relative; z-index: 1;" class="animate-in">
+                <div class="badge badge-accent" style="margin-bottom: var(--space-6);">
+                    2026 Market Data
+                </div>
+                <h1 class="hero-title">
+                    Know Your<br>True Move-In Cost
+                </h1>
                 <p class="hero-subtitle">
-                    This is not a marketing suggestion.<br>
-                    It is a mathematical certainty based on 2026 economic data.
+                    Don't just check if you can pay the rent. Check if you can survive move-in day.
                 </p>
-                <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle);">
-                    <p style="font-size: 0.8rem; color: var(--text-tertiary);">
-                        CONFIDENTIAL RISK ASSESSMENT<br>
-                        DO NOT DISTRIBUTE OUTSIDE DECISION CIRCLE
-                    </p>
+                
+                <div style="margin-top: var(--space-12); padding-top: var(--space-6); border-top: 1px solid var(--border-default);">
+                    <div style="display: flex; gap: var(--space-8); color: var(--text-tertiary); font-size: 0.875rem;">
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">100+</div>
+                            <div>US Cities</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">Free</div>
+                            <div>No Sign-up</div>
+                        </div>
+                        <div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">2026</div>
+                            <div>Data</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- RIGHT: Evaluation Form -->
+        <!-- RIGHT: Calculator Form -->
         <div class="split-right">
-            <div class="form-container animate-entry" style="animation-delay: 0.1s;">
+            <div class="card animate-in animate-delay-1" style="width: 100%; max-width: 420px; padding: var(--space-8);">
                 <form action="/RentVerdict/verdict" method="post">
                     
                     <div class="form-group">
-                        <label for="cityState">Jurisdiction (Target City)</label>
-                        <select id="cityState" name="cityState" required aria-required="true" aria-describedby="cityStateHint">
-                            <option value="" disabled selected>Select Jurisdiction...</option>
+                        <label for="cityState" class="form-label">Target City</label>
+                        <select id="cityState" name="cityState" class="form-select" required aria-required="true">
+                            <option value="" disabled selected>Select a city...</option>
                             @for(CityEntry city : cities)
                                 <option value="${city.city()}|${city.state()}">${city.city()}, ${city.state()}</option>
                             @endfor
                         </select>
-                        <span id="cityStateHint" class="visually-hidden">Select the city where you plan to rent</span>
                     </div>
 
                     <div class="form-group">
-                        <label for="monthlyRent">Base Monthly Liability (Rent)</label>
-                        <input type="text" id="monthlyRent" name="monthlyRent" placeholder="0" inputmode="numeric" required aria-required="true" aria-describedby="rentHint">
-                        <span id="rentHint" class="visually-hidden">Enter your expected monthly rent amount in dollars</span>
+                        <label for="monthlyRent" class="form-label">Monthly Rent</label>
+                        <input type="text" id="monthlyRent" name="monthlyRent" class="form-input" placeholder="$0" inputmode="numeric" required aria-required="true">
                     </div>
 
                     <div class="form-group">
-                        <label for="availableCash">Liquid Assets (Cash on Hand)</label>
-                        <input type="text" id="availableCash" name="availableCash" placeholder="0" inputmode="numeric" required aria-required="true" aria-describedby="cashHint">
-                        <span id="cashHint" class="visually-hidden">Enter total cash available for move-in costs</span>
+                        <label for="availableCash" class="form-label">Cash on Hand</label>
+                        <input type="text" id="availableCash" name="availableCash" class="form-input" placeholder="$0" inputmode="numeric" required aria-required="true">
                     </div>
 
                     <div class="checkbox-group">
                         <label class="checkbox-label">
                             <input type="checkbox" name="hasPet" value="true">
-                            <span>Pet</span>
+                            <span>I have a pet</span>
                         </label>
                         <label class="checkbox-label">
                             <input type="checkbox" name="isLocalMove" value="true" checked>
-                            <span>Local Move</span>
+                            <span>Local move</span>
                         </label>
                     </div>
 
-                    <button type="submit" class="btn-primary">Execute Verdict Analysis</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-full">
+                        Get My Verdict
+                    </button>
                     
                     <script>
                         document.addEventListener('DOMContentLoaded', () => {
@@ -92,17 +107,15 @@
                                 const input = document.getElementById(id);
                                 if (!input) return;
 
-                                // Format with commas when leaving the field
                                 input.addEventListener('blur', (e) => {
-                                    let value = e.target.value.replace(/,/g, '').replace(/[^0-9]/g, '');
+                                    let value = e.target.value.replace(/[$,]/g, '').replace(/[^0-9]/g, '');
                                     if (value) {
-                                        e.target.value = parseInt(value).toLocaleString('en-US');
+                                        e.target.value = '$' + parseInt(value).toLocaleString('en-US');
                                     }
                                 });
 
-                                // Remove commas when entering to edit
                                 input.addEventListener('focus', (e) => {
-                                    e.target.value = e.target.value.replace(/,/g, '');
+                                    e.target.value = e.target.value.replace(/[$,]/g, '');
                                 });
                             });
 
@@ -110,38 +123,31 @@
                                 currencyInputs.forEach(id => {
                                     const input = document.getElementById(id);
                                     if (input) {
-                                        input.value = input.value.replace(/,/g, '');
+                                        input.value = input.value.replace(/[$,]/g, '');
                                     }
                                 });
                             });
                         });
                     </script>
-                    
-                    <p style="text-align: center; margin-top: 2rem; font-size: 0.75rem; color: var(--text-tertiary);">
-                        Simulation ID: ${java.util.UUID.randomUUID().toString().substring(0,8).toUpperCase()}
-                    </p>
                 </form>
             </div>
         </div>
     </div>
 
-    <!-- Jurisdictions List for pSEO Discovery -->
-    <div style="background: var(--bg-panel); border-top: 1px solid var(--border-subtle); padding: 4rem 2rem;">
+    <!-- Popular Cities Section -->
+    <div style="background: var(--bg-secondary); border-top: 1px solid var(--border-default); padding: var(--space-16) var(--space-6);">
         <div style="max-width: 1000px; margin: 0 auto;">
-            <h2 style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-tertiary); margin-bottom: 2rem;">
-                Popular Jurisdictions
-            </h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem;">
+            <h2 class="section-title" style="margin-bottom: var(--space-6);">Popular Cities</h2>
+            <div class="tag-group">
                 @for(CityEntry city : cities.subList(0, Math.min(cities.size(), 12)))
-                    <a href="/RentVerdict/verdict/${city.city().toLowerCase().replace(" ", "-")}-${city.state().toLowerCase()}" 
-                       style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;">
-                        ${city.city()}, ${city.state()} &rarr;
+                    <a href="/RentVerdict/verdict/${city.city().toLowerCase().replace(" ", "-")}-${city.state().toLowerCase()}" class="tag">
+                        ${city.city()}, ${city.state()}
                     </a>
                 @endfor
             </div>
-            <div style="margin-top: 2rem; text-align: center;">
-                <a href="/RentVerdict/cities" class="btn-primary" style="display: inline-block; width: auto; padding: 0.8rem 2rem; font-size: 0.9rem; background: var(--bg-panel); color: var(--text-primary); border: 1px solid var(--border-subtle);">
-                    View All 100+ Jurisdictions &rarr;
+            <div style="margin-top: var(--space-6);">
+                <a href="/RentVerdict/cities" class="btn btn-secondary">
+                    View All 100+ Cities →
                 </a>
             </div>
         </div>

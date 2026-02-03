@@ -1,9 +1,8 @@
-@import gg.jte.Content
-@param Content content
 @param String title = "First Rent Verdict"
-@param String description = "Standardize your rental financial risk interaction with the 50/30/20 rule. First Rent Verdict provides objective affordability analysis for new tenants."
-@param String canonical = null
+@param String description = "First Rent Verdict - Know your true move-in cost before signing the lease."
+@param String canonical = "https://movecostinfo.com/"
 @param boolean noindex = false
+@param gg.jte.Content content
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,51 +10,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MK941K4W3S"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-MK941K4W3S');
-    </script>
-    @if(description != null)
-        <meta name="description" content="${description}">
-    @endif
-    @if(canonical != null)
-        <link rel="canonical" href="${canonical}">
-        <meta property="og:url" content="${canonical}">
-    @endif
+    <meta name="description" content="${description}">
+    <link rel="canonical" href="${canonical}">
+    
     @if(noindex)
         <meta name="robots" content="noindex, nofollow">
-    @else
-        <meta name="robots" content="index, follow">
     @endif
 
-    <!-- Open Graph / Social -->
-    <meta property="og:type" content="website">
+    <!-- Open Graph -->
     <meta property="og:title" content="${title}">
-    @if(description != null)
-        <meta property="og:description" content="${description}">
-    @endif
+    <meta property="og:description" content="${description}">
+    <meta property="og:url" content="${canonical}">
+    <meta property="og:type" content="website">
     <meta property="og:site_name" content="First Rent Verdict">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://movecostinfo.com/images/og-card.png"> <!-- Placeholder/Default -->
 
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="icon" type="image/png" href="/images/favicon.png">
-    <meta name="theme-color" content="#ffffff">
 
-    <!-- Google Search Console Verification -->
-    <!-- <meta name="google-site-verification" content="" /> -->
+    <!-- GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YQX4VQ8ZT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-5YQX4VQ8ZT');
+    </script>
 </head>
 <body>
     @template.layout.header()
-    <main style="flex: 1;">
+    
+    <main>
         ${content}
     </main>
+    
     @template.layout.footer()
 </body>
 </html>

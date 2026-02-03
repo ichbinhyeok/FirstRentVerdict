@@ -1,7 +1,7 @@
 To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.12/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
 Daemon will be stopped at the end of the build 
-Calculating task graph as configuration cache cannot be reused because system property 'stderr.encoding' has changed.
-> Task :app:processTestResources NO-SOURCE
+Calculating task graph as no cached configuration is available for tasks: build
+> Task :app:check UP-TO-DATE
 > Task :app:generateJte
 > Task :app:processResources
 
@@ -10,10 +10,7 @@ Note: Some input files use unchecked or unsafe operations.
 Note: Recompile with -Xlint:unchecked for details.
 
 > Task :app:classes
-> Task :app:precompileJte SKIPPED
 > Task :app:resolveMainClassName
-> Task :app:compileTestJava UP-TO-DATE
-> Task :app:testClasses UP-TO-DATE
 > Task :app:jar
 > Task :app:bootJar
 > Task :app:startScripts
@@ -23,13 +20,10 @@ Note: Recompile with -Xlint:unchecked for details.
 > Task :app:distZip
 > Task :app:bootDistZip
 > Task :app:assemble
-OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
-> Task :app:test
-> Task :app:check
 > Task :app:build
 
 [Incubating] Problems report is available at: file:///C:/Development/Owner/FirstRentVerdict/build/reports/problems/problems-report.html
 
-BUILD SUCCESSFUL in 26s
-14 actionable tasks: 13 executed, 1 up-to-date
+BUILD SUCCESSFUL in 17s
+12 actionable tasks: 12 executed
 Configuration cache entry stored.
