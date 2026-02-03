@@ -1,540 +1,429 @@
 @import firstrentverdict.model.verdict.VerdictResult
 @import firstrentverdict.model.verdict.Verdict
 @import firstrentverdict.model.verdict.MarketPosition
+@import firstrentverdict.model.verdict.RegionalContext
+@import firstrentverdict.model.verdict.SafetyGap
+@import firstrentverdict.model.verdict.FinancialLineItem
+@import java.util.List
+@import java.lang.Math
 
 @param VerdictResult result
 @param boolean noindex = true
 
 @template.layout.main(
-    title = "Your Rent Verdict Result - Confidential",
-    noindex = true,
+    title = "Verdict Report - First Rent Verdict",
+    noindex = noindex,
     content = @`
-    <div style="max-width: 720px; margin: 4rem auto; padding: 0 2rem;">
+    <!-- Main Result Container -->
+    <div style="max-width: 900px; margin: 0 auto; padding: var(--space-8) var(--space-6);">
         
-        <div class="back-link-container">
+        <!-- 1. Navigation -->
+        <div style="margin-bottom: var(--space-8);">
             <a href="/RentVerdict/" class="back-link">
-                &larr; Return to Engine
+                &larr; Start Over
             </a>
         </div>
 
-        <div class="verdict-section">
-            <h3 class="verdict-label">Final Decision</h3>
-            <div id="verdict-badge">
-                @if(result.verdict() == Verdict.APPROVED)
-                    <div class="verdict-text verdict-approved">APPROVED</div>
-                @elseif(result.verdict() == Verdict.BORDERLINE)
-                    <div class="verdict-text verdict-borderline">BORDERLINE</div>
-                @else
-                    <div class="verdict-text verdict-denied">DENIED</div>
-                @endif
-            </div>
-
-            <!-- MATH PROOF: Now Integrated into Safety Gap Card -->
-            @if(result.verdict() != Verdict.APPROVED)
-               <!-- Proof moved to Safety Gap -->
-            @endif
-        </div>
-
-        <div id="safety-gap-container">
-            @if(result.safetyGap() != null)
-                @if(result.safetyGap().isApproved())
-                    <div class="safety-gap-card safety-gap-approved">
-                        <div id="safety-gap-amount" class="safety-gap-amount">${result.safetyGap().displayText()}</div>
-                        <div id="safety-gap-action" class="safety-gap-action">${result.safetyGap().actionPrompt()}</div>
-                    </div>
-                @else
-                    <div class="safety-gap-card safety-gap-denied">
-                        <div id="safety-gap-amount" class="safety-gap-amount">${result.safetyGap().displayText()}</div>
-                        <!-- REPLACED Action Prompt with MATH PROOF -->
-                         <div class="math-proof" style="background: transparent; padding: 0; color: var(--signal-error); font-weight: 500; font-size: 0.85rem;">
-                            Total Upfront $${String.format("%,d", result.financials().totalUpfrontCost())} — Available Cash $${String.format("%,d", result.financials().availableCash())}
-                        </div>
-                    </div>
-                @endif
-            @endif
-        </div>
-
-        <div class="why-verdict-section" style="display: ${result.whyThisVerdict() != null ? "block" : "none"};">
-            <h3 class="section-title" style="font-weight: 700; letter-spacing: 0.02em;">WHY THIS VERDICT</h3>
-            <p id="why-text" class="why-text" style="font-weight: 400; color: var(--text-primary);">
-                ${result.whyThisVerdict() != null ? result.whyThisVerdict() : ""}
-            </p>
-            <div id="bottleneck-container" class="bottleneck-container" style="display: ${result.primaryBottleneck() != null ? "block" : "none"};">
-                <span class="bottleneck-label">Primary Bottleneck:</span>
-                <span id="bottleneck-text" class="bottleneck-value">${result.primaryBottleneck() != null ? result.primaryBottleneck() : ""}</span>
-            </div>
-        </div>
-
-        @if(result.contributingFactors() != null && !result.contributingFactors().isEmpty())
-            <div class="contributing-section">
-                <h4 class="contributing-title" style="font-weight: 700; letter-spacing: 0.02em;">CONTRIBUTING FACTORS</h4>
-                <ul class="contributing-list">
-                    @for(String factor : result.contributingFactors())
-                        <li class="contributing-item">
-                            <span class="contributing-bullet">→</span>
-                            ${factor}
-                        </li>
-                    @endfor
-                </ul>
-            </div>
-        @endif
-
-        @if(result.regionalContext() != null)
-            <details class="regional-details">
-                <summary class="regional-summary">REGION: ${result.regionalContext().cityName().toUpperCase()}</summary>
-                <div class="market-warning" style="display: ${result.verdict() == Verdict.DENIED && result.marketPosition().marketZone().equals("Below Market") ? "block" : "none"}; margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">
-                    <strong>Market Position: Below Market.</strong> However, affordability fails due to upfront cash constraints.
-                </div>
-                <ul class="contributing-list" style="margin-top: 1rem;">
-                    @for(String context : result.regionalContext().contextFactors())
-                        <li class="contributing-item" style="font-size: 0.95rem;">
-                            <span class="contributing-bullet">•</span>
-                            ${context}
-                        </li>
-                    @endfor
-                </ul>
-            </details>
-        @endif
-
-
-        <!-- Recovery Hint Box (Deterministic) -->
-        <div id="recovery-hint" class="recovery-hint-box" style="display: ${result.verdict() != Verdict.APPROVED ? "block" : "none"};">
-            <h4 class="verdict-label" style="margin-bottom: 1rem;">To Reach Approved Status:</h4>
-            <div style="font-size: 1rem; color: var(--text-primary); line-height: 1.5;">
-                You must meet <strong>ONE</strong> of the following conditions:
-                <ul style="margin: 0.5rem 0 0 0; padding-left: 1.5rem;">
-                    <li style="margin-bottom: 0.5rem;">
-                        @if(((result.financials().availableCash() - result.financials().staticCosts() - result.financials().recommendedBuffer()) / result.financials().upfrontBaseMultiplier()) < 0)
-                             Reduce rent to <strong>Option Unavailable</strong>
-                             <div style="color: var(--signal-error); font-size: 0.85rem; margin-top: 0.5rem;">
-                                Current cash level cannot support any rental scenario.
-                            </div>
-                        @else
-                             Reduce rent to <strong>$<span id="target-rent">
-                             ${String.format("%,d", (int) Math.floor((result.financials().availableCash() - result.financials().staticCosts() - result.financials().recommendedBuffer()) / result.financials().upfrontBaseMultiplier()))}
-                             </span></strong> or lower
-                        @endif
-                    </li>
-                    <li>
-                        Add <strong>$<span id="target-cash">
-                        ${String.format("%,d", Math.max(0, result.financials().recommendedBuffer() - result.financials().remainingBuffer()))}
-                        </span></strong> in available cash
-                        <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.2rem;">
-                            (Includes upfront shortfall + required post-move safety buffer)
-                        </div>
-                    </li>
-                </ul>
-            </div>
-             <div id="target-rent-error" style="display:none; color: var(--signal-error); font-size: 0.85rem; margin-top: 0.5rem;">
-                Current cash level cannot support any rental scenario.
-            </div>
-        </div>
-
-        <div class="simulation-lab">
-            <h4>Simulation Lab: Change the Variables</h4>
-            <div class="sim-controls">
-                <div class="control-group">
-                    <label>Monthly Rent: $<span id="rent-val">${result.financials().monthlyRent()}</span></label>
-                    <input type="range" id="rent-slider" 
-                           min="500" 
-                           max="${(int)Math.max(3000, Math.max(result.financials().monthlyRent() * 1.5, result.marketPosition().p75Rent() * 1.5))}" 
-                           value="${result.financials().monthlyRent()}" 
-                           step="50">
-                    <div class="control-info">Slide to see impact of different rent levels</div>
-                </div>
-                <div class="control-group">
-                    <label>Additional Cash: $<span id="cash-val">0</span></label>
-                    <input type="range" id="cash-slider" 
-                           min="0" max="20000" value="0" step="500">
-                    <div class="control-info">Simulate extra savings or external support</div>
-                </div>
-            </div>
-            <div id="sim-status" style="display:none; text-align: center; margin-top: 1rem; font-size: 0.8rem; color: var(--text-tertiary);">
-                Recalculating verdict...
-            </div>
-        </div>
-
-        <div style="margin-bottom: 4rem;">
-            <h3 class="contributing-title" style="margin-bottom: 1.5rem; font-weight: 700; letter-spacing: 0.02em;">FINANCIAL DATA POINTS</h3>
+        <!-- 2. Hero Verdict Section -->
+        <div class="verdict-hero fade-in-up">
+            <div class="verdict-label">OFFICIAL VERDICT</div>
             
-            <div class="financial-grid">
-                <div>
-                    <div class="financial-label-sm">Total Upfront Cost</div>
-                    <div id="total-upfront-cost" class="financial-value-lg">$${String.format("%,d", result.financials().totalUpfrontCost())}</div>
-                    
-                    <!-- Legend for Annotations -->
-                    <div style="font-size: 0.7rem; color: var(--text-tertiary); margin-top: 1rem; font-style: italic;">
-                        * "Applied Baseline/Standard": Used when specific rules are absent.
-                    </div>
+            <!-- Verdict Badge -->
+            <div style="margin-bottom: var(--space-4);">
+                @if(result.verdict() == Verdict.APPROVED)
+                    <h1 class="verdict-text verdict-approved">APPROVED</h1>
+                @elseif(result.verdict() == Verdict.BORDERLINE)
+                    <h1 class="verdict-text verdict-borderline">BORDERLINE</h1>
+                @else
+                    <h1 class="verdict-text verdict-denied">DENIED</h1>
+                @endif
+            </div>
 
-                    <!-- Smart Receipt: Detailed Breakdown -->
-                    <div style="margin-top: 0.5rem; border-top: 1px dashed var(--border-subtle); padding-top: 1rem;">
-                        <ul style="list-style: none; padding: 0; font-size: 0.9rem;">
-                             @for(firstrentverdict.model.verdict.FinancialLineItem item : result.financials().costBreakdown())
-                                <li style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.75rem;">
-                                    <div>
-                                        <div style="font-weight: 500; color: var(--text-secondary);">${item.label()}</div>
-                                        <div class="receipt-annotation-locked" style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 0.1rem;">${item.annotation()}</div>
-                                    </div>
-                                    <div style="font-weight: 600; color: var(--text-primary);">$${String.format("%,d", item.amount())}</div>
-                                </li>
-                             @endfor
-                        </ul>
-                        <div class="receipt-guardrail">
-                            Locked items represent requirements under the selected scenario.
-                        </div>
-                    </div>
+            <!-- AI Advisor Note (The "WHY") -->
+            <div class="advisor-note">
+                <div class="advisor-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                    </svg>
                 </div>
                 <div>
-                     <!-- Market Radar (New Section before Buffer) -->
-                     <div class="market-radar-container">
-                        <div class="radar-title">Market Radar: <span id="radar-title-text">${result.marketPosition().marketZone()}</span></div>
-                        <div class="radar-track">
-                             <div class="radar-range"></div>
-                             <div id="radar-marker" class="radar-marker" style="left: ${Math.min(100.0, Math.max(0.0, (double)result.financials().monthlyRent() / (result.marketPosition().medianRent() * 2.0) * 100.0)) + "%"};"></div>
-                             <div id="radar-label" class="radar-label" style="left: ${Math.min(100.0, Math.max(0.0, (double)result.financials().monthlyRent() / (result.marketPosition().medianRent() * 2.0) * 100.0)) + "%"}; white-space: nowrap;">
-                                YOU ($${String.format("%,d", result.financials().monthlyRent())})
-                             </div>
+                    <h3 style="font-size: 0.875rem; font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Analyst's Summary</h3>
+                    <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.5;">
+                        ${result.whyThisVerdict()}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Key Contributing Factors (The "PROOF") -->
+            <div class="factors-grid">
+                @for(String factor : result.contributingFactors())
+                    <div class="factor-item">
+                        <span style="color: var(--accent-primary); margin-right: var(--space-2);">✓</span>
+                        ${factor}
+                    </div>
+                @endfor
+                <!-- Regional Context Injection -->
+                @if(result.regionalContext() != null && result.regionalContext().contextFactors() != null)
+                   @for(String regionFactor : result.regionalContext().contextFactors())
+                        <div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);">
+                            <span style="color: var(--text-tertiary); margin-right: var(--space-2);">📍</span>
+                            ${regionFactor}
                         </div>
-                        <div class="radar-legend" style="display: grid; grid-template-columns: 1fr 1fr 1fr; position: relative;">
-                            <span style="text-align: left;">Lower ($${result.marketPosition().p25Rent()})</span>
-                            <span style="text-align: center;">Median ($${result.marketPosition().medianRent()})</span>
-                            <span style="text-align: right;">Higher ($${result.marketPosition().p75Rent()})</span>
+                   @endfor
+                @endif
+            </div>
+        </div>
+
+        <!-- 3. Key Financial Cards (Dashboard Grid) -->
+        <div class="financial-grid fade-in-up" style="animation-delay: 0.1s; margin-bottom: var(--space-12);">
+            <!-- Total Upfront Cost -->
+            <div class="card">
+                <div class="financial-label">Est. Move-In Invoice</div>
+                <div class="financial-value" id="disp-total-cost">$${String.format("%,d", result.financials().totalUpfrontCost())}</div>
+                <div class="financial-value-sm">1st Month + Deposit + Fees</div>
+            </div>
+
+            <!-- Available Cash -->
+            <div class="card">
+                <div class="financial-label">Your Liquidity</div>
+                <div class="financial-value" id="disp-cash">$${String.format("%,d", result.financials().availableCash())}</div>
+                <div class="financial-value-sm">Adjustable in Lab</div>
+            </div>
+
+            <!-- Remaining Buffer / Shortfall -->
+            <div class="card" id="card-buffer" data-initial-status="${result.financials().remainingBuffer() < result.financials().recommendedBuffer() ? "danger" : "success"}">
+                <div class="financial-label" id="lbl-buffer">
+                    ${result.financials().remainingBuffer() < 0 ? "Deficit (Shortfall)" : "Safety Buffer"}
+                </div>
+                <div class="financial-value" id="disp-buffer" style="color: ${result.financials().remainingBuffer() < result.financials().recommendedBuffer() ? "var(--danger)" : "var(--success)"};">
+                    ${result.financials().remainingBuffer() < 0 ? "-" : ""}$${String.format("%,d", Math.abs(result.financials().remainingBuffer()))}
+                </div>
+                <div class="financial-value-sm" id="lbl-buffer-status">
+                    ${result.financials().remainingBuffer() < result.financials().recommendedBuffer() 
+                        ? "High Risk: Below Safety Threshold" 
+                        : "Healthy Emergency Reserve"}
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Split Section: Breakdown & Analysis -->
+        <div class="split-section-grid fade-in-up" style="animation-delay: 0.2s;">
+            
+            <!-- Left: Smart Receipt (Correctly using costBreakdown) -->
+            <div>
+                <h3 class="section-title">Verified Cost Breakdown</h3>
+                <div class="receipt">
+                    <div class="receipt-header">
+                        <h4>Itemized Invoice</h4>
+                        <span class="badge badge-outline">2026 Data</span>
+                    </div>
+                    <div class="receipt-body">
+                        <!-- Loop through ACTUAL backend items instead of hardcoding -->
+                        @for(firstrentverdict.model.verdict.FinancialLineItem item : result.financials().costBreakdown())
+                            <div class="receipt-item receipt-dynamic-item" data-label="${item.label()}">
+                                <div>
+                                    <div class="receipt-item-label">${item.label()}</div>
+                                    <div class="receipt-item-note" id="note-${item.label().replaceAll("[^a-zA-Z0-9]", "")}">${item.annotation()}</div>
+                                </div>
+                                <div class="receipt-item-value" id="val-${item.label().replaceAll("[^a-zA-Z0-9]", "")}">$${String.format("%,d", item.amount())}</div>
+                            </div>
+                        @endfor
+                    </div>
+                    <div class="receipt-total">
+                        <span class="receipt-total-label">EST. TOTAL</span>
+                        <span class="receipt-total-value" id="receipt-total">$${String.format("%,d", result.financials().totalUpfrontCost())}</span>
+                    </div>
+                </div>
+                
+                <p style="margin-top: var(--space-4); font-size: 0.8125rem; color: var(--text-tertiary); line-height: 1.5;">
+                    * <strong>Data Source:</strong> Estimates based on <span style="text-decoration: underline;">2026 Regional Cost Index</span>. 
+                    Security deposits are calculated using state-specific caps where applicable. Values are for planning purposes only.
+                </p>
+            </div>
+
+            <!-- Right: Interactive Simulation -->
+            <div>
+                <h3 class="section-title">Scenario Lab</h3>
+                
+                <!-- Market Radar -->
+                <div class="market-radar">
+                    <div class="radar-legend" style="margin-bottom: var(--space-2);">
+                        <span>Market Assessment</span>
+                        <span style="font-weight: 600; color: var(--text-primary);" id="radar-label">${result.marketPosition().marketZone()}</span>
+                    </div>
+                    <div class="radar-track">
+                        <div class="radar-range" title="Typical Market Range"></div>
+                        <div class="radar-marker" id="radar-marker" 
+                             style="left: ${Math.min(100.0, Math.max(0.0, (double)result.financials().monthlyRent() / (result.marketPosition().medianRent() * 2.0) * 100.0)) + "%"};">
                         </div>
+                    </div>
+                    <div class="radar-legend">
+                        <span>Better Value</span>
+                        <span>Premium</span>
+                    </div>
+                </div>
+
+                <!-- Interactive Sim Card -->
+                <div class="card sim-card" style="margin-bottom: var(--space-8); border: 1px solid var(--border-default); box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                     <div style="margin-bottom: var(--space-6);">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="font-size: 1rem; font-weight: 700; color: var(--accent-primary);">Live Simulator</h4>
+                            <span class="badge badge-accent">Interactive</span>
+                        </div>
+                        <p style="font-size: 0.8125rem; color: var(--text-secondary); margin-top: var(--space-2);">
+                            Adjust values to test 'What-If' scenarios. Deposit rates update automatically based on risk.
+                        </p>
                      </div>
                      
-                    <!-- Market Correction Simulation Action -->
-                     <div id="market-correction-container" style="margin-bottom: 2rem; text-align: center;">
-                          <button onclick="simulateMarketCorrection(${result.marketPosition().p25Rent()})" class="market-correction-btn">
-                              Simulate Market Correction (Rent $${result.marketPosition().p25Rent()})
-                          </button>
+                     <!-- Rent Slider -->
+                     <div class="form-group mb-4">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2); font-weight: 600;">
+                            <span style="font-size: 0.875rem; color: var(--text-secondary);">Target Rent</span>
+                            <span id="sim-rent-display" style="color: var(--accent-primary); font-size: 1.125rem;">$${String.format("%,d", result.financials().monthlyRent())}</span>
+                        </div>
+                        <!-- Range Limit: Min = 25% percentile or $500 / Max = 75% percentile * 1.5 or Current*1.5 -->
+                        <input type="range" id="rent-slider" 
+                               style="width: 100%; cursor: grab;"
+                               min="${Math.max(500, (int)(result.marketPosition().p25Rent() * 0.5))}" 
+                               max="${(int)Math.max(result.marketPosition().p75Rent() * 1.5, result.financials().monthlyRent() * 1.5)}" 
+                               value="${result.financials().monthlyRent()}" 
+                               step="50">
+                        <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-tertiary); margin-top: 4px;">
+                            <span>$${Math.max(500, (int)(result.marketPosition().p25Rent() * 0.5))}</span>
+                            <span>$${(int)Math.max(result.marketPosition().p75Rent() * 1.5, result.financials().monthlyRent() * 1.5)}</span>
+                        </div>
                      </div>
 
-                    <div class="financial-label-sm">Remaining Buffer</div>
-                    <div id="remaining-buffer" class="financial-value-lg" style="color: ${result.financials().remainingBuffer() < result.financials().recommendedBuffer() ? "var(--signal-error)" : "var(--text-primary)"};">
-                        $${String.format("%,d", result.financials().remainingBuffer())}
-                    </div>
+                     <!-- Cash Slider (New!) -->
+                     <div class="form-group mb-0">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-2); font-weight: 600;">
+                            <span style="font-size: 0.875rem; color: var(--text-secondary);">Your Cash</span>
+                            <span id="sim-cash-display" style="color: var(--text-primary); font-size: 1.125rem;">$${String.format("%,d", result.financials().availableCash())}</span>
+                        </div>
+                        <!-- Range Limit: Min = 0 / Max = Current + 10k or Current * 1.5 (More realistic) -->
+                        <input type="range" id="cash-slider" 
+                               style="width: 100%; cursor: grab;"
+                               min="0" 
+                               max="${(int)Math.max(result.financials().availableCash() + 5000, result.financials().availableCash() * 1.5)}" 
+                               value="${result.financials().availableCash()}" 
+                               step="100">
+                     </div>
+                     
+                     <div id="sim-feedback" style="margin-top: var(--space-4); padding: var(--space-3); background: var(--bg-primary); border-radius: var(--radius-sm); font-size: 0.875rem; display: none; border-left: 3px solid var(--text-secondary);">
+                        <div style="display: flex; justify-content: space-between;">
+                             <span>New Buffer:</span>
+                             <strong id="sim-new-buffer">$0</strong>
+                        </div>
+                     </div>
                 </div>
+
+                <!-- Strategic Action Steps -->
+                <div class="step-list">
+                    @if(result.verdict() != Verdict.APPROVED)
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Bridge the Gap</h4>
+                                <p>You are approximately <strong>$${String.format("%,d", Math.abs(result.financials().remainingBuffer()))}</strong> short of a comfortable move. Consider a co-signer.</p>
+                            </div>
+                        </div>
+                    @else
+                        <div class="step-item">
+                            <div class="step-number" style="background: var(--success);">✓</div>
+                            <div class="step-content">
+                                <h4>Application Ready</h4>
+                                <p>This rent is within your <strong>safe financial zone</strong>. Proceed with documentation.</p>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+
             </div>
         </div>
-
-        <!-- Next Steps / Action Plan (Decision Support Enhancement) -->
-        <div style="margin-bottom: 3rem; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.03) 0%, rgba(16, 185, 129, 0.03) 100%); border-radius: 12px; border: 1px solid var(--border-subtle);">
-            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-primary);">
-                📋 Your Next Steps
-            </h3>
-            
-            @if(result.verdict() == Verdict.APPROVED)
-                <div style="display: grid; gap: 1rem;">
-                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                        <span style="background: rgba(22, 163, 74, 0.1); color: #16a34a; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">1</span>
-                        <div>
-                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Prepare Documentation</div>
-                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Gather pay stubs (2-3 months), bank statements, and photo ID before applying.</div>
-                        </div>
-                    </div>
-                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                        <span style="background: rgba(22, 163, 74, 0.1); color: #16a34a; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">2</span>
-                        <div>
-                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Check Credit Report</div>
-                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Review your credit score and dispute any errors before landlords pull it.</div>
-                        </div>
-                    </div>
-                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                        <span style="background: rgba(22, 163, 74, 0.1); color: #16a34a; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">3</span>
-                        <div>
-                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Keep Buffer Intact</div>
-                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Your $${String.format("%,d", result.safetyGap().gapAmount())} buffer is your safety net—don't spend it on move-in extras.</div>
-                        </div>
-                    </div>
-                </div>
-            @elseif(result.verdict() == Verdict.BORDERLINE)
-                <div style="display: grid; gap: 1rem;">
-                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                        <span style="background: rgba(202, 138, 4, 0.1); color: #ca8a04; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">1</span>
-                        <div>
-                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Negotiate Lower Rent</div>
-                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Ask for a reduced rate, especially if you can show income stability or sign a longer lease.</div>
-                        </div>
-                    </div>
-                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                        <span style="background: rgba(202, 138, 4, 0.1); color: #ca8a04; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">2</span>
-                        <div>
-                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Delay Move by 30-60 Days</div>
-                            <div style="font-size: 0.9rem; color: var(--text-secondary);">An extra month of savings could move you from BORDERLINE to APPROVED.</div>
-                        </div>
-                    </div>
-                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                        <span style="background: rgba(202, 138, 4, 0.1); color: #ca8a04; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">3</span>
-                        <div>
-                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Consider Roommates</div>
-                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Splitting rent can free up cash for a safer financial buffer.</div>
-                        </div>
-                    </div>
-                </div>
-            @else
-                <div style="display: grid; gap: 1rem;">
-                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                        <span style="background: rgba(220, 38, 38, 0.1); color: #dc2626; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">1</span>
-                        <div>
-                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Build Your Cash Reserve</div>
-                            <div style="font-size: 0.9rem; color: var(--text-secondary);">You need $${String.format("%,d", Math.abs(result.safetyGap().gapAmount()))} more before this move is financially safe.</div>
-                        </div>
-                    </div>
-                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                        <span style="background: rgba(220, 38, 38, 0.1); color: #dc2626; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">2</span>
-                        <div>
-                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Look for Lower-Cost Areas</div>
-                            <div style="font-size: 0.9rem; color: var(--text-secondary);">Use the slider above to see what rent level would make this move safe for you.</div>
-                        </div>
-                    </div>
-                    <div class="next-step-item" style="display: flex; gap: 0.75rem; align-items: flex-start;">
-                        <span style="background: rgba(220, 38, 38, 0.1); color: #dc2626; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600;">3</span>
-                        <div>
-                            <div style="font-weight: 600; color: var(--text-primary); margin-bottom: 0.25rem;">Cut Moving Costs</div>
-                            <div style="font-size: 0.9rem; color: var(--text-secondary);">DIY moving, asking friends for help, or selling furniture can save $300-800+.</div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
-
-        <!-- Data Footnote (Stage 3: Data Authority) -->
-        <details class="methodology-footnote">
-             <summary>Methodology & Data Sources</summary>
-             <ul class="methodology-list">
-                 <li><strong>Data Source:</strong> 2026 Q1 Regional Market Index (${result.regionalContext().cityName()})</li>
-                 <li><strong>Compliance:</strong> State Security Deposit Regulations (Local Compliance)</li>
-                 <li><strong>Benchmarks:</strong> Standardized Moving Cost Baselines</li>
-             </ul>
-        </details>
-
-        <div class="new-assessment-section">
-           <p style="font-size: 0.8rem; color: var(--text-tertiary); margin-bottom: 2rem;">
-               This scenario fails due to cash constraints, not rent level.
-           </p>
-           <a href="/RentVerdict/" class="btn-primary" style="display: inline-block; text-decoration: none; width: auto; min-width: 200px;">Run a New Scenario</a>
-        </div>
+        
+        <!-- Data Injection with Dual Deposit Logic -->
+        <div id="sim-data" 
+             data-cash="${result.financials().availableCash()}"
+             data-static-costs="${result.financials().staticCosts()}"
+             data-dep-typ="${result.financials().typicalDepositMult()}"
+             data-dep-high="${result.financials().highRiskDepositMult()}"
+             data-rec-buffer="${result.financials().recommendedBuffer()}"
+             data-median-rent="${result.marketPosition().medianRent()}"
+             style="display:none;"></div>
 
     </div>
-
+    
+    <style>
+        .split-section-grid {
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: var(--space-8); 
+            align-items: start;
+        }
+        @media (max-width: 900px) {
+            .split-section-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Advisor Note Styling */
+        .advisor-note {
+            background: #f8faff;
+            border-left: 4px solid var(--accent-primary);
+            padding: var(--space-4);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+        }
+        .advisor-icon {
+            color: var(--accent-primary);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        
+        /* Factors Grid */
+        .factors-grid {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-6);
+        }
+        .factor-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-default);
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-full);
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        @keyframes fadeInUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    
     <script>
-        const rentSlider = document.getElementById('rent-slider');
-        const cashSlider = document.getElementById('cash-slider');
-        const rentVal = document.getElementById('rent-val');
-        const cashVal = document.getElementById('cash-val');
-        const simStatus = document.getElementById('sim-status');
-        const recoveryHint = document.getElementById('recovery-hint');
-        const targetRentSpan = document.getElementById('target-rent');
-        const targetCashSpan = document.getElementById('target-cash');
-        const targetRentError = document.getElementById('target-rent-error');
-
-        let debounceTimer;
-
-        function formatCurrency(amount) {
-            return amount.toLocaleString();
-        }
-
-        function updateUI(data) {
-            const result = data.result;
-            const financials = result.financials;
+        document.addEventListener('DOMContentLoaded', () => {
+            const rentSlider = document.getElementById('rent-slider');
+            const cashSlider = document.getElementById('cash-slider');
+            const rentDisplay = document.getElementById('sim-rent-display');
+            const cashDisplay = document.getElementById('sim-cash-display');
+            const dataEl = document.getElementById('sim-data');
             
-            // 1. Verdict Badge
-            const badge = document.getElementById('verdict-badge');
-            let badgeHtml = '';
-            // FALLBACK if verdict is somehow missing
-            const verdict = result.verdict || 'DENIED'; 
+            const dispRecTotal = document.getElementById('receipt-total');
+            const dispTotalCost = document.getElementById('disp-total-cost');
+            const dispCash = document.getElementById('disp-cash');
+            const dispBuffer = document.getElementById('disp-buffer');
+            const lblBuffer = document.getElementById('lbl-buffer');
+            const lblBufferStatus = document.getElementById('lbl-buffer-status');
+            const cardBuffer = document.getElementById('card-buffer');
+            const radarMarker = document.getElementById('radar-marker');
+            const radarLabel = document.getElementById('radar-label');
+            const simFeedback = document.getElementById('sim-feedback');
+            const simNewBuffer = document.getElementById('sim-new-buffer');
             
-            if (verdict === 'APPROVED') {
-                badgeHtml = '<div style="font-size: 4.5rem; font-weight: 900; color: #2d5016; letter-spacing: -0.05em; line-height: 0.9;">APPROVED</div>';
-            } else if (verdict === 'BORDERLINE') {
-                badgeHtml = '<div style="font-size: 4.5rem; font-weight: 900; color: #947600; letter-spacing: -0.05em; line-height: 0.9; text-decoration: underline;">BORDERLINE</div>';
-            } else {
-                badgeHtml = '<div style="font-size: 4.5rem; font-weight: 900; color: var(--signal-error); letter-spacing: -0.05em; line-height: 0.9;">DENIED</div>';
-            }
-            badge.innerHTML = badgeHtml;
+            if (!rentSlider || !cashSlider || !dataEl) return;
 
-            // 2. Safety Gap (Uses displayText field)
-            const sgContainer = document.getElementById('safety-gap-container');
-            if (result.safetyGap) {
-                const isPositive = result.safetyGap.isApproved;
-                const color = isPositive ? "var(--signal-success)" : "var(--signal-error)";
-                const bgColor = isPositive ? "var(--bg-body)" : "rgba(205, 44, 37, 0.03)";
+            const staticCosts = parseInt(dataEl.dataset.staticCosts);
+            const depTyp = parseFloat(dataEl.dataset.depTyp); 
+            const depHigh = parseFloat(dataEl.dataset.depHigh); 
+            const recBuffer = parseInt(dataEl.dataset.recBuffer);
+            const medianRent = parseInt(dataEl.dataset.medianRent);
+
+            const fmt = (n) => '$' + Math.floor(n).toLocaleString();
+            
+            // Helper to update everything
+            function updateSimulation() {
+                const newRent = parseInt(rentSlider.value);
+                const newCash = parseInt(cashSlider.value);
                 
-                // Fallback for missing displayText
-                const displayTxt = result.safetyGap.displayText || "Risk Detected";
-                const actionPrmpt = result.safetyGap.actionPrompt || "Action Required";
-
-                sgContainer.innerHTML = 
-                    '<div style="position: sticky; top: 60px; background: var(--bg-body); border: 2px solid ' + color + '; padding: 1.5rem; margin-bottom: 3rem; text-align: center; z-index: 100; background-color: ' + bgColor + ';">' +
-                        '<div id="safety-gap-amount" style="font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem;">' + displayTxt + '</div>' + 
-                        '<div id="safety-gap-action" style="font-size: 0.9rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em;">' + actionPrmpt + '</div>' +
-                    '</div>';
-
-            }
-
-            // 3. Why & Bottleneck
-            // 3. Why & Bottleneck
-            // Fallback for missing Why text
-            const whyText = result.whyThisVerdict || "Financial assessment indicates unacceptable risk level for this move.";
-            const whyTextEl = document.getElementById('why-text');
-            if (whyTextEl) whyTextEl.innerText = whyText;
-            
-            const bottleneckContainer = document.getElementById('bottleneck-container');
-            const bottleneckTextEl = document.getElementById('bottleneck-text');
-
-            if (result.primaryBottleneck) {
-                 if (bottleneckTextEl) bottleneckTextEl.innerText = result.primaryBottleneck;
-                 if (bottleneckContainer) bottleneckContainer.style.display = 'block';
-            } else {
-                 if (bottleneckContainer) bottleneckContainer.style.display = 'none';
-            }
-
-            // 4. Financials
-            const totalUpfrontEl = document.getElementById('total-upfront-cost');
-            if (totalUpfrontEl) totalUpfrontEl.innerText = '$' + financials.totalUpfrontCost.toLocaleString();
-
-            const remBuffer = document.getElementById('remaining-buffer');
-            if (remBuffer) {
-                remBuffer.innerText = '$' + financials.remainingBuffer.toLocaleString();
-                remBuffer.style.color = financials.remainingBuffer < financials.recommendedBuffer ? 'var(--signal-error)' : 'var(--text-primary)';
-            }
-            
-            // 5. Recovery Hint Logic
-            if (verdict !== 'APPROVED') {
-                recoveryHint.style.display = 'block';
+                rentDisplay.innerText = fmt(newRent);
+                cashDisplay.innerText = fmt(newCash);
+                dispCash.innerText = fmt(newCash); 
                 
-                // Needed Cash = max(0, recommendedBuffer - remainingBuffer)
-                const neededCash = Math.max(0, financials.recommendedBuffer - financials.remainingBuffer);
-                targetCashSpan.innerText = formatCurrency(neededCash);
+                // Dynamic Risk Logic: If Cash < Rent * 3 => High Risk
+                const isHighRisk = newCash < (newRent * 3);
+                const currentDepMult = isHighRisk ? depHigh : depTyp;
+                const riskLabel = isHighRisk && depHigh > depTyp ? "Risk-Adjusted" : "Standard";
+                const noteVal = `${riskLabel} (${currentDepMult.toFixed(1)}x Rent)`;
 
-                // Target Rent calculation
-                const currentAvailable = financials.remainingBuffer + financials.totalUpfrontCost;
-                const maxRent = Math.floor((currentAvailable - financials.staticCosts - financials.recommendedBuffer) / financials.upfrontBaseMultiplier);
+                // Update Rent Line
+                const rentValEl = document.getElementById('val-FirstMonthRent');
+                if(rentValEl) rentValEl.innerText = fmt(newRent);
                 
-                if (maxRent < 0) {
-                     if (targetRentSpan) {
-                         targetRentSpan.innerText = "Option Unavailable";
-                         targetRentSpan.style.fontSize = "0.9em"; 
-                         targetRentSpan.style.color = "var(--text-tertiary)";
-                     }
-                     if (targetRentError) {
-                        targetRentError.innerText = "Current cash level cannot support any rental scenario.";
-                        targetRentError.style.display = 'block';
-                     }
+                // Update Deposit Line
+                const newDeposit = newRent * currentDepMult;
+                const depositValEl = document.getElementById('val-SecurityDeposit');
+                if(depositValEl) depositValEl.innerText = fmt(newDeposit);
+                
+                // Update Deposit Note in Receipt (Visual Feedback!)
+                const depositNoteEl = document.getElementById('note-SecurityDeposit');
+                if(depositNoteEl) {
+                    // Start of the note
+                    depositNoteEl.innerText = noteVal;
+                    if(isHighRisk) depositNoteEl.style.color = "var(--danger)";
+                    else depositNoteEl.style.color = "var(--text-tertiary)";
+                }
+
+                // Total
+                const newTotalUpfront = newRent + newDeposit + staticCosts;
+                
+                dispRecTotal.innerText = fmt(newTotalUpfront);
+                dispTotalCost.innerText = fmt(newTotalUpfront);
+                
+                const newBuffer = newCash - newTotalUpfront;
+                
+                dispBuffer.innerText = (newBuffer < 0 ? "-" : "") + fmt(Math.abs(newBuffer));
+                simNewBuffer.innerText = (newBuffer < 0 ? "-" : "") + fmt(Math.abs(newBuffer));
+                simFeedback.style.display = 'block';
+                
+                if (newBuffer < recBuffer) {
+                    dispBuffer.style.color = "var(--danger)";
+                    cardBuffer.className = "card"; 
+                    cardBuffer.style.border = "1px solid var(--danger)";
+                    cardBuffer.style.background = "#fff0f0";
+                    simFeedback.style.borderLeftColor = "var(--danger)";
+                    
+                    if (newBuffer < 0) {
+                        lblBuffer.innerText = "Deficit";
+                        lblBufferStatus.innerText = "Insolvency Risk";
+                    } else {
+                        lblBuffer.innerText = "Remaining Buffer";
+                        lblBufferStatus.innerText = "Below Safety Level";
+                    }
                 } else {
-                     if (targetRentSpan) {
-                         targetRentSpan.innerText = formatCurrency(maxRent);
-                         targetRentSpan.style.fontSize = "inherit";
-                         targetRentSpan.style.color = "inherit";
-                     }
-                     if (targetRentError) targetRentError.style.display = 'none';
+                    dispBuffer.style.color = "var(--success)";
+                    cardBuffer.className = "card";
+                    cardBuffer.style.border = "1px solid var(--success)";
+                    cardBuffer.style.background = "#f0fff4";
+                    simFeedback.style.borderLeftColor = "var(--success)";
+                    lblBuffer.innerText = "Safety Buffer";
+                    lblBufferStatus.innerText = "Healthy Reserve";
                 }
-
-            } else {
-                recoveryHint.style.display = 'none';
+                
+                const maxRadar = medianRent * 2.0;
+                let pct = (newRent / maxRadar) * 100;
+                if(pct > 100) pct = 100;
+                if(pct < 0) pct = 0;
+                radarMarker.style.left = pct + "%";
+                
+                // Update Radar Label
+                if(newRent <= (medianRent * 0.8)) radarLabel.innerText = "Below Market";
+                else if(newRent >= (medianRent * 1.2)) radarLabel.innerText = "Premium Range";
+                else radarLabel.innerText = "Market Standard";
             }
 
-            // 6. Market Radar Dynamic Update
-            const marketPos = result.marketPosition;
-            if (marketPos && financials) {
-                const titleEl = document.getElementById('radar-title-text');
-                if (titleEl) titleEl.innerText = marketPos.marketZone;
-                
-                const userRent = financials.monthlyRent;
-                const median = marketPos.medianRent;
-                
-                // Define scale: 0 to 2x Median
-                const maxScale = median * 2.0;
-                const percentage = Math.min(100.0, Math.max(0.0, (userRent / maxScale) * 100.0));
-                
-                const marker = document.getElementById('radar-marker');
-                const label = document.getElementById('radar-label');
-                
-                if (marker) marker.style.left = percentage + '%';
-                if (label) {
-                    label.style.left = percentage + '%';
-                    label.innerHTML = 'YOU ($' + userRent.toLocaleString() + ')';
-                }
-            }
-
-            simStatus.style.display = 'none';
-            document.querySelectorAll('.simulation-lab, .verdict-text, .safety-gap-card, .why-text, .bottleneck-value').forEach(el => el.classList.remove('updating'));
-        }
-
-        function simulateMarketCorrection(targetRent) {
-            simStatus.style.display = 'block';
-            document.querySelectorAll('.verdict-text, .safety-gap-card, .why-text, .bottleneck-value').forEach(el => el.classList.add('updating'));
-            
-            // Sync slider UI so they stay consistent
-            rentSlider.value = targetRent;
-            rentVal.innerText = targetRent;
-
-            const payload = {
-                adjustedRent: targetRent,
-                cashInjection: 0
-            };
-
-            fetch('/RentVerdict/what-if', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            })
-            .then(response => response.json())
-            .then(data => updateUI(data))
-            .catch(err => {
-                console.error('Market Correction failed:', err);
-                simStatus.innerText = 'Error applying market correction.';
-            });
-        }
-
-        let abortController;
-
-        function runSimulation() {
-            if (abortController) {
-                abortController.abort();
-            }
-            abortController = new AbortController();
-
-            simStatus.style.display = 'block';
-            document.querySelectorAll('.verdict-text, .safety-gap-card, .why-text, .bottleneck-value').forEach(el => el.classList.add('updating'));
-            
-            const payload = {
-                adjustedRent: parseInt(rentSlider.value),
-                cashInjection: parseInt(cashSlider.value)
-            };
-
-            fetch('/RentVerdict/what-if', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-                signal: abortController.signal
-            })
-            .then(async response => {
-                if (!response.ok) {
-                    const errorData = await response.text();
-                    throw new Error('Server responded with ' + response.status + ': ' + errorData);
-                }
-                return response.json();
-            })
-            .then(data => updateUI(data))
-            .catch(err => {
-                if (err.name === 'AbortError') return;
-                console.error('Simulation failed:', err);
-                simStatus.innerText = 'Error updating simulation: ' + err.message;
-            });
-        }
-
-        rentSlider.addEventListener('input', (e) => {
-            rentVal.innerText = e.target.value;
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(runSimulation, 200);
-        });
-
-        cashSlider.addEventListener('input', (e) => {
-            cashVal.innerText = e.target.value;
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(runSimulation, 200);
+            rentSlider.addEventListener('input', updateSimulation);
+            cashSlider.addEventListener('input', updateSimulation);
         });
     </script>
 `)

@@ -78,6 +78,7 @@ public class VerdictController {
         session.setAttribute(SESSION_KEY_ORIGINAL_RESULT, result);
 
         model.addAttribute("result", result);
+        model.addAttribute("noindex", true);
 
         return "pages/result";
     }

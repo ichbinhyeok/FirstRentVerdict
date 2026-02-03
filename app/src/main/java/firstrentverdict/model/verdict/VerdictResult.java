@@ -74,6 +74,8 @@ public record VerdictResult(
                         int remainingBuffer,
                         int recommendedBuffer,
                         double upfrontBaseMultiplier, // e.g. 2.5 (1 + deposit multiplier)
+                        double typicalDepositMult, // For simple simulation
+                        double highRiskDepositMult, // For risk simulation
                         int staticCosts, // moving + pet + fees
                         List<FinancialLineItem> costBreakdown) {
         }

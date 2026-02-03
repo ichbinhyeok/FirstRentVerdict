@@ -41,12 +41,27 @@ public class VerdictService {
 
         // Security Deposit Logic: Strict Legal Cap
         // If state has a cap, we use Math.min(typical, cap).
-        // Security Deposit Logic
+        // Security Deposit Logic: Dynamic Risk Assessment
+        // If available cash is tight (< 3x rent), landlords may perceive higher risk.
+        // We simulate this by checking 'high_risk_multipliers' if available in data.
+
         double depositMult = 1.0;
+        String depositRiskNote = "Standard Rate";
+        boolean isHighRisk = input.availableCash() < (input.monthlyRent() * 3);
+
         if (depositData != null && depositData.city_practice() != null) {
-            if (depositData.city_practice().typicalMultipliers() != null
-                    && !depositData.city_practice().typicalMultipliers().isEmpty()) {
-                depositMult = depositData.city_practice().typicalMultipliers().get(0);
+            var practice = depositData.city_practice();
+
+            if (isHighRisk && practice.highRiskMultipliers() != null && !practice.highRiskMultipliers().isEmpty()) {
+                // Use the highest multiplier for conservative estimation
+                depositMult = practice.highRiskMultipliers().stream()
+                        .mapToDouble(Double::doubleValue)
+                        .max()
+                        .orElse(1.0);
+                depositRiskNote = String.format("Risk-Adjusted (%.1fx Rent)", depositMult);
+            } else if (practice.typicalMultipliers() != null && !practice.typicalMultipliers().isEmpty()) {
+                depositMult = practice.typicalMultipliers().get(0);
+                depositRiskNote = String.format("Standard (%.1fx Rent)", depositMult);
             }
         }
         int depositCost = (int) (input.monthlyRent() * depositMult);
@@ -181,14 +196,15 @@ public class VerdictService {
                 "Applied Baseline: User Input"));
 
         // 2. Security Deposit
+        // 2. Security Deposit
         String depositAnnotation;
-        // Simplified annotation logic as legal cap data is now in notes
-        if (depositData != null && depositData.city_practice() != null && depositData.city_practice().notes() != null
-                && !depositData.city_practice().notes().isEmpty()) {
-            depositAnnotation = "Applied Standard · " + depositData.city_practice().notes();
-        } else {
-            depositAnnotation = "Applied Standard · Required by Lease Terms";
-        }
+        String sourceNote = (depositData != null && depositData.city_practice() != null
+                && depositData.city_practice().notes() != null)
+                        ? depositData.city_practice().notes()
+                        : "Required by Lease Terms";
+
+        // Prioritize the Risk Note we calculated earlier
+        depositAnnotation = depositRiskNote + " · " + sourceNote;
 
         costBreakdown.add(new FinancialLineItem(
                 "Security Deposit",
@@ -249,6 +265,23 @@ public class VerdictService {
                 input.monthlyRent(),
                 marketZone);
 
+        // Calculate simulation multipliers
+        double simTypicalMult = (depositData != null && depositData.city_practice() != null
+                && depositData.city_practice().typicalMultipliers() != null
+                && !depositData.city_practice().typicalMultipliers().isEmpty())
+                        ? depositData.city_practice().typicalMultipliers().get(0)
+                        : 1.0;
+
+        double simHighRiskMult = simTypicalMult;
+        if (depositData != null && depositData.city_practice() != null
+                && depositData.city_practice().highRiskMultipliers() != null
+                && !depositData.city_practice().highRiskMultipliers().isEmpty()) {
+            simHighRiskMult = depositData.city_practice().highRiskMultipliers().stream()
+                    .mapToDouble(Double::doubleValue)
+                    .max()
+                    .orElse(simTypicalMult);
+        }
+
         return new VerdictResult(
                 verdict,
                 whyThisVerdict,
@@ -263,6 +296,8 @@ public class VerdictService {
                         remainingCash,
                         recommendedBuffer,
                         baseMultiplier, // e.g. 2.5 (1 + deposit multiplier)
+                        simTypicalMult,
+                        simHighRiskMult,
                         staticCosts, // moving + pet + fees
                         costBreakdown),
                 marketPosition);
