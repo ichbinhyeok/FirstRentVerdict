@@ -2,6 +2,7 @@
     title = "Terms of Use - Verdict Labs",
     description = "Terms of Use for First Rent Verdict. Disclaimer of liability and usage guidelines.",
     canonical = "https://movecostinfo.com/RentVerdict/terms",
+    noindex = true,
     content = @`
     <div style="max-width: 800px; margin: 4rem auto; padding: 0 1.5rem;">
         <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem;">Terms of Use</h1>

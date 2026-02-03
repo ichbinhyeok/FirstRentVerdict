@@ -2,33 +2,34 @@ To honour the JVM settings for this build a single-use Daemon process will be fo
 Daemon will be stopped at the end of the build 
 Calculating task graph as configuration cache cannot be reused because system property 'stderr.encoding' has changed.
 > Task :app:processTestResources NO-SOURCE
-> Task :app:generateJte UP-TO-DATE
-> Task :app:processResources UP-TO-DATE
-> Task :app:compileJava UP-TO-DATE
-> Task :app:classes UP-TO-DATE
+> Task :app:generateJte
+> Task :app:processResources
+
+> Task :app:compileJava
+Note: Some input files use unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+
+> Task :app:classes
 > Task :app:precompileJte SKIPPED
+> Task :app:resolveMainClassName
 > Task :app:compileTestJava UP-TO-DATE
 > Task :app:testClasses UP-TO-DATE
+> Task :app:jar
+> Task :app:bootJar
+> Task :app:startScripts
+> Task :app:distTar
+> Task :app:bootStartScripts
+> Task :app:bootDistTar
+> Task :app:distZip
+> Task :app:bootDistZip
+> Task :app:assemble
 OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
-
 > Task :app:test
+> Task :app:check
+> Task :app:build
 
-VerdictServiceTest > testMarketPosition_Calculation() FAILED
-    org.opentest4j.AssertionFailedError at VerdictServiceTest.java:179
+[Incubating] Problems report is available at: file:///C:/Development/Owner/FirstRentVerdict/build/reports/problems/problems-report.html
 
-7 tests completed, 1 failed
-
-> Task :app:test FAILED
-
-FAILURE: Build failed with an exception.
-
-* What went wrong:
-Execution failed for task ':app:test'.
-> There were failing tests. See the report at: file:///C:/Development/Owner/FirstRentVerdict/app/build/reports/tests/test/index.html
-
-* Try:
-> Run with --scan to get full insights.
-
-BUILD FAILED in 15s
-5 actionable tasks: 1 executed, 4 up-to-date
+BUILD SUCCESSFUL in 26s
+14 actionable tasks: 13 executed, 1 up-to-date
 Configuration cache entry stored.

@@ -32,4 +32,9 @@ public class AboutController {
     public String terms(Model model) {
         return "pages/terms";
     }
+
+    @GetMapping("/contact")
+    public String contact(Model model) {
+        return "pages/contact";
+    }
 }

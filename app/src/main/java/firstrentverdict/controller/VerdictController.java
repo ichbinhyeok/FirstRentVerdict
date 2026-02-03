@@ -109,7 +109,15 @@ public class VerdictController {
                 repository.getSecurityDeposit(city, state).orElse(null),
                 repository.getMoving(city, state).orElse(null));
 
+        // Get related cities from same state for internal linking
+        var allCities = repository.getAllCities();
+        java.util.List<firstrentverdict.model.dtos.CitiesData.CityEntry> relatedCities = allCities.stream()
+                .filter(c -> c.state().equalsIgnoreCase(state) && !c.city().equalsIgnoreCase(city))
+                .limit(5)
+                .collect(java.util.stream.Collectors.toList());
+
         model.addAttribute("pageData", content);
+        model.addAttribute("relatedCities", relatedCities);
         return "pages/city_landing";
     }
 

@@ -4,8 +4,27 @@
 @param List<CityEntry> cities
 
 @template.layout.main(
+    title = "First Rent Verdict: Can You Afford That Apartment? Free Calculator (2026)",
+    description = "Free rent affordability calculator using 2026 market data. Calculate your move-in costs, security deposit, and cash buffer for 100+ US cities.",
     canonical = "https://movecostinfo.com/RentVerdict/",
     content = @`
+    <!-- WebApplication Schema for Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "First Rent Verdict",
+      "url": "https://movecostinfo.com/RentVerdict/",
+      "description": "Free rent affordability calculator using 2026 market data for 100+ US cities.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
     <div class="split-layout">
         <!-- LEFT: Identity & Authority -->
         <div class="split-left animate-entry">
@@ -31,22 +50,25 @@
                     
                     <div class="form-group">
                         <label for="cityState">Jurisdiction (Target City)</label>
-                        <select id="cityState" name="cityState" required>
+                        <select id="cityState" name="cityState" required aria-required="true" aria-describedby="cityStateHint">
                             <option value="" disabled selected>Select Jurisdiction...</option>
                             @for(CityEntry city : cities)
                                 <option value="${city.city()}|${city.state()}">${city.city()}, ${city.state()}</option>
                             @endfor
                         </select>
+                        <span id="cityStateHint" class="visually-hidden">Select the city where you plan to rent</span>
                     </div>
 
                     <div class="form-group">
                         <label for="monthlyRent">Base Monthly Liability (Rent)</label>
-                        <input type="text" id="monthlyRent" name="monthlyRent" placeholder="0" inputmode="numeric" required>
+                        <input type="text" id="monthlyRent" name="monthlyRent" placeholder="0" inputmode="numeric" required aria-required="true" aria-describedby="rentHint">
+                        <span id="rentHint" class="visually-hidden">Enter your expected monthly rent amount in dollars</span>
                     </div>
 
                     <div class="form-group">
                         <label for="availableCash">Liquid Assets (Cash on Hand)</label>
-                        <input type="text" id="availableCash" name="availableCash" placeholder="0" inputmode="numeric" required>
+                        <input type="text" id="availableCash" name="availableCash" placeholder="0" inputmode="numeric" required aria-required="true" aria-describedby="cashHint">
+                        <span id="cashHint" class="visually-hidden">Enter total cash available for move-in costs</span>
                     </div>
 
                     <div class="checkbox-group">

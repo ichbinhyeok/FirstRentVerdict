@@ -1,6 +1,9 @@
 @import firstrentverdict.service.seo.CityContentGenerator.CityPageContent
 @import firstrentverdict.service.seo.CityContentGenerator.QnA
+@import firstrentverdict.model.dtos.CitiesData.CityEntry
+@import java.util.List
 @param CityPageContent pageData
+@param List<CityEntry> relatedCities = java.util.Collections.emptyList()
 
 @template.layout.main(
     title = pageData.pageTitle(),
@@ -245,14 +248,28 @@
             </a>
         </div>
 
-        <!-- Internal Linking (Popular Cities Stub) -->
+        <!-- Related Cities in Same State (Dynamic Internal Linking) -->
         <div style="margin-bottom: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle);">
-            <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-tertiary); margin-bottom: 1rem;">POPULAR MARKETS</h3>
+            <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-tertiary); margin-bottom: 1rem;">MORE IN ${pageData.state()}</h3>
             <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                <a href="/RentVerdict/verdict/austin-tx" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px;">Austin, TX</a>
-                <a href="/RentVerdict/verdict/dallas-tx" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px;">Dallas, TX</a>
-                <a href="/RentVerdict/verdict/miami-fl" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px;">Miami, FL</a>
-                <a href="/RentVerdict/verdict/new-york-ny" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px;">New York, NY</a>
+                @if(!relatedCities.isEmpty())
+                    @for(CityEntry related : relatedCities)
+                        <a href="/RentVerdict/verdict/${related.city().toLowerCase().replace(" ", "-")}-${related.state().toLowerCase()}" 
+                           style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px; transition: background 0.2s;"
+                           onmouseover="this.style.background='var(--bg-surface)'"
+                           onmouseout="this.style.background='transparent'">
+                            ${related.city()}, ${related.state()}
+                        </a>
+                    @endfor
+                @else
+                    <a href="/RentVerdict/verdict/austin-tx" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px;">Austin, TX</a>
+                    <a href="/RentVerdict/verdict/dallas-tx" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px;">Dallas, TX</a>
+                    <a href="/RentVerdict/verdict/miami-fl" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px;">Miami, FL</a>
+                    <a href="/RentVerdict/verdict/new-york-ny" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px;">New York, NY</a>
+                @endif
+            </div>
+            <div style="margin-top: 1rem;">
+                <a href="/RentVerdict/cities" style="color: var(--text-tertiary); font-size: 0.85rem; text-decoration: underline;">View all 100+ cities →</a>
             </div>
         </div>
 

@@ -2,6 +2,7 @@
     title = "Privacy Policy - Verdict Labs",
     description = "Privacy Policy for First Rent Verdict. How we collect, use, and protect your data.",
     canonical = "https://movecostinfo.com/RentVerdict/privacy",
+    noindex = true,
     content = @`
     <div style="max-width: 800px; margin: 4rem auto; padding: 0 1.5rem;">
         <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 2rem;">Privacy Policy</h1>
