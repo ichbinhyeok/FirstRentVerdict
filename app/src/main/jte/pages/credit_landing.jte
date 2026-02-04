@@ -10,7 +10,21 @@
 @template.layout.main(
     title = pageData.pageTitle(),
     description = pageData.metaDescription(),
+    canonical = (canonicalUrl != null ? canonicalUrl : "https://movecostinfo.com/RentVerdict/verdict/credit/" + tier.toLowerCase() + "/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase()),
     content = @`
+    
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://movecostinfo.com/RentVerdict/"},
+        {"@type": "ListItem", "position": 2, "name": "${pageData.city()}", "item": "https://movecostinfo.com/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}"},
+        {"@type": "ListItem", "position": 3, "name": "${tier} Credit Guide"}
+      ]
+    }
+    </script>
     <div class="container" style="max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem;">
         
         <!-- Breadcrumbs -->

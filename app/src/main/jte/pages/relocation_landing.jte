@@ -21,13 +21,26 @@
         @for(int i=0; i < pageData.commonQuestions().size(); i++)
         {
           "@type": "Question",
-          "name": "${pageData.commonQuestions().get(i).question()}",
+          "name": "${pageData.commonQuestions().get(i).question().replace("\"", "\\\"")}",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "${pageData.commonQuestions().get(i).answer()}"
+            "text": "${pageData.commonQuestions().get(i).answer().replace("\"", "\\\"")}"
           }
         }${i < pageData.commonQuestions().size() - 1 ? "," : ""}
         @endfor
+      ]
+    }
+    </script>
+    
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://movecostinfo.com/RentVerdict/"},
+        {"@type": "ListItem", "position": 2, "name": "${pageData.city()}", "item": "https://movecostinfo.com/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}"},
+        {"@type": "ListItem", "position": 3, "name": "Relocation Guide"}
       ]
     }
     </script>

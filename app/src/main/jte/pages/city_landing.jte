@@ -33,6 +33,19 @@
     }
     </script>
     
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://movecostinfo.com/RentVerdict/"},
+        {"@type": "ListItem", "position": 2, "name": "Cities", "item": "https://movecostinfo.com/RentVerdict/cities"},
+        {"@type": "ListItem", "position": 3, "name": "${pageData.city()}, ${pageData.state()}"}
+      ]
+    }
+    </script>
+    
     <!-- Floating CTA Bar (Mobile Only) -->
     <div class="floating-cta-bar d-md-none">
         <div style="color: white;">
