@@ -20,7 +20,7 @@ public class SitemapController {
         this.repository = repository;
     }
 
-    @GetMapping(value = "/RentVerdict/sitemap.xml", produces = MediaType.APPLICATION_XML_VALUE)
+    @GetMapping(value = { "/sitemap.xml", "/RentVerdict/sitemap.xml" }, produces = MediaType.APPLICATION_XML_VALUE)
     @ResponseBody
     public String sitemap() {
         List<CitiesData.CityEntry> cities = repository.getAllCities();
