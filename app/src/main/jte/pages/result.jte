@@ -11,9 +11,11 @@
 @param VerdictResult result
 @param VerdictInput input
 @param boolean noindex = true
+@param String pageType = "GENERAL"
+@param String scenarioTitle = null
 
 @template.layout.main(
-    title = "Verdict Report - First Rent Verdict",
+    title = (scenarioTitle != null ? scenarioTitle : "Verdict Report - First Rent Verdict"),
     noindex = noindex,
     content = @`
     <!-- Main Result Container -->

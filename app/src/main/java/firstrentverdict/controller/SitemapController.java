@@ -47,8 +47,16 @@ public class SitemapController {
         // 2. City Pages (pSEO)
         for (CitiesData.CityEntry city : cities) {
             String slug = city.city().toLowerCase().replace(" ", "-") + "-" + city.state().toLowerCase();
-            String location = "https://movecostinfo.com/RentVerdict/verdict/" + slug;
-            addUrl(xml, location, "0.8", monthlyMod);
+
+            // General Verdict
+            addUrl(xml, "https://movecostinfo.com/RentVerdict/verdict/" + slug, "0.8", monthlyMod);
+
+            // Relocation (High Demand)
+            addUrl(xml, "https://movecostinfo.com/RentVerdict/verdict/moving-to/" + slug, "0.9", monthlyMod);
+
+            // Credit Specific (Long Tail)
+            addUrl(xml, "https://movecostinfo.com/RentVerdict/verdict/credit/poor/" + slug, "0.8", monthlyMod);
+            addUrl(xml, "https://movecostinfo.com/RentVerdict/verdict/credit/fair/" + slug, "0.7", monthlyMod);
         }
 
         xml.append("</urlset>");

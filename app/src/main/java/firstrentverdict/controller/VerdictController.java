@@ -29,17 +29,15 @@ public class VerdictController {
     private final VerdictDataRepository repository;
     private final VerdictService verdictService;
     private final WhatIfService whatIfService;
-    private final firstrentverdict.service.seo.CityContentGenerator cityContentGenerator;
 
     public VerdictController(
             VerdictDataRepository repository,
             VerdictService verdictService,
-            WhatIfService whatIfService,
-            firstrentverdict.service.seo.CityContentGenerator cityContentGenerator) {
+            WhatIfService whatIfService) {
         this.repository = repository;
         this.verdictService = verdictService;
         this.whatIfService = whatIfService;
-        this.cityContentGenerator = cityContentGenerator;
+
     }
 
     @GetMapping("/")
@@ -90,43 +88,120 @@ public class VerdictController {
         return "pages/result";
     }
 
-    @GetMapping("/verdict/{slug}")
-    public String cityPage(@PathVariable("slug") String slug, Model model) {
-        // Parse slug: e.g. "austin-tx" -> city="Austin", state="TX"
-        if (slug == null || slug.length() < 3) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid city URL");
+    private String[] parseCitySlug(String slug) {
+        if (slug == null || slug.lastIndexOf('-') == -1) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid URL format");
         }
-
         String state = slug.substring(slug.lastIndexOf('-') + 1).toUpperCase();
-        String citySlug = slug.substring(0, slug.lastIndexOf('-'));
-        // Capitalize words: "new-york" -> "New York"
-        String city = java.util.Arrays.stream(citySlug.split("-"))
-                .map(word -> word.substring(0, 1).toUpperCase() + word.substring(1))
+        String cityPart = slug.substring(0, slug.lastIndexOf('-'));
+
+        // Capitalize: new-york -> New York
+        String city = java.util.Arrays.stream(cityPart.split("-"))
+                .map(s -> s.length() > 0 ? s.substring(0, 1).toUpperCase() + s.substring(1) : "")
                 .collect(java.util.stream.Collectors.joining(" "));
 
+        return new String[] { city, state };
+    }
+
+    @GetMapping("/verdict/{slug}")
+    public String cityPage(@PathVariable("slug") String slug, Model model) {
+        String[] location = parseCitySlug(slug);
+        String city = location[0];
+        String state = location[1];
+
         if (!repository.isValidCity(city, state)) {
-            // Try fallback (maybe basic casing issue, though repository checks exact key
-            // usually)
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not supported: " + city + ", " + state);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found in database");
         }
 
-        firstrentverdict.service.seo.CityContentGenerator.CityPageContent content = cityContentGenerator.generate(
-                city,
-                state,
-                repository.getRent(city, state).orElseThrow(),
-                repository.getSecurityDeposit(city, state).orElse(null),
-                repository.getMoving(city, state).orElse(null));
+        // Fetch Median Rent for Simulation Default
+        var rentData = repository.getRent(city, state).orElse(null);
+        int medianRent = (rentData != null) ? (int) rentData.median() : 2000;
+        int cash = medianRent * 3 + 1500; // Standard buffer
 
-        // Get related cities from same state for internal linking
-        var allCities = repository.getAllCities();
-        java.util.List<firstrentverdict.model.dtos.CitiesData.CityEntry> relatedCities = allCities.stream()
-                .filter(c -> c.state().equalsIgnoreCase(state) && !c.city().equalsIgnoreCase(city))
-                .limit(5)
-                .collect(java.util.stream.Collectors.toList());
+        SimulationInput simInput = new SimulationInput(
+                city, state, medianRent, cash, false, null, null,
+                firstrentverdict.model.verdict.CreditTier.GOOD, true, null, null);
 
-        model.addAttribute("pageData", content);
-        model.addAttribute("relatedCities", relatedCities);
-        return "pages/city_landing";
+        VerdictResult result = verdictService.simulateVerdict(simInput);
+        VerdictInput viewInput = new VerdictInput(city, state, medianRent, cash, false, true, null);
+
+        model.addAttribute("input", viewInput);
+        model.addAttribute("result", result);
+        model.addAttribute("pageType", "GENERAL");
+        model.addAttribute("scenarioTitle", "Rent Verdict: " + city + ", " + state);
+
+        return "pages/result";
+    }
+
+    @GetMapping("/verdict/credit/{tier}/{slug}")
+    public String creditPage(
+            @PathVariable("tier") String tier,
+            @PathVariable("slug") String slug,
+            Model model) {
+
+        String[] location = parseCitySlug(slug);
+        String city = location[0];
+        String state = location[1];
+
+        if (!repository.isValidCity(city, state)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
+        }
+
+        var rentData = repository.getRent(city, state).orElse(null);
+        int medianRent = (rentData != null) ? (int) rentData.median() : 2000;
+        int cash = medianRent * 3 + 1500;
+
+        firstrentverdict.model.verdict.CreditTier creditTier;
+        try {
+            creditTier = firstrentverdict.model.verdict.CreditTier.valueOf(tier.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid credit tier");
+        }
+
+        SimulationInput simInput = new SimulationInput(
+                city, state, medianRent, cash, false, null, null,
+                creditTier, true, null, null);
+
+        VerdictResult result = verdictService.simulateVerdict(simInput);
+        VerdictInput viewInput = new VerdictInput(city, state, medianRent, cash, false, true, null);
+
+        model.addAttribute("input", viewInput);
+        model.addAttribute("result", result);
+        model.addAttribute("pageType", "CREDIT_" + creditTier.name());
+        model.addAttribute("scenarioTitle",
+                "Renting in " + city + " with " + tier.substring(0, 1).toUpperCase() + tier.substring(1) + " Credit");
+
+        return "pages/result";
+    }
+
+    @GetMapping("/verdict/moving-to/{slug}")
+    public String relocationPage(@PathVariable("slug") String slug, Model model) {
+        String[] location = parseCitySlug(slug);
+        String city = location[0];
+        String state = location[1];
+
+        if (!repository.isValidCity(city, state)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
+        }
+
+        var rentData = repository.getRent(city, state).orElse(null);
+        int medianRent = (rentData != null) ? (int) rentData.median() : 2000;
+        int cash = medianRent * 4 + 2000; // Moving cross-country is expensive
+
+        SimulationInput simInput = new SimulationInput(
+                city, state, medianRent, cash, false, null, null,
+                firstrentverdict.model.verdict.CreditTier.GOOD, false, null, null // isLocalMove = false
+        );
+
+        VerdictResult result = verdictService.simulateVerdict(simInput);
+        VerdictInput viewInput = new VerdictInput(city, state, medianRent, cash, false, false, null);
+
+        model.addAttribute("input", viewInput);
+        model.addAttribute("result", result);
+        model.addAttribute("pageType", "RELOCATION");
+        model.addAttribute("scenarioTitle", "Relocation Guide: Moving to " + city + ", " + state);
+
+        return "pages/result";
     }
 
     @GetMapping("/cities")
