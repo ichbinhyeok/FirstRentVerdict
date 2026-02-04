@@ -30,6 +30,7 @@ public class JsonDataLoader implements CommandLineRunner {
         loadPetData();
         loadCashBufferData();
         loadCityCoordinates();
+        loadCityInsights();
 
         System.out.println("✅ Data Loading Complete. Total cities supported: " + repository.getAllCities().size());
     }
@@ -126,6 +127,17 @@ public class JsonDataLoader implements CommandLineRunner {
             }
         } else {
             System.err.println("❌ city_coordinates.json not found!");
+        }
+    }
+
+    private void loadCityInsights() throws Exception {
+        ClassPathResource resource = new ClassPathResource("data/city_insights.json");
+        if (resource.exists()) {
+            try (InputStream is = resource.getInputStream()) {
+                CityInsightData data = objectMapper.readValue(is, CityInsightData.class);
+                data.data().forEach(repository::addCityInsight);
+                System.out.println("Loaded qualitative insights for " + data.data().size() + " cities.");
+            }
         }
     }
 }

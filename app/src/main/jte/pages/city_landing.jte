@@ -4,323 +4,254 @@
 @import java.util.List
 @param CityPageContent pageData
 @param List<CityEntry> relatedCities = java.util.Collections.emptyList()
+@param Integer savings = null
+@param String canonicalUrl = null
 
 @template.layout.main(
     title = pageData.pageTitle(),
     description = pageData.metaDescription(),
-    canonical = "https://movecostinfo.com/RentVerdict/verdict/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase(),
+    canonical = (canonicalUrl != null ? canonicalUrl : "https://movecostinfo.com/RentVerdict/verdict/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase()),
     content = @`
-    <!-- JSON-LD FAQ Schema -->
+    
+    <!-- FAQ Schema -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-
-        @for(int i = 0; i < pageData.commonQuestions().size(); i++)
-          {
-            "@type": "Question",
-            "name": "${pageData.commonQuestions().get(i).question()}",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "${pageData.commonQuestions().get(i).answer()}"
-            }
-          }${i < pageData.commonQuestions().size() - 1 ? "," : ""}
+        @for(int i=0; i < pageData.commonQuestions().size(); i++)
+        {
+          "@type": "Question",
+          "name": "${pageData.commonQuestions().get(i).question().replace("\"", "\\\"")}",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "${pageData.commonQuestions().get(i).answer().replace("\"", "\\\"")}"
+          }
+        }${i < pageData.commonQuestions().size() - 1 ? "," : ""}
         @endfor
       ]
     }
     </script>
+    
+    <!-- Floating CTA Bar (Mobile Only) -->
+    <div class="floating-cta-bar d-md-none">
+        <div style="color: white;">
+            <div style="font-size: 0.75rem; opacity: 0.8; font-weight: 600;">APPROVED OR DENIED?</div>
+            <div style="font-size: 0.9rem; font-weight: 700;">Check Your Potential</div>
+        </div>
+        <a href="/RentVerdict/" class="btn btn-primary btn-sm" style="padding: 0.75rem 1.5rem; font-weight: 700;">START AUDIT</a>
+    </div>
 
-    <div class="container" style="max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem;">
+    <div class="container" style="max-width: 900px; margin: 0 auto; padding: 3rem 1.5rem;">
         
-        <!-- Breadcrumbs (SEO & Navigation) -->
-        <nav style="margin-bottom: 2rem; font-size: 0.85rem; color: var(--text-tertiary);">
-            <a href="/RentVerdict/" style="color: inherit; text-decoration: none; transition: color 0.2s;">Home</a> 
-            <span style="margin: 0 0.5rem;">/</span> 
-            <a href="/RentVerdict/cities" style="color: inherit; text-decoration: none; transition: color 0.2s;">Cities</a> 
-            <span style="margin: 0 0.5rem;">/</span> 
-            <span style="color: var(--text-secondary);">${pageData.city()}, ${pageData.state()}</span>
+        <!-- Breadcrumbs -->
+        <nav style="margin-bottom: 2.5rem; font-size: 0.825rem; color: var(--text-tertiary); display: flex; gap: 0.5rem; align-items: center;">
+            <a href="/RentVerdict/" style="color: inherit;">Home</a> 
+            <span>/</span> 
+            <a href="/RentVerdict/cities" style="color: inherit;">Cities</a> 
+            <span>/</span> 
+            <span style="color: var(--text-secondary); font-weight: 500;">${pageData.city()}, ${pageData.state()}</span>
         </nav>
 
-        <!-- JSON-LD Breadcrumb Schema -->
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://movecostinfo.com/RentVerdict/"
-          },{
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Cities",
-            "item": "https://movecostinfo.com/RentVerdict/cities"
-          },{
-            "@type": "ListItem",
-            "position": 3,
-            "name": "${pageData.city()}, ${pageData.state()}",
-            "item": "https://movecostinfo.com/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}"
-          }]
-        }
-        </script>
-        <div style="text-align: center; margin-bottom: 4rem;">
-            <div class="badge-subtle" style="margin-bottom: 1rem;">2026 Rental Market Audit</div>
-            <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2;">
-                ${pageData.pageTitle()}
-            </h1>
-            
-            <!-- Affordability Tier Badge (Thin Content Prevention) -->
-            <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;">
-                @if(pageData.affordabilityTier().equals("High-Cost"))
-                    <span style="background: rgba(220, 38, 38, 0.1); color: #dc2626; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">⚠️ High-Cost Market</span>
-                @elseif(pageData.affordabilityTier().equals("Affordable"))
-                    <span style="background: rgba(22, 163, 74, 0.1); color: #16a34a; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">✓ Affordable Market</span>
-                @else
-                    <span style="background: rgba(202, 138, 4, 0.1); color: #ca8a04; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">● Moderate Market</span>
-                @endif
-                
-                @if(pageData.nationalComparison() >= 0)
-                    <span style="background: var(--bg-surface); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; color: var(--text-secondary);">
-                        +${pageData.nationalComparison()}% vs National Avg
-                    </span>
-                @else
-                    <span style="background: var(--bg-surface); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; color: var(--text-secondary);">
-                        ${pageData.nationalComparison()}% vs National Avg
-                    </span>
+        <!-- Hero Section: Premium Contextual Header -->
+        <header style="margin-bottom: 5rem; text-align: left;">
+            <div style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem;">
+                <span class="benefit-pill" style="border-color: var(--accent-primary); color: var(--accent-primary);">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    2026 AUDITED DATA
+                </span>
+                @if(pageData.affordabilityTier().equals("Affordable"))
+                    <span class="benefit-pill" style="border-color: var(--success); color: var(--success);">AFFORDABLE MARKET</span>
                 @endif
             </div>
-            
-            <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; margin-bottom: 2rem;">
+
+            <h1 style="font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.03em;">
+                <span class="gradient-text">${pageData.pageTitle()}</span>
+            </h1>
+
+            <p style="font-size: 1.25rem; color: var(--text-secondary); line-height: 1.6; max-width: 750px;">
                 ${pageData.marketContextText()}
             </p>
+        </header>
 
-            <div style="margin-top: 2.5rem;">
-                <a href="/RentVerdict/" class="btn btn-primary btn-lg" style="text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);">
-                    <span>Run Personal Affordability Test</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-                <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-tertiary);">
-                    <span style="color: var(--success);">●</span> Live 2026 ${pageData.city()} Data Loaded
-                </div>
+        <!-- Specialized Intent Blocks -->
+        @if(savings != null)
+            <div class="glass-morphism" style="padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border-left: 5px solid var(--accent-primary);">
+                <h3 style="margin-bottom: 1rem;">Savings Analysis for ${pageData.city()}</h3>
+                <p style="font-size: 1.1rem; color: var(--text-secondary);">${pageData.localInsight()}</p>
             </div>
-        </div>
-
-        <!-- Key Financial Grid -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
-            <!-- Rent Card -->
-            <div class="card" style="padding: 1.5rem; border-left: 4px solid var(--primary);">
-                <div style="font-size: 0.9rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Median Rent</div>
-                <div style="font-size: 2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
-                    $${String.format("%,d", pageData.medianRent())}
-                </div>
-                <div style="font-size: 0.9rem; color: var(--text-secondary);">
-                    Range: $${String.format("%,d", pageData.rentLow())} - $${String.format("%,d", pageData.rentHigh())}
-                </div>
+        @elseif(pageData.pageTitle().contains("Pet"))
+            <div class="glass-morphism" style="padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border-left: 5px solid #f59e0b;">
+                <h3 style="margin-bottom: 1rem;">🐾 Pet-Friendly Policy Audit</h3>
+                <p style="font-size: 1.1rem; color: var(--text-secondary);">${pageData.localInsight()}</p>
+                <div style="margin-top: 1rem; font-size: 0.9rem; font-style: italic; color: var(--text-tertiary);">* Based on typical private and corporate rental practices in ${pageData.city()}.</div>
             </div>
-
-            <!-- Income Card -->
-            <div class="card" style="padding: 1.5rem; border-left: 4px solid var(--verdict-approved);">
-                <div style="font-size: 0.9rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Income Goal (3x)</div>
-                <div style="font-size: 2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
-                    $${String.format("%,d", pageData.yearlyIncomeReq())}
-                </div>
-                <div style="font-size: 0.9rem; color: var(--text-secondary);">
-                    Per Year / ~$${String.format("%,d", pageData.monthlyIncomeReq())} Mo
-                </div>
-            </div>
-
-            <!-- Cash Card -->
-            <div class="card" style="padding: 1.5rem; border-left: 4px solid var(--verdict-denied);">
-                <div style="font-size: 0.9rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Est. Move-in Cash</div>
-                <div style="font-size: 2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
-                    $${String.format("%,d", pageData.totalUpfrontEstimate())}
-                </div>
-                <div style="font-size: 0.9rem; color: var(--text-secondary);">
-                    Rent + Deposit + Moving
-                </div>
-            </div>
-        </div>
-
-        <!-- Cost Breakdown Table (SEO Content Depth) -->
-        <div style="margin-bottom: 4rem;">
-            <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">Total Move-in Cost Breakdown</h2>
-            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
-                Many first-time renters in ${pageData.city()} focus only on the monthly rent, missing the "Liquidity Wall"—the upfront cash required to get the keys.
-            </p>
-            <div style="overflow-x: auto;">
-                <table style="width: 100%; border-collapse: collapse; min-width: 600px;">
-                    <thead>
-                        <tr style="border-bottom: 2px solid var(--border-subtle); text-align: left;">
-                            <th style="padding: 1rem; color: var(--text-secondary);">Expense Item</th>
-                            <th style="padding: 1rem; color: var(--text-secondary);">Low Est.</th>
-                            <th style="padding: 1rem; color: var(--text-secondary);">Typical</th>
-                            <th style="padding: 1rem; color: var(--text-secondary);">High Est.</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style="border-bottom: 1px solid var(--border-subtle);">
-                            <td style="padding: 1rem; font-weight: 600;">First Month Rent</td>
-                            <td style="padding: 1rem;">$${String.format("%,d", pageData.rentLow())}</td>
-                            <td style="padding: 1rem;">$${String.format("%,d", pageData.medianRent())}</td>
-                            <td style="padding: 1rem;">$${String.format("%,d", pageData.rentHigh())}</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border-subtle);">
-                            <td style="padding: 1rem; font-weight: 600;">Security Deposit <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-tertiary); display: block;">${pageData.depositNotes()}</span></td>
-                            <td style="padding: 1rem;">$${String.format("%,d", (int)(pageData.rentLow() * 0.5))}</td>
-                            <td style="padding: 1rem;">$${String.format("%,d", pageData.typicalDeposit())}</td>
-                            <td style="padding: 1rem;">$${String.format("%,d", pageData.rentHigh() * 2)}</td>
-                        </tr>
-                        <tr style="border-bottom: 1px solid var(--border-subtle);">
-                            <td style="padding: 1rem; font-weight: 600;">Moving Costs <span style="font-size: 0.8rem; font-weight: normal; color: var(--text-tertiary); display: block;">${pageData.movingAssumptions()}</span></td>
-                            <td style="padding: 1rem;">$${String.format("%,d", pageData.movingLow())}</td>
-                            <td style="padding: 1rem;">$${String.format("%,d", pageData.typicalMoving())}</td>
-                            <td style="padding: 1rem;">$${String.format("%,d", pageData.movingHigh())}</td>
-                        </tr>
-                        <tr style="background: var(--bg-surface);">
-                            <td style="padding: 1rem; font-weight: 700;">Est. Total Cash Needed</td>
-                            <td style="padding: 1rem; font-weight: 700;">$${String.format("%,d", pageData.rentLow() + (int)(pageData.rentLow() * 0.5) + pageData.movingLow())}</td>
-                            <td style="padding: 1rem; font-weight: 700; color: var(--primary);">$${String.format("%,d", pageData.totalUpfrontEstimate())}</td>
-                            <td style="padding: 1rem; font-weight: 700;">$${String.format("%,d", pageData.rentHigh() * 3 + pageData.movingHigh())}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Risks Section -->
-        <div style="margin-bottom: 4rem; padding: 2.5rem; background: var(--bg-surface); border-radius: 12px; border: 1px solid var(--border-subtle);">
-            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--verdict-denied);">
-                ⚠️ ${pageData.preVerdictHeadline()}
-            </h2>
-            <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary);">
-                ${pageData.riskNarrative()}
-            </p>
-        </div>
-
-        <!-- Local Insight Section (Thin Content Prevention) -->
-        <div style="margin-bottom: 4rem; padding: 2rem; background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 51, 234, 0.05) 100%); border-radius: 12px; border: 1px solid rgba(59, 130, 246, 0.1);">
-            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--text-primary);">
-                📍 Local Insight: ${pageData.city()}, ${pageData.state()}
-            </h3>
-            <p style="font-size: 1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 1rem;">
-                ${pageData.localInsight()}
-            </p>
-            
-            <!-- Legal Summary -->
-            <div style="padding-top: 1rem; border-top: 1px dashed rgba(59, 130, 246, 0.2);">
-                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-tertiary);">⚖️ LEGAL NOTE:</span>
-                <span style="font-size: 0.9rem; color: var(--text-secondary);">${pageData.legalSummary()}</span>
-            </div>
-        </div>
-
-        <!-- Data Sources (E-E-A-T) -->
-        @if(pageData.dataSources() != null && !pageData.dataSources().isEmpty())
-        <div style="margin-bottom: 4rem; padding: 1.5rem; background: var(--bg-body); border: 1px solid var(--border-subtle); border-radius: 8px;">
-            <h4 style="font-size: 0.8rem; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.75rem; letter-spacing: 0.05em;">Data Sources</h4>
-            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                @for(String source : pageData.dataSources())
-                    <li style="font-size: 0.8rem; color: var(--text-secondary); background: var(--bg-surface); padding: 0.25rem 0.75rem; border-radius: 12px;">${source}</li>
-                @endfor
-            </ul>
-        </div>
         @endif
 
-        <!-- Common Questions (QnA Section) -->
-        <div style="margin-bottom: 4rem;">
-            <h3 style="font-size: 0.9rem; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 2rem; letter-spacing: 0.05em;">
-                Common Moving Questions
-            </h3>
-            
-            @if(pageData.commonQuestions() != null)
-                @for(firstrentverdict.service.seo.CityContentGenerator.QnA qna : pageData.commonQuestions())
-                    <div style="margin-bottom: 2rem;">
-                        <h4 style="font-size: 1.2rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">
-                            ${qna.question()}
-                        </h4>
-                        <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.6;">
-                            ${qna.answer()}
-                        </p>
-                    </div>
-                @endfor
-            @endif
+        <!-- Financial Summary Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 5rem;">
+            <div class="card glass-morphism" style="border: none; padding: 2rem;">
+                <div class="financial-label">Median Rent</div>
+                <div class="financial-value" style="font-size: 2.5rem;">$${String.format("%,d", pageData.medianRent())}</div>
+                <div class="financial-value-sm">p25: $${String.format("%,d", pageData.rentLow())} • p75: $${String.format("%,d", pageData.rentHigh())}</div>
+            </div>
+
+            <div class="card" style="background: var(--text-primary); border: none; padding: 2rem; color: white;">
+                <div class="financial-label" style="color: rgba(255,255,255,0.6);">Total Move-in Cash</div>
+                <div class="financial-value" style="color: white; font-size: 2.5rem;">$${String.format("%,d", pageData.totalUpfrontEstimate())}</div>
+                <div class="financial-value-sm" style="color: rgba(255,255,255,0.8);">First + Deposit + Movers</div>
+            </div>
         </div>
 
-        <!-- MEGA CTA: The Main Product -->
-        <div style="margin-bottom: 4rem; background: linear-gradient(135deg, var(--bg-surface) 0%, rgba(59, 130, 246, 0.03) 100%); border: 2px solid var(--primary); border-radius: 24px; padding: 4rem 2rem; text-align: center; position: relative; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);">
-            <!-- Decorative Element -->
-            <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: var(--primary); opacity: 0.05; border-radius: 50%;"></div>
-            
-            <div style="position: relative; z-index: 1;">
-                <div class="badge-accent" style="margin-bottom: 1.5rem; display: inline-block;">THE VERDICT ENGINE</div>
-                <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -0.02em;">
-                    Should you move to ${pageData.city()}?
-                </h2>
-                <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2.5rem; max-width: 550px; margin-left: auto; margin-right: auto; line-height: 1.6;">
-                    Don't guess with your savings. Our <strong>Real-time Simulator</strong> analyzes your cash vs. actual move-in costs in ${pageData.city()} to give you a definitive Approved or Denied judgment.
-                </p>
+        <!-- The "Liquidity Wall" Visual Breakdown -->
+        <section style="margin-bottom: 6rem;">
+            <h2 style="font-size: 2rem; margin-bottom: 2rem;">Itemized Move-in Invoice</h2>
+            <div style="background: var(--bg-secondary); border-radius: var(--radius-lg); border: 1px solid var(--border-default); overflow: hidden;">
+                <div style="padding: 1.5rem; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; background: var(--bg-tertiary);">
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-secondary);">ESTIMATED BREAKDOWN</span>
+                    <span class="badge badge-subtle">2026 COST INDEX</span>
+                </div>
                 
-                <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
-                    <a href="/RentVerdict/" class="btn btn-primary btn-lg" style="text-decoration: none; padding: 1.25rem 3rem; font-size: 1.25rem; font-weight: 700; width: 100%; max-width: 400px; box-shadow: 0 20px 30px -10px rgba(59, 130, 246, 0.4);">
-                        Launch 2026 Calculator
-                    </a>
+                <div style="padding: 0 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; padding: 1.5rem 0; border-bottom: 1px solid var(--border-subtle);">
+                        <div>
+                            <div style="font-weight: 700;">First Month Rent</div>
+                            <div style="font-size: 0.85rem; color: var(--text-tertiary);">Standard target for ${pageData.city()}</div>
+                        </div>
+                        <div style="font-size: 1.25rem; font-weight: 700;">$${String.format("%,d", pageData.medianRent())}</div>
+                    </div>
                     
-                    <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
-                        <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            Free Forever
+                    <div style="display: flex; justify-content: space-between; padding: 1.5rem 0; border-bottom: 1px solid var(--border-subtle);">
+                        <div>
+                            <div style="font-weight: 700;">Security Deposit</div>
+                            <div style="font-size: 0.85rem; color: var(--text-tertiary);">${pageData.depositNotes()}</div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            No Sign-up Required
+                        <div style="font-size: 1.25rem; font-weight: 700;">$${String.format("%,d", pageData.typicalDeposit())}</div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; padding: 1.5rem 0; border-bottom: 1px solid var(--border-subtle);">
+                        <div>
+                            <div style="font-weight: 700;">Pet-Related (Est.)</div>
+                            <div style="font-size: 0.85rem; color: var(--text-tertiary);">${pageData.petNotes()}</div>
                         </div>
-                        <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text-secondary);">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--success)" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            100% Data Privacy
+                        <div style="font-size: 1.25rem; font-weight: 700;">$${String.format("%,d", pageData.petDeposit())}</div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; padding: 1.5rem 0;">
+                        <div>
+                            <div style="font-weight: 700;">Moving & Logistics</div>
+                            <div style="font-size: 0.85rem; color: var(--text-tertiary);">${pageData.movingAssumptions()}</div>
                         </div>
+                        <div style="font-size: 1.25rem; font-weight: 700;">$${String.format("%,d", pageData.typicalMoving())}</div>
+                    </div>
+                </div>
+
+                <div style="padding: 2rem 1.5rem; background: var(--accent-gradient-subtle); border-top: 1px solid var(--accent-primary); display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary);">TOTAL UPFRONT</span>
+                    <span style="font-size: 2rem; font-weight: 800; color: var(--accent-primary);">$${String.format("%,d", pageData.totalUpfrontEstimate() + pageData.petDeposit())}</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expert Strategy & Local Tips -->
+        <section style="margin-bottom: 6rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+            <div style="background: var(--bg-panel); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-subtle);">
+                <div style="color: var(--accent-primary); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 1rem;">Expert Strategy</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">The ${pageData.city()} Renter's Blueprint</h3>
+                <p style="line-height: 1.7; color: var(--text-secondary); margin-bottom: 1.5rem;">${pageData.renterAdvice()}</p>
+                <div style="padding: 1rem; background: var(--bg-secondary); border-radius: 8px; font-size: 0.9rem; color: var(--text-primary);">
+                    <strong>📅 Timing Tip:</strong> ${pageData.seasonalTip()}
+                </div>
+            </div>
+            <div style="background: var(--bg-panel); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-subtle);">
+                <div style="color: #10b981; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 1rem;">Local Protections</div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Tenant Rights & Law</h3>
+                <p style="line-height: 1.7; color: var(--text-secondary); margin-bottom: 1.5rem;">${pageData.legalSummary()}</p>
+                <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px; font-size: 0.9rem; color: #059669;">
+                    <strong>⚖️ Regulatory Note:</strong> Local ordinances in ${pageData.state()} may cap security deposits to 1-2 months' rent.
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium CTA Card -->
+        <section style="margin-bottom: 6rem;">
+            <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 4rem 2rem; border-radius: var(--radius-xl); text-align: center; color: white; box-shadow: 0 40px 60px -15px rgba(0,0,0,0.3);">
+                <div class="badge-accent" style="margin-bottom: 1.5rem; background: rgba(99, 102, 241, 0.2); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.4);">THE VERDICT ENGINE</div>
+                <h2 style="font-size: 2.25rem; font-weight: 800; color: white; margin-bottom: 1.5rem; letter-spacing: -0.02em;">Should you move to ${pageData.city()}?</h2>
+                <p style="font-size: 1.15rem; color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto 3rem; line-height: 1.6;">
+                    Analyzing $${String.format("%,d", pageData.medianRent())} rent is just the start. Our simulator checks your actual savings vs. regional liquidity risks to give you a definitive Approved or Denied judgment.
+                </p>
+                <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+                    <a href="/RentVerdict/" class="btn btn-primary btn-lg" style="padding: 1.25rem 3.5rem; font-size: 1.25rem; font-weight: 800; width: 100%; max-width: 420px; box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);">
+                        AUDIT MY POTENTIAL
+                    </a>
+                    <div style="display: flex; gap: 2rem; color: rgba(255,255,255,0.5); font-size: 0.85rem; font-weight: 500;">
+                        <span>✓ FREE ANALYSIS</span>
+                        <span>✓ 100% PRIVATE</span>
+                        <span>✓ NO SIGN-UP</span>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Block 3: Market Context -->
-        <div style="margin-bottom: 4rem;">
-            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Regional Market Context</h2>
-            <p style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                ${pageData.marketContextText()}
-            </p>
-            <a href="/RentVerdict/guide/rent-affordability-rule" style="font-size: 0.95rem; color: var(--text-primary); font-weight: 500; text-decoration: underline;">
-                Learn more about our 50/30/20 Liquidity Framework &rarr;
-            </a>
-        </div>
+        <!-- QnA Section -->
+        <section style="margin-bottom: 6rem;">
+            <h2 style="font-size: 1.5rem; margin-bottom: 2.5rem; text-transform: uppercase; color: var(--text-tertiary); letter-spacing: 0.05em;">Moving FAQ</h2>
+            @for(QnA qna : pageData.commonQuestions())
+                <div style="margin-bottom: 3rem;">
+                    <h3 style="font-size: 1.35rem; font-weight: 700; margin-bottom: 0.75rem;">${qna.question()}</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-secondary);">${qna.answer()}</p>
+                </div>
+            @endfor
+        </section>
 
-        <!-- Related Cities in Same State (Dynamic Internal Linking) -->
-        <div style="margin-bottom: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle);">
-            <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-tertiary); margin-bottom: 1rem;">MORE IN ${pageData.state()}</h3>
-            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                @if(!relatedCities.isEmpty())
-                    @for(CityEntry related : relatedCities)
-                        <a href="/RentVerdict/verdict/${related.city().toLowerCase().replace(" ", "-")}-${related.state().toLowerCase()}" 
-                           style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px; transition: background 0.2s;"
-                           onmouseover="this.style.background='var(--bg-surface)'"
-                           onmouseout="this.style.background='transparent'">
-                            ${related.city()}, ${related.state()}
-                        </a>
-                    @endfor
-                @else
-                    <a href="/RentVerdict/verdict/austin-tx" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px;">Austin, TX</a>
-                    <a href="/RentVerdict/verdict/dallas-tx" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px;">Dallas, TX</a>
-                    <a href="/RentVerdict/verdict/miami-fl" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px;">Miami, FL</a>
-                    <a href="/RentVerdict/verdict/new-york-ny" style="color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; border: 1px solid var(--border-subtle); padding: 0.5rem 1rem; border-radius: 20px;">New York, NY</a>
-                @endif
+        <!-- Internal Mesh (High-Intent Clustering) -->
+        <section style="margin-bottom: 4rem; padding: 2rem; background: var(--bg-surface); border-radius: var(--radius-lg); border: 1px solid var(--border-default);">
+            <h3 style="font-size: 0.9rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">Exploration Guide: ${pageData.city()}</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                <a href="/RentVerdict/verdict/with-pet/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}" 
+                   style="padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); text-decoration: none; color: var(--text-primary); transition: all 0.2s; border: 1px solid var(--border-subtle);">
+                    <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">🐾</div>
+                    <div style="font-weight: 700; font-size: 0.9rem;">Pet Ownership</div>
+                    <div style="font-size: 0.75rem; color: var(--text-tertiary);">Deposits & Rules</div>
+                </a>
+                <a href="/RentVerdict/verdict/credit/poor/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}" 
+                   style="padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); text-decoration: none; color: var(--text-primary); transition: all 0.2s; border: 1px solid var(--border-subtle);">
+                    <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">📉</div>
+                    <div style="font-weight: 700; font-size: 0.9rem;">Bad Credit Guide</div>
+                    <div style="font-size: 0.75rem; color: var(--text-tertiary);">Approval Strategy</div>
+                </a>
+                <a href="/RentVerdict/verdict/can-i-move-with/5000/to/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}" 
+                   style="padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); text-decoration: none; color: var(--text-primary); transition: all 0.2s; border: 1px solid var(--border-subtle);">
+                    <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">💰</div>
+                    <div style="font-weight: 700; font-size: 0.9rem;">$5,000 Savings</div>
+                    <div style="font-size: 0.75rem; color: var(--text-tertiary);">Affordability Audit</div>
+                </a>
+                <a href="/RentVerdict/verdict/moving-to/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}" 
+                   style="padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); text-decoration: none; color: var(--text-primary); transition: all 0.2s; border: 1px solid var(--border-subtle);">
+                    <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">📦</div>
+                    <div style="font-weight: 700; font-size: 0.9rem;">Relocation Cost</div>
+                    <div style="font-size: 0.75rem; color: var(--text-tertiary);">Long Distance</div>
+                </a>
             </div>
-            <div style="margin-top: 1rem;">
-                <a href="/RentVerdict/cities" style="color: var(--text-tertiary); font-size: 0.85rem; text-decoration: underline;">View all 100+ cities →</a>
+        </section>
+
+        <!-- Related Cities -->
+        <footer style="padding-top: 3rem; border-top: 1px solid var(--border-default);">
+            <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">Compare with Nearby Markets in ${pageData.state()}</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                @for(CityEntry related : relatedCities)
+                    <a href="/RentVerdict/verdict/${related.city().toLowerCase().replace(" ", "-")}-${related.state().toLowerCase()}" class="benefit-pill">
+                        ${related.city()}
+                    </a>
+                @endfor
             </div>
-        </div>
-
-
+        </footer>
 
     </div>
+
+    <style>
+        .d-md-none { display: flex; }
+        @media (min-width: 768px) { .d-md-none { display: none; } }
+    </style>
 `)

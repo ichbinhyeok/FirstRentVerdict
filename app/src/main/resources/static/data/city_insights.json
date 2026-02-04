@@ -1,0 +1,805 @@
+{
+    "version": "2026-02",
+    "data": [
+        {
+            "city": "New York",
+            "state": "NY",
+            "marketTrend": "Rental inventory levels hit record lows in 2025; competition remains extreme for rent-stabilized units.",
+            "seasonalTip": "Hunting in late October to December is the only way to avoid the cutthroat summer 'bidding wars'.",
+            "localLaw": "Security deposits are strictly capped at ONE month's rent by NY State law (HSTPA 2019).",
+            "renterAdvice": "Always confirm if a 'Broker Fee' applies; for those with credit below 700, professional guarantor services like 'Insurent' are widely accepted."
+        },
+        {
+            "city": "Los Angeles",
+            "state": "CA",
+            "marketTrend": "Post-pandemic 'return to office' mandates are driving high demand in West LA and Culver City.",
+            "seasonalTip": "Spring sees the most inventory, but landlords are more desperate to fill units in late November.",
+            "localLaw": "AB 1482 caps annual rent increases; AB 12 (2024) limits total security deposits to 1 month's rent.",
+            "renterAdvice": "Parking is a non-negotiable hidden cost; for pet owners, 'pet rent' of $50-$100/mo is standard in managed buildings."
+        },
+        {
+            "city": "Chicago",
+            "state": "IL",
+            "marketTrend": "Stability in the Midwest hub makes it one of the last few affordable megacity markets in 2026.",
+            "seasonalTip": "Moving in January is physically brutal due to snow, but that's when you find '2 months free' deals.",
+            "localLaw": "The Chicago RLTO requires interest on security deposits; it also provides strong 'right to repair' protections.",
+            "renterAdvice": "Prioritize units near CTA lines; for those with credit challenges, 'mom-and-pop' landlords in neighborhoods like Avondale are more flexible."
+        },
+        {
+            "city": "Houston",
+            "state": "TX",
+            "marketTrend": "Stabilizing market with high multifamily occupancy (90.5%) but softened 1-2 bedroom prices.",
+            "seasonalTip": "Peak hurricane season (Aug-Sept) occasionally slows demand, leading to waived application fees.",
+            "localLaw": "Texas law requires deposit returns within 30 days; there is no state-wide limit on pet deposits.",
+            "renterAdvice": "Houston is prone to flooding; ground-floor units often have lower credit hurdles than luxury high-rises."
+        },
+        {
+            "city": "Phoenix",
+            "state": "AZ",
+            "marketTrend": "Modest softening in 2026 due to surge in new supply; over 50% of listings offer concessions.",
+            "seasonalTip": "Avoid mid-summer moves; extreme heat increases mover costs and breakage risks significantly.",
+            "localLaw": "Landlords can only charge 1.5 months' rent for security deposits unless you volunteer more.",
+            "renterAdvice": "AC efficiency is the biggest variable; ask for previous summer's utility bill averages."
+        },
+        {
+            "city": "Philadelphia",
+            "state": "PA",
+            "marketTrend": "Affordability pressure remains intense for low-wage earners despite 1.5% decrease in asking rent.",
+            "seasonalTip": "Late spring is peak listing season; winter moves offer better leverage for negotiating.",
+            "localLaw": "Landlords must provide a 'Certificate of Rental Suitability' for all new tenancies.",
+            "renterAdvice": "Informal evictions are a risk; ensure you have a written lease and understand legal processes."
+        },
+        {
+            "city": "San Antonio",
+            "state": "TX",
+            "marketTrend": "Fast growth in affordable housing options for renters compared to other Texas metros.",
+            "seasonalTip": "Late winter is the best time for move-in specials in the developing Pearl District.",
+            "localLaw": "San Antonio requires landlords to provide a Notice of Tenant Rights with any Notice to Vacate.",
+            "renterAdvice": "Expect income requirements of 3x rent; criminal and eviction record checks are standard."
+        },
+        {
+            "city": "San Diego",
+            "state": "CA",
+            "marketTrend": "Critical housing shortage persists; one of the nation's most expensive and tight markets.",
+            "seasonalTip": "Beach area units (PB/OB) see $500/mo premiums during the June-August peak season.",
+            "localLaw": "AB 12 limits total security deposits (including pet) to 1 month's rent for most landlords.",
+            "renterAdvice": "Pet owners should focus on North Park/Ocean Beach for the most pet-friendly community vibes."
+        },
+        {
+            "city": "Dallas",
+            "state": "TX",
+            "marketTrend": "Corporate relocations to the 'Platinum Corridor' keep high-end demand very strong.",
+            "seasonalTip": "Avoid May-June when large firms onboard new relocation cohorts, peaking competition.",
+            "localLaw": "Texas has no rent control; landlords can raise rent to any amount upon lease renewal.",
+            "renterAdvice": "Retaliation for repair requests is prohibited; keep written records of all management contact."
+        },
+        {
+            "city": "San Jose",
+            "state": "CA",
+            "marketTrend": "San Jose's Apartment Rent Ordinance limits annual increases to 5% for many units.",
+            "seasonalTip": "Inventory is highest in July, but the best price-to-value units appear in early November.",
+            "localLaw": "Tenants are entitled to relocation benefits if displaced by building demolition.",
+            "renterAdvice": "Habitability laws are strict; landlords must provide functioning heat and natural lighting."
+        },
+        {
+            "city": "Austin",
+            "state": "TX",
+            "marketTrend": "Massive influx of luxury supply has shifted leverage to tenants; move-in incentives are common.",
+            "seasonalTip": "Avoid the August student rush; December-January offers the highest move-in concessions.",
+            "localLaw": "Austin Fair Housing protects against discrimination based on student status and age.",
+            "renterAdvice": "Austin has no legal limit on rent increases; negotiate a renewal cap into your initial lease."
+        },
+        {
+            "city": "Jacksonville",
+            "state": "FL",
+            "marketTrend": "Emerging top choice for space seekers; average apartment sizes (978sqft) lead Florida.",
+            "seasonalTip": "Peak vacation rental season is June-August; standard rentals are easier to snag in January.",
+            "localLaw": "Short-term rentals (less than 30 days) require a specific certificate in Jacksonville Beach.",
+            "renterAdvice": "Inventory is rising; larger single-family homes are currently seeing the most price softening."
+        },
+        {
+            "city": "Fort Worth",
+            "state": "TX",
+            "marketTrend": "Rents are trending upward with a 1% increase in 2025, but still 3.6% below national average.",
+            "seasonalTip": "Spring turnover is high; look for units in 'Near Southside' for better walkability value.",
+            "localLaw": "Texas law protects your right to privacy; 24h notice is generally required for entry.",
+            "renterAdvice": "Landlords generally cannot seize essential personal items like clothes for unpaid rent."
+        },
+        {
+            "city": "Columbus",
+            "state": "OH",
+            "marketTrend": "Single-family rental market is exceptionally strong; 3-bedroom units average $1,738/mo.",
+            "seasonalTip": "Winter and holiday months are the slowest; look for 'waived app fee' deals in December.",
+            "localLaw": "Ohio is landlord-friendly with no rent control; 30-day notice required for monthly increases.",
+            "renterAdvice": "Landlords must provide a lead paint disclosure for any property built before 1978."
+        },
+        {
+            "city": "Indianapolis",
+            "state": "IN",
+            "marketTrend": "Active listings surged 18.3% in 2025; market is shifting from landlord to neutral/balanced.",
+            "seasonalTip": "Avoid moving in December; holiday lulls make mover scheduling easier but inventory lower.",
+            "localLaw": "Indiana law allows for an immediate eviction filing if rent is even one day late.",
+            "renterAdvice": "Central Indiana has seen a shift toward tenant preference for home offices and outdoor space."
+        },
+        {
+            "city": "Charlotte",
+            "state": "NC",
+            "marketTrend": "High investor activity has concentrated the market; single-family homes lead rental stock (33.7%).",
+            "seasonalTip": "Peak moving season aligns with the school calendar (May-August); demand is highest then.",
+            "localLaw": "North Carolina prohibits 'self-help' evictions; locks cannot be changed without a court order.",
+            "renterAdvice": "Charlotte's rapid growth means 'estimated' utility costs for new builds are often understated."
+        },
+        {
+            "city": "San Francisco",
+            "state": "CA",
+            "marketTrend": "Multifamily market shows muted growth compared to national trends; demand is improving in SoMa.",
+            "seasonalTip": "October's 'Indian Summer' is a hidden gem for moving before the rainy winter season starts.",
+            "localLaw": "Rent control limits annual increases (1.7% in 2024-25) for units built before June 1979.",
+            "renterAdvice": "SF has strict 'Just Cause' eviction protections; landlords need valid reasons to terminate."
+        },
+        {
+            "city": "Seattle",
+            "state": "WA",
+            "marketTrend": "Moderating prices due to Light Rail expansion and new 'Transit Oriented Development'.",
+            "seasonalTip": "Peak season is March-October; winter moves (Nov-Feb) yield the best rent concessions.",
+            "localLaw": "Landlords must provide 180 days' notice for hikes; pet deposits are capped at 25% of one month's rent.",
+            "renterAdvice": "Seattle's 'First-in-Time' law helps those with lower credit if they are the first qualified applicant."
+        },
+        {
+            "city": "Denver",
+            "state": "CO",
+            "marketTrend": "Transitioning to a 'renter's market' in 2026; concessions like '3 months free' at 15-year highs.",
+            "seasonalTip": "Late spring is peak for outdoor enthusiasts; November moves score the highest concessions.",
+            "localLaw": "Denver requires a specific rental license for any landlord with a lease over 30 days.",
+            "renterAdvice": "Effective rent (including concessions) is often 10% lower than the 'asking' sticker price."
+        },
+        {
+            "city": "Oklahoma City",
+            "state": "OK",
+            "marketTrend": "One of the last few major metros where rents remain significantly below national averages.",
+            "seasonalTip": "Tornado season (April-June) can occasionally disrupt moving logistics; check for storm shelters.",
+            "localLaw": "Landlords must return security deposits within 45 days of a written request and vacancy.",
+            "renterAdvice": "Check if the property includes mandatory 'benefit packages' which can add $30-50 to monthly costs."
+        },
+        {
+            "city": "Nashville",
+            "state": "TN",
+            "marketTrend": "Evictions are up slightly, but new luxury supply is forcing high-end landlords to offer deals.",
+            "seasonalTip": "Winter is the most renter-friendly season; look for move-in specials in the Gulch.",
+            "localLaw": "Tennessee allows a 10% late fee only after a contractually specified grace period.",
+            "renterAdvice": "Freelancers and gig workers often face strict 3x-5x income requirements in Nashville."
+        },
+        {
+            "city": "El Paso",
+            "state": "TX",
+            "marketTrend": "Stable, slow-growth market largely insulated from the national volatility of 2025.",
+            "seasonalTip": "Avoid moving during July when the Chihuahuan Desert heat reaches its dangerous peaks.",
+            "localLaw": "Texas Property Code Section 92 regulates most residential rental rights and duties.",
+            "renterAdvice": "Utility costs for cooling can be 20% higher than expected; prioritize evaporative or efficient AC."
+        },
+        {
+            "city": "Washington",
+            "state": "DC",
+            "marketTrend": "Second-fastest declining market for rentals in late 2025, offering rare leverage for tenants.",
+            "seasonalTip": "Most landlords require 60 days' notice; don't start your search more than 2 months out.",
+            "localLaw": "DC's TOPA law gives tenants purchase rights; credit background checks are strictly regulated.",
+            "renterAdvice": "Credit scores of 670+ are standard; for lower scores, offering a larger upfront deposit (if allowed) can help."
+        },
+        {
+            "city": "Las Vegas",
+            "state": "NV",
+            "marketTrend": "Transitioning to a balanced market; prices for single-family rentals face downward pressure.",
+            "seasonalTip": "Average rent dropped to $1,271 in 2026; look for 'build-to-rent' subdivisions for more space.",
+            "localLaw": "Nevada law limits security deposits to a maximum of 3 months' rent for residential units.",
+            "renterAdvice": "Avoid moving in mid-summer; many movers refuse to work during peak heat hours (1pm-5pm)."
+        },
+        {
+            "city": "Boston",
+            "state": "MA",
+            "marketTrend": "Uniquely rigid lease cycle; 70% of all apartments turnover on September 1st.",
+            "seasonalTip": "Start searching in May for a Sept 1st move; later searches yield only 'leftover' inventory.",
+            "localLaw": "Security deposit, first month, last month, and broker fee are the ONLY permitted upfront costs.",
+            "renterAdvice": "Broker fees (typically one month's rent) are paid by the tenant in 90% of Boston listings."
+        },
+        {
+            "city": "Portland",
+            "state": "OR",
+            "marketTrend": "Market has cooled in 2026, becoming significantly more tenant-friendly than California metros.",
+            "seasonalTip": "Inventory is highest in May; winter months see very little turnover in popular NE neighborhoods.",
+            "localLaw": "Mandatory Relocation Assistance applies if a landlord issues a no-cause eviction.",
+            "renterAdvice": "Oregon law requires 24h notice for entry; habitability standards include working plumbing/heat."
+        },
+        {
+            "city": "Louisville",
+            "state": "KY",
+            "marketTrend": "Listed among the most affordable metros in 2026; price stability is remarkably high.",
+            "seasonalTip": "Spring is highly competitive for the Highlands; look in winter for deals in Germantown.",
+            "localLaw": "Kentucky's URLTA (if adopted by the city) requires 2 days' notice before landlord entry.",
+            "renterAdvice": "Louisville is piloting AI to speed up permits, potentially increasing new supply by late 2026."
+        },
+        {
+            "city": "Memphis",
+            "state": "TN",
+            "marketTrend": "Strong options for affordable housing; rents are stabilizing after 2024 price corrections.",
+            "seasonalTip": "Fall moves are ideal to avoid the humid Tennessee summer and the holiday rush.",
+            "localLaw": "Landlords must hold security deposits in a special account and disclose the location.",
+            "renterAdvice": "Renters in Memphis often spend less than 25% of income on housing, above national savings average."
+        },
+        {
+            "city": "Detroit",
+            "state": "MI",
+            "marketTrend": "Single-family homes make up 45.1% of rentals; large multifamily is only 24.4% of stock.",
+            "seasonalTip": "Renovated units in Midtown/Corktown move fast; visit in person as photos are often outdated.",
+            "localLaw": "Michigan law limits security deposits to 1.5 months' rent total (all deposits included).",
+            "renterAdvice": "A massive housing supply gap remains; expect competition for 'turn-key' safe neighborhoods."
+        },
+        {
+            "city": "Baltimore",
+            "state": "MD",
+            "marketTrend": "Robust demand in Inner Harbor and Canton areas; older rowhome stock offers high value.",
+            "seasonalTip": "Summer moves near Johns Hopkins are difficult due to the massive medical residency turnover.",
+            "localLaw": "Maryland law requires security deposits to be returned within 45 days after lease ends.",
+            "renterAdvice": "Factor in the 'Ground Rent' quirk of Baltimore if renting or buying houses; check your lease."
+        },
+        {
+            "city": "Milwaukee",
+            "state": "WI",
+            "marketTrend": "Stable Midwest market with strong renter protections; 28-day notice required for rent hikes.",
+            "seasonalTip": "Winter is slow; landlords cannot shut off utilities between Nov 1 - April 15 for any reason.",
+            "localLaw": "Milwaukee landlords must ensure heating can maintain 67°F minimum in all living areas.",
+            "renterAdvice": "Wisconsin law prohibits 'self-help' evictions; only a sheriff can legally remove a tenant."
+        },
+        {
+            "city": "Albuquerque",
+            "state": "NM",
+            "marketTrend": "Warm market with increasing demand; average rent is roughly 29% lower than national median.",
+            "seasonalTip": "Rents decreased by 0.8% in 2025; look for move-in specials in newer developments.",
+            "localLaw": "Landlords generally cannot raise rent mid-lease unless a specific 'escrow' clause exists.",
+            "renterAdvice": "Single-family rentals in popular NE Heights are seeing high days-on-market; try to negotiate."
+        },
+        {
+            "city": "Tucson",
+            "state": "AZ",
+            "marketTrend": "Retains its title as one of the most affordable cities for renters in the Southwest.",
+            "seasonalTip": "Cycle search around the University of Arizona schedule; June offers the most student turnover.",
+            "localLaw": "Arizona prohibits rent control at the state level; expect annual market-based adjustment.",
+            "renterAdvice": "Swamp coolers (evaporative cooling) are common in older units but ineffective in humid months."
+        },
+        {
+            "city": "Fresno",
+            "state": "CA",
+            "marketTrend": "Growing as a remote-work hub for Bay Area residents seeking lower cost of living.",
+            "seasonalTip": "Summer heat is extreme; move-in fees often drop in July/August as fewer people want to lug boxes.",
+            "localLaw": "California's AB 1482 rent caps apply here; most units can't see hikes above 10%.",
+            "renterAdvice": "Clovis border areas offer better school districts but cost a 15% rent premium over central Fresno."
+        },
+        {
+            "city": "Sacramento",
+            "state": "CA",
+            "marketTrend": "Single-family homes comprise 41% of rentals; market is cooling as Bay Area influx slows.",
+            "seasonalTip": "Spring is the highest turnover season; winter offers fewer choices but lower price points.",
+            "localLaw": "Sacramento's 'Tenant Protection Act' provides additional local just-cause eviction layers.",
+            "renterAdvice": "Flood insurance zones are extensive; verify if your potential rent includes flood-specific fees."
+        },
+        {
+            "city": "Kansas City",
+            "state": "MO",
+            "marketTrend": "The Northland and Overland Park (KS) areas are seeing massive new luxury apartment growth.",
+            "seasonalTip": "Avoid moving on weekends when the Chiefs are playing at home; traffic/logistics can be paralyzed.",
+            "localLaw": "Missouri law is very landlord-friendly; there is no limit on security deposit amounts.",
+            "renterAdvice": "Factor in the 1% Kansas City Earnings Tax if working or living within the city limits."
+        },
+        {
+            "city": "Mesa",
+            "state": "AZ",
+            "marketTrend": "Surpassing Phoenix in some growth metrics; high demand for single-family rentals for families.",
+            "seasonalTip": "Winter is peak season for 'snowbirds'; rents can temporarily spike for short-term leases.",
+            "localLaw": "Security deposits cannot exceed 1.5 months' rent without the tenant's express consent.",
+            "renterAdvice": "Commute to Phoenix via the Light Rail/US-60 can be brutal; look for units near the East Valley tech hubs."
+        },
+        {
+            "city": "Atlanta",
+            "state": "GA",
+            "marketTrend": "Supply growth is focused on high-rent luxury ($1,500+); affordable units are shrinking rapidly.",
+            "seasonalTip": "July 'Heat Domes' are peak moving misery; target October for the best moving climate.",
+            "localLaw": "Georgia law requires security deposits to be held in escrow; ask for proof upon signing.",
+            "renterAdvice": "52% of Atlanta renters are cost-burdened; check for 'Affordable Housing' lottery units near Midtown."
+        },
+        {
+            "city": "Omaha",
+            "state": "NE",
+            "marketTrend": "Remarkably stable market with high occupancy in the Old Market and Blackstone districts.",
+            "seasonalTip": "Late spring (April-May) is when the best 'corporate housing' units hitting the market.",
+            "localLaw": "Nebraska limits security deposits to 1 month's rent (1.25 months if you have a pet).",
+            "renterAdvice": "Rent includes 'Trash Fees' in many complexes; verify these hidden add-ons before signing."
+        },
+        {
+            "city": "Colorado Springs",
+            "state": "CO",
+            "marketTrend": "Strong military-driven demand; housing supply is finally catching up to the population surge.",
+            "seasonalTip": "Avoid turnover dates near major base rotations (PCS season) to avoid peak competition.",
+            "localLaw": "Colorado limits late fees to $50 or 5% of rent; no rent control exists state-wide.",
+            "renterAdvice": "Radon testing is critical for garden-level/basement units in Colorado Springs; ask for results."
+        },
+        {
+            "city": "Raleigh",
+            "state": "NC",
+            "marketTrend": "Market is stabilizing with 52% of listings offering concessions; demand is high for tech-corridor units.",
+            "seasonalTip": "March-May is the busiest season; winter (Dec-Feb) offers the highest concentration of move-in specials.",
+            "localLaw": "Security deposits are capped at 1.5 months for multi-month leases, 2 months for month-to-month.",
+            "renterAdvice": "Wake County is seeing a surge in 'Luxury' multi-family units; always ask about waived pet fees."
+        },
+        {
+            "city": "Long Beach",
+            "state": "CA",
+            "marketTrend": "Vacancy rates jumped in 2025 due to a 15,000 unit supply surge; rents hit a 4-year low.",
+            "seasonalTip": "Summer demand is brutal; late Autumn moves are 10-15% cheaper due to higher vacancy.",
+            "localLaw": "California's state-wide 10% rent hike cap applies; Long Beach has strict habitability codes.",
+            "renterAdvice": "Downtown Long Beach offers high utility, but check for noise-dampening windows in newer builds."
+        },
+        {
+            "city": "Virginia Beach",
+            "state": "VA",
+            "marketTrend": "Tight market with 1-in-3 households cost-burdened; rents increased modestly in 2024-25.",
+            "seasonalTip": "Summer is peak season for tourists and moves; winter offers reduced security deposit incentives.",
+            "localLaw": "Virginia's Residential Landlord Tenant Act (VRLTA) governs all residential leases here.",
+            "renterAdvice": "Oceanfront premiums are roughly 40%; Inland areas like Salem offer much better square footage value."
+        },
+        {
+            "city": "Miami",
+            "state": "FL",
+            "marketTrend": "Sustained influx of tech/finance relocations; Brickell median rents are at all-time highs.",
+            "seasonalTip": "Hurricane season (June-Nov) offers a slight window for negotiation as tourist demand drops.",
+            "localLaw": "Florida requires 15-60 days for deposit returns; pet 'fees' are typically non-refundable.",
+            "renterAdvice": "Luxury high-rises often have strict pet weight limits (under 25-50 lbs); check 'pet resumes' for flexibility."
+        },
+        {
+            "city": "Oakland",
+            "state": "CA",
+            "marketTrend": "Gentrification cooling in 2026; rent prices for 1-2 bedrooms declined roughly 2% recently.",
+            "seasonalTip": "May-July inventory is peak; landlords are more willing to negotiate on older Victorian units.",
+            "localLaw": "Strict 'Just Cause for Eviction' ordinance prevents termination without valid legal reasons.",
+            "renterAdvice": "Rent control applies to most buildings built before 1978; verify your unit's status with RAP."
+        },
+        {
+            "city": "Minneapolis",
+            "state": "MN",
+            "marketTrend": "One of the most stable markets in the US; new 2040 Plan leads to abundant supply.",
+            "seasonalTip": "Moving in Dec-Feb is extremely difficult due to snow; aim for Sept/Oct for stable pricing.",
+            "localLaw": "Minneapolis requires interest on security deposits; landlords must provide a move-in checklist.",
+            "renterAdvice": "Prioritize units with underground parking; winter street parking bans are strictly enforced."
+        },
+        {
+            "city": "Tulsa",
+            "state": "OK",
+            "marketTrend": "Gaining traction for remote workers (Tulsa Remote program); energy/tech jobs drive 3% rent growth.",
+            "seasonalTip": "Peak activity is spring; winter months see very little turnover in popular Midtown areas.",
+            "localLaw": "Oklahoma law is landlord-friendly; no rent control exists, but 30-day notice is standard.",
+            "renterAdvice": "Nearly 70% of households are 1-2 people; competition for high-end 1-bedroom units is stiff."
+        },
+        {
+            "city": "Bakersfield",
+            "state": "CA",
+            "marketTrend": "Affordable alternative to the Central Coast; demand from agricultural and energy sectors is steady.",
+            "seasonalTip": "Summer heat (100°F+) is peak misery for movers; target February for the best weather/price balance.",
+            "localLaw": "California's AB 1482 rent caps apply; annual increases are tied to regional CPI.",
+            "renterAdvice": "Air quality is a significant local factor; look for units with newer HVAC filtration systems."
+        },
+        {
+            "city": "Wichita",
+            "state": "KS",
+            "marketTrend": "Peak activity from late spring to summer; landlords list properties to minimize vacancy at full market value.",
+            "seasonalTip": "Winter months offer incentives like a free month's rent or reduced deposits to attract tenants.",
+            "localLaw": "Security deposits cannot exceed one month's rent for unfurnished properties.",
+            "renterAdvice": "Landlords must return deposits within 30 days; always get a written receipt for cash payments."
+        },
+        {
+            "city": "Arlington",
+            "state": "TX",
+            "marketTrend": "High student demand from UTA; prices are stable with 1% annual growth in 2025.",
+            "seasonalTip": "Avoid the August student move-in rush; November moves score the best renewal rates.",
+            "localLaw": "Texas has 'Notice to Vacate' requirements; landlords must give 3 days' notice before filing eviction.",
+            "renterAdvice": "Check distance to the Entertainment District; game-day traffic can make commuting difficult."
+        },
+        {
+            "city": "Aurora",
+            "state": "CO",
+            "marketTrend": "Developing as a tech hub; spillover from Denver keeps occupancy rates near 94.5%.",
+            "seasonalTip": "Moving in January is risky due to blizzards; spring moves offer more multi-family inventory.",
+            "localLaw": "Colorado limits pet rent/deposits (HB23-1068); pet deposits are capped at $300.",
+            "renterAdvice": "Radon mitigation is required for some units; ask for the latest safety inspection results."
+        },
+        {
+            "city": "Tampa",
+            "state": "FL",
+            "marketTrend": "Stable market in 2026; moderate rent growth of 1.3% with strong tenant demand in Midtown.",
+            "seasonalTip": "Peak moving season is summer; relocations and school turnover keep demand extremely high then.",
+            "localLaw": "Florida law (HB 1417) preempts local rent control; landlords have full fee flexibility.",
+            "renterAdvice": "Harbour Island and Uptown command the highest rents; North Tampa offers more affordable options."
+        },
+        {
+            "city": "New Orleans",
+            "state": "LA",
+            "marketTrend": "Short-term rental lottery system (2023) has stabilized long-term inventory in the Marigny.",
+            "seasonalTip": "Spring is busiest due to events; winter is more affordable but check for humid-cold weather issues.",
+            "localLaw": "Short-term rentals are limited to 1 per square block; permits are strictly monitored.",
+            "renterAdvice": "Conversion of rentals into higher-priced vacation homes makes affordable gems rare."
+        },
+        {
+            "city": "Cleveland",
+            "state": "OH",
+            "marketTrend": "Reliable market with 55% renter-occupied homes; rents projected to rise 3.2% in 2026.",
+            "seasonalTip": "Peak demand is spring/summer; properties near the Cleveland Clinic lease within 10 days.",
+            "localLaw": "Cleveland requires annual rental registration and lead-safe certification for most units.",
+            "renterAdvice": "Midwest winters are long; check that the lease specifies who handles snow removal for driveways."
+        },
+        {
+            "city": "Honolulu",
+            "state": "HI",
+            "marketTrend": "O'ahu rent growth moderated in 2025; vacancy rates remain extremely low (3.4%).",
+            "seasonalTip": "Spring is peak activity due to military rotations; winter offers very little new inventory.",
+            "localLaw": "Residential units must be rented for 90+ days; Hawaii's landlord-tenant code is very specific on repairs.",
+            "renterAdvice": "Pet owners face a 'pet tax' in Honolulu; many condos allow only one pet under 20 lbs."
+        },
+        {
+            "city": "Anaheim",
+            "state": "CA",
+            "marketTrend": "High demand driven by entertainment/tourism sectors; prices track closely with Orange County medians.",
+            "seasonalTip": "Tourism-related moves peak in summer; winter months see more stable, long-term listings.",
+            "localLaw": "California's statewide rent control (AB 1482) protects most multi-family tenants here.",
+            "renterAdvice": "Commute times near Disneyland are variable; visit the area during park 'peak' hours before signing."
+        },
+        {
+            "city": "Lexington",
+            "state": "KY",
+            "marketTrend": "Affordability is high; average rent is roughly 34% lower than the national median in 2026.",
+            "seasonalTip": "Check unit availability around the UK academic calendar; May/June sees the most student turnover.",
+            "localLaw": "Kentucky's URLTA (if adopted) requires landlords to give 2 days' notice before non-emergency entry.",
+            "renterAdvice": "Most rentals (54%) fall between $1,000-$1,500; renter-occupied households make up 46% of the city."
+        },
+        {
+            "city": "Stockton",
+            "state": "CA",
+            "marketTrend": "Warm market with increasing demand; rents are 21% lower than the national average in 2026.",
+            "seasonalTip": "Winter is slow; spring and summer see the most activity due to strategic location near the Bay.",
+            "localLaw": "California law protects against lock-outs and utility shut-offs; 'just cause' is needed for eviction.",
+            "renterAdvice": "Keep copies of all rental records; Stockton has high demand due to its role as a commuter hub."
+        },
+        {
+            "city": "Corpus Christi",
+            "state": "TX",
+            "marketTrend": "Median rent prices softened by 2.78% recently; 38% more affordable than national median.",
+            "seasonalTip": "Hurricane season (June-Nov) can occasionally lead to lower demand and move-in specials.",
+            "localLaw": "Texas law requires security deposits to be returned within 30 days of move-out.",
+            "renterAdvice": "47% of rentals are between $1,000-$1,500; negotiate on older multi-family units near the bay."
+        },
+        {
+            "city": "Henderson",
+            "state": "NV",
+            "marketTrend": "Rents decreased 3.3% in 2025; diverse neighborhoods attract families seeking a safe environment.",
+            "seasonalTip": "Avoid mid-summer moves (July-August) when Nevada temperatures exceed 110°F regularly.",
+            "localLaw": "Nevada law limits security deposits to 3 months' rent; Clark County handles most disputes.",
+            "renterAdvice": "Income requirements are strict; expect to show monthly net income of 2.5x to 3x the rent."
+        },
+        {
+            "city": "Riverside",
+            "state": "CA",
+            "marketTrend": "Strategic hub for logistics; rents follow the Tenant Protection Act of 2019 (cap 5% + CPI).",
+            "seasonalTip": "Summer is peak move-in; winter months offer better leverage for negotiating lease terms.",
+            "localLaw": "Landlords must have 'just cause' (e.g., non-payment) to terminate a tenancy after 12 months.",
+            "renterAdvice": "Utility costs for cooling are a concern in the Inland Empire; ask for previous year's bill ranges."
+        },
+        {
+            "city": "Newark",
+            "state": "NJ",
+            "marketTrend": "Strong demand from NYC commuters; Ironbound district remains a high-value, high-demand area.",
+            "seasonalTip": "Avoid moving during peak university move-in days (late August) for Rutgers/NJIT.",
+            "localLaw": "Newark has an Office of Tenant Legal Assistance (OTLA) to support renters in eviction court.",
+            "renterAdvice": "NJ law requires 'Truth in Renting' booklets given to all tenants; ensure you receive yours."
+        },
+        {
+            "city": "Saint Paul",
+            "state": "MN",
+            "marketTrend": "Historic stabilization; Saint Paul's rent control (3% cap) remains one of the strictest in the US.",
+            "seasonalTip": "Don't move in winter (Nov-March) unless absolutely necessary; snow removal costs are high.",
+            "localLaw": "Security deposits must include interest paid to the tenant upon return (MN law).",
+            "renterAdvice": "Street parking in Saint Paul is notoriously difficult; prioritize units with off-street options."
+        },
+        {
+            "city": "Santa Ana",
+            "state": "CA",
+            "marketTrend": "Only city in Orange County with rent control; annual hikes limited to 3% or 80% of CPI.",
+            "seasonalTip": "Summer sees high student demand from nearby colleges; aim for October-November moves.",
+            "localLaw": "Rent stabilization applies to multi-family properties built before February 1, 1995.",
+            "renterAdvice": "Demand for rent-controlled units is extreme; landlords often prioritize credit scores of 700+."
+        },
+        {
+            "city": "Cincinnati",
+            "state": "OH",
+            "marketTrend": "Urban revitalization in Over-the-Rhine (OTR) has pushed high-end rents 5% higher in 2025.",
+            "seasonalTip": "Avoid moving on weekend days when major festivals (like Oktoberfest Zinzinnati) are active.",
+            "localLaw": "Ohio law allows landlords to file eviction 3 days after a rent late notice is delivered.",
+            "renterAdvice": "Check if your neighborhood has a Special Improvement District (SID) fee added to the rent."
+        },
+        {
+            "city": "Irvine",
+            "state": "CA",
+            "marketTrend": "Exceptionally stable, high-end market; corporate landlords (Irvine Company) dominate.",
+            "seasonalTip": "Cycle moves around the UCI academic calendar (September/June) for the most availability.",
+            "localLaw": "Irvine provides mediator resources; AB 1482 applies to older, non-exempt properties.",
+            "renterAdvice": "Credit scores under 720 may require an increased deposit or a co-signer in Irvine Company buildings."
+        },
+        {
+            "city": "Orlando",
+            "state": "FL",
+            "marketTrend": "Vacancy periods are lengthening as new supply hits the market; rent growth is cooling to 2-3%.",
+            "seasonalTip": "Avoid moving in mid-August; heat and humidity are at their peaks during student move-ins.",
+            "localLaw": "Florida law (HB 1417) preempts local rent control; landlords can set market-based rates.",
+            "renterAdvice": "Check proximity to I-4; commute times for 'behind-the-gate' complexes are often underestimated."
+        },
+        {
+            "city": "Pittsburgh",
+            "state": "PA",
+            "marketTrend": "Stability driven by tech/healthcare sectors; Lawrenceville and East Liberty are peak demand.",
+            "seasonalTip": "Moving in winter is difficult due to hills and snow; aim for spring (April-May) for best luck.",
+            "localLaw": "Pennsylvania law gives landlords absolute rights to handle abandoned property after a lease ends.",
+            "renterAdvice": "FACTOR in the 3% Pittsburgh Earned Income Tax if working within city limits; it hits your budget."
+        },
+        {
+            "city": "St. Louis",
+            "state": "MO",
+            "marketTrend": "Average rents are easing, with a 1.3% decline in late 2025; vacancy rates are tight at 7.6%.",
+            "seasonalTip": "Winter offers lower rates due to decreased demand; spring/summer is peak for school relocations.",
+            "localLaw": "Missouri has no statewide rent control; landlords must provide 30-day notice for increases.",
+            "renterAdvice": "Utilize the St. Louis Mediation Project for free housing dispute resolution before court."
+        },
+        {
+            "city": "Greensboro",
+            "state": "NC",
+            "marketTrend": "Short-term rental space restrictions were removed in 2025; supply is increasing in the urban core.",
+            "seasonalTip": "April-June is most competitive for rentals; winter months see more 'motivated' landlords.",
+            "localLaw": "Landlords are legally required to maintain a safe and fit living environment (NC G.S. 42).",
+            "renterAdvice": "Legal Aid of NC offers free assistance for tenants; seek help early if repairs are neglected."
+        },
+        {
+            "city": "Jersey City",
+            "state": "NJ",
+            "marketTrend": "Jersey City rents fell in 2025 as new development finally met demand; affordability remains a focus.",
+            "seasonalTip": "Peak demand is late spring; winter moves offer the best price-to-value for Journal Square units.",
+            "localLaw": "Rent control applies to pre-1978 buildings with 4+ units; hikes are tied to regional CPI.",
+            "renterAdvice": "Rent control provides stability; verify your building's registration status with the city."
+        },
+        {
+            "city": "Anchorage",
+            "state": "AK",
+            "marketTrend": "High demand and low vacancy drives rent increases; construction costs stay high in 2026.",
+            "seasonalTip": "Spring/Summer is the only viable moving season; winter listings are rare and move-ins difficult.",
+            "localLaw": "Alaska requires 30 days' written notice for rent increases on month-to-month tenancies.",
+            "renterAdvice": "Verify if heat is included in the rent; heating costs in Alaska winters can exceed $300/mo."
+        },
+        {
+            "city": "Lincoln",
+            "state": "NE",
+            "marketTrend": "Strong student-driven market with consistent 2% growth; vacancy remains below 5%.",
+            "seasonalTip": "May and August are chaos due to UNL rotations; target October for the best long-term deals.",
+            "localLaw": "Nebraska law limits security deposits to 1 month's rent (1.25 with pets).",
+            "renterAdvice": "Check the age of the furnace; high quality insulation is key for Nebraska's extreme seasons."
+        },
+        {
+            "city": "Plano",
+            "state": "TX",
+            "marketTrend": "Apartment rents decreased 3.6% in 2025; vacancy rate is stable at 7.1%.",
+            "seasonalTip": "Peak seasons are summer/holidays; utilize free locating services to find move-in specials.",
+            "localLaw": "Texas law requires a 75-day written notice for rent increases of 10% or more annually.",
+            "renterAdvice": "Budget for 'community fees' which are common in Plano; they often add $50-$70 to monthly costs."
+        },
+        {
+            "city": "Durham",
+            "state": "NC",
+            "marketTrend": "Renter demand surged in 2025; average rents are stable despite nearby Raleigh's easing prices.",
+            "seasonalTip": "Spring and Fall see the highest turnover for short-term and research-related rentals.",
+            "localLaw": "New ordinance prohibits rent collection for units with 'imminently dangerous' safety conditions.",
+            "renterAdvice": "Ensure your property meets safety standards; Durham is strict on locks, heat, and electricals."
+        },
+        {
+            "city": "Buffalo",
+            "state": "NY",
+            "marketTrend": "Rents increased 3.3% in 2025, but Buffalo remains a top affordable metro for lower-wage earners.",
+            "seasonalTip": "Summer moves are priority; winter (Dec-Feb) moves are brutal and often have more vacancy.",
+            "localLaw": "Tenants have a right to a safe home and written receipts for all cash rent payments.",
+            "renterAdvice": "Budget $100-$200/mo for utilities; older Buffalo homes are charming but often poorly insulated."
+        },
+        {
+            "city": "Chandler",
+            "state": "AZ",
+            "marketTrend": "Rent growth is slowing to 2-3% in 2026; vacancy periods for 2-bedroom units are lengthening.",
+            "seasonalTip": "Peak moving is spring; winter months offer the best leverage for negotiating lease renewals.",
+            "localLaw": "Landlords must provide an itemized list of deductions from deposits within 14 business days.",
+            "renterAdvice": "Rent should ideally not exceed 30% of income; utilize AZ Tenant Advocates for legal help."
+        },
+        {
+            "city": "Chula Vista",
+            "state": "CA",
+            "marketTrend": "Rental laws recently strengthened in 2025; focus on 'no-fault' eviction protections.",
+            "seasonalTip": "Demand peaks in June/July; aim for an early spring move to beat the San Diego spillover.",
+            "localLaw": "Security deposits are capped at 2 months (unfurnished); must be returned within 21 days.",
+            "renterAdvice": "Chula Vista's Residential Tenant Protection Ordinance (CVMC 9.65) is your primary defense."
+        },
+        {
+            "city": "Toledo",
+            "state": "OH",
+            "marketTrend": "Rental demand peaks April-August; Toledo remains one of the most affordable cities in Ohio.",
+            "seasonalTip": "November-February is slow; listings are rare but landlords often waive application fees.",
+            "localLaw": "The Toledo Housing Court is the primary resource for handling landlord-tenant disputes.",
+            "renterAdvice": "Check windows and furnace filters before winter; heating older Toledo units is expensive."
+        },
+        {
+            "city": "Madison",
+            "state": "WI",
+            "marketTrend": "Rental prices increased 4% in 2025; tight inventory sustains demand in the Isthmus areas.",
+            "seasonalTip": "Don't sign leases too early; prices often drop closer to summer for student-area properties.",
+            "localLaw": "Landlords must provide at least 28 days' notice for rent increases on monthly tenancies.",
+            "renterAdvice": "Conduct a thorough walk-through with photos; Madison landlords are strict on security deposits."
+        },
+        {
+            "city": "Gilbert",
+            "state": "AZ",
+            "marketTrend": "Steady market in 2026; median rents remained unchanged year-over-year in late 2025.",
+            "seasonalTip": "Peak demand is spring; family-friendly neighborhoods keep inventory low during the school year.",
+            "localLaw": "The Arizona Residential Landlord & Tenant Act (ARLTA) governs all local rental disputes.",
+            "renterAdvice": "Rent in Gilbert is 19% higher than national average ($2,375); aim for a debt-to-income under 30%."
+        },
+        {
+            "city": "Reno",
+            "state": "NV",
+            "marketTrend": "Reno-Sparks experiencing high housing costs; supply remains limited in MidTown and south Reno.",
+            "seasonalTip": "Spring moves are peak; winter moves offer better leverage for negotiating free parking.",
+            "localLaw": "Nevada has no rent grace period; a 7-day notice for non-payment is the legal standard.",
+            "renterAdvice": "Northern Nevada Legal Aid offers free services if you face 'self-help' eviction or repair gaps."
+        },
+        {
+            "city": "Fort Wayne",
+            "state": "IN",
+            "marketTrend": "Ranked a top emerging market for 2025; rent increased 1.8% in late 2025 due to high demand.",
+            "seasonalTip": "Winter is slow and inventory is rare; aim for May-July to find the best multi-family units.",
+            "localLaw": "Indiana law mandates units be 'clean and safe'; self-help evictions are illegal here.",
+            "renterAdvice": "Check for working locks and furnaces; landlords cannot enter without reasonable notice."
+        },
+        {
+            "city": "North Las Vegas",
+            "state": "NV",
+            "marketTrend": "Rental rates dropped 3% in late 2025; average rent is now around $1,357 per month.",
+            "seasonalTip": "February-May is high occupancy for short-term rentals; aim for winter for the best lease deals.",
+            "localLaw": "Nevada law limits security deposits to 3 months; no grace period for rent payments.",
+            "renterAdvice": "North Las Vegas is seeing a dip in sales prices; use this leverage to negotiate on rent."
+        },
+        {
+            "city": "St. Petersburg",
+            "state": "FL",
+            "marketTrend": "Strong market in 2025/2026; average rent is $2,100 (5% above national median).",
+            "seasonalTip": "Peak demand is March-July; September moves offer 5-10% lower prices as vacations end.",
+            "localLaw": "The 'Rent Ready Norfolk' program style resources are available for tenant rights locally.",
+            "renterAdvice": "Market is 'WARM'; increasing demand means you should have your 2.5x-3x income proof ready."
+        },
+        {
+            "city": "Lubbock",
+            "state": "TX",
+            "marketTrend": "Student-led market (Texas Tech) with consistent 2.5% growth; high demand near the university.",
+            "seasonalTip": "Avoid mid-May move-ins; target July for student turnover units or January for stability.",
+            "localLaw": "Texas law requires landlords to return deposits within 30 days of lease end.",
+            "renterAdvice": "Single-family rentals offer much better value here than high-end student 'luxury' apartments."
+        },
+        {
+            "city": "Irving",
+            "state": "TX",
+            "marketTrend": "Median rent increased year-over-year, but saw a $22 month-over-month decrease in late 2025.",
+            "seasonalTip": "Peak demand is summer; October-December offers a more relaxed moving experience with moderate prices.",
+            "localLaw": "Texas law requires a 75-day written notice for rent increases over 10% in some zones.",
+            "renterAdvice": "Check distance to DFW airport; flight path noise can be a factor for North Irving rentals."
+        },
+        {
+            "city": "Laredo",
+            "state": "TX",
+            "marketTrend": "40% more affordable than national average; median house rents are around $1,065 in 2026.",
+            "seasonalTip": "Late spring is peak activity; winter months see motivated landlords and waived apps.",
+            "localLaw": "Texas Property Code Section 92 regulates all residential rental rights for Laredo.",
+            "renterAdvice": "Energy costs for cooling are significant; verify if the unit has newer insulation installed."
+        },
+        {
+            "city": "Winston-Salem",
+            "state": "NC",
+            "marketTrend": "The market is currently 'HOT'; multi-family rents increased 2.3% and are growing into 2026.",
+            "seasonalTip": "April has highest demand; September is the lowest. Aim for a fall move to find better rates.",
+            "localLaw": "North Carolina requires landlords to maintain fit housing; tenants have repair request rights.",
+            "renterAdvice": "Utilize the Human Relations Department for free mediation of any landlord/tenant disputes."
+        },
+        {
+            "city": "Chesapeake",
+            "state": "VA",
+            "marketTrend": "Average rent is $1,585; prices rise in spring/summer as military and family moves peak.",
+            "seasonalTip": "Winter (Jan-Feb) is slowest; landlords often offer promotion like 'half off first month'.",
+            "localLaw": "Landlords must provide a 'Statement of Tenant Rights and Responsibilities' upon move-in.",
+            "renterAdvice": "Chesapeake is sprawling; prioritize units near major roads to avoid heavy local commute traffic."
+        },
+        {
+            "city": "Glendale",
+            "state": "AZ",
+            "marketTrend": "Stability in North Glendale; supply increases near Grand Ave are keeping 1-bedroom rents stable.",
+            "seasonalTip": "Avoid moving during the Super Bowl or major events at State Farm Stadium; mover rates triple.",
+            "localLaw": "Arizona ARLTA applies; 2 days' notice required for landlord entry for non-emergencies.",
+            "renterAdvice": "Factor in the 'City Tax' on rent that some AZ cities apply; it's usually 1.5% to 2.5%."
+        },
+        {
+            "city": "Garland",
+            "state": "TX",
+            "marketTrend": "Strong market with a 37% year-over-year increase in multi-family supply in late 2025.",
+            "seasonalTip": "Peak demand is summer; autumn moves offer motived buyers and lower rental price points.",
+            "localLaw": "Texas law prohibits retaliation for repair complaints for six months after the report.",
+            "renterAdvice": "Landlords must ensure common areas are safe; check for compliance with Garland building codes."
+        },
+        {
+            "city": "Scottsdale",
+            "state": "AZ",
+            "marketTrend": "Booming short-term rental market; nightly rates average $394, making long-term gems rare.",
+            "seasonalTip": "December through April is peak season; slow season activity is higher than in most US cities.",
+            "localLaw": "Arizona's ARLTA governs all rights; tenants have basic rights to water, electricity, and heat.",
+            "renterAdvice": "Tenant responsibilities include notifying landlords of repairs; follow lease provisions closely."
+        },
+        {
+            "city": "Norfolk",
+            "state": "VA",
+            "marketTrend": "Short-term rentals have strong 67% occupancy; long-term demand is driven by military presence.",
+            "seasonalTip": "74% of leasing occurs in June-August; winter is significantly slower with rare new listings.",
+            "localLaw": "Utilize the 'Rent Ready Norfolk' program workshops to understand your rights before signing.",
+            "renterAdvice": "The VRLTA governs all leases; verify that you receive your 'Statement of Rights' upon signing."
+        },
+        {
+            "city": "Boise",
+            "state": "ID",
+            "marketTrend": "Rents softened by 1.6% in 2025; vacancy rates rose slightly, giving tenants more choices.",
+            "seasonalTip": "Peak moving is May–September; activity picks up in March and inventory peaks mid-July.",
+            "localLaw": "Landlords must give 30 days' notice for rent increases; 'self-help' eviction is illegal.",
+            "renterAdvice": "A Boise ordinance prohibits denial of tenancy based on lawful source of income (vouchers)."
+        },
+        {
+            "city": "Fremont",
+            "state": "CA",
+            "marketTrend": "Strong demand due to tech hub proximity; average rent is $3,050 despite a recent slight dip.",
+            "seasonalTip": "Summer is peak activity; winter (Oct-April) moves can yield lower rates in older apartments.",
+            "localLaw": "California law requires 24-hour written notice for entry; small claims court handles deposit issues.",
+            "renterAdvice": "Check school ratings even if you don't have kids; they drive value for 20% of the rent market."
+        },
+        {
+            "city": "Spokane",
+            "state": "WA",
+            "marketTrend": "Softening market with vacancy rates exceeding 5%; new apartment developments are increasing supply.",
+            "seasonalTip": "Winter is slow; spring and summer are most active. Aim for October-April for better deals.",
+            "localLaw": "Washington state law requires 120 days' notice for any rent increase over 10% (as of 2025).",
+            "renterAdvice": "Use the current supply surge to negotiate lower rent or a free parking spot for 12 months."
+        },
+        {
+            "city": "Santa Clarita",
+            "state": "CA",
+            "marketTrend": "Median rent dropped $201 recently; high sales prices keep renters in the market longer.",
+            "seasonalTip": "June has highest demand; November lowest. May-September offers the most multi-family options.",
+            "localLaw": "Short-term rentals require a permit; typical CA entry and repair laws apply to all units.",
+            "renterAdvice": "Santa Clarita is family-centric; single-family rentals move much faster than studio apartments."
+        },
+        {
+            "city": "Baton Rouge",
+            "state": "LA",
+            "marketTrend": "Affordable option at 37% below national median; market is 'WARM' with increasing demand.",
+            "seasonalTip": "Winter is best for rates; summer is peak move-in time for state government relocations.",
+            "localLaw": "Short-term rentals (STRs) are loosely defined; check local permits for Airbnb-style units.",
+            "renterAdvice": "Check the age of the AC unit; high humidity in Baton Rouge makes efficiency critical."
+        },
+        {
+            "city": "Richmond",
+            "state": "VA",
+            "marketTrend": "Rental prices consistently rising (3.1% in July 2024); apartments average $1,350/mo.",
+            "seasonalTip": "May-September is peak for VCU-adjacent units; winter offers higher landlord flexibility.",
+            "localLaw": "Virginia law requires disclosure of visible mold; carbon monoxide detectors are mandatory.",
+            "renterAdvice": "The Fan and Museum Districts are peak demand; check neighborhood safety stats before signing."
+        }
+    ]
+}

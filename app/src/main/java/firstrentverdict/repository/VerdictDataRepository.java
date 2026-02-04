@@ -20,6 +20,7 @@ public class VerdictDataRepository {
     private final Map<String, PetData.CityPet> petMap = new ConcurrentHashMap<>();
     private final Map<String, StateLawData.StateLaw> stateLaws = new ConcurrentHashMap<>();
     private final Map<String, CityCoordinates.CityCoordinate> cityCoordinates = new ConcurrentHashMap<>();
+    private final Map<String, CityInsightData.CityInsight> cityInsights = new ConcurrentHashMap<>();
 
     // Valid cities set
     private final Map<String, CitiesData.CityEntry> validCities = new ConcurrentHashMap<>();
@@ -62,6 +63,10 @@ public class VerdictDataRepository {
         cityCoordinates.put(generateKey(coordinate.city(), coordinate.state()), coordinate);
     }
 
+    public void addCityInsight(CityInsightData.CityInsight insight) {
+        cityInsights.put(generateKey(insight.city(), insight.state()), insight);
+    }
+
     // Accessors
     public Optional<RentData.CityRent> getRent(String city, String state) {
         return Optional.ofNullable(rentMap.get(generateKey(city, state)));
@@ -97,5 +102,9 @@ public class VerdictDataRepository {
 
     public Optional<CityCoordinates.CityCoordinate> getCityCoordinate(String city, String state) {
         return Optional.ofNullable(cityCoordinates.get(generateKey(city, state)));
+    }
+
+    public Optional<CityInsightData.CityInsight> getCityInsight(String city, String state) {
+        return Optional.ofNullable(cityInsights.get(generateKey(city, state)));
     }
 }

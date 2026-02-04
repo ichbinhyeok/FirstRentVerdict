@@ -14,10 +14,63 @@
 @param String pageType = "GENERAL"
 @param String scenarioTitle = null
 
+!{
+    String metaDesc = "";
+    String cityState = input.city() + ", " + input.state();
+    int estDeposit = result.financials().totalUpfrontCost();
+    
+    if ("GENERAL".equals(pageType)) {
+        metaDesc = "True cost of renting in " + cityState + ". See hidden fees, deposit requirements (" + String.format("$%,d", estDeposit) + "), and market strictness.";
+    } else if (pageType.startsWith("CREDIT_")) {
+        String tierName = pageType.replace("CREDIT_", ""); 
+        metaDesc = "Renting in " + cityState + " with " + tierName + " Credit? We analyzed local risks. Expect ~" + String.format("$%,d", estDeposit) + " upfront. See approval strategy.";
+    } else if ("RELOCATION".equals(pageType)) {
+        metaDesc = "Moving to " + cityState + "? Essential relocation cost breakdown. See how much cash you really need before you move. 2026 update.";
+    } else {
+        metaDesc = "First Rent Verdict analysis for " + cityState + ". Check your approval odds.";
+    }
+}
+
 @template.layout.main(
     title = (scenarioTitle != null ? scenarioTitle : "Verdict Report - First Rent Verdict"),
+    description = metaDesc,
     noindex = noindex,
     content = @`
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "How much do I need to move to ${cityState}?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Based on current market data, you should budget approximately ${String.format("$%,d", result.financials().totalUpfrontCost())} for upfront costs, which includes the first month's rent, security deposit, and potential broker or admin fees."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Can I rent in ${cityState} with ${pageType.startsWith("CREDIT_") ? pageType.replace("CREDIT_", "").toLowerCase() + " credit" : "bad credit"}?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but it requires preparation. Our analysis shows a ${result.verdict() == firstrentverdict.model.verdict.Verdict.APPROVED ? "high" : "moderate to low"} likelihood of approval based on your financials, provided you have a safety buffer."
+        }
+      }]
+    }
+    </script>
+
+    <!-- Breadcrumbs -->
+    <nav style="max-width: 900px; margin: 0 auto; padding: var(--space-4) var(--space-6) 0; font-size: 0.8125rem; color: var(--text-tertiary);">
+        <a href="/RentVerdict/" style="color: inherit; text-decoration: none;">Home</a> 
+        <span style="margin: 0 4px;">/</span> 
+        <a href="/RentVerdict/verdict/${input.city().toLowerCase().replace(" ", "-")}-${input.state().toLowerCase()}" style="color: inherit; text-decoration: none;">${input.city()}</a>
+        <span style="margin: 0 4px;">/</span>
+        <span style="color: var(--text-secondary); font-weight: 500;">
+            Analysis
+        </span>
+    </nav>
+
     <!-- Main Result Container -->
     <div style="max-width: 900px; margin: 0 auto; padding: var(--space-8) var(--space-6);">
         
@@ -28,49 +81,38 @@
             </a>
         </div>
         
-        <!-- ... (Rest of view content omitted for brevity until the script part) ... -->
-
-        <!-- Share This Insight (Viral Loop) -->
-        <div style="margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--border-default);">
-            <h4 style="font-size: 0.875rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--space-3); text-transform: uppercase; letter-spacing: 0.05em;">Share This Tool</h4>
-            <div style="display: flex; gap: var(--space-3);">
-                <button onclick="shareTwitter()" class="btn btn-secondary btn-sm" style="flex: 1;">
-                    Twitter
-                </button>
-                <button onclick="copyLink()" class="btn btn-secondary btn-sm" style="flex: 1;">
-                    Copy Link
-                </button>
+        <!-- pSEO Engagement Hook (Behavioral Nudge) -->
+        @if(!"GENERAL".equals(pageType))
+            <div style="background: #fff8e1; border: 1px solid #ffe082; color: #5d4037; padding: var(--space-4); border-radius: var(--radius-sm); margin-bottom: var(--space-6); text-align: center; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                <div style="font-weight: 600; margin-bottom: 4px;">⚠️ Estimate based on typical ${pageType.replace("CREDIT_", "").toLowerCase()} scenarios</div>
+                <div>
+                   Results vary by exact rent & cash. 
+                   <a href="#simulation-lab" style="color: #e65100; font-weight: 700; text-decoration: underline; margin-left: 4px;">
+                       👇 Customize your calculation below for accuracy.
+                   </a>
+                </div>
             </div>
-            <script>
-                function getShareUrl() {
-                    const baseUrl = "https://movecostinfo.com/RentVerdict/verdict";
-                    const params = new URLSearchParams();
-                    // Use verified input data for reconstruction
-                    params.append("cityState", "${input.city()}|${input.state()}"); 
-                    params.append("monthlyRent", "${input.monthlyRent()}");
-                    params.append("availableCash", "${input.availableCash()}");
-                    params.append("hasPet", "${input.hasPet()}");
-                    params.append("isLocalMove", "${input.isLocalMove()}");
-                    
-                    return baseUrl + "?" + params.toString();
-                }
+        @endif
 
-                function shareTwitter() {
-                    // Use result data for the text message
-                    const text = "Checking my move-in costs for ${input.city()} with First Rent Verdict. The hidden costs are real! 🏠💸";
-                    const url = getShareUrl();
-                    window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(url), "_blank");
-                }
-                function copyLink() {
-                    navigator.clipboard.writeText(getShareUrl());
-                    alert("Link copied to clipboard! Anyone with this link can see these results.");
-                }
-            </script>
-        </div>
+
 
         <!-- 2. Hero Verdict Section -->
         <div class="verdict-hero fade-in-up">
-            <div class="verdict-label">OFFICIAL VERDICT</div>
+            @if(!"GENERAL".equals(pageType))
+                <h1 style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary); margin-bottom: var(--space-4); text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.2;">
+                    @if(pageType.startsWith("CREDIT_POOR"))
+                        Renting in ${input.city()} with <span style="color: var(--danger);">Poor Credit</span>
+                    @elseif(pageType.startsWith("CREDIT_FAIR"))
+                        Renting in ${input.city()} with <span style="color: #f59e0b;">Fair Credit</span>
+                    @elseif(pageType.equals("RELOCATION"))
+                         Moving to ${input.city()} Cost Guide
+                    @else
+                         ${input.city()} Rental Verdict
+                    @endif
+                </h1>
+            @else
+                <div class="verdict-label">OFFICIAL VERDICT</div>
+            @endif
             
             <!-- Verdict Badge -->
             <div style="margin-bottom: var(--space-4);" id="verdict-badge-container">
@@ -117,6 +159,7 @@
                 @endif
             </div>
         </div>
+
 
         <!-- 3. Key Financial Cards (Dashboard Grid) -->
         <div class="financial-grid fade-in-up" style="animation-delay: 0.1s; margin-bottom: var(--space-12);">
@@ -208,7 +251,7 @@
                 </div>
 
                 <!-- Interactive Sim Card -->
-                <div class="card sim-card" style="margin-bottom: var(--space-8); border: 1px solid var(--border-default); box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                <div id="simulation-lab" class="card sim-card" style="margin-bottom: var(--space-8); border: 1px solid var(--border-default); box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
                      <div style="margin-bottom: var(--space-6);">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <h4 style="font-size: 1rem; font-weight: 700; color: var(--accent-primary);">Live Simulator</h4>
@@ -261,29 +304,50 @@
                             <label class="form-label" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-bottom: var(--space-2);">Move Type</label>
                             <div style="display: flex; gap: var(--space-4);">
                                 <label style="display: flex; align-items: center; gap: 6px; font-size: 0.875rem; cursor: pointer;">
-                                    <input type="radio" name="moveType" value="local" checked> Local
+                                    @if(input.isLocalMove())
+                                        <input type="radio" name="moveType" value="local" checked> Local
+                                    @else
+                                        <input type="radio" name="moveType" value="local"> Local
+                                    @endif
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 6px; font-size: 0.875rem; cursor: pointer;">
-                                    <input type="radio" name="moveType" value="long"> Long Distance
+                                    @if(!input.isLocalMove())
+                                        <input type="radio" name="moveType" value="long" checked> Long Distance
+                                    @else
+                                        <input type="radio" name="moveType" value="long"> Long Distance
+                                    @endif
                                 </label>
                             </div>
-                            <div id="long-dist-inputs" style="display: none; margin-top: var(--space-3);">
-                                <div style="display: flex; gap: var(--space-2);">
-                                    <input type="text" id="sim-from-city" placeholder="From City" class="form-input" style="font-size: 0.875rem;">
-                                    <input type="text" id="sim-from-state" placeholder="State" class="form-input" style="width: 70px; font-size: 0.875rem;" maxlength="2">
-                                </div>
-                                <div id="dist-feedback" style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 4px;"></div>
-                            </div>
+
                         </div>
 
                         <!-- Credit Score -->
                         <div class="form-group mb-4">
                              <label class="form-label" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-bottom: var(--space-2);">Credit Profile</label>
                              <select id="sim-credit" class="form-select" style="font-size: 0.875rem;">
-                                <option value="EXCELLENT">Excellent (750+)</option>
-                                <option value="GOOD" selected>Good (670-749)</option>
-                                <option value="FAIR">Fair (580-669)</option>
-                                <option value="POOR">Poor (< 580)</option>
+                                @if(input.creditTier() == firstrentverdict.model.verdict.CreditTier.EXCELLENT)
+                                    <option value="EXCELLENT" selected>Excellent (750+)</option>
+                                @else
+                                    <option value="EXCELLENT">Excellent (750+)</option>
+                                @endif
+
+                                @if(input.creditTier() == firstrentverdict.model.verdict.CreditTier.GOOD)
+                                    <option value="GOOD" selected>Good (670-749)</option>
+                                @else
+                                    <option value="GOOD">Good (670-749)</option>
+                                @endif
+
+                                @if(input.creditTier() == firstrentverdict.model.verdict.CreditTier.FAIR)
+                                    <option value="FAIR" selected>Fair (580-669)</option>
+                                @else
+                                    <option value="FAIR">Fair (580-669)</option>
+                                @endif
+
+                                @if(input.creditTier() == firstrentverdict.model.verdict.CreditTier.POOR)
+                                    <option value="POOR" selected>Poor (&lt; 580)</option>
+                                @else
+                                    <option value="POOR">Poor (&lt; 580)</option>
+                                @endif
                              </select>
                          </div>
                          
@@ -466,9 +530,6 @@
             
             // New Inputs
             const moveTypeRadios = document.getElementsByName('moveType');
-            const longDistInputs = document.getElementById('long-dist-inputs');
-            const simFromCity = document.getElementById('sim-from-city');
-            const simFromState = document.getElementById('sim-from-state');
             const simCredit = document.getElementById('sim-credit');
             const simPet = document.getElementById('sim-pet');
 
@@ -497,14 +558,11 @@
 
             // -- Toggle Long Distance Inputs --
             Array.from(moveTypeRadios).forEach(r => {
-                r.addEventListener('change', (e) => {
-                    longDistInputs.style.display = (e.target.value === 'long') ? 'block' : 'none';
-                    triggerSimulation();
-                });
+                r.addEventListener('change', triggerSimulation);
             });
 
             // -- Event Listeners --
-            [rentSlider, cashSlider, simCredit, simPet, simFromCity, simFromState].forEach(el => {
+            [rentSlider, cashSlider, simCredit, simPet].forEach(el => {
                 if(el) el.addEventListener('input', triggerSimulation);
             });
             
@@ -651,4 +709,5 @@
         });
     </script>
 
+    </div>
 `)

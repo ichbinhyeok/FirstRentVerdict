@@ -131,20 +131,61 @@
         </div>
     </div>
 
-    <!-- Popular Cities Section -->
-    <div style="background: var(--bg-secondary); border-top: 1px solid var(--border-default); padding: var(--space-16) var(--space-6);">
+    <!-- Market Explorer Hub -->
+    <div style="background: var(--bg-secondary); border-top: 1px solid var(--border-default); padding: var(--space-20) var(--space-6);">
         <div style="max-width: 1000px; margin: 0 auto;">
-            <h2 class="section-title" style="margin-bottom: var(--space-6);">Popular Cities</h2>
-            <div class="tag-group">
-                @for(CityEntry city : cities.subList(0, Math.min(cities.size(), 12)))
-                    <a href="/RentVerdict/verdict/${city.city().toLowerCase().replace(" ", "-")}-${city.state().toLowerCase()}" class="tag">
-                        ${city.city()}, ${city.state()}
-                    </a>
-                @endfor
+            <div style="text-align: center; margin-bottom: var(--space-12);">
+                <h2 class="section-title">Analyze Local Rental Markets</h2>
+                <p style="color: var(--text-tertiary); margin-top: var(--space-4);">Real-time liquidity audits for 100+ US cities based on 2026 data.</p>
             </div>
-            <div style="margin-top: var(--space-6);">
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-8);">
+                <!-- Cluster: Major Markets -->
+                <div class="card" style="padding: var(--space-6);">
+                    <h3 style="font-size: 1rem; margin-bottom: var(--space-4); color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">
+                        <span>🌆</span> Major Hubs
+                    </h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        @for(CityEntry city : cities.subList(0, Math.min(cities.size(), 8)))
+                            <a href="/RentVerdict/verdict/${city.city().toLowerCase().replace(" ", "-")}-${city.state().toLowerCase()}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; padding: 0.25rem 0.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 4px;">
+                                ${city.city()}
+                            </a>
+                        @endfor
+                    </div>
+                </div>
+
+                <!-- Cluster: Relocation Tools -->
+                <div class="card" style="padding: var(--space-6);">
+                    <h3 style="font-size: 1rem; margin-bottom: var(--space-4); color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">
+                        <span>📦</span> Moving Guides
+                    </h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        @for(CityEntry city : cities.subList(Math.max(0, cities.size()-8), cities.size()))
+                            <a href="/RentVerdict/verdict/moving-to/${city.city().toLowerCase().replace(" ", "-")}-${city.state().toLowerCase()}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; padding: 0.25rem 0.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 4px;">
+                                Moving to ${city.city()}
+                            </a>
+                        @endfor
+                    </div>
+                </div>
+
+                <!-- Cluster: Credit Approval -->
+                <div class="card" style="padding: var(--space-6);">
+                    <h3 style="font-size: 1rem; margin-bottom: var(--space-4); color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">
+                        <span>📉</span> Bad Credit Help
+                    </h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        @for(CityEntry city : cities.subList(Math.min(cities.size(), 15), Math.min(cities.size(), 23)))
+                            <a href="/RentVerdict/verdict/credit/poor/${city.city().toLowerCase().replace(" ", "-")}-${city.state().toLowerCase()}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; padding: 0.25rem 0.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 4px;">
+                                ${city.city()} Low Score
+                            </a>
+                        @endfor
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: var(--space-12); text-align: center;">
                 <a href="/RentVerdict/cities" class="btn btn-secondary">
-                    View All 100+ Cities →
+                    Browse All Supporting Cities & States →
                 </a>
             </div>
         </div>

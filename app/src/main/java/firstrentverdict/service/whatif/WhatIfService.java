@@ -87,6 +87,7 @@ public class WhatIfService {
                 newCash,
                 original.hasPet(),
                 original.isLocalMove(),
-                null);
+                original.creditTier(),
+                original.moveInDate());
     }
 }

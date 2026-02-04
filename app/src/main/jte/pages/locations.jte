@@ -15,6 +15,43 @@
             <p class="hero-subtitle" style="margin: 0 auto;">Select your city to begin the affordability audit.</p>
         </div>
 
+        <!-- Specialized Intent Hub -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
+            <a href="/RentVerdict/verdict/with-pet/new-york-ny" style="text-decoration: none; color: inherit; transition: transform 0.2s ease;" class="intent-card">
+                <div style="padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; text-align: center;">
+                    <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🐾</div>
+                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">Pet Audits</div>
+                    <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.25rem;">View Pet-Friendly Markets</div>
+                </div>
+            </a>
+            <a href="/RentVerdict/verdict/credit/poor/atlanta-ga" style="text-decoration: none; color: inherit; transition: transform 0.2s ease;" class="intent-card">
+                <div style="padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; text-align: center;">
+                    <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">📉</div>
+                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">Credit Guides</div>
+                    <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.25rem;">Low Score Approval Tips</div>
+                </div>
+            </a>
+            <a href="/RentVerdict/verdict/moving-to/austin-tx" style="text-decoration: none; color: inherit; transition: transform 0.2s ease;" class="intent-card">
+                <div style="padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; text-align: center;">
+                    <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">📦</div>
+                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">Relocation</div>
+                    <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.25rem;">Cost Difference Audit</div>
+                </div>
+            </a>
+            <a href="/RentVerdict/verdict/can-i-move-with/5000/to/miami-fl" style="text-decoration: none; color: inherit; transition: transform 0.2s ease;" class="intent-card">
+                <div style="padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; text-align: center;">
+                    <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">💰</div>
+                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">Savings Audit</div>
+                    <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.25rem;">Budget Approval Index</div>
+                </div>
+            </a>
+        </div>
+
+        <style>
+            .intent-card:hover { transform: translateY(-4px); }
+            .intent-card > div:hover { border-color: var(--accent-primary) !important; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        </style>
+
         <div class="split-layout" style="display: block; border: none; min-height: auto;">
              <div style="column-count: 1; column-gap: 2rem;">
                 @for(String state : citiesByState.keySet())

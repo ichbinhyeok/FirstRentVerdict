@@ -1,6 +1,7 @@
 package firstrentverdict.controller;
 
 import firstrentverdict.model.dtos.CitiesData;
+import firstrentverdict.model.dtos.RentData;
 import firstrentverdict.model.dtos.WhatIfRequest;
 import firstrentverdict.model.dtos.WhatIfResponse;
 import firstrentverdict.model.verdict.VerdictInput;
@@ -29,15 +30,17 @@ public class VerdictController {
     private final VerdictDataRepository repository;
     private final VerdictService verdictService;
     private final WhatIfService whatIfService;
+    private final firstrentverdict.service.seo.CityContentGenerator cityContentGenerator;
 
     public VerdictController(
             VerdictDataRepository repository,
             VerdictService verdictService,
-            WhatIfService whatIfService) {
+            WhatIfService whatIfService,
+            firstrentverdict.service.seo.CityContentGenerator cityContentGenerator) {
         this.repository = repository;
         this.verdictService = verdictService;
         this.whatIfService = whatIfService;
-
+        this.cityContentGenerator = cityContentGenerator;
     }
 
     @GetMapping("/")
@@ -73,7 +76,8 @@ public class VerdictController {
         String state = parts[1];
 
         VerdictInput input = new VerdictInput(
-                city, state, monthlyRent, availableCash, hasPet, isLocalMove, null);
+                city, state, monthlyRent, availableCash, hasPet, isLocalMove,
+                firstrentverdict.model.verdict.CreditTier.GOOD, null);
 
         VerdictResult result = verdictService.assessVerdict(input);
 
@@ -113,24 +117,31 @@ public class VerdictController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found in database");
         }
 
-        // Fetch Median Rent for Simulation Default
+        // Fetch Data for SEO Landing
         var rentData = repository.getRent(city, state).orElse(null);
-        int medianRent = (rentData != null) ? (int) rentData.median() : 2000;
-        int cash = medianRent * 3 + 1500; // Standard buffer
+        if (rentData == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rent data not found");
+        }
 
-        SimulationInput simInput = new SimulationInput(
-                city, state, medianRent, cash, false, null, null,
-                firstrentverdict.model.verdict.CreditTier.GOOD, true, null, null);
+        var depositData = repository.getSecurityDeposit(city, state).orElse(null);
+        var movingData = repository.getMoving(city, state).orElse(null);
+        var petData = repository.getPet(city, state).orElse(null);
+        var insight = repository.getCityInsight(city, state).orElse(null);
 
-        VerdictResult result = verdictService.simulateVerdict(simInput);
-        VerdictInput viewInput = new VerdictInput(city, state, medianRent, cash, false, true, null);
+        var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
+                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.GENERAL, null);
 
-        model.addAttribute("input", viewInput);
-        model.addAttribute("result", result);
-        model.addAttribute("pageType", "GENERAL");
-        model.addAttribute("scenarioTitle", "Rent Verdict: " + city + ", " + state);
+        // Get related cities in same state
+        List<CitiesData.CityEntry> relatedCities = repository.getAllCities().stream()
+                .filter(c -> c.state().equalsIgnoreCase(state) && !c.city().equalsIgnoreCase(city))
+                .limit(5)
+                .toList();
 
-        return "pages/result";
+        model.addAttribute("pageData", pageContent);
+        model.addAttribute("relatedCities", relatedCities);
+        model.addAttribute("canonicalUrl", "https://movecostinfo.com/RentVerdict/verdict/" + slug);
+
+        return "pages/city_landing";
     }
 
     @GetMapping("/verdict/credit/{tier}/{slug}")
@@ -147,31 +158,76 @@ public class VerdictController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
         }
 
+        // Fetch Data for SEO Landing
         var rentData = repository.getRent(city, state).orElse(null);
-        int medianRent = (rentData != null) ? (int) rentData.median() : 2000;
-        int cash = medianRent * 3 + 1500;
+        if (rentData == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rent data not found");
+        }
+        var depositData = repository.getSecurityDeposit(city, state).orElse(null);
+        var movingData = repository.getMoving(city, state).orElse(null);
+        var petData = repository.getPet(city, state).orElse(null);
+        var insight = repository.getCityInsight(city, state).orElse(null);
 
-        firstrentverdict.model.verdict.CreditTier creditTier;
-        try {
-            creditTier = firstrentverdict.model.verdict.CreditTier.valueOf(tier.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid credit tier");
+        var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
+                insight,
+                tier.equalsIgnoreCase("poor") ? firstrentverdict.service.seo.CityContentGenerator.Intent.CREDIT_POOR
+                        : firstrentverdict.service.seo.CityContentGenerator.Intent.CREDIT_FAIR,
+                null);
+
+        // Get related cities in same state
+        List<CitiesData.CityEntry> relatedCities = repository.getAllCities().stream()
+                .filter(c -> c.state().equalsIgnoreCase(state) && !c.city().equalsIgnoreCase(city))
+                .limit(5)
+                .toList();
+
+        model.addAttribute("pageData", pageContent);
+        model.addAttribute("relatedCities", relatedCities);
+        model.addAttribute("tier", Character.toUpperCase(tier.charAt(0)) + tier.substring(1).toLowerCase());
+        model.addAttribute("canonicalUrl",
+                "https://movecostinfo.com/RentVerdict/verdict/credit/" + tier.toLowerCase() + "/" + slug);
+
+        return "pages/credit_landing";
+    }
+
+    @GetMapping("/verdict/credit/good/{slug}")
+    public String creditGoodPage(
+            @PathVariable("slug") String slug,
+            Model model) {
+
+        String[] location = parseCitySlug(slug);
+        String city = location[0];
+        String state = location[1];
+
+        if (!repository.isValidCity(city, state)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
         }
 
-        SimulationInput simInput = new SimulationInput(
-                city, state, medianRent, cash, false, null, null,
-                creditTier, true, null, null);
+        // Fetch Data for SEO Landing
+        var rentData = repository.getRent(city, state).orElse(null);
+        if (rentData == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rent data not found");
+        }
 
-        VerdictResult result = verdictService.simulateVerdict(simInput);
-        VerdictInput viewInput = new VerdictInput(city, state, medianRent, cash, false, true, null);
+        var depositData = repository.getSecurityDeposit(city, state).orElse(null);
+        var movingData = repository.getMoving(city, state).orElse(null);
+        var petData = repository.getPet(city, state).orElse(null);
+        var insight = repository.getCityInsight(city, state).orElse(null);
 
-        model.addAttribute("input", viewInput);
-        model.addAttribute("result", result);
-        model.addAttribute("pageType", "CREDIT_" + creditTier.name());
-        model.addAttribute("scenarioTitle",
-                "Renting in " + city + " with " + tier.substring(0, 1).toUpperCase() + tier.substring(1) + " Credit");
+        var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
+                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.CREDIT_GOOD, null);
 
-        return "pages/result";
+        // Get related cities in same state
+        List<CitiesData.CityEntry> relatedCities = repository.getAllCities().stream()
+                .filter(c -> c.state().equalsIgnoreCase(state) && !c.city().equalsIgnoreCase(city))
+                .limit(5)
+                .toList();
+
+        model.addAttribute("pageData", pageContent);
+        model.addAttribute("relatedCities", relatedCities);
+        model.addAttribute("tier", "Good");
+        model.addAttribute("canonicalUrl", "https://movecostinfo.com/RentVerdict/verdict/credit/good/" + slug);
+
+        return "pages/credit_landing";
     }
 
     @GetMapping("/verdict/moving-to/{slug}")
@@ -184,24 +240,150 @@ public class VerdictController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
         }
 
+        // Fetch Data for SEO Landing
         var rentData = repository.getRent(city, state).orElse(null);
-        int medianRent = (rentData != null) ? (int) rentData.median() : 2000;
-        int cash = medianRent * 4 + 2000; // Moving cross-country is expensive
+        if (rentData == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rent data not found");
+        }
 
-        SimulationInput simInput = new SimulationInput(
-                city, state, medianRent, cash, false, null, null,
-                firstrentverdict.model.verdict.CreditTier.GOOD, false, null, null // isLocalMove = false
-        );
+        var depositData = repository.getSecurityDeposit(city, state).orElse(null);
+        var movingData = repository.getMoving(city, state).orElse(null);
+        var petData = repository.getPet(city, state).orElse(null);
+        var insight = repository.getCityInsight(city, state).orElse(null);
 
-        VerdictResult result = verdictService.simulateVerdict(simInput);
-        VerdictInput viewInput = new VerdictInput(city, state, medianRent, cash, false, false, null);
+        var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
+                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.RELOCATION, null);
 
-        model.addAttribute("input", viewInput);
-        model.addAttribute("result", result);
-        model.addAttribute("pageType", "RELOCATION");
-        model.addAttribute("scenarioTitle", "Relocation Guide: Moving to " + city + ", " + state);
+        // Get related cities in same state
+        List<CitiesData.CityEntry> relatedCities = repository.getAllCities().stream()
+                .filter(c -> c.state().equalsIgnoreCase(state) && !c.city().equalsIgnoreCase(city))
+                .limit(5)
+                .toList();
 
-        return "pages/result";
+        model.addAttribute("pageData", pageContent);
+        model.addAttribute("relatedCities", relatedCities);
+        model.addAttribute("canonicalUrl", "https://movecostinfo.com/RentVerdict/verdict/moving-to/" + slug);
+
+        return "pages/relocation_landing";
+    }
+
+    @GetMapping({ "/verdict/with-pet/{slug}", "/verdict/pet-friendly-apartments/{slug}" })
+    public String petPage(@PathVariable("slug") String slug, Model model) {
+        String[] location = parseCitySlug(slug);
+        String city = location[0];
+        String state = location[1];
+
+        if (!repository.isValidCity(city, state)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
+        }
+
+        var rentData = repository.getRent(city, state).orElse(null);
+        var depositData = repository.getSecurityDeposit(city, state).orElse(null);
+        var movingData = repository.getMoving(city, state).orElse(null);
+        var petData = repository.getPet(city, state).orElse(null);
+        var insight = repository.getCityInsight(city, state).orElse(null);
+
+        var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
+                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.PET_FRIENDLY, null);
+
+        model.addAttribute("pageData", pageContent);
+        model.addAttribute("canonicalUrl", "https://movecostinfo.com/RentVerdict/verdict/with-pet/" + slug);
+        return "pages/city_landing";
+    }
+
+    @GetMapping("/verdict/can-i-move-with/{amount}/to/{slug}")
+    public String savingsPage(
+            @PathVariable("amount") int amount,
+            @PathVariable("slug") String slug,
+            Model model) {
+        String[] location = parseCitySlug(slug);
+        String city = location[0];
+        String state = location[1];
+
+        if (!repository.isValidCity(city, state)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
+        }
+
+        var rentData = repository.getRent(city, state).orElse(null);
+        var depositData = repository.getSecurityDeposit(city, state).orElse(null);
+        var movingData = repository.getMoving(city, state).orElse(null);
+        var petData = repository.getPet(city, state).orElse(null);
+        var insight = repository.getCityInsight(city, state).orElse(null);
+
+        var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
+                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.SAVINGS_BASED, amount);
+
+        model.addAttribute("pageData", pageContent);
+        model.addAttribute("savings", amount);
+        model.addAttribute("canonicalUrl",
+                "https://movecostinfo.com/RentVerdict/verdict/can-i-move-with/" + amount + "/to/" + slug);
+        return "pages/city_landing";
+    }
+
+    @GetMapping("/verdict/moving-from/{from}/to/{to}")
+    public String relocationPairPage(
+            @PathVariable("from") String from,
+            @PathVariable("to") String to,
+            Model model) {
+
+        String[] location = parseCitySlug(to);
+        String city = location[0];
+        String state = location[1];
+
+        if (!repository.isValidCity(city, state)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Destination city not found");
+        }
+
+        var rentData = repository.getRent(city, state).orElse(null);
+        var depositData = repository.getSecurityDeposit(city, state).orElse(null);
+        var movingData = repository.getMoving(city, state).orElse(null);
+        var petData = repository.getPet(city, state).orElse(null);
+        var insight = repository.getCityInsight(city, state).orElse(null);
+
+        // Readable 'From' city name
+        String readableFrom = java.util.Arrays.stream(from.split("-"))
+                .map(s -> s.length() > 0 ? s.substring(0, 1).toUpperCase() + s.substring(1) : "")
+                .collect(java.util.stream.Collectors.joining(" "));
+
+        var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
+                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.RELOCATION_PAIR, readableFrom);
+
+        model.addAttribute("pageData", pageContent);
+        model.addAttribute("canonicalUrl",
+                "https://movecostinfo.com/RentVerdict/verdict/moving-from/" + from + "/to/" + to);
+        return "pages/city_landing";
+    }
+
+    @GetMapping("/first-month-cost/{rent}/{state}")
+    public String firstMonthCostPage(
+            @PathVariable("rent") int rent,
+            @PathVariable("state") String state,
+            Model model) {
+
+        // Find a representative city in this state or use a generic "State Average"
+        String repCity = repository.getAllCities().stream()
+                .filter(c -> c.state().equalsIgnoreCase(state))
+                .findFirst()
+                .map(c -> c.city())
+                .orElse("Local");
+
+        var depositData = repository.getSecurityDeposit(repCity, state).orElse(null);
+        var movingData = repository.getMoving(repCity, state).orElse(null);
+        var petData = repository.getPet(repCity, state).orElse(null);
+        var insight = repository.getCityInsight(repCity, state).orElse(null);
+
+        // Dummy rent data to satisfy generator
+        RentData.CityRent dummyRent = new RentData.CityRent(repCity, state.toUpperCase(), 2026, rent,
+                (int) (rent * 0.8), (int) (rent * 1.2), null, null, false);
+
+        var pageContent = cityContentGenerator.generate(repCity, state.toUpperCase(), dummyRent, depositData,
+                movingData, petData, insight,
+                firstrentverdict.service.seo.CityContentGenerator.Intent.RENT_STATE, rent);
+
+        model.addAttribute("pageData", pageContent);
+        model.addAttribute("canonicalUrl",
+                "https://movecostinfo.com/RentVerdict/first-month-cost/" + rent + "/" + state.toLowerCase());
+        return "pages/city_landing";
     }
 
     @GetMapping("/cities")
