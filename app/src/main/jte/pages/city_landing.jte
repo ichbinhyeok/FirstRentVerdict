@@ -22,10 +22,10 @@
         @for(int i=0; i < pageData.commonQuestions().size(); i++)
         {
           "@type": "Question",
-          "name": "${pageData.commonQuestions().get(i).question().replace("\"", "\\\"")}",
+          "name": "$unsafe{pageData.commonQuestions().get(i).question().replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "")}",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "${pageData.commonQuestions().get(i).answer().replace("\"", "\\\"")}"
+            "text": "$unsafe{pageData.commonQuestions().get(i).answer().replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "")}"
           }
         }${i < pageData.commonQuestions().size() - 1 ? "," : ""}
         @endfor
@@ -46,8 +46,8 @@
     }
     </script>
     
-    <!-- Floating CTA Bar (Mobile Only) -->
-    <div class="floating-cta-bar d-md-none">
+    <!-- Floating CTA Bar (Mobile Only, hidden by default) -->
+    <div id="mobile-cta-bar" class="floating-cta-bar d-md-none" style="display: none;">
         <div style="color: white;">
             <div style="font-size: 0.75rem; opacity: 0.8; font-weight: 600;">APPROVED OR DENIED?</div>
             <div style="font-size: 0.9rem; font-weight: 700;">Check Your Potential</div>
@@ -263,5 +263,22 @@
 
     </div>
 
-    </div>
+    <!-- Mobile Floating Bar Scroll Logic -->
+    <script>
+    (function() {
+        const bar = document.getElementById('mobile-cta-bar');
+        if (!bar || window.innerWidth > 768) return;
+        
+        let lastScroll = 0;
+        window.addEventListener('scroll', function() {
+            const scrollY = window.scrollY;
+            if (scrollY > 300) {
+                bar.style.display = 'flex';
+            } else {
+                bar.style.display = 'none';
+            }
+            lastScroll = scrollY;
+        }, { passive: true });
+    })();
+    </script>
 `)

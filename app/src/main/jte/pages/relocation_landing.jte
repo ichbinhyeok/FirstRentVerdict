@@ -21,10 +21,10 @@
         @for(int i=0; i < pageData.commonQuestions().size(); i++)
         {
           "@type": "Question",
-          "name": "${pageData.commonQuestions().get(i).question().replace("\"", "\\\"")}",
+          "name": "$unsafe{pageData.commonQuestions().get(i).question().replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "")}",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "${pageData.commonQuestions().get(i).answer().replace("\"", "\\\"")}"
+            "text": "$unsafe{pageData.commonQuestions().get(i).answer().replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "")}"
           }
         }${i < pageData.commonQuestions().size() - 1 ? "," : ""}
         @endfor
