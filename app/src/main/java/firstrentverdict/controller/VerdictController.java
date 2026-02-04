@@ -5,6 +5,7 @@ import firstrentverdict.model.dtos.WhatIfRequest;
 import firstrentverdict.model.dtos.WhatIfResponse;
 import firstrentverdict.model.verdict.VerdictInput;
 import firstrentverdict.model.verdict.VerdictResult;
+import firstrentverdict.model.verdict.SimulationInput;
 import firstrentverdict.repository.VerdictDataRepository;
 import firstrentverdict.service.core.VerdictService;
 import firstrentverdict.service.whatif.WhatIfService;
@@ -56,7 +57,7 @@ public class VerdictController {
             @RequestParam(value = "monthlyRent", required = false) Integer monthlyRent,
             @RequestParam(value = "availableCash", required = false) Integer availableCash,
             @RequestParam(value = "hasPet", defaultValue = "false") boolean hasPet,
-            @RequestParam(value = "isLocalMove", defaultValue = "false") boolean isLocalMove,
+            @RequestParam(value = "isLocalMove", defaultValue = "true") boolean isLocalMove,
             Model model,
             HttpSession session) {
 
@@ -175,5 +176,11 @@ public class VerdictController {
                 prevBottleneck,
                 currBottleneck,
                 !prevBottleneck.equals(currBottleneck) || !originalResult.verdict().equals(newResult.verdict()));
+    }
+
+    @PostMapping("/api/simulate")
+    @ResponseBody
+    public VerdictResult simulateVerdict(@RequestBody SimulationInput input) {
+        return verdictService.simulateVerdict(input);
     }
 }

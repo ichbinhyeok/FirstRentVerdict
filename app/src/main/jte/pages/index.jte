@@ -89,10 +89,7 @@
                             <input type="checkbox" name="hasPet" value="true">
                             <span>I have a pet</span>
                         </label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="isLocalMove" value="true" checked>
-                            <span>Local move</span>
-                        </label>
+
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-lg btn-full">

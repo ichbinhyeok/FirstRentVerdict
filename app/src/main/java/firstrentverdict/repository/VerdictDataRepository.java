@@ -18,6 +18,8 @@ public class VerdictDataRepository {
     private final Map<String, CashBufferData.CityBuffer> cashBufferMap = new ConcurrentHashMap<>();
     private final Map<String, MovingData.CityMoving> movingMap = new ConcurrentHashMap<>();
     private final Map<String, PetData.CityPet> petMap = new ConcurrentHashMap<>();
+    private final Map<String, StateLawData.StateLaw> stateLaws = new ConcurrentHashMap<>();
+    private final Map<String, CityCoordinates.CityCoordinate> cityCoordinates = new ConcurrentHashMap<>();
 
     // Valid cities set
     private final Map<String, CitiesData.CityEntry> validCities = new ConcurrentHashMap<>();
@@ -52,6 +54,14 @@ public class VerdictDataRepository {
         validCities.put(generateKey(city.city(), city.state()), city);
     }
 
+    public void addStateLaw(StateLawData.StateLaw law) {
+        stateLaws.put(law.state().toUpperCase(), law);
+    }
+
+    public void addCityCoordinate(CityCoordinates.CityCoordinate coordinate) {
+        cityCoordinates.put(generateKey(coordinate.city(), coordinate.state()), coordinate);
+    }
+
     // Accessors
     public Optional<RentData.CityRent> getRent(String city, String state) {
         return Optional.ofNullable(rentMap.get(generateKey(city, state)));
@@ -79,5 +89,13 @@ public class VerdictDataRepository {
 
     public java.util.List<CitiesData.CityEntry> getAllCities() {
         return new java.util.ArrayList<>(validCities.values());
+    }
+
+    public Optional<StateLawData.StateLaw> getStateLaw(String state) {
+        return Optional.ofNullable(stateLaws.get(state.toUpperCase()));
+    }
+
+    public Optional<CityCoordinates.CityCoordinate> getCityCoordinate(String city, String state) {
+        return Optional.ofNullable(cityCoordinates.get(generateKey(city, state)));
     }
 }

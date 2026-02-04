@@ -29,6 +29,7 @@ public class JsonDataLoader implements CommandLineRunner {
         loadMovingData();
         loadPetData();
         loadCashBufferData();
+        loadCityCoordinates();
 
         System.out.println("✅ Data Loading Complete. Total cities supported: " + repository.getAllCities().size());
     }
@@ -62,16 +63,24 @@ public class JsonDataLoader implements CommandLineRunner {
         if (resource.exists()) {
             try (InputStream is = resource.getInputStream()) {
                 SecurityDepositWrapper wrapper = objectMapper.readValue(is, SecurityDepositWrapper.class);
+
+                if (wrapper.state_laws() != null) {
+                    wrapper.state_laws().forEach(repository::addStateLaw);
+                }
+
                 if (wrapper.cities() != null) {
                     wrapper.cities().forEach(repository::addSecurityDeposit);
-                    System.out.println("Loaded security deposit data for " + wrapper.cities().size() + " cities.");
                 }
+                System.out.println("Loaded security deposit data for " + wrapper.cities().size() + " cities and "
+                        + (wrapper.state_laws() != null ? wrapper.state_laws().size() : 0) + " states.");
             }
         }
     }
 
     @com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown = true)
-    private record SecurityDepositWrapper(List<SecurityDepositData> cities) {
+    private record SecurityDepositWrapper(
+            List<StateLawData.StateLaw> state_laws,
+            List<SecurityDepositData> cities) {
     }
 
     private void loadMovingData() throws Exception {
@@ -104,6 +113,19 @@ public class JsonDataLoader implements CommandLineRunner {
                 data.cities().forEach(repository::addCashBuffer);
                 System.out.println("Loaded cash buffer data for " + data.cities().size() + " cities.");
             }
+        }
+    }
+
+    private void loadCityCoordinates() throws Exception {
+        ClassPathResource resource = new ClassPathResource("data/city_coordinates.json");
+        if (resource.exists()) {
+            try (InputStream is = resource.getInputStream()) {
+                CityCoordinates data = objectMapper.readValue(is, CityCoordinates.class);
+                data.cities().forEach(repository::addCityCoordinate);
+                System.out.println("Loaded coordinates for " + data.cities().size() + " cities.");
+            }
+        } else {
+            System.err.println("❌ city_coordinates.json not found!");
         }
     }
 }

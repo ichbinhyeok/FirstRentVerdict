@@ -251,27 +251,51 @@
                                step="100">
                      </div>
 
-                     <!-- Credit Score Toggle (NEW!) -->
-                     <div class="form-group mb-0" style="padding: var(--space-3); background: var(--bg-secondary); border-radius: var(--radius-sm); border: 1px solid var(--border-default);">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <div>
-                                <span style="font-size: 0.875rem; font-weight: 600; color: var(--text-primary);">Credit Score</span>
-                                <p style="font-size: 0.75rem; color: var(--text-tertiary); margin: 2px 0 0 0;">Affects deposit requirements</p>
+                     <!-- 3. Advanced Simulation Controls -->
+                     <div style="background: var(--bg-tertiary); padding: var(--space-4); border-radius: var(--radius-sm); border: 1px solid var(--border-default); margin-top: var(--space-4);">
+                        
+                        <!-- Move Type -->
+                        <div class="form-group mb-4">
+                            <label class="form-label" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-bottom: var(--space-2);">Move Type</label>
+                            <div style="display: flex; gap: var(--space-4);">
+                                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.875rem; cursor: pointer;">
+                                    <input type="radio" name="moveType" value="local" checked> Local
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 6px; font-size: 0.875rem; cursor: pointer;">
+                                    <input type="radio" name="moveType" value="long"> Long Distance
+                                </label>
                             </div>
-                            <div style="display: flex; gap: var(--space-2);">
-                                <button type="button" id="credit-good" class="credit-btn credit-active" 
-                                        style="padding: 6px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1px solid var(--success); background: rgba(22, 163, 74, 0.1); color: var(--success);">
-                                    Good+
-                                </button>
-                                <button type="button" id="credit-poor" class="credit-btn"
-                                        style="padding: 6px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 1px solid var(--border-default); background: transparent; color: var(--text-secondary);">
-                                    Fair/Poor
-                                </button>
+                            <div id="long-dist-inputs" style="display: none; margin-top: var(--space-3);">
+                                <div style="display: flex; gap: var(--space-2);">
+                                    <input type="text" id="sim-from-city" placeholder="From City" class="form-input" style="font-size: 0.875rem;">
+                                    <input type="text" id="sim-from-state" placeholder="State" class="form-input" style="width: 70px; font-size: 0.875rem;" maxlength="2">
+                                </div>
+                                <div id="dist-feedback" style="font-size: 0.75rem; color: var(--text-tertiary); margin-top: 4px;"></div>
                             </div>
                         </div>
-                        <div id="credit-warning" style="display: none; margin-top: var(--space-2); padding: var(--space-2); background: rgba(220, 38, 38, 0.05); border-radius: var(--radius-sm); font-size: 0.75rem; color: var(--danger);">
-                            ⚠️ Lower credit scores often require higher security deposits
-                        </div>
+
+                        <!-- Credit Score -->
+                        <div class="form-group mb-4">
+                             <label class="form-label" style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: var(--text-secondary); margin-bottom: var(--space-2);">Credit Profile</label>
+                             <select id="sim-credit" class="form-select" style="font-size: 0.875rem;">
+                                <option value="EXCELLENT">Excellent (750+)</option>
+                                <option value="GOOD" selected>Good (670-749)</option>
+                                <option value="FAIR">Fair (580-669)</option>
+                                <option value="POOR">Poor (< 580)</option>
+                             </select>
+                         </div>
+                         
+                         <!-- Pet Toggle -->
+                         <div class="form-group mb-0">
+                            <label class="checkbox-label" style="font-size: 0.875rem; font-weight: 500;">
+                                                                @if(input.hasPet())
+                                    <input type="checkbox" id="sim-pet" checked>
+                                @else
+                                    <input type="checkbox" id="sim-pet">
+                                @endif
+                                <span>Moving with a pet</span>
+                            </label>
+                         </div>
                      </div>
                      
                      <div id="sim-feedback" style="margin-top: var(--space-4); padding: var(--space-3); background: var(--bg-primary); border-radius: var(--radius-sm); font-size: 0.875rem; display: none; border-left: 3px solid var(--text-secondary);">
@@ -432,245 +456,197 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // -- Elements --
             const rentSlider = document.getElementById('rent-slider');
             const cashSlider = document.getElementById('cash-slider');
             const rentDisplay = document.getElementById('sim-rent-display');
             const cashDisplay = document.getElementById('sim-cash-display');
-            const dataEl = document.getElementById('sim-data');
             
-            const dispRecTotal = document.getElementById('receipt-total');
+            // New Inputs
+            const moveTypeRadios = document.getElementsByName('moveType');
+            const longDistInputs = document.getElementById('long-dist-inputs');
+            const simFromCity = document.getElementById('sim-from-city');
+            const simFromState = document.getElementById('sim-from-state');
+            const simCredit = document.getElementById('sim-credit');
+            const simPet = document.getElementById('sim-pet');
+
+            // Display Elements
             const dispTotalCost = document.getElementById('disp-total-cost');
-            const dispCash = document.getElementById('disp-cash');
+            const dispCash = document.getElementById('disp-cash'); // Financial Card
             const dispBuffer = document.getElementById('disp-buffer');
             const lblBuffer = document.getElementById('lbl-buffer');
             const lblBufferStatus = document.getElementById('lbl-buffer-status');
             const cardBuffer = document.getElementById('card-buffer');
+            
+            const receiptBody = document.querySelector('.receipt-body');
+            const receiptTotal = document.getElementById('receipt-total');
+            
+            const badgeContainer = document.getElementById('verdict-badge-container');
+            const advisorText = document.getElementById('main-advisor-text');
+            const factorsContainer = document.getElementById('factors-container');
+            
             const radarMarker = document.getElementById('radar-marker');
             const radarLabel = document.getElementById('radar-label');
-            const simFeedback = document.getElementById('sim-feedback');
-            const simNewBuffer = document.getElementById('sim-new-buffer');
-            
-            // Credit Score Toggle Elements
-            const creditGoodBtn = document.getElementById('credit-good');
-            const creditPoorBtn = document.getElementById('credit-poor');
-            const creditWarning = document.getElementById('credit-warning');
-            
-            // Sticky Bar Elements
-            const stickyBar = document.getElementById('sticky-sim-bar');
-            const stickyVal = document.getElementById('sticky-buffer-val');
-            const stickyStatus = document.getElementById('sticky-status-badge');
 
-            if (!rentSlider || !cashSlider || !dataEl) return;
-
-            const staticCosts = parseInt(dataEl.dataset.staticCosts);
-            const depTyp = parseFloat(dataEl.dataset.depTyp); 
-            const depHigh = parseFloat(dataEl.dataset.depHigh); 
-            const recBuffer = parseInt(dataEl.dataset.recBuffer);
-            const medianRent = parseInt(dataEl.dataset.medianRent);
-            const originalCash = parseInt(dataEl.dataset.cash);
+            if (!rentSlider || !cashSlider) return;
             
-            // Track credit score selection (default: good)
-            let isCreditPoor = false;
-            let fetchDebounceTimer;
-
             const fmt = (n) => '$' + Math.floor(n).toLocaleString();
+            let debounceTimer;
+
+            // -- Toggle Long Distance Inputs --
+            Array.from(moveTypeRadios).forEach(r => {
+                r.addEventListener('change', (e) => {
+                    longDistInputs.style.display = (e.target.value === 'long') ? 'block' : 'none';
+                    triggerSimulation();
+                });
+            });
+
+            // -- Event Listeners --
+            [rentSlider, cashSlider, simCredit, simPet, simFromCity, simFromState].forEach(el => {
+                if(el) el.addEventListener('input', triggerSimulation);
+            });
             
-            // Credit Score Toggle Handlers
-            if (creditGoodBtn && creditPoorBtn) {
-                creditGoodBtn.addEventListener('click', () => {
-                    isCreditPoor = false;
-                    creditGoodBtn.style.border = '1px solid var(--success)';
-                    creditGoodBtn.style.background = 'rgba(22, 163, 74, 0.1)';
-                    creditGoodBtn.style.color = 'var(--success)';
-                    creditPoorBtn.style.border = '1px solid var(--border-default)';
-                    creditPoorBtn.style.background = 'transparent';
-                    creditPoorBtn.style.color = 'var(--text-secondary)';
-                    if (creditWarning) creditWarning.style.display = 'none';
-                    updateSimulation();
-                });
-                
-                creditPoorBtn.addEventListener('click', () => {
-                    isCreditPoor = true;
-                    creditPoorBtn.style.border = '1px solid var(--danger)';
-                    creditPoorBtn.style.background = 'rgba(220, 38, 38, 0.1)';
-                    creditPoorBtn.style.color = 'var(--danger)';
-                    creditGoodBtn.style.border = '1px solid var(--border-default)';
-                    creditGoodBtn.style.background = 'transparent';
-                    creditGoodBtn.style.color = 'var(--text-secondary)';
-                    if (creditWarning) creditWarning.style.display = 'block';
-                    updateSimulation();
-                });
+            // Initial state check
+            if(document.querySelector('input[name="moveType"]:checked').value === 'long') {
+                longDistInputs.style.display = 'block';
             }
-            
-            async function fetchFullVerdictUpdate(newRent, newCash) {
-                const cashDelta = newCash - originalCash;
-                const advisorText = document.getElementById('main-advisor-text');
-                if (advisorText) advisorText.style.opacity = '0.5';
+
+            function triggerSimulation() {
+                // Immediate UI feedback for sliders
+                rentDisplay.innerText = fmt(rentSlider.value);
+                cashDisplay.innerText = fmt(cashSlider.value);
+
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(fetchSimulation, 500);
+            }
+
+            async function fetchSimulation() {
+                // 1. Gather Data
+                const cityState = "${input.city()}|${input.state()}"; // Original target city
+                const parts = cityState.split('|');
+                const isLongDist = document.querySelector('input[name="moveType"]:checked').value === 'long';
+                
+                const payload = {
+                    city: parts[0],
+                    state: parts[1],
+                    monthlyRent: parseInt(rentSlider.value),
+                    availableCash: parseInt(cashSlider.value),
+                    hasPet: simPet.checked,
+                    isLocalMove: !isLongDist,
+                    creditTier: simCredit.value,
+                    fromCity: isLongDist ? simFromCity.value : null,
+                    fromState: isLongDist ? simFromState.value : null
+                };
+
+                // Visual Loading State
+                if(advisorText) advisorText.style.opacity = '0.5';
 
                 try {
-                    const response = await fetch('/RentVerdict/what-if', {
+                    const res = await fetch('/RentVerdict/api/simulate', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ adjustedRent: newRent, cashInjection: cashDelta })
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(payload)
                     });
                     
-                    if (!response.ok) return;
-                    const data = await response.json();
-                    const res = data.result;
-
-                    // 1. Badge
-                    const badgeContainer = document.getElementById('verdict-badge-container');
-                    if (badgeContainer) {
-                        badgeContainer.innerHTML = '<h1 class="verdict-text verdict-' + res.verdict.toLowerCase() + '">' + res.verdict + '</h1>';
-                    }
-
-                    // 2. Advisor Summary
-                    if (advisorText) {
-                        advisorText.innerText = res.whyThisVerdict;
-                        advisorText.style.opacity = '1';
-                    }
-
-                    // 3. Factors
-                    const fContainer = document.getElementById('factors-container');
-                    if (fContainer) {
-                        let html = '';
-                        res.contributingFactors.forEach(f => {
-                            html += '<div class="factor-item"><span style="color: var(--accent-primary); margin-right: var(--space-2);">✓</span>' + f + '</div>';
-                        });
-                        if (res.regionalContext && res.regionalContext.contextFactors) {
-                            res.regionalContext.contextFactors.forEach(rf => {
-                                html += '<div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);"><span style="color: var(--text-tertiary); margin-right: var(--space-2);">📍</span>' + rf + '</div>';
-                            });
-                        }
-                        fContainer.innerHTML = html;
-                    }
-
-                    // 4. Action Steps
-                    const actionContainer = document.getElementById('action-steps-container');
-                    if (actionContainer) {
-                        const isApproved = res.verdict === 'APPROVED';
-                        const gap = Math.abs(res.financials.remainingBuffer);
-                        const fmtGap = '$' + gap.toLocaleString();
-                        
-                        if (!isApproved) {
-                            actionContainer.innerHTML = '<div class="step-item"><div class="step-number">1</div><div class="step-content"><h4>Bridge the Gap</h4><p id="action-step-desc">You are approximately <strong>' + fmtGap + '</strong> short of a comfortable move. Consider a co-signer.</p></div></div>';
-                        } else {
-                            actionContainer.innerHTML = '<div class="step-item"><div class="step-number" style="background: var(--success);">✓</div><div class="step-content"><h4>Application Ready</h4><p id="action-step-desc">This rent is within your <strong>safe financial zone</strong>. Proceed with documentation.</p></div></div>';
-                        }
-                    }
-                } catch (e) { console.error(e); }
+                    if (!res.ok) throw new Error("Sim failed");
+                    const result = await res.json();
+                    
+                    updateUI(result);
+                    
+                } catch (e) {
+                    console.error(e);
+                } finally {
+                    if(advisorText) advisorText.style.opacity = '1';
+                }
             }
 
-            function updateSimulation() {
-                const newRent = parseInt(rentSlider.value);
-                const newCash = parseInt(cashSlider.value);
+            function updateUI(result) {
+                const fin = result.financials;
                 
-                rentDisplay.innerText = fmt(newRent);
-                cashDisplay.innerText = fmt(newCash);
-                dispCash.innerText = fmt(newCash); 
+                // Financial Cards
+                if(dispTotalCost) dispTotalCost.innerText = fmt(fin.totalUpfrontCost);
+                if(dispCash) dispCash.innerText = fmt(fin.availableCash);
                 
-                const isCashHighRisk = newCash < (newRent * 3);
-                const isHighRisk = isCreditPoor || isCashHighRisk;
-                const currentDepMult = isHighRisk ? depHigh : depTyp;
-                
-                let riskLabel = "Standard";
-                if (isCreditPoor && depHigh > depTyp) {
-                    riskLabel = "Credit-Adjusted";
-                } else if (isCashHighRisk && depHigh > depTyp) {
-                    riskLabel = "Risk-Adjusted";
-                }
-                const noteVal = riskLabel + " (" + currentDepMult.toFixed(1) + "x Rent)";
-
-                const rentValEl = document.getElementById('val-FirstMonthRent');
-                if(rentValEl) rentValEl.innerText = fmt(newRent);
-                
-                const newDeposit = newRent * currentDepMult;
-                const depositValEl = document.getElementById('val-SecurityDeposit');
-                if(depositValEl) depositValEl.innerText = fmt(newDeposit);
-                
-                const depositNoteEl = document.getElementById('note-SecurityDeposit');
-                if(depositNoteEl) {
-                    depositNoteEl.innerText = noteVal;
-                    if(isHighRisk) depositNoteEl.style.color = "var(--danger)";
-                    else depositNoteEl.style.color = "var(--text-tertiary)";
-                }
-
-                const newTotalUpfront = newRent + newDeposit + staticCosts;
-                dispRecTotal.innerText = fmt(newTotalUpfront);
-                dispTotalCost.innerText = fmt(newTotalUpfront);
-                const newBuffer = newCash - newTotalUpfront;
-                
-                dispBuffer.innerText = (newBuffer < 0 ? "-" : "") + fmt(Math.abs(newBuffer));
-                simNewBuffer.innerText = (newBuffer < 0 ? "-" : "") + fmt(Math.abs(newBuffer));
-                simFeedback.style.display = 'block';
-                
-                if (newBuffer < recBuffer) {
-                    dispBuffer.style.color = "var(--danger)";
-                    cardBuffer.className = "card"; 
-                    cardBuffer.style.border = "1px solid var(--danger)";
-                    cardBuffer.style.background = "#fff0f0";
-                    simFeedback.style.borderLeftColor = "var(--danger)";
-                    if (newBuffer < 0) {
-                        lblBuffer.innerText = "Deficit";
-                        lblBufferStatus.innerText = "Insolvency Risk";
-                    } else {
-                        lblBuffer.innerText = "Remaining Buffer";
-                        lblBufferStatus.innerText = "Below Safety Level";
-                    }
-                } else {
-                    dispBuffer.style.color = "var(--success)";
-                    cardBuffer.className = "card";
-                    cardBuffer.style.border = "1px solid var(--success)";
-                    cardBuffer.style.background = "#f0fff4";
-                    simFeedback.style.borderLeftColor = "var(--success)";
-                    lblBuffer.innerText = "Safety Buffer";
-                    lblBufferStatus.innerText = "Healthy Reserve";
-                }
-
-                if(stickyBar && stickyVal && stickyStatus) {
-                    stickyVal.innerText = (newBuffer < 0 ? "-" : "") + fmt(Math.abs(newBuffer));
-                    if(newBuffer < 0) {
-                        stickyStatus.innerText = "Insolvency Risk";
-                        stickyStatus.style.background = "var(--danger-bg)";
-                        stickyStatus.style.color = "var(--danger)";
-                    } else if(newBuffer < recBuffer) {
-                        stickyStatus.innerText = "Low Buffer";
-                        stickyStatus.style.background = "var(--warning-bg)";
-                        stickyStatus.style.color = "#a16207";
-                    } else {
-                        stickyStatus.innerText = "Safe";
-                        stickyStatus.style.background = "var(--success-bg)";
-                        stickyStatus.style.color = "var(--success)";
-                    }
+                const buff = fin.remainingBuffer;
+                if(dispBuffer) {
+                    dispBuffer.innerText = (buff < 0 ? "-" : "") + fmt(Math.abs(buff));
+                    dispBuffer.style.color = buff < fin.recommendedBuffer ? "var(--danger)" : "var(--success)";
                 }
                 
-                const maxRadar = medianRent * 2.0;
-                let pct = (newRent / maxRadar) * 100;
-                if(pct > 100) pct = 100;
-                if(pct < 0) pct = 0;
-                radarMarker.style.left = pct + "%";
-                if(newRent <= (medianRent * 0.8)) radarLabel.innerText = "Below Market";
-                else if(newRent >= (medianRent * 1.2)) radarLabel.innerText = "Premium Range";
-                else radarLabel.innerText = "Market Standard";
+                if(cardBuffer) {
+                    const isRisk = buff < fin.recommendedBuffer;
+                    cardBuffer.style.border = isRisk ? "1px solid var(--danger)" : "1px solid var(--success)";
+                    cardBuffer.style.background = isRisk ? "#fff0f0" : "#f0fff4";
+                    
+                    if(lblBuffer) lblBuffer.innerText = buff < 0 ? "Deficit" : "Safety Buffer";
+                    if(lblBufferStatus) lblBufferStatus.innerText = isRisk ? (buff < 0 ? "Insolvency Risk" : "Below Safety Level") : "Healthy Reserve";
+                }
 
-                clearTimeout(fetchDebounceTimer);
-                fetchDebounceTimer = setTimeout(() => { fetchFullVerdictUpdate(newRent, newCash); }, 500);
-            }
-
-            rentSlider.addEventListener('input', updateSimulation);
-            cashSlider.addEventListener('input', updateSimulation);
-
-            const simCard = document.querySelector('.sim-card');
-            if(simCard && stickyBar && window.innerWidth <= 768) {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) { stickyBar.style.display = 'flex'; } 
-                        else { stickyBar.style.display = 'none'; }
+                // Receipt Breakdown (Dynamic Rebuild) - NO BACKTICKS
+                if(receiptBody) {
+                    let html = '';
+                    fin.costBreakdown.forEach(item => {
+                        html += '<div class="receipt-item receipt-dynamic-item">' +
+                            '<div>' +
+                                '<div class="receipt-item-label">' + item.label + '</div>' +
+                                '<div class="receipt-item-note">' + item.annotation + '</div>' +
+                            '</div>' +
+                            '<div class="receipt-item-value">$' + item.amount.toLocaleString() + '</div>' +
+                        '</div>';
                     });
-                }, { threshold: 0.1 });
-                observer.observe(simCard);
+                    receiptBody.innerHTML = html;
+                }
+                if(receiptTotal) receiptTotal.innerText = fmt(fin.totalUpfrontCost);
+
+                // Verdict Badge
+                if(badgeContainer) {
+                     badgeContainer.innerHTML = '<h1 class="verdict-text verdict-' + result.verdict.toLowerCase() + '">' + result.verdict + '</h1>';
+                }
+                
+                // Advisor Text
+                if(advisorText) advisorText.innerText = result.whyThisVerdict;
+                
+                // Factors - NO BACKTICKS
+                if(factorsContainer) {
+                    let html = '';
+                    result.contributingFactors.forEach(f => {
+                         html += '<div class="factor-item"><span style="color: var(--accent-primary); margin-right: var(--space-2);">✓</span>' + f + '</div>';
+                    });
+                    if (result.regionalContext && result.regionalContext.contextFactors) {
+                        result.regionalContext.contextFactors.forEach(rf => {
+                            html += '<div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);"><span style="color: var(--text-tertiary); margin-right: var(--space-2);">📍</span>' + rf + '</div>';
+                        });
+                    }
+                    factorsContainer.innerHTML = html;
+                }
+
+                // Action Steps
+                const actionContainer = document.getElementById('action-steps-container');
+                if (actionContainer) {
+                    const isApproved = result.verdict === 'APPROVED';
+                    const gap = Math.abs(fin.remainingBuffer);
+                    const fmtGap = '$' + gap.toLocaleString();
+                    
+                    if (!isApproved) {
+                        actionContainer.innerHTML = '<div class="step-item"><div class="step-number">1</div><div class="step-content"><h4>Bridge the Gap</h4><p id="action-step-desc">You are approximately <strong>' + fmtGap + '</strong> short of a comfortable move. Consider a co-signer.</p></div></div>';
+                    } else {
+                        actionContainer.innerHTML = '<div class="step-item"><div class="step-number" style="background: var(--success);">✓</div><div class="step-content"><h4>Application Ready</h4><p id="action-step-desc">This rent is within your <strong>safe financial zone</strong>. Proceed with documentation.</p></div></div>';
+                    }
+                }
+                
+                // Market Radar
+                if(result.marketPosition) {
+                    const mp = result.marketPosition;
+                    if(radarLabel) radarLabel.innerText = mp.marketZone;
+                    if(radarMarker) {
+                         const maxRadar = mp.medianRent * 2.0;
+                         let pct = (fin.monthlyRent / maxRadar) * 100;
+                         if(pct > 100) pct = 100; if(pct < 0) pct = 0;
+                         radarMarker.style.left = pct + "%";
+                    }
+                }
             }
-            updateSimulation();
         });
     </script>
+
 `)

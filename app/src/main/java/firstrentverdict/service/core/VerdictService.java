@@ -4,6 +4,8 @@ import firstrentverdict.model.dtos.*;
 import firstrentverdict.model.verdict.*;
 import firstrentverdict.repository.VerdictDataRepository;
 import firstrentverdict.service.verdict.*;
+import firstrentverdict.service.calc.*;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,17 +23,33 @@ public class VerdictService {
     private final VerdictDataRepository repository;
     private final BottleneckAnalyzer bottleneckAnalyzer;
     private final VerdictTextGenerator textGenerator;
+    private final MovingCostCalculator movingCostCalculator;
+    private final DistanceCalculator distanceCalculator;
 
     public VerdictService(
             VerdictDataRepository repository,
             BottleneckAnalyzer bottleneckAnalyzer,
-            VerdictTextGenerator textGenerator) {
+            VerdictTextGenerator textGenerator,
+            MovingCostCalculator movingCostCalculator,
+            DistanceCalculator distanceCalculator) {
         this.repository = repository;
         this.bottleneckAnalyzer = bottleneckAnalyzer;
         this.textGenerator = textGenerator;
+        this.movingCostCalculator = movingCostCalculator;
+        this.distanceCalculator = distanceCalculator;
     }
 
     public VerdictResult assessVerdict(VerdictInput input) {
+        return simulateVerdict(new SimulationInput(
+                input.city(), input.state(), input.monthlyRent(), input.availableCash(),
+                input.hasPet(), null, null, CreditTier.GOOD, true, null, input.moveInDate()));
+    }
+
+    public VerdictResult simulateVerdict(SimulationInput input) {
+        return calculateCoreLogic(input);
+    }
+
+    private VerdictResult calculateCoreLogic(SimulationInput input) {
         // 1. Validate City
         if (!repository.isValidCity(input.city(), input.state())) {
             throw new IllegalArgumentException("Unsupported city: " + input.city() + ", " + input.state());
@@ -45,30 +63,72 @@ public class VerdictService {
         RentData.CityRent rentData = repository.getRent(input.city(), input.state()).orElseThrow();
 
         // 3. Calculate Security Deposit with Risk Assessment
+        // 3. Calculate Security Deposit with Risk Assessment
         double depositMult = 1.0;
         String depositRiskNote = "Standard Rate";
         boolean isHighRisk = input.availableCash() < (input.monthlyRent() * 3);
+
+        if (input.creditTier() == CreditTier.POOR || input.creditTier() == CreditTier.FAIR) {
+            isHighRisk = true;
+        }
+
         String depositLegalNote = null;
 
         if (depositData != null && depositData.city_practice() != null) {
             var practice = depositData.city_practice();
             depositLegalNote = practice.notes();
 
-            if (isHighRisk && practice.highRiskMultipliers() != null && !practice.highRiskMultipliers().isEmpty()) {
-                depositMult = practice.highRiskMultipliers().stream()
-                        .mapToDouble(Double::doubleValue)
-                        .max()
-                        .orElse(1.0);
-                depositRiskNote = String.format("Risk-Adjusted (%.1fx Rent)", depositMult);
-            } else if (practice.typicalMultipliers() != null && !practice.typicalMultipliers().isEmpty()) {
-                depositMult = practice.typicalMultipliers().get(0);
-                depositRiskNote = String.format("Standard (%.1fx Rent)", depositMult);
+            if (input.creditTier() != null) {
+                switch (input.creditTier()) {
+                    case POOR -> {
+                        depositMult = practice.highRiskMultipliers().stream().mapToDouble(d -> d).max().orElse(2.0);
+                        depositRiskNote = "High Risk (Poor Credit)";
+                    }
+                    case FAIR -> {
+                        double typical = practice.typicalMultipliers().isEmpty() ? 1.0
+                                : practice.typicalMultipliers().get(0);
+                        depositMult = Math.min(typical * 1.5,
+                                practice.highRiskMultipliers().stream().mapToDouble(d -> d).min().orElse(2.0));
+                        depositRiskNote = "Moderate Risk (Fair Credit)";
+                    }
+                    default -> {
+                        depositMult = practice.typicalMultipliers().isEmpty() ? 1.0
+                                : practice.typicalMultipliers().get(0);
+                        depositRiskNote = "Standard Rate (" + input.creditTier() + ")";
+                    }
+                }
+            } else {
+                if (isHighRisk && practice.highRiskMultipliers() != null && !practice.highRiskMultipliers().isEmpty()) {
+                    depositMult = practice.highRiskMultipliers().stream()
+                            .mapToDouble(Double::doubleValue)
+                            .max()
+                            .orElse(1.0);
+                    depositRiskNote = String.format("Risk-Adjusted (%.1fx Rent)", depositMult);
+                } else if (practice.typicalMultipliers() != null && !practice.typicalMultipliers().isEmpty()) {
+                    depositMult = practice.typicalMultipliers().get(0);
+                    depositRiskNote = String.format("Standard (%.1fx Rent)", depositMult);
+                }
             }
         }
         int depositCost = (int) (input.monthlyRent() * depositMult);
 
         // 4. Moving Cost
-        int movingCost = movingData.typical();
+        int movingCost;
+        if (input.isLocalMove()) {
+            movingCost = movingData.typical();
+        } else {
+            double distance = 0.0;
+            if (input.fromCity() != null && input.fromState() != null) {
+                var fromCoord = repository.getCityCoordinate(input.fromCity(), input.fromState());
+                var toCoord = repository.getCityCoordinate(input.city(), input.state());
+                if (fromCoord.isPresent() && toCoord.isPresent()) {
+                    distance = distanceCalculator.calculateMiles(
+                            fromCoord.get().lat(), fromCoord.get().lng(),
+                            toCoord.get().lat(), toCoord.get().lng());
+                }
+            }
+            movingCost = movingCostCalculator.calculateCost(false, distance, movingData);
+        }
 
         // 5. Pet Costs
         int petOneTime = 0;
@@ -177,7 +237,7 @@ public class VerdictService {
      * Builds itemized cost breakdown with annotations from source data
      */
     private List<FinancialLineItem> buildCostBreakdown(
-            VerdictInput input, int depositCost, String depositRiskNote, String depositLegalNote,
+            SimulationInput input, int depositCost, String depositRiskNote, String depositLegalNote,
             MovingData.CityMoving movingData, PetData.CityPet petData,
             int petOneTime, int petMonthlyRent, int brokerFee) {
 
@@ -229,7 +289,7 @@ public class VerdictService {
      * Builds contributing factors from ACTUAL data (no hardcoding)
      */
     private List<String> buildContributingFactors(
-            VerdictInput input, boolean isHighRisk, String depositLegalNote,
+            SimulationInput input, boolean isHighRisk, String depositLegalNote,
             int remainingCash, int recommendedBuffer, int brokerFee) {
 
         List<String> factors = new ArrayList<>();
@@ -274,7 +334,7 @@ public class VerdictService {
      * Builds DYNAMIC regional context based on actual market data
      */
     private RegionalContext buildRegionalContext(
-            VerdictInput input, RentData.CityRent rentData, SecurityDepositData depositData,
+            SimulationInput input, RentData.CityRent rentData, SecurityDepositData depositData,
             VerdictContext.MarketTier marketTier, int totalUpfront) {
 
         List<String> contextFactors = new ArrayList<>();
@@ -346,7 +406,7 @@ public class VerdictService {
         return new SafetyGap(gapAmount, actionPrompt, displayText, verdict == Verdict.APPROVED);
     }
 
-    private MarketPosition buildMarketPosition(VerdictInput input, RentData.CityRent rentData) {
+    private MarketPosition buildMarketPosition(SimulationInput input, RentData.CityRent rentData) {
         String marketZone;
         if (input.monthlyRent() <= rentData.p25()) {
             marketZone = "Below Market";
