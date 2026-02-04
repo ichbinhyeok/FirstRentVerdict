@@ -141,44 +141,38 @@
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-8);">
                 <!-- Cluster: Major Markets -->
-                <div class="card" style="padding: var(--space-6);">
-                    <h3 style="font-size: 1rem; margin-bottom: var(--space-4); color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">
-                        <span>🌆</span> Major Hubs
+                <div class="card" style="padding: var(--space-8); border-top: 4px solid var(--accent-primary);">
+                    <h3 style="font-size: 1.25rem; margin-bottom: var(--space-6); color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
+                        <span>🌆</span> Major Markets
                     </h3>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        @for(CityEntry city : cities.subList(0, Math.min(cities.size(), 8)))
-                            <a href="/RentVerdict/verdict/${city.city().toLowerCase().replace(" ", "-")}-${city.state().toLowerCase()}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; padding: 0.25rem 0.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 4px;">
-                                ${city.city()}
-                            </a>
-                        @endfor
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <a href="/RentVerdict/verdict/new-york-ny" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">Audit New York, NY</a>
+                        <a href="/RentVerdict/verdict/los-angeles-ca" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">Audit Los Angeles, CA</a>
+                        <a href="/RentVerdict/verdict/chicago-il" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">Audit Chicago, IL</a>
                     </div>
                 </div>
 
-                <!-- Cluster: Relocation Tools -->
-                <div class="card" style="padding: var(--space-6);">
-                    <h3 style="font-size: 1rem; margin-bottom: var(--space-4); color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">
-                        <span>📦</span> Moving Guides
+                <!-- Cluster: Case Studies -->
+                <div class="card" style="padding: var(--space-8); border-top: 4px solid #f59e0b;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: var(--space-6); color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
+                        <span>🐾</span> Special Intent
                     </h3>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        @for(CityEntry city : cities.subList(Math.max(0, cities.size()-8), cities.size()))
-                            <a href="/RentVerdict/verdict/moving-to/${city.city().toLowerCase().replace(" ", "-")}-${city.state().toLowerCase()}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; padding: 0.25rem 0.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 4px;">
-                                Moving to ${city.city()}
-                            </a>
-                        @endfor
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <a href="/RentVerdict/verdict/with-pet/new-york-ny" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #f59e0b; color: #d97706;">Pet-Friendly NY Audit</a>
+                        <a href="/RentVerdict/verdict/moving-to/austin-tx" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #f59e0b; color: #d97706;">Moving to Austin Guide</a>
+                        <a href="/RentVerdict/verdict/can-i-move-with/5000/to/miami-fl" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #f59e0b; color: #d97706;">$5,000 Miami Savings</a>
                     </div>
                 </div>
 
                 <!-- Cluster: Credit Approval -->
-                <div class="card" style="padding: var(--space-6);">
-                    <h3 style="font-size: 1rem; margin-bottom: var(--space-4); color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">
-                        <span>📉</span> Bad Credit Help
+                <div class="card" style="padding: var(--space-8); border-top: 4px solid #ef4444;">
+                    <h3 style="font-size: 1.25rem; margin-bottom: var(--space-6); color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
+                        <span>📉</span> Credit Strategy
                     </h3>
-                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                        @for(CityEntry city : cities.subList(Math.min(cities.size(), 15), Math.min(cities.size(), 23)))
-                            <a href="/RentVerdict/verdict/credit/poor/${city.city().toLowerCase().replace(" ", "-")}-${city.state().toLowerCase()}" style="font-size: 0.85rem; color: var(--text-secondary); text-decoration: none; padding: 0.25rem 0.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 4px;">
-                                ${city.city()} Low Score
-                            </a>
-                        @endfor
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <a href="/RentVerdict/verdict/credit/poor/atlanta-ga" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #ef4444; color: #dc2626;">Poor Credit Atlanta</a>
+                        <a href="/RentVerdict/verdict/credit/fair/houston-tx" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #ef4444; color: #dc2626;">Fair Credit Houston</a>
+                        <a href="/RentVerdict/verdict/credit/good/seattle-wa" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #ef4444; color: #dc2626;">Good Credit Seattle</a>
                     </div>
                 </div>
             </div>

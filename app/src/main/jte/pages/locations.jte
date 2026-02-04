@@ -16,40 +16,52 @@
         </div>
 
         <!-- Specialized Intent Hub -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
-            <a href="/RentVerdict/verdict/with-pet/new-york-ny" style="text-decoration: none; color: inherit; transition: transform 0.2s ease;" class="intent-card">
-                <div style="padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; text-align: center;">
-                    <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">🐾</div>
-                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">Pet Audits</div>
-                    <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.25rem;">View Pet-Friendly Markets</div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
+            <a href="/RentVerdict/verdict/with-pet/new-york-ny" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">
+                <div style="padding: 2rem 1.5rem; background: var(--bg-surface); border: 2px solid var(--border-subtle); border-radius: 16px; text-align: center;">
+                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">🐾</div>
+                    <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Pet Audit Guide</div>
+                    <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 0.5rem;">New York Pet Rules</div>
                 </div>
             </a>
-            <a href="/RentVerdict/verdict/credit/poor/atlanta-ga" style="text-decoration: none; color: inherit; transition: transform 0.2s ease;" class="intent-card">
-                <div style="padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; text-align: center;">
-                    <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">📉</div>
-                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">Credit Guides</div>
-                    <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.25rem;">Low Score Approval Tips</div>
+            <a href="/RentVerdict/verdict/credit/poor/atlanta-ga" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">
+                <div style="padding: 2rem 1.5rem; background: var(--bg-surface); border: 2px solid var(--border-subtle); border-radius: 16px; text-align: center;">
+                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">📉</div>
+                    <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Poor Credit Guide</div>
+                    <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 0.5rem;">Atlanta Approval Strategy</div>
                 </div>
             </a>
-            <a href="/RentVerdict/verdict/moving-to/austin-tx" style="text-decoration: none; color: inherit; transition: transform 0.2s ease;" class="intent-card">
-                <div style="padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; text-align: center;">
-                    <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">📦</div>
-                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">Relocation</div>
-                    <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.25rem;">Cost Difference Audit</div>
+            <a href="/RentVerdict/verdict/moving-to/austin-tx" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">
+                <div style="padding: 2rem 1.5rem; background: var(--bg-surface); border: 2px solid var(--border-subtle); border-radius: 16px; text-align: center;">
+                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">📦</div>
+                    <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Relocation Audit</div>
+                    <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 0.5rem;">Austin Cost Breakdown</div>
                 </div>
             </a>
-            <a href="/RentVerdict/verdict/can-i-move-with/5000/to/miami-fl" style="text-decoration: none; color: inherit; transition: transform 0.2s ease;" class="intent-card">
-                <div style="padding: 1.5rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; text-align: center;">
-                    <div style="font-size: 1.75rem; margin-bottom: 0.5rem;">💰</div>
-                    <div style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">Savings Audit</div>
-                    <div style="font-size: 0.8rem; color: var(--text-tertiary); margin-top: 0.25rem;">Budget Approval Index</div>
+            <a href="/RentVerdict/verdict/can-i-move-with/5000/to/miami-fl" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">
+                <div style="padding: 2rem 1.5rem; background: var(--bg-surface); border: 2px solid var(--border-subtle); border-radius: 16px; text-align: center;">
+                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">💰</div>
+                    <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Savings Analysis</div>
+                    <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 0.5rem;">Miami with $5,000</div>
                 </div>
             </a>
         </div>
 
+        <!-- Popular Markets (Direct Access) -->
+        <div style="margin-bottom: 5rem;">
+            <h2 style="font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-tertiary); margin-bottom: 1.5rem; text-align: center;">Top Market Audits</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                <a href="/RentVerdict/verdict/new-york-ny" class="btn btn-intent" style="padding: 1rem 2rem; border-radius: 50px; font-weight: 700;">NEW YORK, NY</a>
+                <a href="/RentVerdict/verdict/los-angeles-ca" class="btn btn-intent" style="padding: 1rem 2rem; border-radius: 50px; font-weight: 700;">LOS ANGELES, CA</a>
+                <a href="/RentVerdict/verdict/chicago-il" class="btn btn-intent" style="padding: 1rem 2rem; border-radius: 50px; font-weight: 700;">CHICAGO, IL</a>
+                <a href="/RentVerdict/verdict/atlanta-ga" class="btn btn-intent" style="padding: 1rem 2rem; border-radius: 50px; font-weight: 700;">ATLANTA, GA</a>
+                <a href="/RentVerdict/verdict/houston-tx" class="btn btn-intent" style="padding: 1rem 2rem; border-radius: 50px; font-weight: 700;">HOUSTON, TX</a>
+            </div>
+        </div>
+
         <style>
             .intent-card:hover { transform: translateY(-4px); }
-            .intent-card > div:hover { border-color: var(--accent-primary) !important; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+            .intent-card > div:hover { border-color: var(--accent-primary) !important; box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15); }
         </style>
 
         <div class="split-layout" style="display: block; border: none; min-height: auto;">
