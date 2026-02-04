@@ -250,8 +250,5 @@
 
     </div>
 
-    <style>
-        .d-md-none { display: flex; }
-        @media (min-width: 768px) { .d-md-none { display: none; } }
-    </style>
+    </div>
 `)

@@ -471,6 +471,38 @@ a:hover {
     box-shadow: var(--shadow-md);
 }
 
+/* Floating Responsive CTA Bar */
+.floating-cta-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.floating-cta-bar .btn {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+    .d-md-none {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    body {
+        padding-bottom: 80px;
+        /* Space for the floating bar */
+    }
+}
+
 .btn-lg {
     padding: var(--space-4) var(--space-8);
     font-size: 1rem;

@@ -83,8 +83,8 @@
 
         <!-- Interactive CTA -->
         <div style="background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); color: white; border-radius: 24px; padding: 4rem 2rem; text-align: center; margin-bottom: 4rem; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);">
-            <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1.5rem;">Can you actually afford this?</h2>
-            <p style="font-size: 1.125rem; opacity: 0.9; margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
+            <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 1.5rem; color: white;">Can you actually afford this?</h2>
+            <p style="font-size: 1.125rem; color: rgba(255, 255, 255, 0.9); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
                 Don't guess with your future. Use our real-time simulator to see if your specific cash-on-hand can overcome your ${tier} credit score in ${pageData.city()}.
             </p>
             <a href="/RentVerdict/" class="btn btn-primary btn-lg" style="background: white; color: #0f172a; border: none; padding: 1.25rem 3rem; font-size: 1.25rem; font-weight: 700;">

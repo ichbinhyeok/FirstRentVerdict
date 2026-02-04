@@ -103,8 +103,8 @@
 
         <!-- CTA Section -->
         <div style="background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; border-radius: 24px; padding: 4rem 2rem; text-align: center; margin-bottom: 4rem; box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.3);">
-            <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem;">Is your budget relocation-ready?</h2>
-            <p style="font-size: 1.2rem; opacity: 0.9; margin-bottom: 2.5rem; max-width: 550px; margin-left: auto; margin-right: auto;">
+            <h2 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1.5rem; color: white;">Is your budget relocation-ready?</h2>
+            <p style="font-size: 1.2rem; color: rgba(255, 255, 255, 0.9); margin-bottom: 2.5rem; max-width: 550px; margin-left: auto; margin-right: auto;">
                 Moving costs are the #1 reason for post-lease financial stress. Use our simulator to see if your cash buffer is actually enough for ${pageData.city()}.
             </p>
             <a href="/RentVerdict/" class="btn btn-primary btn-lg" style="background: white; color: #4f46e5; border: none; padding: 1.25rem 3rem; font-size: 1.25rem; font-weight: 700;">

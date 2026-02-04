@@ -1,7 +1,6 @@
 package firstrentverdict.service.core;
 
 import firstrentverdict.model.verdict.*;
-import firstrentverdict.repository.VerdictDataRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,14 +17,13 @@ class VerdictServiceTest {
 
         @Test
         void testVerdict_Denied_Insolvency() {
-                // New York: Rent 3850 + Deposit 3850 (1x cap) + Moving 1100 = 8800 upfront.
-                // User has 5000: immediate insolvency.
                 VerdictInput input = new VerdictInput(
                                 "New York", "NY",
                                 3850,
                                 5000,
                                 false,
                                 true,
+                                CreditTier.GOOD,
                                 null);
 
                 VerdictResult result = verdictService.assessVerdict(input);
@@ -36,15 +34,13 @@ class VerdictServiceTest {
 
         @Test
         void testVerdict_Denied_LowBuffer() {
-                // New York: ~8800 upfront.
-                // Buffer rec: 2925.
-                // User has 9000. Remaining: 200. (200 < 0.5 * 2925) -> DENIED
                 VerdictInput input = new VerdictInput(
                                 "New York", "NY",
                                 3850,
                                 9000,
                                 false,
                                 true,
+                                CreditTier.GOOD,
                                 null);
 
                 VerdictResult result = verdictService.assessVerdict(input);
@@ -55,16 +51,13 @@ class VerdictServiceTest {
 
         @Test
         void testVerdict_Borderline() {
-                // New York: ~8800 upfront. Buffer rec: 2925.
-                // We want BORDERLINE: Remaining < 2925 BUT Remaining > 0.5 * 2925 (1462.5)
-                // Let's aim for Remaining = 2000.
-                // Available needed = 8800 + 2000 = 10800.
                 VerdictInput input = new VerdictInput(
                                 "New York", "NY",
                                 3850,
                                 10800,
                                 false,
                                 true,
+                                CreditTier.GOOD,
                                 null);
 
                 VerdictResult result = verdictService.assessVerdict(input);
@@ -74,44 +67,33 @@ class VerdictServiceTest {
 
         @Test
         void testLegalCap_Enforcement() {
-                // New York has a 1x cap.
-                // Rent 3000 -> Deposit should be 3000, NOT higher even if typical was higher.
-                // Math verification instead of text note
                 VerdictInput input = new VerdictInput(
                                 "New York", "NY",
                                 3000,
-                                20000, // Plenty of cash
+                                20000,
                                 false,
                                 true,
+                                CreditTier.GOOD,
                                 null);
 
                 VerdictResult result = verdictService.assessVerdict(input);
-
-                // Deposit cost is hidden in totalUpfrontCost calculation or text.
-                // We can infer it or verify the result is APPROVED.
-                // Since we removed the text note logic, we just verify the verdict is sound.
                 assertEquals(Verdict.APPROVED, result.verdict());
         }
 
         @Test
         void testVerdict_ImmediateInsolvency_CanonicalValue() {
-                // Goal: Create immediate insolvency scenario with remainingCash = -1
-                // New York Rent 3850 -> Upfront = 3850 + 3850 + 1100 = 8800.
-                // User needs to have 8799 cash to get -1 remaining.
-
                 VerdictInput input = new VerdictInput(
                                 "New York", "NY",
                                 3850,
                                 8799,
                                 false,
                                 true,
+                                CreditTier.GOOD,
                                 null);
 
                 VerdictResult result = verdictService.assessVerdict(input);
 
                 assertEquals(Verdict.DENIED, result.verdict());
-                // Verify Canonical Value Rule:
-                // Gap should be exactly equal to remainingCash (-1), NOT (remaining - buffer)
                 assertEquals(-1, result.safetyGap().gapAmount());
                 assertTrue(result.primaryBottleneck().contains("Immediate Insolvency"));
         }
@@ -126,6 +108,7 @@ class VerdictServiceTest {
                                 20000,
                                 true, // has pet
                                 true,
+                                CreditTier.GOOD,
                                 null);
 
                 VerdictResult resultNY = verdictService.assessVerdict(inputNY);
@@ -154,6 +137,7 @@ class VerdictServiceTest {
                                 10000,
                                 false,
                                 true,
+                                CreditTier.GOOD,
                                 null);
 
                 VerdictResult resultTX = verdictService.assessVerdict(inputTX);
@@ -172,7 +156,8 @@ class VerdictServiceTest {
                 // New York Rent Data (Stub/JSON): Median 4200, p25 3000, p75 5500
 
                 // Scenario 1: Below Market
-                VerdictInput inputCheap = new VerdictInput("New York", "NY", 2500, 10000, false, true, null);
+                VerdictInput inputCheap = new VerdictInput("New York", "NY", 2500, 10000, false, true, CreditTier.GOOD,
+                                null);
                 VerdictResult resultCheap = verdictService.assessVerdict(inputCheap);
                 assertNotNull(resultCheap.marketPosition());
                 assertEquals("Below Market", resultCheap.marketPosition().marketZone());
@@ -180,12 +165,14 @@ class VerdictServiceTest {
                 assertEquals(3200, resultCheap.marketPosition().p25Rent());
 
                 // Scenario 2: Market Standard
-                VerdictInput inputStandard = new VerdictInput("New York", "NY", 3500, 10000, false, true, null);
+                VerdictInput inputStandard = new VerdictInput("New York", "NY", 3500, 10000, false, true,
+                                CreditTier.GOOD, null);
                 VerdictResult resultStandard = verdictService.assessVerdict(inputStandard);
                 assertEquals("Market Standard", resultStandard.marketPosition().marketZone());
 
                 // Scenario 3: Premium
-                VerdictInput inputExpensive = new VerdictInput("New York", "NY", 6000, 10000, false, true, null);
+                VerdictInput inputExpensive = new VerdictInput("New York", "NY", 6000, 10000, false, true,
+                                CreditTier.GOOD, null);
                 VerdictResult resultExpensive = verdictService.assessVerdict(inputExpensive);
                 assertEquals("Premium Range", resultExpensive.marketPosition().marketZone());
         }
