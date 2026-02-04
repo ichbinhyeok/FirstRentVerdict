@@ -318,7 +318,7 @@
                         function getShareUrl() {
                             const baseUrl = "https://movecostinfo.com/RentVerdict/verdict";
                             const params = new URLSearchParams();
-                            params.append("cityState", "${result.regionalContext().cityName()}|${result.regionalContext().stateCode()}"); 
+                            params.append("cityState", "${input.city()}|${input.state()}"); 
                             // Note: We need the exact 'City|State' format. 
                             // Assuming result.regionalContext() has these or extracting from result logic.
                             // However, let's use the explicit Values from the result object for accuracy.
