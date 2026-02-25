@@ -5,6 +5,7 @@ import firstrentverdict.model.dtos.SecurityDepositData;
 import firstrentverdict.model.dtos.MovingData;
 import firstrentverdict.model.dtos.PetData;
 import firstrentverdict.model.dtos.CityInsightData;
+import firstrentverdict.repository.VerdictDataRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,6 +13,12 @@ import java.util.List;
 
 @Service
 public class CityContentGenerator {
+
+    private final VerdictDataRepository repository;
+
+    public CityContentGenerator(VerdictDataRepository repository) {
+        this.repository = repository;
+    }
 
         public enum Intent {
                 GENERAL,
@@ -49,6 +56,16 @@ public class CityContentGenerator {
                         }
                         depositNotes = depositData.city_practice().notes();
                 }
+
+                java.util.Optional<firstrentverdict.model.dtos.StateLawData.StateLaw> stateLawOpt = repository.getStateLaw(state);
+                if (stateLawOpt.isPresent() && stateLawOpt.get().legalCapMultiplier() != null) {
+                    double cap = stateLawOpt.get().legalCapMultiplier();
+                    if (depositMult > cap) {
+                        depositMult = cap;
+                        depositNotes = depositNotes + " (Capped by State Law)";
+                    }
+                }
+
                 int deposit = (int) (avgRent * depositMult);
 
                 // 2. Precise Moving Logic
