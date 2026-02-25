@@ -161,6 +161,7 @@
             </div>
         </div>
 
+        @template.components.rescue_plan(result = result, input = input)
 
         <!-- 3. Key Financial Cards (Dashboard Grid) -->
         <div class="financial-grid fade-in-up" style="animation-delay: 0.1s; margin-bottom: var(--space-12);">
