@@ -1117,6 +1117,12 @@
                     }
                 }
                 
+                // Toggle Rescue Plan Visibility
+                const rescuePlanCard = document.getElementById('rescue-plan-card');
+                if (rescuePlanCard) {
+                    rescuePlanCard.style.display = (result.verdict === 'DENIED' || result.verdict === 'BORDERLINE') ? 'block' : 'none';
+                }
+                
                 // Market Radar
                 if(result.marketPosition) {
                     const mp = result.marketPosition;

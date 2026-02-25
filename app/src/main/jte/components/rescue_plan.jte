@@ -4,8 +4,7 @@
 @param VerdictResult result
 @param VerdictInput input
 
-@if(result.verdict() == Verdict.DENIED)
-    <div style="background: var(--bg-surface); border: 2px solid var(--danger); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 3rem; text-align: left;">
+<div id="rescue-plan-card" style="display: ${result.verdict() == Verdict.DENIED || result.verdict() == Verdict.BORDERLINE ? "block" : "none"}; background: var(--bg-surface); border: 2px solid var(--danger); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 3rem; text-align: left;">
         <h3 style="color: var(--danger); font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
             <span>🚨</span> Verdict Rescue Plan
         </h3>
@@ -34,4 +33,3 @@
             </div>
         </div>
     </div>
-@endif
