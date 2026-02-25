@@ -156,7 +156,7 @@
                     Analyzing $${String.format("%,d", pageData.medianRent())} rent is just the start. Our simulator checks your actual savings vs. regional liquidity risks to give you a definitive Approved or Denied judgment.
                 </p>
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
-                    <a href="/RentVerdict/" class="btn btn-primary btn-lg" style="padding: 1.25rem 3.5rem; font-size: 1.25rem; font-weight: 800; width: 100%; max-width: 420px; box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);">
+                    <a href="/RentVerdict/" class="btn btn-primary btn-lg" onclick="gtag('event', 'cta_click_audit', {'event_category': 'acquisition', 'page_type': 'savings_landing'});" style="padding: 1.25rem 3.5rem; font-size: 1.25rem; font-weight: 800; width: 100%; max-width: 420px; box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);">
                         AUDIT MY POTENTIAL
                     </a>
                     <div style="display: flex; gap: 2rem; color: rgba(255,255,255,0.5); font-size: 0.85rem; font-weight: 500;">

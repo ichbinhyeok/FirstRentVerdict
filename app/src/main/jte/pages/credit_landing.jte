@@ -102,7 +102,7 @@
             <p style="font-size: 1.125rem; color: rgba(255, 255, 255, 0.9); margin-bottom: 2.5rem; max-width: 500px; margin-left: auto; margin-right: auto;">
                 Don't guess with your future. Use our real-time simulator to see if your specific cash-on-hand can overcome your ${tier} credit score in ${pageData.city()}.
             </p>
-            <a href="/RentVerdict/" class="btn btn-primary btn-lg" style="background: white; color: #0f172a; border: none; padding: 1.25rem 3rem; font-size: 1.25rem; font-weight: 700;">
+            <a href="/RentVerdict/" class="btn btn-primary btn-lg" onclick="gtag('event', 'cta_click_audit', {'event_category': 'acquisition', 'page_type': 'credit_landing'});" style="background: white; color: #0f172a; border: none; padding: 1.25rem 3rem; font-size: 1.25rem; font-weight: 700;">
                 Run Approval Test Now
             </a>
             <div style="margin-top: 1.5rem; font-size: 0.875rem; opacity: 0.6;">
