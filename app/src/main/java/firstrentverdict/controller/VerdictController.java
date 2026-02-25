@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Comparator;
 import java.util.List;
@@ -31,6 +32,9 @@ public class VerdictController {
     private final VerdictService verdictService;
     private final WhatIfService whatIfService;
     private final firstrentverdict.service.seo.CityContentGenerator cityContentGenerator;
+
+    @Value("${app.base-url:https://movecostinfo.com}")
+    private String baseUrl;
 
     public VerdictController(
             VerdictDataRepository repository,
@@ -93,7 +97,16 @@ public class VerdictController {
     }
 
     private String[] parseCitySlug(String slug) {
-        if (slug == null || slug.lastIndexOf('-') == -1) {
+        if (slug == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid URL format");
+        }
+
+        var cityEntry = repository.getCityBySlug(slug).orElse(null);
+        if (cityEntry != null) {
+            return new String[] { cityEntry.city(), cityEntry.state() };
+        }
+
+        if (slug.lastIndexOf('-') == -1) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid URL format");
         }
         String state = slug.substring(slug.lastIndexOf('-') + 1).toUpperCase();
@@ -139,7 +152,7 @@ public class VerdictController {
 
         model.addAttribute("pageData", pageContent);
         model.addAttribute("relatedCities", relatedCities);
-        model.addAttribute("canonicalUrl", "https://movecostinfo.com/RentVerdict/verdict/" + slug);
+        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/" + slug);
 
         return "pages/city_landing";
     }
@@ -184,7 +197,7 @@ public class VerdictController {
         model.addAttribute("relatedCities", relatedCities);
         model.addAttribute("tier", Character.toUpperCase(tier.charAt(0)) + tier.substring(1).toLowerCase());
         model.addAttribute("canonicalUrl",
-                "https://movecostinfo.com/RentVerdict/verdict/credit/" + tier.toLowerCase() + "/" + slug);
+                baseUrl + "/RentVerdict/verdict/credit/" + tier.toLowerCase() + "/" + slug);
 
         return "pages/credit_landing";
     }
@@ -225,7 +238,7 @@ public class VerdictController {
         model.addAttribute("pageData", pageContent);
         model.addAttribute("relatedCities", relatedCities);
         model.addAttribute("tier", "Good");
-        model.addAttribute("canonicalUrl", "https://movecostinfo.com/RentVerdict/verdict/credit/good/" + slug);
+        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/credit/good/" + slug);
 
         return "pages/credit_landing";
     }
@@ -262,7 +275,7 @@ public class VerdictController {
 
         model.addAttribute("pageData", pageContent);
         model.addAttribute("relatedCities", relatedCities);
-        model.addAttribute("canonicalUrl", "https://movecostinfo.com/RentVerdict/verdict/moving-to/" + slug);
+        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/moving-to/" + slug);
 
         return "pages/relocation_landing";
     }
@@ -287,7 +300,7 @@ public class VerdictController {
                 insight, firstrentverdict.service.seo.CityContentGenerator.Intent.PET_FRIENDLY, null);
 
         model.addAttribute("pageData", pageContent);
-        model.addAttribute("canonicalUrl", "https://movecostinfo.com/RentVerdict/verdict/with-pet/" + slug);
+        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/with-pet/" + slug);
         return "pages/city_landing";
     }
 
@@ -320,7 +333,7 @@ public class VerdictController {
         model.addAttribute("pageData", pageContent);
         model.addAttribute("savings", amount);
         model.addAttribute("canonicalUrl",
-                "https://movecostinfo.com/RentVerdict/verdict/can-i-move-with/" + amount + "/to/" + slug);
+                baseUrl + "/RentVerdict/verdict/can-i-move-with/" + amount + "/to/" + slug);
         return "pages/city_landing";
     }
 
@@ -359,7 +372,7 @@ public class VerdictController {
 
         model.addAttribute("pageData", pageContent);
         model.addAttribute("canonicalUrl",
-                "https://movecostinfo.com/RentVerdict/verdict/moving-from/" + from + "/to/" + to);
+                baseUrl + "/RentVerdict/verdict/moving-from/" + from + "/to/" + to);
         return "pages/city_landing";
     }
 
@@ -395,7 +408,7 @@ public class VerdictController {
 
         model.addAttribute("pageData", pageContent);
         model.addAttribute("canonicalUrl",
-                "https://movecostinfo.com/RentVerdict/first-month-cost/" + rent + "/" + state.toLowerCase());
+                baseUrl + "/RentVerdict/first-month-cost/" + rent + "/" + state.toLowerCase());
         return "pages/city_landing";
     }
 

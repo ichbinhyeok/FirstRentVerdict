@@ -8,3 +8,5 @@ spring:
 # server:
 #   servlet:
 #     context-path: /RentVerdict
+app:
+  base-url: "https://movecostinfo.com"

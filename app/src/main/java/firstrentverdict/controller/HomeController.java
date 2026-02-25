@@ -19,14 +19,8 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
-        // Fetch cities for the dropdown menu in the calculator
-        List<CitiesData.CityEntry> sortedCities = repository.getAllCities();
-        sortedCities.sort(Comparator.comparing(CitiesData.CityEntry::city));
-
-        model.addAttribute("cities", sortedCities);
-
-        // Directly serve the calculator page instead of redirecting
-        return "pages/index";
+    public String home() {
+        // Redirect to canonical path to prevent Duplicate Content SEO penalty
+        return "redirect:/RentVerdict/";
     }
 }

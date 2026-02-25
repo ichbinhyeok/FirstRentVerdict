@@ -24,6 +24,7 @@ public class VerdictDataRepository {
 
     // Valid cities set
     private final Map<String, CitiesData.CityEntry> validCities = new ConcurrentHashMap<>();
+    private final Map<String, CitiesData.CityEntry> slugMap = new ConcurrentHashMap<>();
 
     private String generateKey(String city, String state) {
         if (city == null || state == null)
@@ -53,6 +54,8 @@ public class VerdictDataRepository {
 
     public void addCity(CitiesData.CityEntry city) {
         validCities.put(generateKey(city.city(), city.state()), city);
+        String slug = city.city().toLowerCase().replace(" ", "-").replace(".", "") + "-" + city.state().toLowerCase();
+        slugMap.put(slug, city);
     }
 
     public void addStateLaw(StateLawData.StateLaw law) {
@@ -94,6 +97,10 @@ public class VerdictDataRepository {
 
     public java.util.List<CitiesData.CityEntry> getAllCities() {
         return new java.util.ArrayList<>(validCities.values());
+    }
+
+    public Optional<CitiesData.CityEntry> getCityBySlug(String slug) {
+        return Optional.ofNullable(slugMap.get(slug.toLowerCase()));
     }
 
     public Optional<StateLawData.StateLaw> getStateLaw(String state) {
