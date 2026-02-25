@@ -300,7 +300,7 @@ public class VerdictController {
 
         model.addAttribute("pageData", pageContent);
         model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/with-pet/" + slug);
-        return "pages/city_landing";
+        return "pages/landing_pet";
     }
 
     @GetMapping("/verdict/can-i-move-with/{amount}/to/{slug}")
@@ -335,7 +335,7 @@ public class VerdictController {
         model.addAttribute("savings", amount);
         model.addAttribute("canonicalUrl",
                 baseUrl + "/RentVerdict/verdict/can-i-move-with/" + amount + "/to/" + slug);
-        return "pages/city_landing";
+        return "pages/landing_savings";
     }
 
     @GetMapping("/verdict/moving-from/{from}/to/{to}")
