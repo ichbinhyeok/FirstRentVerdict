@@ -1,8 +1,6 @@
 package firstrentverdict.controller;
 
 import firstrentverdict.model.verdict.*;
-import firstrentverdict.repository.VerdictDataRepository;
-import firstrentverdict.service.core.VerdictService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -10,13 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -24,9 +19,6 @@ class VerdictControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private VerdictDataRepository repository;
 
     @Test
     void testIndexPageLoads() throws Exception {
@@ -79,7 +71,9 @@ class VerdictControllerTest {
                 .andExpect(view().name("pages/result"))
                 .andExpect(model().attribute("result", notNullValue()))
                 .andDo(result -> {
-                    VerdictResult vr = (VerdictResult) result.getModelAndView().getModel().get("result");
+                    org.springframework.web.servlet.ModelAndView mv = result.getModelAndView();
+                    assert mv != null;
+                    VerdictResult vr = (VerdictResult) mv.getModel().get("result");
                     String depositNote = vr.financials().costBreakdown().stream()
                             .filter(i -> i.label().equals("Security Deposit"))
                             .findFirst().orElseThrow().annotation();
@@ -102,7 +96,9 @@ class VerdictControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("pages/result"))
                 .andDo(result -> {
-                    VerdictResult vr = (VerdictResult) result.getModelAndView().getModel().get("result");
+                    org.springframework.web.servlet.ModelAndView mv = result.getModelAndView();
+                    assert mv != null;
+                    VerdictResult vr = (VerdictResult) mv.getModel().get("result");
                     // Label changed to "Pet Deposit/Fee"
                     String petNote = vr.financials().costBreakdown().stream()
                             .filter(i -> i.label().equals("Pet Deposit/Fee"))
@@ -130,7 +126,9 @@ class VerdictControllerTest {
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED))
                 .andExpect(status().isOk())
                 .andDo(result -> {
-                    VerdictResult vr = (VerdictResult) result.getModelAndView().getModel().get("result");
+                    org.springframework.web.servlet.ModelAndView mv = result.getModelAndView();
+                    java.util.Objects.requireNonNull(mv);
+                    VerdictResult vr = (VerdictResult) mv.getModel().get("result");
                     String depositNote = vr.financials().costBreakdown().stream()
                             .filter(i -> i.label().equals("Security Deposit"))
                             .findFirst().orElseThrow().annotation();

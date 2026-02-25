@@ -1,17 +1,19 @@
 $tests = @(
-    @{ name = "Valid City Page"; url = "http://localhost:8081/RentVerdict/verdict/new-york-ny"; expected = 200; method = "GET" }
-    @{ name = "Invalid City Name"; url = "http://localhost:8081/RentVerdict/verdict/fake-city-ny"; expected = 404; method = "GET" }
+    @{ name = "Valid City Page"; url = "http://localhost:8080/RentVerdict/verdict/new-york-ny"; expected = 200; method = "GET" }
+    @{ name = "Invalid City Name"; url = "http://localhost:8080/RentVerdict/verdict/fake-city-ny"; expected = 404; method = "GET" }
     
-    @{ name = "Valid Savings Page"; url = "http://localhost:8081/RentVerdict/verdict/can-i-move-with/5000/to/new-york-ny"; expected = 200; method = "GET" }
-    @{ name = "Invalid Savings Amount (Crawl Trap 5001)"; url = "http://localhost:8081/RentVerdict/verdict/can-i-move-with/5001/to/new-york-ny"; expected = 404; method = "GET" }
-    @{ name = "Invalid Savings Bounds"; url = "http://localhost:8081/RentVerdict/verdict/can-i-move-with/900000/to/new-york-ny"; expected = 404; method = "GET" }
+    @{ name = "Valid Savings Page (5k)"; url = "http://localhost:8080/RentVerdict/verdict/can-i-move-with/5000/to/new-york-ny"; expected = 200; method = "GET" }
+    @{ name = "Invalid Savings Amount (Whitelist 4000)"; url = "http://localhost:8080/RentVerdict/verdict/can-i-move-with/4000/to/new-york-ny"; expected = 404; method = "GET" }
+    @{ name = "Invalid Savings Bounds"; url = "http://localhost:8080/RentVerdict/verdict/can-i-move-with/900000/to/new-york-ny"; expected = 404; method = "GET" }
 
-    @{ name = "Valid Relocation"; url = "http://localhost:8081/RentVerdict/verdict/moving-from/chicago-il/to/new-york-ny"; expected = 200; method = "GET" }
-    @{ name = "Invalid Origin City Relocation"; url = "http://localhost:8081/RentVerdict/verdict/moving-from/fake-city-il/to/new-york-ny"; expected = 404; method = "GET" }
+    @{ name = "Valid Relocation"; url = "http://localhost:8080/RentVerdict/verdict/moving-from/chicago-il/to/new-york-ny"; expected = 200; method = "GET" }
+    @{ name = "Invalid Origin City Relocation"; url = "http://localhost:8080/RentVerdict/verdict/moving-from/fake-city-il/to/new-york-ny"; expected = 404; method = "GET" }
 
-    @{ name = "Valid Rent State Page"; url = "http://localhost:8081/RentVerdict/first-month-cost/3000/ny"; expected = 200; method = "GET" }
-    @{ name = "Invalid Rent Amount (Crawl Trap 3001)"; url = "http://localhost:8081/RentVerdict/first-month-cost/3001/ny"; expected = 404; method = "GET" }
-    @{ name = "Invalid Rent Bounds"; url = "http://localhost:8081/RentVerdict/first-month-cost/20000/ny"; expected = 404; method = "GET" }
+    @{ name = "Deleted Rent State Page (410 GONE)"; url = "http://localhost:8080/RentVerdict/first-month-cost/3000/ny"; expected = 410; method = "GET" }
+    
+    @{ name = "Valid Compare Page"; url = "http://localhost:8080/RentVerdict/verdict/compare/austin-tx-vs-new-york-ny"; expected = 200; method = "GET" }
+    @{ name = "Unnormalized Compare Page (301 Redirect)"; url = "http://localhost:8080/RentVerdict/verdict/compare/new-york-ny-vs-austin-tx"; expected = 301; method = "GET" }
+    @{ name = "Self Compare Page"; url = "http://localhost:8080/RentVerdict/verdict/compare/austin-tx-vs-austin-tx"; expected = 404; method = "GET" }
 )
 
 Write-Host "========================== SMOKE TEST STARTING =========================="
@@ -37,7 +39,25 @@ foreach ($test in $tests) {
     }
 }
 
-$simulateUrl = "http://localhost:8081/RentVerdict/api/simulate"
+# Pixel-perfect content assertion
+Write-Host "--- Content Assertion ---"
+try {
+    $cityHtml = (Invoke-WebRequest -Uri "http://localhost:8080/RentVerdict/verdict/new-york-ny" -UseBasicParsing -ErrorAction Stop).Content
+    if ($cityHtml -match "Security Deposit" -and $cityHtml -match "TOTAL UPFRONT") {
+        Write-Host "[PASS] Core UI components exist (Security Deposit & TOTAL UPFRONT)" -ForegroundColor Green
+        $passCount++
+    }
+    else {
+        Write-Host "[FAIL] Core UI components missing in City Page" -ForegroundColor Red
+        $failCount++
+    }
+}
+catch {
+    Write-Host "[FAIL] Content Assertion failed. $($_.Exception.Message)" -ForegroundColor Red
+    $failCount++
+}
+
+$simulateUrl = "http://localhost:8080/RentVerdict/api/simulate"
 
 # Valid Simulate
 $validBody = '{"city":"New York","state":"NY","monthlyRent":3000,"availableCash":15000,"hasPet":false,"isLocalMove":true,"creditTier":"GOOD"}'
