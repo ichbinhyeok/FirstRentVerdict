@@ -45,7 +45,7 @@
 
     <div style="padding: 2rem 1.5rem; background: var(--accent-gradient-subtle); border-top: 1px solid var(--accent-primary); display: flex; justify-content: space-between; align-items: center;">
         <span style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary);">TOTAL UPFRONT</span>
-        <span style="font-size: 2rem; font-weight: 800; color: var(--accent-primary);">$${String.format("%,d", pageData.isPetIntent() ? pageData.totalUpfrontEstimate() + pageData.petDeposit() : pageData.totalUpfrontEstimate())}</span>
+        <span style="font-size: 2rem; font-weight: 800; color: var(--accent-primary);">$${String.format("%,d", pageData.totalUpfrontEstimate())}</span>
     </div>
     
     @if(!pageData.isPetIntent())

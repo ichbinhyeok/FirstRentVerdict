@@ -279,7 +279,7 @@ public class VerdictController {
         return "pages/relocation_landing";
     }
 
-    @GetMapping({ "/verdict/with-pet/{slug}", "/verdict/pet-friendly-apartments/{slug}" })
+    @GetMapping("/verdict/with-pet/{slug}")
     public String petPage(@PathVariable("slug") String slug, Model model) {
         String[] location = parseCitySlug(slug);
         String city = location[0];
@@ -298,9 +298,24 @@ public class VerdictController {
         var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
                 insight, firstrentverdict.service.seo.CityContentGenerator.Intent.PET_FRIENDLY, null);
 
+        // Get related cities in same state
+        List<CitiesData.CityEntry> relatedCities = repository.getAllCities().stream()
+                .filter(c -> c.state().equalsIgnoreCase(state) && !c.city().equalsIgnoreCase(city))
+                .limit(5)
+                .toList();
+        model.addAttribute("relatedCities", relatedCities);
+
         model.addAttribute("pageData", pageContent);
         model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/with-pet/" + slug);
         return "pages/landing_pet";
+    }
+
+    @GetMapping("/verdict/pet-friendly-apartments/{slug}")
+    public org.springframework.web.servlet.view.RedirectView petRedirect(@PathVariable("slug") String slug) {
+        org.springframework.web.servlet.view.RedirectView rv = new org.springframework.web.servlet.view.RedirectView(
+                "/RentVerdict/verdict/with-pet/" + slug);
+        rv.setStatusCode(org.springframework.http.HttpStatus.MOVED_PERMANENTLY);
+        return rv;
     }
 
     @GetMapping("/verdict/can-i-move-with/{amount}/to/{slug}")
@@ -330,6 +345,13 @@ public class VerdictController {
 
         var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
                 insight, firstrentverdict.service.seo.CityContentGenerator.Intent.SAVINGS_BASED, amount);
+
+        // Get related cities in same state
+        List<CitiesData.CityEntry> relatedCities = repository.getAllCities().stream()
+                .filter(c -> c.state().equalsIgnoreCase(state) && !c.city().equalsIgnoreCase(city))
+                .limit(5)
+                .toList();
+        model.addAttribute("relatedCities", relatedCities);
 
         model.addAttribute("pageData", pageContent);
         model.addAttribute("savings", amount);
@@ -363,13 +385,8 @@ public class VerdictController {
         var petData = repository.getPet(city, state).orElse(null);
         var insight = repository.getCityInsight(city, state).orElse(null);
 
-        // Readable 'From' city name
-        String readableFrom = java.util.Arrays.stream(from.split("-"))
-                .map(s -> s.length() > 0 ? s.substring(0, 1).toUpperCase() + s.substring(1) : "")
-                .collect(java.util.stream.Collectors.joining(" "));
-
         var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
-                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.RELOCATION_PAIR, readableFrom);
+                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.RELOCATION_PAIR, from);
 
         model.addAttribute("pageData", pageContent);
         model.addAttribute("canonicalUrl",

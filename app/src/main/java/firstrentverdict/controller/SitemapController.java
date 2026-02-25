@@ -59,42 +59,29 @@ public class SitemapController {
             addUrl(xml, root + "credit/fair/" + slug, "0.7", monthlyMod);
             addUrl(xml, root + "credit/good/" + slug, "0.6", monthlyMod);
 
-            // - Pet (2 intents x 100 cities = 200)
+            // - Pet (1 intent x 100 cities = 100)
             addUrl(xml, root + "with-pet/" + slug, "0.8", monthlyMod);
-            addUrl(xml, root + "pet-friendly-apartments/" + slug, "0.8", monthlyMod);
 
             // - Savings Based
             for (int savings : new int[] { 3000, 5000, 10000 }) {
                 addUrl(xml, root + "can-i-move-with/" + savings + "/to/" + slug, "0.9", monthlyMod);
             }
 
-            // - Salary Needed
-            addUrl(xml, root + "salary-needed/" + slug, "0.8", monthlyMod);
-
-            // - No Cosigner
-            addUrl(xml, root + "no-cosigner/" + slug, "0.8", monthlyMod);
+            // Placeholders removed from sitemap (Salary Needed, No Cosigner)
 
             // - Moving Pairs (870 target)
             cities.stream()
                     .filter(c -> !c.city().equalsIgnoreCase(city.city()))
                     .limit(9)
                     .forEach(from -> {
-                        String fromSlug = from.city().toLowerCase().replace(" ", "-");
+                        String fromSlug = from.city().toLowerCase().replace(" ", "-") + "-"
+                                + from.state().toLowerCase();
                         addUrl(xml,
                                 baseUrl + "/RentVerdict/verdict/moving-from/" + fromSlug + "/to/" + slug,
                                 "0.8", monthlyMod);
                     });
 
-            // - Compare Pairs (approx 50 target by alphabetical filter)
-            cities.stream()
-                    .filter(c -> !c.city().equalsIgnoreCase(city.city()))
-                    .filter(c -> city.city().compareToIgnoreCase(c.city()) > 0)
-                    .limit(1)
-                    .forEach(other -> {
-                        String otherSlug = other.city().toLowerCase().replace(" ", "-") + "-"
-                                + other.state().toLowerCase();
-                        addUrl(xml, root + "compare/" + otherSlug + "-vs-" + slug, "0.7", monthlyMod);
-                    });
+            // Placeholders removed from sitemap (Compare Pairs)
         }
 
         xml.append("</urlset>");

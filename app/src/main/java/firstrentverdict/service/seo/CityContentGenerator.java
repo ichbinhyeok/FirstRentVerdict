@@ -195,7 +195,17 @@ public class CityContentGenerator {
                                                 "Yes, many luxury buildings and national property managers offer 'Deposit-Free' options for top-tier credit profiles."));
                         }
                         case RELOCATION_PAIR -> {
-                                String fromCity = (String) contextValue;
+                                String fromCitySlug = (String) contextValue;
+                                String fromCity = fromCitySlug;
+                                String[] fParts = parseCitySlug(fromCitySlug);
+                                if (fParts != null) {
+                                        fromCity = java.util.Arrays.stream(fParts[0].split(" "))
+                                                        .map(s -> s.length() > 0
+                                                                        ? s.substring(0, 1).toUpperCase()
+                                                                                        + s.substring(1)
+                                                                        : "")
+                                                        .collect(java.util.stream.Collectors.joining(" "));
+                                }
                                 pageTitle = String.format("Moving from %s to %s Cost Audit (2026)", fromCity, city);
                                 metaDescription = String.format(
                                                 "Relocating from %s to %s? We found a $%,d move-in barrier. [2026 Cost Index] Calculate your specific relocation budget.%s",

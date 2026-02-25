@@ -81,6 +81,17 @@
             </p>
         </header>
 
+        <!-- AEO: Quick Answer Box -->
+        <div style="background: var(--bg-surface); padding: 1.5rem 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border: 1px solid var(--border-subtle); display: flex; align-items: flex-start; gap: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+            <div style="font-size: 1.5rem; line-height: 1;">💡</div>
+            <div>
+                <strong style="display: block; font-size: 0.9rem; color: var(--accent-primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Quick Answer</strong>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-primary); font-weight: 500;">
+                    To securely move into a median-priced apartment in ${pageData.city()}, ${pageData.state()}, you typically need <strong style="color: var(--text-primary);">$${String.format("%,d", pageData.totalUpfrontEstimate())}</strong> upfront. This consists of the first month's rent ($${String.format("%,d", pageData.medianRent())}), a standard security deposit ($${String.format("%,d", pageData.typicalDeposit())}), and estimated moving logistics ($${String.format("%,d", pageData.typicalMoving())}).
+                </p>
+            </div>
+        </div>
+
         <!-- Specialized Intent Blocks -->
         @if(savings != null)
             <div class="glass-morphism" style="padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border-left: 5px solid var(--accent-primary);">
@@ -159,6 +170,25 @@
 
         <!-- QnA Section -->
         @template.components.faq_section(questions = pageData.commonQuestions())
+
+        <!-- Explore Specialized Scenarios (Internal Link Silo) -->
+        <section style="margin-bottom: 4rem; padding-top: 2rem;">
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1.5rem; color: var(--text-primary);">Explore Specialized Scenarios</h3>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <a href="/RentVerdict/verdict/can-i-move-with/5000/to/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}" style="padding: 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; text-decoration: none; color: var(--text-primary); font-weight: 500; display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface); transition: border-color 0.2s ease;">
+                    <span>Can I move to ${pageData.city()} with $5,000?</span>
+                    <span style="color: var(--accent-primary);">→</span>
+                </a>
+                <a href="/RentVerdict/verdict/credit/poor/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}" style="padding: 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; text-decoration: none; color: var(--text-primary); font-weight: 500; display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface); transition: border-color 0.2s ease;">
+                    <span>Renting in ${pageData.city()} with poor credit</span>
+                    <span style="color: var(--accent-primary);">→</span>
+                </a>
+                <a href="/RentVerdict/verdict/with-pet/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}" style="padding: 1rem; border: 1px solid var(--border-subtle); border-radius: 8px; text-decoration: none; color: var(--text-primary); font-weight: 500; display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface); transition: border-color 0.2s ease;">
+                    <span>Moving to ${pageData.city()} with pets</span>
+                    <span style="color: var(--accent-primary);">→</span>
+                </a>
+            </div>
+        </section>
 
         @template.components.internal_links(
             city = pageData.city(),

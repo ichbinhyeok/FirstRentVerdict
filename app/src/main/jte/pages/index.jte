@@ -26,6 +26,17 @@
     }
     </script>
 
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "First Rent Verdict",
+      "url": "https://movecostinfo.com/RentVerdict/",
+      "logo": "https://movecostinfo.com/images/favicon.svg"
+    }
+    </script>
+
     <div class="split-layout">
         <!-- LEFT: Hero -->
         <div class="split-left">

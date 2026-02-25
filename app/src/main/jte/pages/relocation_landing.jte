@@ -44,6 +44,38 @@
       ]
     }
     </script>
+    
+    <!-- HowTo Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to Relocate to ${pageData.city()}, ${pageData.state()} Securely",
+      "description": "A step-by-step cost and strategy guide for moving interstate to ${pageData.city()}.",
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "USD",
+        "value": "${pageData.totalUpfrontEstimate() + 1500}"
+      },
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Budget for the 'Hidden Move Factor'",
+          "text": "Calculate your base move-in liquidity: First month's rent ($${String.format("%,d", pageData.medianRent())}), security deposits ($${String.format("%,d", pageData.typicalDeposit())}), and cross-country logistics ($${String.format("%,d", pageData.typicalMoving())})."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Implement the 2-Week Temporary Route",
+          "text": "Never sign a lease sight-unseen. Budget for 14 days of temporary housing (e.g., Airbnb) in ${pageData.city()} to tour units in person and avoid long-distance scams."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Prepare Transfer Documents",
+          "text": "Local landlords view out-of-state movers as higher risk. Have your offer letter or income transfer documents ready before touring to bypass local income verification barriers."
+        }
+      ]
+    }
+    </script>
     <div class="container" style="max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem;">
         
         <!-- Breadcrumbs -->
@@ -56,9 +88,16 @@
         </nav>
 
         <div style="margin-bottom: 4rem;">
-            <div style="display: inline-block; background: rgba(59, 130, 246, 0.1); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700; margin-bottom: 1.5rem;">
-                2026 RELOCATION BLUEPRINT
+            <div style="display: inline-flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+                <div style="background: rgba(59, 130, 246, 0.1); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 700;">
+                    2026 RELOCATION BLUEPRINT
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-tertiary); display: flex; align-items: center; gap: 0.25rem;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    Data Verified by Analysts
+                </div>
             </div>
+            
             <h1 style="font-size: 2.75rem; font-weight: 800; margin-bottom: 1.5rem; line-height: 1.1; letter-spacing: -0.02em;">
                 Moving to ${pageData.city()}, ${pageData.state()}: The Essential Cost Audit
             </h1>
@@ -66,6 +105,18 @@
             <p style="font-size: 1.25rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
                 Relocating to ${pageData.city()} involves more than just rent. Between cross-country movers, utility deposits, and temporary housing, the <span style="color: var(--text-primary); font-weight: 600;">"hidden move factor"</span> can add $2,000+ to your budget.
             </p>
+        </div>
+
+        <!-- AEO: Quick Answer Box -->
+        <div style="background: var(--bg-surface); padding: 1.5rem 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border: 1px solid var(--border-subtle); display: flex; align-items: flex-start; gap: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+            <div style="font-size: 1.5rem; line-height: 1;">💡</div>
+            <div>
+                <strong style="display: block; font-size: 0.9rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Quick Answer</strong>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-primary); font-weight: 500;">
+                    A standard interstate relocation to ${pageData.city()} generally costs about <strong style="color: var(--text-primary);">$${String.format("%,d", pageData.totalUpfrontEstimate() + 1500)}</strong> in total liquidity. This estimate accounts for long-distance movers ($${String.format("%,d", pageData.typicalMoving())}), your first month’s rent ($${String.format("%,d", pageData.medianRent())}), security deposits, and a 14-day temporary housing buffer.
+                </p>
+                <div style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-tertiary);">Sources: US Census ACS, Local Rental Surveys</div>
+            </div>
         </div>
 
         <!-- Key Financial Grid -->

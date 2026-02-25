@@ -81,6 +81,17 @@
             </p>
         </header>
 
+        <!-- AEO: Quick Answer Box -->
+        <div style="background: var(--bg-surface); padding: 1.5rem 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border: 1px solid var(--border-subtle); display: flex; align-items: flex-start; gap: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+            <div style="font-size: 1.5rem; line-height: 1;">💡</div>
+            <div>
+                <strong style="display: block; font-size: 0.9rem; color: var(--verdict-approved); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Quick Answer (Savings)</strong>
+                <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-primary); font-weight: 500;">
+                    To move to ${pageData.city()}, ${pageData.state()}, you typically need <strong style="color: var(--text-primary);">$${String.format("%,d", pageData.totalUpfrontEstimate())}</strong> upfront. Moving with $${String.format("%,d", savings)} in savings is <strong>${savings >= pageData.totalUpfrontEstimate() ? "generally sufficient" : "likely not enough"}</strong> to cover the median first month's rent ($${String.format("%,d", pageData.medianRent())}), security deposits ($${String.format("%,d", pageData.typicalDeposit())}), and moving logistics.
+                </p>
+            </div>
+        </div>
+
         <!-- Specialized Intent Blocks -->
         @if(savings != null)
             <div class="glass-morphism" style="padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border-left: 5px solid var(--accent-primary);">

@@ -46,7 +46,7 @@
             </h1>
             
             <p style="font-size: 1.25rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
-                In ${pageData.city()}, ${pageData.state()}, a ${tier} credit score doesn't mean an automatic rejection, but it <span style="color: var(--text-primary); font-weight: 600;">@if(tier.equalsIgnoreCase("Poor") || tier.equalsIgnoreCase("Fair")) may require a higher security deposit (see local estimate below). @else typically qualifies for standard deposit terms in most markets. @endif</span> Most landlords in this market require higher security deposits to offset credit risk.
+                In ${pageData.city()}, ${pageData.state()}, a ${tier} credit score doesn't mean an automatic rejection, but it <span style="color: var(--text-primary); font-weight: 600;">@if(tier.equalsIgnoreCase("Poor") || tier.equalsIgnoreCase("Fair")) may require a higher security deposit (see local estimate below). Most landlords in this market require higher security deposits to offset credit risk. @else typically qualifies for standard deposit terms in most markets. With good credit, you have stronger leverage to negotiate. @endif</span>
             </p>
         </div>
 
