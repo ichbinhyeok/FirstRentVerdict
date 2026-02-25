@@ -38,6 +38,12 @@ public class SitemapController {
         addUrl(xml, baseUrl + "/RentVerdict/", "1.0", monthlyMod);
         addUrl(xml, baseUrl + "/RentVerdict/cities", "0.9", monthlyMod);
 
+        // 1b. Guides
+        addUrl(xml, baseUrl + "/RentVerdict/guides", "0.9", monthlyMod);
+        addUrl(xml, baseUrl + "/RentVerdict/guides/no-credit-check-apartments", "0.8", monthlyMod);
+        addUrl(xml, baseUrl + "/RentVerdict/guides/how-to-rent-with-eviction", "0.8", monthlyMod);
+        addUrl(xml, baseUrl + "/RentVerdict/guides/first-time-renter-budget", "0.8", monthlyMod);
+
         // 2. High-Intent pSEO Scenarios
         for (CitiesData.CityEntry city : cities) {
             String slug = city.city().toLowerCase().replace(" ", "-") + "-" + city.state().toLowerCase();
