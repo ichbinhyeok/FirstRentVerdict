@@ -6,11 +6,12 @@
 @param String tier
 @param List<CityEntry> relatedCities = java.util.Collections.emptyList()
 @param String canonicalUrl = null
+@param String baseUrl = "https://movecostinfo.com"
 
 @template.layout.main(
     title = pageData.pageTitle(),
     description = pageData.metaDescription(),
-    canonical = (canonicalUrl != null ? canonicalUrl : "https://movecostinfo.com/RentVerdict/verdict/credit/" + tier.toLowerCase() + "/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase()),
+    canonical = (canonicalUrl != null ? canonicalUrl : baseUrl + "/RentVerdict/verdict/credit/" + tier.toLowerCase() + "/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase()),
     content = @`
     
     <!-- BreadcrumbList Schema -->
@@ -19,8 +20,8 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://movecostinfo.com/RentVerdict/"},
-        {"@type": "ListItem", "position": 2, "name": "${pageData.city()}", "item": "https://movecostinfo.com/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}"},
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "${baseUrl}/RentVerdict/"},
+        {"@type": "ListItem", "position": 2, "name": "${pageData.city()}", "item": "${baseUrl}/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}"},
         {"@type": "ListItem", "position": 3, "name": "${tier} Credit Guide"}
       ]
     }
@@ -45,7 +46,7 @@
             </h1>
             
             <p style="font-size: 1.25rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
-                In ${pageData.city()}, ${pageData.state()}, a ${tier} credit score doesn't mean an automatic rejection, but it <span style="color: var(--text-primary); font-weight: 600;">doubles your upfront costs.</span> Most landlords in this market require higher security deposits to offset credit risk.
+                In ${pageData.city()}, ${pageData.state()}, a ${tier} credit score doesn't mean an automatic rejection, but it <span style="color: var(--text-primary); font-weight: 600;">@if(tier.equalsIgnoreCase("Poor") || tier.equalsIgnoreCase("Fair")) may require a higher security deposit (see local estimate below). @else typically qualifies for standard deposit terms in most markets. @endif</span> Most landlords in this market require higher security deposits to offset credit risk.
             </p>
         </div>
 
@@ -73,7 +74,7 @@
             <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">Navigating the ${pageData.city()} "Credit Wall"</h2>
             <div style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary);">
                 <p style="margin-bottom: 1.5rem;">
-                    Our 2026 market audit shows that ${pageData.city()} landlords are increasingly using algorithmic screening. For applicants with ${tier} credit, this often results in a "Conditional Approval"—meaning you're approved only if you pay a maximum security deposit (often 2 months' rent).
+                    Our 2026 market audit shows that ${pageData.city()} landlords are increasingly using algorithmic screening. For applicants with ${tier} credit, this often results in a "Conditional Approval"—meaning you're approved only if you meet a higher deposit threshold. The exact amount varies by local market and state law.
                 </p>
                 <div style="background: var(--bg-surface); padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--border-subtle);">
                     <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">💡 Expert Strategy for ${tier} Credit</h3>

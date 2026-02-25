@@ -14,11 +14,11 @@ import java.util.List;
 @Service
 public class CityContentGenerator {
 
-    private final VerdictDataRepository repository;
+        private final VerdictDataRepository repository;
 
-    public CityContentGenerator(VerdictDataRepository repository) {
-        this.repository = repository;
-    }
+        public CityContentGenerator(VerdictDataRepository repository) {
+                this.repository = repository;
+        }
 
         public enum Intent {
                 GENERAL,
@@ -51,19 +51,22 @@ public class CityContentGenerator {
                         depositMult = !depositData.city_practice().typicalMultipliers().isEmpty()
                                         ? depositData.city_practice().typicalMultipliers().get(0)
                                         : 1.0;
-                        if (intent == Intent.CREDIT_POOR && depositData.city_practice().highRiskMultipliers() != null && !depositData.city_practice().highRiskMultipliers().isEmpty()) {
-                            depositMult = depositData.city_practice().highRiskMultipliers().stream().mapToDouble(Double::doubleValue).max().orElse(depositMult);
+                        if (intent == Intent.CREDIT_POOR && depositData.city_practice().highRiskMultipliers() != null
+                                        && !depositData.city_practice().highRiskMultipliers().isEmpty()) {
+                                depositMult = depositData.city_practice().highRiskMultipliers().stream()
+                                                .mapToDouble(Double::doubleValue).max().orElse(depositMult);
                         }
                         depositNotes = depositData.city_practice().notes();
                 }
 
-                java.util.Optional<firstrentverdict.model.dtos.StateLawData.StateLaw> stateLawOpt = repository.getStateLaw(state);
+                java.util.Optional<firstrentverdict.model.dtos.StateLawData.StateLaw> stateLawOpt = repository
+                                .getStateLaw(state);
                 if (stateLawOpt.isPresent() && stateLawOpt.get().legalCapMultiplier() != null) {
-                    double cap = stateLawOpt.get().legalCapMultiplier();
-                    if (depositMult > cap) {
-                        depositMult = cap;
-                        depositNotes = depositNotes + " (Capped by State Law)";
-                    }
+                        double cap = stateLawOpt.get().legalCapMultiplier();
+                        if (depositMult > cap) {
+                                depositMult = cap;
+                                depositNotes = depositNotes + " (Capped by State Law)";
+                        }
                 }
 
                 int deposit = (int) (avgRent * depositMult);
@@ -71,6 +74,27 @@ public class CityContentGenerator {
                 // 2. Precise Moving Logic
                 int moving = (movingData != null) ? movingData.typical() : 500;
                 String movingNotes = (movingData != null) ? movingData.assumptions() : "Standard local move.";
+
+                if (intent == Intent.RELOCATION_PAIR && contextValue instanceof String fromCity) {
+                        java.util.Optional<firstrentverdict.model.dtos.CityCoordinates.CityCoordinate> toCoord = repository
+                                        .getCityCoordinate(city, state);
+                        // Parse fromCity correctly to get its coordinate
+                        String[] fromParts = parseCitySlug(fromCity);
+                        if (fromParts != null) {
+                                java.util.Optional<firstrentverdict.model.dtos.CityCoordinates.CityCoordinate> fromCoord = repository
+                                                .getCityCoordinate(fromParts[0], fromParts[1]);
+                                if (toCoord.isPresent() && fromCoord.isPresent()) {
+                                        double distance = calculateHaversineDistance(
+                                                        fromCoord.get().lat(), fromCoord.get().lng(),
+                                                        toCoord.get().lat(), toCoord.get().lng());
+                                        double base = 300;
+                                        double rate = 0.75; // average rate per mile
+                                        int calculatedCost = (int) (base + (distance * rate));
+                                        moving = Math.min(6000, Math.max(300, calculatedCost));
+                                        movingNotes = "Estimates based on distance (" + (int) distance + " miles).";
+                                }
+                        }
+                }
 
                 // 3. Precise Pet Logic
                 int petDeposit = (petData != null && petData.oneTime() != null) ? petData.oneTime().avg() : 300;
@@ -132,7 +156,9 @@ public class CityContentGenerator {
                                                                 + String.format("%,d", (avgRent * 3) + 2000) + "."));
                         }
                         case CREDIT_POOR -> {
-                                String multStr = depositMult == (long) depositMult ? String.format("%d", (long) depositMult) : String.format("%.1f", depositMult);
+                                String multStr = depositMult == (long) depositMult
+                                                ? String.format("%d", (long) depositMult)
+                                                : String.format("%.1f", depositMult);
 
                                 pageTitle = String.format("Renting in %s with Poor Credit (2026 Approval Guide)", city);
                                 metaDescription = String.format(
@@ -242,7 +268,7 @@ public class CityContentGenerator {
                                 localLaw,
                                 localInsight,
                                 petDeposit, petRentMonthly, petNotes,
-                                seasonalTip, renterAdvice);
+                                seasonalTip, renterAdvice, intent == Intent.PET_FRIENDLY);
         }
 
         public record CityPageContent(
@@ -255,9 +281,30 @@ public class CityContentGenerator {
                         String movingAssumptions,
                         String affordabilityTier, int nationalComparison, String legalSummary, String localInsight,
                         int petDeposit, int petRent, String petNotes,
-                        String seasonalTip, String renterAdvice) {
+                        String seasonalTip, String renterAdvice, boolean isPetIntent) {
         }
 
         public record QnA(String question, String answer) {
+        }
+
+        private String[] parseCitySlug(String slug) {
+                int lastDash = slug.lastIndexOf('-');
+                if (lastDash > 0 && lastDash < slug.length() - 1) {
+                        String cityName = slug.substring(0, lastDash).replace("-", " ");
+                        String stateCode = slug.substring(lastDash + 1);
+                        return new String[] { cityName, stateCode };
+                }
+                return null;
+        }
+
+        private double calculateHaversineDistance(double lat1, double lon1, double lat2, double lon2) {
+                int R = 3958; // Radius of the earth in miles
+                double dLat = Math.toRadians(lat2 - lat1);
+                double dLon = Math.toRadians(lon2 - lon1);
+                double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                                                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                return R * c;
         }
 }

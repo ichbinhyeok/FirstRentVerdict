@@ -6,11 +6,12 @@
 @param List<CityEntry> relatedCities = java.util.Collections.emptyList()
 @param Integer savings = null
 @param String canonicalUrl = null
+@param String baseUrl = "https://movecostinfo.com"
 
 @template.layout.main(
     title = pageData.pageTitle(),
     description = pageData.metaDescription(),
-    canonical = (canonicalUrl != null ? canonicalUrl : "https://movecostinfo.com/RentVerdict/verdict/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase()),
+    canonical = (canonicalUrl != null ? canonicalUrl : baseUrl + "/RentVerdict/verdict/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase()),
     content = @`
     
     <!-- FAQ Schema -->
@@ -39,8 +40,8 @@
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://movecostinfo.com/RentVerdict/"},
-        {"@type": "ListItem", "position": 2, "name": "Cities", "item": "https://movecostinfo.com/RentVerdict/cities"},
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "${baseUrl}/RentVerdict/"},
+        {"@type": "ListItem", "position": 2, "name": "Cities", "item": "${baseUrl}/RentVerdict/cities"},
         {"@type": "ListItem", "position": 3, "name": "${pageData.city()}, ${pageData.state()}"}
       ]
     }
@@ -142,6 +143,7 @@
                         <div style="font-size: 1.25rem; font-weight: 700;">$${String.format("%,d", pageData.typicalDeposit())}</div>
                     </div>
                     
+                    @if(pageData.isPetIntent())
                     <div style="display: flex; justify-content: space-between; padding: 1.5rem 0; border-bottom: 1px solid var(--border-subtle);">
                         <div>
                             <div style="font-weight: 700;">Pet-Related (Est.)</div>
@@ -149,6 +151,7 @@
                         </div>
                         <div style="font-size: 1.25rem; font-weight: 700;">$${String.format("%,d", pageData.petDeposit())}</div>
                     </div>
+                    @endif
 
                     <div style="display: flex; justify-content: space-between; padding: 1.5rem 0;">
                         <div>
@@ -161,8 +164,16 @@
 
                 <div style="padding: 2rem 1.5rem; background: var(--accent-gradient-subtle); border-top: 1px solid var(--accent-primary); display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 1.25rem; font-weight: 800; color: var(--text-primary);">TOTAL UPFRONT</span>
-                    <span style="font-size: 2rem; font-weight: 800; color: var(--accent-primary);">$${String.format("%,d", pageData.totalUpfrontEstimate() + pageData.petDeposit())}</span>
+                    <span style="font-size: 2rem; font-weight: 800; color: var(--accent-primary);">$${String.format("%,d", pageData.isPetIntent() ? pageData.totalUpfrontEstimate() + pageData.petDeposit() : pageData.totalUpfrontEstimate())}</span>
                 </div>
+                
+                @if(!pageData.isPetIntent())
+                <div style="padding: 1rem 1.5rem; text-align: center; border-top: 1px solid var(--border-subtle);">
+                    <a href="/RentVerdict/verdict/with-pet/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}" style="color: var(--accent-primary); text-decoration: none; font-weight: 600; font-size: 0.9rem;">
+                        🐾 Have a pet? See pet cost breakdown &rarr;
+                    </a>
+                </div>
+                @endif
             </div>
         </section>
 
