@@ -110,6 +110,17 @@ public class VerdictService {
                 }
             }
         }
+
+        // Apply state law cap if available
+        java.util.Optional<StateLawData.StateLaw> stateLawOpt = repository.getStateLaw(input.state());
+        if (stateLawOpt.isPresent() && stateLawOpt.get().legalCapMultiplier() != null) {
+            double cap = stateLawOpt.get().legalCapMultiplier();
+            if (depositMult > cap) {
+                depositMult = cap;
+                depositRiskNote = depositRiskNote + " (Capped by State Law)";
+            }
+        }
+
         int depositCost = (int) (input.monthlyRent() * depositMult);
 
         // 4. Moving Cost
@@ -143,7 +154,7 @@ public class VerdictService {
         // 6. Broker Fee (NYC, Boston, etc.)
         int brokerFee = 0;
         if (BROKER_FEE_CITIES.contains(input.city())) {
-            brokerFee = (int) (input.monthlyRent() * BROKER_FEE_PERCENT);
+            brokerFee = (int) (input.monthlyRent() * 12 * BROKER_FEE_PERCENT); // 10-15% of ANNUAL rent
         }
 
         // 7. Total Upfront Calculation
@@ -169,7 +180,7 @@ public class VerdictService {
         // 10. Build Enhanced Cost Breakdown
         List<FinancialLineItem> costBreakdown = buildCostBreakdown(
                 input, depositCost, depositRiskNote, depositLegalNote,
-                movingData, petData, petOneTime, petMonthlyRent, brokerFee);
+                movingData, petData, petOneTime, petMonthlyRent, brokerFee, movingCost);
 
         // 11. Bottleneck Analysis
         FinancialSnapshot snapshot = new FinancialSnapshot(
@@ -239,7 +250,7 @@ public class VerdictService {
     private List<FinancialLineItem> buildCostBreakdown(
             SimulationInput input, int depositCost, String depositRiskNote, String depositLegalNote,
             MovingData.CityMoving movingData, PetData.CityPet petData,
-            int petOneTime, int petMonthlyRent, int brokerFee) {
+            int petOneTime, int petMonthlyRent, int brokerFee, int movingCost) {
 
         List<FinancialLineItem> items = new ArrayList<>();
 
@@ -258,7 +269,7 @@ public class VerdictService {
         String movingAnnotation = String.format("Range: $%,d - $%,d · %s",
                 movingData.low(), movingData.high(),
                 movingData.assumptions() != null ? movingData.assumptions() : "Local Move");
-        items.add(new FinancialLineItem("Moving Costs", movingData.typical(), movingAnnotation));
+        items.add(new FinancialLineItem("Moving Costs", movingCost, movingAnnotation));
 
         // Broker Fee (if applicable)
         if (brokerFee > 0) {

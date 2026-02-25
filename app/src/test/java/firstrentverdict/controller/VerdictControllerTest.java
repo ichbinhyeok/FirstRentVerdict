@@ -83,7 +83,7 @@ class VerdictControllerTest {
                     String depositNote = vr.financials().costBreakdown().stream()
                             .filter(i -> i.label().equals("Security Deposit"))
                             .findFirst().orElseThrow().annotation();
-                    // NY Deposit annotation now contains "Applied Standard · Strictly limited..."
+                    // NY Deposit annotation now contains legal context from state laws
                     if (!depositNote.contains("Strictly limited")) {
                         throw new AssertionError("NY Deposit expected note about strict limit, got: " + depositNote);
                     }
@@ -113,8 +113,8 @@ class VerdictControllerTest {
                     String depositNote = vr.financials().costBreakdown().stream()
                             .filter(i -> i.label().equals("Security Deposit"))
                             .findFirst().orElseThrow().annotation();
-                    if (!depositNote.startsWith("Applied Standard")) {
-                        throw new AssertionError("Austin Deposit expected Applied Standard, got: " + depositNote);
+                    if (!depositNote.contains("Standard Rate")) {
+                        throw new AssertionError("Austin Deposit expected Standard Rate, got: " + depositNote);
                     }
                 });
     }
@@ -134,8 +134,8 @@ class VerdictControllerTest {
                     String depositNote = vr.financials().costBreakdown().stream()
                             .filter(i -> i.label().equals("Security Deposit"))
                             .findFirst().orElseThrow().annotation();
-                    if (!depositNote.startsWith("Applied Standard")) {
-                        throw new AssertionError("SF Deposit expected Applied Standard, got: " + depositNote);
+                    if (!depositNote.contains("Standard Rate")) {
+                        throw new AssertionError("SF Deposit expected Standard Rate, got: " + depositNote);
                     }
                 });
     }

@@ -37,7 +37,7 @@ class VerdictServiceTest {
                 VerdictInput input = new VerdictInput(
                                 "New York", "NY",
                                 3850,
-                                9000,
+                                14420,
                                 false,
                                 true,
                                 CreditTier.GOOD,
@@ -54,7 +54,7 @@ class VerdictServiceTest {
                 VerdictInput input = new VerdictInput(
                                 "New York", "NY",
                                 3850,
-                                10800,
+                                15420,
                                 false,
                                 true,
                                 CreditTier.GOOD,
@@ -85,7 +85,7 @@ class VerdictServiceTest {
                 VerdictInput input = new VerdictInput(
                                 "New York", "NY",
                                 3850,
-                                8799,
+                                13419,
                                 false,
                                 true,
                                 CreditTier.GOOD,
@@ -115,8 +115,8 @@ class VerdictServiceTest {
 
                 List<FinancialLineItem> breakdownNY = resultNY.financials().costBreakdown();
                 assertNotNull(breakdownNY);
-                // Size should be 5: Rent, Deposit, Moving, Pet Fee, Pet Rent
-                assertEquals(5, breakdownNY.size(), "Should have Rent, Deposit, Moving, Pet Fee, Pet Rent");
+                // Size should be 6: Rent, Deposit, Moving, Broker Fee, Pet Fee, Pet Rent
+                assertEquals(6, breakdownNY.size(), "Should have Rent, Deposit, Moving, Broker Fee, Pet Fee, Pet Rent");
 
                 // Verify Deposit: Should have annotation
                 FinancialLineItem depositItem = breakdownNY.stream().filter(i -> i.label().equals("Security Deposit"))
@@ -146,8 +146,8 @@ class VerdictServiceTest {
                 // Verify Deposit
                 FinancialLineItem depositItemTX = breakdownTX.stream().filter(i -> i.label().equals("Security Deposit"))
                                 .findFirst().orElseThrow();
-                assertTrue(depositItemTX.annotation().contains("Applied Standard")
-                                || depositItemTX.annotation().contains("Rule"),
+                assertTrue(depositItemTX.annotation().contains("Standard Rate")
+                                || depositItemTX.annotation().contains("High Risk"),
                                 "Austin Deposit annotation check");
         }
 

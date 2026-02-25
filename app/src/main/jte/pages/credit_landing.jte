@@ -58,12 +58,12 @@
             </div>
             <div class="card" style="padding: 1.5rem; border-top: 4px solid var(--primary);">
                 <div style="font-size: 0.9rem; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.5rem;">Est. Deposit</div>
-                <div style="font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">$${String.format("%,d", (int)(pageData.medianRent() * 2))}</div>
-                <div style="font-size: 0.9rem; color: var(--text-secondary);">2x rent typical for ${tier} credit</div>
+                <div style="font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">$${String.format("%,d", pageData.typicalDeposit())}</div>
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">Market-adjusted for ${tier} credit</div>
             </div>
             <div class="card" style="padding: 1.5rem; border-top: 4px solid var(--verdict-approved);">
                 <div style="font-size: 0.9rem; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.5rem;">Total Upfront</div>
-                <div style="font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">$${String.format("%,d", pageData.totalUpfrontEstimate() + pageData.medianRent())}</div>
+                <div style="font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">$${String.format("%,d", pageData.totalUpfrontEstimate())}</div>
                 <div style="font-size: 0.9rem; color: var(--text-secondary);">Including higher risk deposit</div>
             </div>
         </div>

@@ -44,6 +44,9 @@ public class CityContentGenerator {
                         depositMult = !depositData.city_practice().typicalMultipliers().isEmpty()
                                         ? depositData.city_practice().typicalMultipliers().get(0)
                                         : 1.0;
+                        if (intent == Intent.CREDIT_POOR && depositData.city_practice().highRiskMultipliers() != null && !depositData.city_practice().highRiskMultipliers().isEmpty()) {
+                            depositMult = depositData.city_practice().highRiskMultipliers().stream().mapToDouble(Double::doubleValue).max().orElse(depositMult);
+                        }
                         depositNotes = depositData.city_practice().notes();
                 }
                 int deposit = (int) (avgRent * depositMult);
@@ -112,11 +115,12 @@ public class CityContentGenerator {
                                                                 + String.format("%,d", (avgRent * 3) + 2000) + "."));
                         }
                         case CREDIT_POOR -> {
-                                int highRiskDeposit = (int) (avgRent * 2.0);
+                                String multStr = depositMult == (long) depositMult ? String.format("%d", (long) depositMult) : String.format("%.1f", depositMult);
+
                                 pageTitle = String.format("Renting in %s with Poor Credit (2026 Approval Guide)", city);
                                 metaDescription = String.format(
-                                                "Credit under 600? In %s, expect to pay up to 2x deposit ($%,d). [2026 Audit] Get the approval blueprint for low scores.%s",
-                                                city, highRiskDeposit, ctrSuffix);
+                                                "Credit under 600? In %s, expect to pay up to %sx deposit ($%,d). [2026 Audit] Get the approval blueprint for low scores.%s",
+                                                city, multStr, deposit, ctrSuffix);
                                 localInsight = String.format(
                                                 "Credit Update: %s High-risk applicants in %s should prepare for higher upfront liquidity.",
                                                 depositNotes, city);
