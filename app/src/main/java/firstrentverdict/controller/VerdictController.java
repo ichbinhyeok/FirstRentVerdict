@@ -296,6 +296,10 @@ public class VerdictController {
             @PathVariable("amount") int amount,
             @PathVariable("slug") String slug,
             Model model) {
+        if (amount < 1000 || amount > 50000 || amount % 500 != 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Amount must be between 1000 and 50000 and a multiple of 500");
+        }
+
         String[] location = parseCitySlug(slug);
         String city = location[0];
         String state = location[1];
@@ -325,6 +329,11 @@ public class VerdictController {
             @PathVariable("from") String from,
             @PathVariable("to") String to,
             Model model) {
+
+        String[] fromLocation = parseCitySlug(from);
+        if (!repository.isValidCity(fromLocation[0], fromLocation[1])) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Origin city not found");
+        }
 
         String[] location = parseCitySlug(to);
         String city = location[0];
@@ -359,6 +368,10 @@ public class VerdictController {
             @PathVariable("rent") int rent,
             @PathVariable("state") String state,
             Model model) {
+
+        if (rent < 500 || rent > 15000 || rent % 50 != 0) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Rent must be between 500 and 15000 and a multiple of 50");
+        }
 
         // Find a representative city in this state or use a generic "State Average"
         String repCity = repository.getAllCities().stream()
@@ -438,6 +451,9 @@ public class VerdictController {
     @PostMapping("/api/simulate")
     @ResponseBody
     public VerdictResult simulateVerdict(@RequestBody SimulationInput input) {
+        if (input.monthlyRent() < 1 || input.monthlyRent() > 30000 || input.availableCash() < 0 || input.availableCash() > 100000) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid simulation parameters");
+        }
         return verdictService.simulateVerdict(input);
     }
 }
