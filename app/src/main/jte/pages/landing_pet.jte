@@ -83,7 +83,7 @@
 
         <!-- AEO: Quick Answer Box -->
         <div style="background: var(--bg-surface); padding: 1.5rem 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border: 1px solid var(--border-subtle); display: flex; align-items: flex-start; gap: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
-            <div style="font-size: 1.5rem; line-height: 1;">?뮕</div>
+            <div style="font-size: 1.5rem; line-height: 1;">💡</div>
             <div>
                 <strong style="display: block; font-size: 0.9rem; color: #f59e0b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Quick Answer (Pet Move-In)</strong>
                 <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-primary); font-weight: 500;">
@@ -100,7 +100,7 @@
             </div>
         @elseif(pageData.pageTitle().contains("Pet"))
             <div class="glass-morphism" style="padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border-left: 5px solid #f59e0b;">
-                <h3 style="margin-bottom: 1rem;">?맽 Pet-Friendly Policy Audit</h3>
+                <h3 style="margin-bottom: 1rem;">🐾 Pet-Friendly Policy Audit</h3>
                 <p style="font-size: 1.1rem; color: var(--text-secondary);">${pageData.localInsight()}</p>
                 <div style="margin-top: 1rem; font-size: 0.9rem; font-style: italic; color: var(--text-tertiary);">* Based on typical private and corporate rental practices in ${pageData.city()}.</div>
             </div>

@@ -116,11 +116,11 @@
 
         <!-- AEO: Quick Answer Box -->
         <div style="background: var(--bg-surface); padding: 1.5rem 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border: 1px solid var(--border-subtle); display: flex; align-items: flex-start; gap: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
-            <div style="font-size: 1.5rem; line-height: 1;">?뮕</div>
+            <div style="font-size: 1.5rem; line-height: 1;">💡</div>
             <div>
                 <strong style="display: block; font-size: 0.9rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Quick Answer</strong>
                 <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-primary); font-weight: 500;">
-                    A standard interstate relocation to ${pageData.city()} generally costs about <strong style="color: var(--text-primary);">$${String.format("%,d", pageData.totalUpfrontEstimate() + 1500)}</strong> in total liquidity. This estimate accounts for long-distance movers ($${String.format("%,d", pageData.typicalMoving())}), your first month?셲 rent ($${String.format("%,d", pageData.medianRent())}), security deposits, and a 14-day temporary housing buffer.
+                    A standard interstate relocation to ${pageData.city()} generally costs about <strong style="color: var(--text-primary);">$${String.format("%,d", pageData.totalUpfrontEstimate() + 1500)}</strong> in total liquidity. This estimate accounts for long-distance movers ($${String.format("%,d", pageData.typicalMoving())}), your first month's rent ($${String.format("%,d", pageData.medianRent())}), security deposits, and a 14-day temporary housing buffer.
                 </p>
                 <div style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-tertiary);">Sources: US Census ACS, Local Rental Surveys</div>
             </div>
@@ -153,18 +153,18 @@
                     Moving out-of-state to ${pageData.city()} means you are a "Cold Lead" to landlords. Without local employment verification or an in-person tour, you face higher scrutiny and a higher risk of rental scams.
                 </p>
                 <div style="background: var(--bg-surface); padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">?벀 Essential Relocation Checklist</h3>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">🚚 Essential Relocation Checklist</h3>
                     <ul style="list-style: none; padding: 0;">
                         <li style="margin-bottom: 1rem; display: flex; gap: 0.75rem;">
-                            <span style="font-size: 1.25rem;">?룧</span>
+                            <span style="font-size: 1.25rem;">📋</span>
                             <span><strong>The 2-Week Airbnb Rule:</strong> Never sign a lease sight-unseen in ${pageData.city()}. Budget for a short-term rental while you tour actual units.</span>
                         </li>
                         <li style="margin-bottom: 1rem; display: flex; gap: 0.75rem;">
-                            <span style="font-size: 1.25rem;">?뱞</span>
+                            <span style="font-size: 1.25rem;">📦</span>
                             <span><strong>Transfer Proof:</strong> Have your offer letter or income transfer documents ready. ${pageData.state()} landlords won't wait for your first local paycheck.</span>
                         </li>
                         <li style="display: flex; gap: 0.75rem;">
-                            <span style="font-size: 1.25rem;">?뮥</span>
+                            <span style="font-size: 1.25rem;">💰</span>
                             <span><strong>Utility Deposits:</strong> Many local utilities require a security deposit for new out-of-state residents without a local payment history.</span>
                         </li>
                     </ul>
@@ -182,7 +182,7 @@
                 Check My Move-In Costs
             </a>
             <div style="margin-top: 1.5rem; font-size: 0.875rem; opacity: 0.7;">
-                Free 2026 Market Data ??Accurate Estimates
+                Free 2026 Market Data · Accurate Estimates
             </div>
         </div>
 

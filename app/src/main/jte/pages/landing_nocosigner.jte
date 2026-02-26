@@ -89,7 +89,7 @@
             </div>
         @elseif(pageData.pageTitle().contains("Pet"))
             <div class="glass-morphism" style="padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border-left: 5px solid #f59e0b;">
-                <h3 style="margin-bottom: 1rem;">?맽 Pet-Friendly Policy Audit</h3>
+                <h3 style="margin-bottom: 1rem;">🐾 Pet-Friendly Policy Audit</h3>
                 <p style="font-size: 1.1rem; color: var(--text-secondary);">${pageData.localInsight()}</p>
                 <div style="margin-top: 1rem; font-size: 0.9rem; font-style: italic; color: var(--text-tertiary);">* Based on typical private and corporate rental practices in ${pageData.city()}.</div>
             </div>

@@ -20,28 +20,28 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
             <a href="/RentVerdict/verdict/with-pet/new-york-ny" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">
                 <div style="padding: 2rem 1.5rem; background: var(--bg-surface); border: 2px solid var(--border-subtle); border-radius: 16px; text-align: center;">
-                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">?맽</div>
+                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">🐾</div>
                     <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Pet Audit Guide</div>
                     <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 0.5rem;">New York Pet Rules</div>
                 </div>
             </a>
             <a href="/RentVerdict/verdict/credit/poor/atlanta-ga" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">
                 <div style="padding: 2rem 1.5rem; background: var(--bg-surface); border: 2px solid var(--border-subtle); border-radius: 16px; text-align: center;">
-                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">?뱣</div>
+                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">💳</div>
                     <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Poor Credit Guide</div>
                     <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 0.5rem;">Atlanta Approval Strategy</div>
                 </div>
             </a>
             <a href="/RentVerdict/verdict/moving-to/austin-tx" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">
                 <div style="padding: 2rem 1.5rem; background: var(--bg-surface); border: 2px solid var(--border-subtle); border-radius: 16px; text-align: center;">
-                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">?벀</div>
+                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">🚚</div>
                     <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Relocation Audit</div>
                     <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 0.5rem;">Austin Cost Breakdown</div>
                 </div>
             </a>
             <a href="/RentVerdict/verdict/can-i-move-with/5000/to/miami-fl" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">
                 <div style="padding: 2rem 1.5rem; background: var(--bg-surface); border: 2px solid var(--border-subtle); border-radius: 16px; text-align: center;">
-                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">?뮥</div>
+                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">💰</div>
                     <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Savings Analysis</div>
                     <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 0.5rem;">Miami with $5,000</div>
                 </div>

@@ -14,7 +14,7 @@
             </div>
             <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">Our Methodology</h1>
             <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.6;">
-                How we determine if you can truly afford that apartment?봟eyond just the monthly rent.
+                How we determine if you can truly afford that apartment — beyond just the monthly rent.
             </p>
         </div>
 
@@ -56,11 +56,11 @@
                 </p>
             </div>
             <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                First Rent Verdict focuses on <strong>upfront liquidity</strong>?봳he cash you need on move-in day?봭ot just your monthly paycheck. Our algorithm calculates:
+                First Rent Verdict focuses on <strong>upfront liquidity</strong> — the cash you need on move-in day — not just your monthly paycheck. Our algorithm calculates:
             </p>
             <div style="background: var(--bg-panel); padding: 2rem; border-radius: 8px; font-family: 'SF Mono', 'Menlo', monospace; font-size: 0.95rem; margin-bottom: 2rem;">
                 <div style="margin-bottom: 1rem;"><strong>Total Upfront Cost</strong> = First Month Rent + Security Deposit + Moving Costs + Pet Fees (if applicable)</div>
-                <div style="margin-bottom: 1rem;"><strong>Remaining Cash</strong> = Your Available Cash ??Total Upfront Cost</div>
+                <div style="margin-bottom: 1rem;"><strong>Remaining Cash</strong> = Your Available Cash − Total Upfront Cost</div>
                 <div style="border-top: 1px dashed var(--border-subtle); padding-top: 1rem; margin-top: 1rem;">
                     <strong>Verdict</strong> = Remaining Cash vs. Recommended Emergency Buffer
                 </div>
@@ -72,21 +72,21 @@
             <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">3. The Three Verdicts</h2>
             <div style="display: grid; gap: 1.5rem;">
                 <div style="background: rgba(22, 163, 74, 0.05); border: 1px solid rgba(22, 163, 74, 0.2); border-radius: 12px; padding: 1.5rem;">
-                    <div style="font-size: 1.5rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">??APPROVED</div>
+                    <div style="font-size: 1.5rem; font-weight: 800; color: #16a34a; margin-bottom: 0.5rem;">✅ APPROVED</div>
                     <p style="color: var(--text-secondary); margin: 0;">
                         Your remaining cash after move-in <strong>exceeds</strong> the recommended emergency buffer. 
                         You can proceed with confidence.
                     </p>
                 </div>
                 <div style="background: rgba(202, 138, 4, 0.05); border: 1px solid rgba(202, 138, 4, 0.2); border-radius: 12px; padding: 1.5rem;">
-                    <div style="font-size: 1.5rem; font-weight: 800; color: #ca8a04; margin-bottom: 0.5rem;">??BORDERLINE</div>
+                    <div style="font-size: 1.5rem; font-weight: 800; color: #ca8a04; margin-bottom: 0.5rem;">⚠️ BORDERLINE</div>
                     <p style="color: var(--text-secondary); margin: 0;">
                         Your remaining cash is <strong>positive but below</strong> the recommended buffer. 
-                        Proceed with caution?봴nexpected expenses could destabilize you.
+                        Proceed with caution — unexpected expenses could destabilize you.
                     </p>
                 </div>
                 <div style="background: rgba(220, 38, 38, 0.05); border: 1px solid rgba(220, 38, 38, 0.2); border-radius: 12px; padding: 1.5rem;">
-                    <div style="font-size: 1.5rem; font-weight: 800; color: #dc2626; margin-bottom: 0.5rem;">??DENIED</div>
+                    <div style="font-size: 1.5rem; font-weight: 800; color: #dc2626; margin-bottom: 0.5rem;">❌ DENIED</div>
                     <p style="color: var(--text-secondary); margin: 0;">
                         Your remaining cash is <strong>negative or critically low</strong>. 
                         This move would put you at immediate financial risk.
@@ -103,28 +103,28 @@
             </p>
             <div style="display: grid; gap: 1rem;">
                 <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; background: var(--bg-surface); border-radius: 8px;">
-                    <div style="font-size: 1.2rem;">?룧</div>
+                    <div style="font-size: 1.2rem;">📋</div>
                     <div>
                         <div style="font-weight: 600; margin-bottom: 0.25rem;">Rent Data</div>
                         <div style="font-size: 0.9rem; color: var(--text-secondary);">Zumper National Rent Report, Zillow Observed Rent Index (ZORI), Apartment List Research</div>
                     </div>
                 </div>
                 <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; background: var(--bg-surface); border-radius: 8px;">
-                    <div style="font-size: 1.2rem;">?뵏</div>
+                    <div style="font-size: 1.2rem;">⚖️</div>
                     <div>
                         <div style="font-weight: 600; margin-bottom: 0.25rem;">Security Deposit Laws</div>
                         <div style="font-size: 0.9rem; color: var(--text-secondary);">State housing authority databases, Nolo Legal Encyclopedia, individual city ordinances</div>
                     </div>
                 </div>
                 <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; background: var(--bg-surface); border-radius: 8px;">
-                    <div style="font-size: 1.2rem;">?벀</div>
+                    <div style="font-size: 1.2rem;">🚚</div>
                     <div>
                         <div style="font-weight: 600; margin-bottom: 0.25rem;">Moving Costs</div>
                         <div style="font-size: 0.9rem; color: var(--text-secondary);">American Moving & Storage Association, HomeAdvisor, regional cost-of-living indices</div>
                     </div>
                 </div>
                 <div style="display: flex; gap: 1rem; align-items: flex-start; padding: 1rem; background: var(--bg-surface); border-radius: 8px;">
-                    <div style="font-size: 1.2rem;">?뮥</div>
+                    <div style="font-size: 1.2rem;">💰</div>
                     <div>
                         <div style="font-weight: 600; margin-bottom: 0.25rem;">Emergency Buffer</div>
                         <div style="font-size: 0.9rem; color: var(--text-secondary);">MIT Living Wage Calculator, BLS Consumer Expenditure Survey, 1.5x monthly non-rent essentials</div>
@@ -157,7 +157,7 @@
 
         <!-- Disclaimer -->
         <div style="background: var(--bg-panel); padding: 2rem; border-radius: 12px; margin-bottom: 4rem;">
-            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">?좑툘 Important Disclaimer</h3>
+            <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1rem;">⚠️ Important Disclaimer</h3>
             <p style="font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary); margin: 0;">
                 First Rent Verdict provides <strong>estimates</strong> based on 2026 market averages. 
                 Actual costs vary by landlord, property, and individual circumstances. 
@@ -169,7 +169,7 @@
         <!-- CTA -->
         <div style="text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 3rem;">
             <a href="/RentVerdict/" class="btn-primary" style="display: inline-block; padding: 1rem 2rem;">
-                Try the Calculator ??
+                Try the Calculator →
             </a>
         </div>
     </div>

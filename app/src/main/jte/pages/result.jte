@@ -146,11 +146,11 @@
         <!-- pSEO Engagement Hook (Behavioral Nudge) -->
         @if(!"GENERAL".equals(pageType))
             <div style="background: #fff8e1; border: 1px solid #ffe082; color: #5d4037; padding: var(--space-4); border-radius: var(--radius-sm); margin-bottom: var(--space-6); text-align: center; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                <div style="font-weight: 600; margin-bottom: 4px;">?좑툘 Estimate based on typical ${pageType.replace("CREDIT_", "").toLowerCase()} scenarios</div>
+                <div style="font-weight: 600; margin-bottom: 4px;">⚠️ Estimate based on typical ${pageType.replace("CREDIT_", "").toLowerCase()} scenarios</div>
                 <div>
                    Results vary by exact rent & cash. 
                    <a href="#simulation-lab" style="color: #e65100; font-weight: 700; text-decoration: underline; margin-left: 4px;">
-                       ?몙 Customize your calculation below for accuracy.
+                       👇 Customize your calculation below for accuracy.
                    </a>
                 </div>
             </div>
@@ -214,7 +214,7 @@
                 @if(result.regionalContext() != null && result.regionalContext().contextFactors() != null)
                    @for(String regionFactor : result.regionalContext().contextFactors())
                         <div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);">
-                            <span style="color: var(--text-tertiary); margin-right: var(--space-2);">?뱧</span>
+                            <span style="color: var(--text-tertiary); margin-right: var(--space-2);">📍</span>
                             ${regionFactor}
                         </div>
                    @endfor
@@ -459,10 +459,10 @@
                             </label>
                             <div class="credit-select-wrapper">
                                 <select id="sim-credit" class="credit-select">
-                                    <option value="EXCELLENT" selected="${input.creditTier() == CreditTier.EXCELLENT}">??Excellent (750+)</option>
-                                    <option value="GOOD" selected="${input.creditTier() == CreditTier.GOOD}">?몟 Good (670-749)</option>
-                                    <option value="FAIR" selected="${input.creditTier() == CreditTier.FAIR}">?뱤 Fair (580-669)</option>
-                                    <option value="POOR" selected="${input.creditTier() == CreditTier.POOR}">?좑툘 Poor (&lt; 580)</option>
+                                    <option value="EXCELLENT" selected="${input.creditTier() == CreditTier.EXCELLENT}">✅ Excellent (750+)</option>
+                                    <option value="GOOD" selected="${input.creditTier() == CreditTier.GOOD}">👍 Good (670-749)</option>
+                                    <option value="FAIR" selected="${input.creditTier() == CreditTier.FAIR}">📊 Fair (580-669)</option>
+                                    <option value="POOR" selected="${input.creditTier() == CreditTier.POOR}">⚠️ Poor (&lt; 580)</option>
                                 </select>
                             </div>
                         </div>
@@ -804,7 +804,7 @@
                         }
 
                         function shareTwitter() {
-                            const text = "Checking my move-in costs for ${result.regionalContext().cityName()} with First Rent Verdict. The hidden costs are real! ?룧?뮯";
+                            const text = "Checking my move-in costs for ${result.regionalContext().cityName()} with First Rent Verdict. The hidden costs are real! 📋🏠";
                             const url = getShareUrl();
                             window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(url), "_blank");
                         }
@@ -1200,7 +1200,7 @@
                     });
                     if (result.regionalContext && result.regionalContext.contextFactors) {
                         result.regionalContext.contextFactors.forEach(rf => {
-                            html += '<div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);"><span style="color: var(--text-tertiary); margin-right: var(--space-2);">?뱧</span>' + rf + '</div>';
+                            html += '<div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);"><span style="color: var(--text-tertiary); margin-right: var(--space-2);">📍</span>' + rf + '</div>';
                         });
                     }
                     factorsContainer.innerHTML = html;
@@ -1260,13 +1260,13 @@
                 let badgeColor, badgeText;
                 if (verdict === 'APPROVED') {
                     badgeColor = 'var(--success)';
-                    badgeText = '??APPROVED';
+                    badgeText = '✅ APPROVED';
                 } else if (verdict === 'BORDERLINE') {
                     badgeColor = 'var(--warning)';
-                    badgeText = '??BORDERLINE';
+                    badgeText = '⚠️ BORDERLINE';
                 } else {
                     badgeColor = 'var(--danger)';
-                    badgeText = '??DENIED';
+                    badgeText = '❌ DENIED';
                 }
                 stickyStatusBadge.style.background = badgeColor;
                 stickyStatusBadge.style.color = '#fff';

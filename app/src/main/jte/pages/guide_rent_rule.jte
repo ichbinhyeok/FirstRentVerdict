@@ -14,7 +14,7 @@
 
         <h2 style="font-size: 1.5rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1rem;">Why It Matters for Rent</h2>
         <p style="font-size: 1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 1rem;">
-            Rent is your largest "Need". If rent exceeds 30% of your gross income (or approx. 50% of your 'Needs' bucket), you are statistically likely to face liquidity crises?봫eaning you won't have cash for emergencies.
+            Rent is your largest "Need". If rent exceeds 30% of your gross income (or approx. 50% of your 'Needs' bucket), you are statistically likely to face liquidity crises — meaning you won't have cash for emergencies.
         </p>
 
         <h2 style="font-size: 1.5rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1rem;">How We Apply It</h2>

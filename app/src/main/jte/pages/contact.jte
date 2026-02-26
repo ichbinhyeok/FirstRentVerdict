@@ -38,7 +38,7 @@
             <!-- Data Corrections Card -->
             <div style="background: var(--bg-surface); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
                 <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                    <div style="font-size: 1.5rem;">?뱤</div>
+                    <div style="font-size: 1.5rem;">📊</div>
                     <div>
                         <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Data Corrections</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 1rem;">

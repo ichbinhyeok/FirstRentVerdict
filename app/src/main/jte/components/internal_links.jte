@@ -18,25 +18,25 @@
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
         <a href="/RentVerdict/verdict/with-pet/${city.toLowerCase().replace(" ", "-")}-${state.toLowerCase()}" 
            style="padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); text-decoration: none; color: var(--text-primary); transition: all 0.2s;">
-            <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">?맽</div>
+            <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">🐾</div>
             <div style="font-weight: 700; font-size: 0.9rem;">Pet Ownership</div>
             <div style="font-size: 0.75rem; color: var(--text-tertiary);">Deposits & Rules</div>
         </a>
         <a href="/RentVerdict/verdict/credit/poor/${city.toLowerCase().replace(" ", "-")}-${state.toLowerCase()}" 
            style="padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); text-decoration: none; color: var(--text-primary); transition: all 0.2s;">
-            <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">?뱣</div>
+            <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">💳</div>
             <div style="font-weight: 700; font-size: 0.9rem;">Bad Credit Guide</div>
             <div style="font-size: 0.75rem; color: var(--text-tertiary);">Approval Strategy</div>
         </a>
         <a href="/RentVerdict/verdict/can-i-move-with/5000/to/${city.toLowerCase().replace(" ", "-")}-${state.toLowerCase()}" 
            style="padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); text-decoration: none; color: var(--text-primary); transition: all 0.2s;">
-            <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">?뮥</div>
+            <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">💰</div>
             <div style="font-weight: 700; font-size: 0.9rem;">$5,000 Savings</div>
             <div style="font-size: 0.75rem; color: var(--text-tertiary);">Affordability Audit</div>
         </a>
         <a href="/RentVerdict/verdict/moving-to/${city.toLowerCase().replace(" ", "-")}-${state.toLowerCase()}" 
            style="padding: 1rem; background: var(--bg-secondary); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); text-decoration: none; color: var(--text-primary); transition: all 0.2s;">
-            <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">?벀</div>
+            <div style="font-size: 1.25rem; margin-bottom: 0.5rem;">🚚</div>
             <div style="font-weight: 700; font-size: 0.9rem;">Relocation Cost</div>
             <div style="font-size: 0.75rem; color: var(--text-tertiary);">Long Distance</div>
         </a>

@@ -155,7 +155,7 @@
                 <!-- Cluster: Major Markets -->
                 <div class="card" style="padding: var(--space-8); border-top: 4px solid var(--accent-primary);">
                     <h3 style="font-size: 1.25rem; margin-bottom: var(--space-6); color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
-                        <span>?뙀</span> Major Markets
+                        <span>🏙️</span> Major Markets
                     </h3>
                     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                         <a href="/RentVerdict/verdict/new-york-ny" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">Audit New York, NY</a>
@@ -167,7 +167,7 @@
                 <!-- Cluster: Case Studies -->
                 <div class="card" style="padding: var(--space-8); border-top: 4px solid #f59e0b;">
                     <h3 style="font-size: 1.25rem; margin-bottom: var(--space-6); color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
-                        <span>?맽</span> Special Intent
+                        <span>🐾</span> Special Intent
                     </h3>
                     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                         <a href="/RentVerdict/verdict/with-pet/new-york-ny" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #f59e0b; color: #d97706;">Pet-Friendly NY Audit</a>
@@ -179,7 +179,7 @@
                 <!-- Cluster: Credit Approval -->
                 <div class="card" style="padding: var(--space-8); border-top: 4px solid #ef4444;">
                     <h3 style="font-size: 1.25rem; margin-bottom: var(--space-6); color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
-                        <span>?뱣</span> Credit Strategy
+                        <span>💳</span> Credit Strategy
                     </h3>
                     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                         <a href="/RentVerdict/verdict/credit/poor/atlanta-ga" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #ef4444; color: #dc2626;">Poor Credit Atlanta</a>
@@ -208,7 +208,7 @@
 
             <div style="margin-top: var(--space-12); text-align: center;">
                 <a href="/RentVerdict/cities" class="btn btn-secondary">
-                    Browse All Supporting Cities & States ??
+                    Browse All Supporting Cities & States →
                 </a>
             </div>
         </div>
