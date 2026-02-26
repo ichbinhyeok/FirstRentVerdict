@@ -16,7 +16,16 @@
                 <div style="color: var(--accent-primary); font-weight: 700; margin-bottom: 0.5rem;">STRATEGY 1</div>
                 <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Guarantor Services</h4>
                 <p style="font-size: 0.9rem; color: var(--text-tertiary); margin-bottom: 1rem;">Companies like The Guarantors or Rhino can co-sign for a small percentage of rent.</p>
-                <a href="/RentVerdict/guides/no-credit-check-apartments" style="font-size: 0.85rem; font-weight: 700; color: var(--accent-primary); text-decoration: none;">Learn How &rarr;</a>
+                <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                    <a href="/RentVerdict/guides/no-credit-check-apartments" style="font-size: 0.85rem; font-weight: 700; color: var(--accent-primary); text-decoration: none;">Learn How &rarr;</a>
+                    <a href="https://www.theguarantors.com/" target="_blank" rel="noopener nofollow"
+                       data-track-event="lead_submit"
+                       data-track-category="monetization"
+                       data-track-label="rescue_partner_theguarantors_click"
+                       style="font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); text-decoration: underline;">
+                        Compare Provider
+                    </a>
+                </div>
             </div>
             
             <div style="background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 1.5rem;">

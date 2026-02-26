@@ -1,12 +1,18 @@
 @import firstrentverdict.service.seo.CityContentGenerator.CityPageContent
 @import firstrentverdict.service.seo.CityContentGenerator.QnA
 @import firstrentverdict.model.dtos.CitiesData.CityEntry
+@import firstrentverdict.content.GuideCatalog
+@import firstrentverdict.content.GuideCatalog.GuideEntry
 @import java.util.List
 @param CityPageContent pageData
 @param String tier
 @param List<CityEntry> relatedCities = java.util.Collections.emptyList()
 @param String canonicalUrl = null
 @param String baseUrl = ""
+
+!{
+    List<GuideEntry> recommendedGuides = GuideCatalog.recommendationsFor("approval");
+}
 
 @template.layout.main(
     title = pageData.pageTitle(),
@@ -107,6 +113,43 @@
             </a>
             <div style="margin-top: 1.5rem; font-size: 0.875rem; opacity: 0.6;">
                 100% Free ??No Sign-up ??Instant Verdict
+            </div>
+        </div>
+
+        <!-- Monetization CTA -->
+        <div style="margin-bottom: 4rem; padding: 1.5rem; border: 1px solid var(--border-subtle); border-radius: 12px; background: var(--bg-panel);">
+            <h3 style="font-size: 1rem; margin-bottom: 0.75rem;">Need extra approval support?</h3>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                Compare guarantor providers and request a direct partnership intro if you want manual help.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="https://www.theguarantors.com/" target="_blank" rel="noopener nofollow"
+                   class="btn btn-secondary btn-sm"
+                   data-track-event="lead_submit"
+                   data-track-category="monetization"
+                   data-track-label="credit_partner_theguarantors_click">
+                    Compare Guarantor Providers
+                </a>
+                <a href="/RentVerdict/contact"
+                   class="btn btn-secondary btn-sm"
+                   data-track-event="lead_submit"
+                   data-track-category="monetization"
+                   data-track-label="credit_contact_partner_intro_click">
+                    Request Partner Intro
+                </a>
+            </div>
+        </div>
+
+        <!-- Intent-Matched Guide Cluster -->
+        <div style="margin-top: 4rem; padding: 2rem; border: 1px solid var(--border-subtle); border-radius: 14px; background: var(--bg-surface); margin-bottom: 4rem;">
+            <h3 style="font-size: 0.9rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 1rem;">Approval Playbooks</h3>
+            <div style="display: grid; gap: 0.75rem;">
+                @for(GuideEntry guide : recommendedGuides)
+                    <a href="/RentVerdict/guides/${guide.slug()}" style="display: block; text-decoration: none; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.9rem 1rem; background: var(--bg-panel);">
+                        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.2rem;">${guide.title()}</div>
+                        <div style="font-size: 0.8rem; color: var(--text-secondary);">${guide.searchIntent()}</div>
+                    </a>
+                @endfor
             </div>
         </div>
 

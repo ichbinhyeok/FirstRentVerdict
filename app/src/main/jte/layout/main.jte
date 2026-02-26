@@ -69,6 +69,71 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-5YQX4VQ8ZT');
+
+        // Centralized analytics helper used across templates.
+        window.frvTrack = function(eventName, params) {
+            if (typeof gtag !== 'function') return;
+            gtag('event', eventName, params || {});
+        };
+
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (!link) return;
+
+            const href = (link.getAttribute('href') || '').trim();
+            const label = (link.dataset.trackLabel || link.textContent || href || '')
+                .replace(/\s+/g, ' ')
+                .trim()
+                .slice(0, 120);
+            const pagePath = window.location.pathname;
+            const customEvent = link.dataset.trackEvent || '';
+            const customCategory = link.dataset.trackCategory || 'engagement';
+
+            if (customEvent) {
+                window.frvTrack(customEvent, {
+                    event_category: customCategory,
+                    event_label: label,
+                    link_url: href,
+                    page_path: pagePath
+                });
+            }
+
+            const isExternalHttp = /^https?:\/\//i.test(href);
+            const isMailOrTel = /^(mailto:|tel:)/i.test(href);
+            if (isExternalHttp || isMailOrTel) {
+                if (customEvent !== 'outbound_click') {
+                    window.frvTrack('outbound_click', {
+                        event_category: 'navigation',
+                        event_label: label,
+                        link_url: href,
+                        page_path: pagePath
+                    });
+                }
+                return;
+            }
+
+            if (!customEvent && (link.classList.contains('btn') || (link.className || '').indexOf('btn') >= 0)) {
+                window.frvTrack('cta_click', {
+                    event_category: 'engagement',
+                    event_label: label,
+                    link_url: href,
+                    page_path: pagePath
+                });
+            }
+        }, { passive: true });
+
+        document.addEventListener('submit', function(e) {
+            const form = e.target;
+            if (!form || !form.dataset) return;
+            const formEvent = form.dataset.trackEvent || '';
+            if (!formEvent) return;
+
+            window.frvTrack(formEvent, {
+                event_category: form.dataset.trackCategory || 'engagement',
+                event_label: form.dataset.trackLabel || (form.getAttribute('action') || window.location.pathname),
+                page_path: window.location.pathname
+            });
+        });
     </script>
 </head>
 <body>

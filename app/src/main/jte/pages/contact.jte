@@ -63,7 +63,10 @@
                             Interested in integrating First Rent Verdict into your platform, 
                             or exploring data licensing opportunities?
                         </p>
-                        <a href="mailto:spainhyeok@gmail.com?subject=Partnership%20Inquiry" 
+                        <a href="mailto:spainhyeok@gmail.com?subject=Partnership%20Inquiry"
+                           data-track-event="lead_submit"
+                           data-track-category="monetization"
+                           data-track-label="contact_partnership_mailto"
                            style="color: var(--text-primary); font-weight: 600; text-decoration: underline;">
                             Explore Partnership ??
                         </a>

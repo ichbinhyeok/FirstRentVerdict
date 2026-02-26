@@ -74,7 +74,7 @@
         <!-- RIGHT: Calculator Form -->
         <div class="split-right">
             <div class="card animate-in animate-delay-1" style="width: 100%; max-width: 420px; padding: var(--space-8);">
-                <form action="/RentVerdict/verdict" method="post" onsubmit="gtag('event', 'generate_verdict', {'event_category': 'engagement'});">
+                <form action="/RentVerdict/verdict" method="post" data-track-event="cta_click" data-track-category="engagement" data-track-label="verdict_form_submit">
                     
                     <div class="form-group">
                         <label for="cityState" class="form-label">Target City</label>

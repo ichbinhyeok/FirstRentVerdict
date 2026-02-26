@@ -274,6 +274,27 @@
                 <a href="${persona.primaryPath()}" class="btn btn-primary">${persona.primaryLabel()}</a>
                 <a href="${persona.secondaryPath()}" class="btn btn-secondary">${persona.secondaryLabel()}</a>
             </div>
+            <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+                <div style="font-size: 0.75rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.625rem;">
+                    Approval Partner Options
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    <a href="https://www.theguarantors.com/" target="_blank" rel="noopener nofollow"
+                       class="btn btn-secondary btn-sm"
+                       data-track-event="lead_submit"
+                       data-track-category="monetization"
+                       data-track-label="partner_theguarantors_click">
+                        Compare Guarantor Option A
+                    </a>
+                    <a href="https://www.insurent.com/" target="_blank" rel="noopener nofollow"
+                       class="btn btn-secondary btn-sm"
+                       data-track-event="lead_submit"
+                       data-track-category="monetization"
+                       data-track-label="partner_insurent_click">
+                        Compare Guarantor Option B
+                    </a>
+                </div>
+            </div>
         </section>
 
         <!-- 4. Split Section: Breakdown & Analysis -->
