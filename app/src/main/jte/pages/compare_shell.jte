@@ -2,7 +2,7 @@
 @param CityPageContent pageData1
 @param CityPageContent pageData2
 @param String canonicalUrl = null
-@param String baseUrl = "https://movecostinfo.com"
+@param String baseUrl = ""
 
 @template.layout.main(
     title = pageData1.city() + " vs " + pageData2.city(),
@@ -15,3 +15,5 @@
     </div>
     `
 )
+
+

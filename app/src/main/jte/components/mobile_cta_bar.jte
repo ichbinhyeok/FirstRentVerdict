@@ -1,4 +1,4 @@
-@param String baseUrl = "https://movecostinfo.com"
+@param String baseUrl = ""
 
 <!-- Floating CTA Bar (Mobile Only, hidden by default) -->
 <div id="mobile-cta-bar" class="floating-cta-bar d-md-none" style="display: none;">
@@ -24,3 +24,5 @@
     });
 })();
 </script>
+
+

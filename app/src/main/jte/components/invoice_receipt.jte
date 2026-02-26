@@ -51,8 +51,9 @@
     @if(!pageData.isPetIntent())
     <div style="padding: 1rem 1.5rem; text-align: center; border-top: 1px solid var(--border-subtle);">
         <a href="/RentVerdict/verdict/with-pet/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}" style="color: var(--accent-primary); text-decoration: none; font-weight: 600; font-size: 0.9rem;">
-            🐾 Have a pet? See pet cost breakdown &rarr;
+            ?맽 Have a pet? See pet cost breakdown &rarr;
         </a>
     </div>
     @endif
 </div>
+

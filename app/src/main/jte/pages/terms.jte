@@ -1,7 +1,9 @@
+@param String baseUrl = ""
+
 @template.layout.main(
     title = "Terms of Use - Verdict Labs",
     description = "Terms of Use for First Rent Verdict. Disclaimer of liability and usage guidelines.",
-    canonical = "https://movecostinfo.com/RentVerdict/terms",
+    canonical = baseUrl + "/RentVerdict/terms",
     noindex = true,
     content = @`
     <div style="max-width: 800px; margin: 4rem auto; padding: 0 1.5rem;">
@@ -35,3 +37,4 @@
         </div>
     </div>
 `)
+

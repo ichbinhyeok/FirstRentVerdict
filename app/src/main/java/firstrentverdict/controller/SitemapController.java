@@ -1,5 +1,6 @@
 package firstrentverdict.controller;
 
+import firstrentverdict.content.GuideCatalog;
 import firstrentverdict.model.dtos.CitiesData;
 import firstrentverdict.repository.VerdictDataRepository;
 import org.springframework.http.MediaType;
@@ -18,7 +19,7 @@ public class SitemapController {
     private final String baseUrl;
 
     public SitemapController(VerdictDataRepository repository,
-            @org.springframework.beans.factory.annotation.Value("${app.base-url:https://movecostinfo.com}") String baseUrl) {
+            @org.springframework.beans.factory.annotation.Value("${app.base-url}") String baseUrl) {
         this.repository = repository;
         this.baseUrl = baseUrl;
     }
@@ -40,9 +41,9 @@ public class SitemapController {
 
         // 1b. Guides
         addUrl(xml, baseUrl + "/RentVerdict/guides", "0.9", monthlyMod);
-        addUrl(xml, baseUrl + "/RentVerdict/guides/no-credit-check-apartments", "0.8", monthlyMod);
-        addUrl(xml, baseUrl + "/RentVerdict/guides/how-to-rent-with-eviction", "0.8", monthlyMod);
-        addUrl(xml, baseUrl + "/RentVerdict/guides/first-time-renter-budget", "0.8", monthlyMod);
+        for (GuideCatalog.GuideEntry guide : GuideCatalog.all()) {
+            addUrl(xml, baseUrl + "/RentVerdict/guides/" + guide.slug(), "0.8", monthlyMod);
+        }
 
         // 2. High-Intent pSEO Scenarios
         for (CitiesData.CityEntry city : cities) {

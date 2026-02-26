@@ -1,4 +1,5 @@
 $tests = @(
+    @{ name = "Canonical Root Redirect (/RentVerdict -> /RentVerdict/)"; url = "http://localhost:8080/RentVerdict"; expected = 301; method = "GET" }
     @{ name = "Valid City Page"; url = "http://localhost:8080/RentVerdict/verdict/new-york-ny"; expected = 200; method = "GET" }
     @{ name = "Invalid City Name"; url = "http://localhost:8080/RentVerdict/verdict/fake-city-ny"; expected = 404; method = "GET" }
     
@@ -8,6 +9,14 @@ $tests = @(
 
     @{ name = "Valid Relocation"; url = "http://localhost:8080/RentVerdict/verdict/moving-from/chicago-il/to/new-york-ny"; expected = 200; method = "GET" }
     @{ name = "Invalid Origin City Relocation"; url = "http://localhost:8080/RentVerdict/verdict/moving-from/fake-city-il/to/new-york-ny"; expected = 404; method = "GET" }
+
+    @{ name = "Valid Credit Tier (poor)"; url = "http://localhost:8080/RentVerdict/verdict/credit/poor/new-york-ny"; expected = 200; method = "GET" }
+    @{ name = "Invalid Credit Tier"; url = "http://localhost:8080/RentVerdict/verdict/credit/aaa/new-york-ny"; expected = 404; method = "GET" }
+    @{ name = "Removed Placeholder - Salary Needed (410 GONE)"; url = "http://localhost:8080/RentVerdict/verdict/salary-needed/new-york-ny"; expected = 410; method = "GET" }
+    @{ name = "Removed Placeholder - No Cosigner (410 GONE)"; url = "http://localhost:8080/RentVerdict/verdict/no-cosigner/new-york-ny"; expected = 410; method = "GET" }
+    @{ name = "Guide Hub"; url = "http://localhost:8080/RentVerdict/guides"; expected = 200; method = "GET" }
+    @{ name = "Guide Article (Bad Credit No Cosigner)"; url = "http://localhost:8080/RentVerdict/guides/rent-with-bad-credit-no-cosigner"; expected = 200; method = "GET" }
+    @{ name = "Guide Article (Invalid Slug)"; url = "http://localhost:8080/RentVerdict/guides/not-found-guide"; expected = 404; method = "GET" }
 
     @{ name = "Deleted Rent State Page (410 GONE)"; url = "http://localhost:8080/RentVerdict/first-month-cost/3000/ny"; expected = 410; method = "GET" }
     

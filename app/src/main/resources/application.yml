@@ -9,4 +9,4 @@ spring:
 #   servlet:
 #     context-path: /RentVerdict
 app:
-  base-url: "https://movecostinfo.com"
+  base-url: ${APP_BASE_URL:https://movecostinfo.com}

@@ -1,7 +1,9 @@
+@param String baseUrl = ""
+
 @template.layout.main(
     title = "Privacy Policy - Verdict Labs",
     description = "Privacy Policy for First Rent Verdict. How we collect, use, and protect your data.",
-    canonical = "https://movecostinfo.com/RentVerdict/privacy",
+    canonical = baseUrl + "/RentVerdict/privacy",
     noindex = true,
     content = @`
     <div style="max-width: 800px; margin: 4rem auto; padding: 0 1.5rem;">
@@ -36,3 +38,4 @@
         </div>
     </div>
 `)
+

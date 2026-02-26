@@ -6,7 +6,7 @@
 @param List<CityEntry> relatedCities = java.util.Collections.emptyList()
 @param Integer savings = null
 @param String canonicalUrl = null
-@param String baseUrl = "https://movecostinfo.com"
+@param String baseUrl = ""
 
 @template.layout.main(
     title = pageData.pageTitle(),
@@ -89,7 +89,7 @@
             </div>
         @elseif(pageData.pageTitle().contains("Pet"))
             <div class="glass-morphism" style="padding: 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border-left: 5px solid #f59e0b;">
-                <h3 style="margin-bottom: 1rem;">🐾 Pet-Friendly Policy Audit</h3>
+                <h3 style="margin-bottom: 1rem;">?맽 Pet-Friendly Policy Audit</h3>
                 <p style="font-size: 1.1rem; color: var(--text-secondary);">${pageData.localInsight()}</p>
                 <div style="margin-top: 1rem; font-size: 0.9rem; font-style: italic; color: var(--text-tertiary);">* Based on typical private and corporate rental practices in ${pageData.city()}.</div>
             </div>
@@ -100,7 +100,7 @@
             <div class="card glass-morphism" style="border: none; padding: 2rem;">
                 <div class="financial-label">Median Rent</div>
                 <div class="financial-value" style="font-size: 2.5rem;">$${String.format("%,d", pageData.medianRent())}</div>
-                <div class="financial-value-sm">p25: $${String.format("%,d", pageData.rentLow())} • p75: $${String.format("%,d", pageData.rentHigh())}</div>
+                <div class="financial-value-sm">p25: $${String.format("%,d", pageData.rentLow())} ??p75: $${String.format("%,d", pageData.rentHigh())}</div>
             </div>
 
             <div class="card" style="background: var(--text-primary); border: none; padding: 2rem; color: white;">
@@ -123,7 +123,7 @@
                 <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">The ${pageData.city()} Renter's Blueprint</h3>
                 <p style="line-height: 1.7; color: var(--text-secondary); margin-bottom: 1.5rem;">${pageData.renterAdvice()}</p>
                 <div style="padding: 1rem; background: var(--bg-secondary); border-radius: 8px; font-size: 0.9rem; color: var(--text-primary);">
-                    <strong>📅 Timing Tip:</strong> ${pageData.seasonalTip()}
+                    <strong>?뱟 Timing Tip:</strong> ${pageData.seasonalTip()}
                 </div>
             </div>
             <div style="background: var(--bg-panel); padding: 2.5rem; border-radius: 16px; border: 1px solid var(--border-subtle);">
@@ -131,7 +131,7 @@
                 <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Tenant Rights & Law</h3>
                 <p style="line-height: 1.7; color: var(--text-secondary); margin-bottom: 1.5rem;">${pageData.legalSummary()}</p>
                 <div style="padding: 1rem; background: rgba(16, 185, 129, 0.1); border-radius: 8px; font-size: 0.9rem; color: #059669;">
-                    <strong>⚖️ Regulatory Note:</strong> Local ordinances in ${pageData.state()} may cap security deposits to 1-2 months' rent.
+                    <strong>?뽳툘 Regulatory Note:</strong> Local ordinances in ${pageData.state()} may cap security deposits to 1-2 months' rent.
                 </div>
             </div>
         </section>
@@ -149,9 +149,9 @@
                         AUDIT MY POTENTIAL
                     </a>
                     <div style="display: flex; gap: 2rem; color: rgba(255,255,255,0.5); font-size: 0.85rem; font-weight: 500;">
-                        <span>✓ FREE ANALYSIS</span>
-                        <span>✓ 100% PRIVATE</span>
-                        <span>✓ NO SIGN-UP</span>
+                        <span>??FREE ANALYSIS</span>
+                        <span>??100% PRIVATE</span>
+                        <span>??NO SIGN-UP</span>
                     </div>
                 </div>
             </div>
@@ -164,9 +164,12 @@
             city = pageData.city(),
             state = pageData.state(),
             relatedCities = relatedCities,
+            intentCategory = "approval",
             baseUrl = baseUrl
         )
 
     </div>
 `
 )
+
+

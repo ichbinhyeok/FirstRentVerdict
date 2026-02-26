@@ -11,3 +11,4 @@
         &copy; 2026 First Rent Verdict. Data-driven rent affordability analysis.
     </div>
 </footer>
+

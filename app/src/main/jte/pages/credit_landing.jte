@@ -6,7 +6,7 @@
 @param String tier
 @param List<CityEntry> relatedCities = java.util.Collections.emptyList()
 @param String canonicalUrl = null
-@param String baseUrl = "https://movecostinfo.com"
+@param String baseUrl = ""
 
 @template.layout.main(
     title = pageData.pageTitle(),
@@ -74,10 +74,10 @@
             <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">Navigating the ${pageData.city()} "Credit Wall"</h2>
             <div style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary);">
                 <p style="margin-bottom: 1.5rem;">
-                    Our 2026 market audit shows that ${pageData.city()} landlords are increasingly using algorithmic screening. For applicants with ${tier} credit, this often results in a "Conditional Approval"—meaning you're approved only if you meet a higher deposit threshold. The exact amount varies by local market and state law.
+                    Our 2026 market audit shows that ${pageData.city()} landlords are increasingly using algorithmic screening. For applicants with ${tier} credit, this often results in a "Conditional Approval"?봫eaning you're approved only if you meet a higher deposit threshold. The exact amount varies by local market and state law.
                 </p>
                 <div style="background: var(--bg-surface); padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">💡 Expert Strategy for ${tier} Credit</h3>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">?뮕 Expert Strategy for ${tier} Credit</h3>
                     <ul style="list-style: none; padding: 0;">
                         <li style="margin-bottom: 1rem; display: flex; gap: 0.75rem;">
                             <span style="color: var(--primary);">01.</span>
@@ -106,7 +106,7 @@
                 Run Approval Test Now
             </a>
             <div style="margin-top: 1.5rem; font-size: 0.875rem; opacity: 0.6;">
-                100% Free • No Sign-up • Instant Verdict
+                100% Free ??No Sign-up ??Instant Verdict
             </div>
         </div>
 
@@ -124,3 +124,5 @@
         </div>
     </div>
 `)
+
+

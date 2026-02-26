@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @ControllerAdvice
 public class GlobalControllerAdvice {
 
-    @Value("${app.base-url:https://movecostinfo.com}")
+    @Value("${app.base-url}")
     private String baseUrl;
 
     @ModelAttribute("baseUrl")

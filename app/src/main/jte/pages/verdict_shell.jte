@@ -1,7 +1,7 @@
 @import firstrentverdict.service.seo.CityContentGenerator.CityPageContent
 @param CityPageContent pageData
 @param String canonicalUrl = null
-@param String baseUrl = "https://movecostinfo.com"
+@param String baseUrl = ""
 
 @template.layout.main(
     title = pageData.pageTitle(),
@@ -14,3 +14,5 @@
     </div>
     `
 )
+
+

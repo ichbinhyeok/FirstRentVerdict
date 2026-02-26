@@ -14,11 +14,25 @@
 @param boolean noindex = true
 @param String pageType = "GENERAL"
 @param String scenarioTitle = null
+@param String baseUrl = ""
 
 !{
+    record PersonaCta(
+            String tag,
+            String headline,
+            String body,
+            String primaryLabel,
+            String primaryPath,
+            String secondaryLabel,
+            String secondaryPath) {
+    }
+
     String metaDesc = "";
     String cityState = input.city() + ", " + input.state();
+    String citySlug = input.city().toLowerCase().replace(" ", "-") + "-" + input.state().toLowerCase();
     int estDeposit = result.financials().totalUpfrontCost();
+    int liquidityGap = Math.max(0, result.financials().totalUpfrontCost() - result.financials().availableCash());
+    PersonaCta persona;
     
     if ("GENERAL".equals(pageType)) {
         metaDesc = "True cost of renting in " + cityState + ". See hidden fees, deposit requirements (" + String.format("$%,d", estDeposit) + "), and market strictness.";
@@ -29,6 +43,53 @@
         metaDesc = "Moving to " + cityState + "? Essential relocation cost breakdown. See how much cash you really need before you move. 2026 update.";
     } else {
         metaDesc = "First Rent Verdict analysis for " + cityState + ". Check your approval odds.";
+    }
+
+    if (input.creditTier() == CreditTier.POOR || input.creditTier() == CreditTier.FAIR) {
+        persona = new PersonaCta(
+                "Credit Recovery",
+                "Approval positioning is your highest-impact lever right now.",
+                "Target listings with flexible screening and apply with a complete documentation packet before paying more application fees.",
+                "Open Bad Credit Approval Playbook",
+                "/RentVerdict/guides/rent-with-bad-credit-no-cosigner",
+                "View City Credit Route",
+                "/RentVerdict/verdict/credit/poor/" + citySlug);
+    } else if (liquidityGap > 0 || result.financials().remainingBuffer() < result.financials().recommendedBuffer()) {
+        persona = new PersonaCta(
+                "Cash Gap",
+                "Your bottleneck is move-in liquidity, not search volume.",
+                "Close the cash gap first, then apply in higher-fit inventory. This reduces denial loops and fee leakage.",
+                "Open Cash Planning Playbook",
+                "/RentVerdict/guides/first-time-renter-budget",
+                "Test $5,000 Scenario",
+                "/RentVerdict/verdict/can-i-move-with/5000/to/" + citySlug);
+    } else if (!input.isLocalMove()) {
+        persona = new PersonaCta(
+                "Relocation",
+                "Long-distance moves fail when logistics are underbudgeted.",
+                "Plan for temporary housing and transfer verification early so strong listings do not fail at final screening.",
+                "Open Relocation Cost Playbook",
+                "/RentVerdict/guides/apartment-guarantor-cost-breakdown",
+                "View Relocation Route",
+                "/RentVerdict/verdict/moving-to/" + citySlug);
+    } else if (input.hasPet()) {
+        persona = new PersonaCta(
+                "Pet Move",
+                "Pet policy variance can erase your safety buffer if unchecked.",
+                "Compare pet-related deposit and monthly fee exposure before committing to any application sequence.",
+                "Open Hidden Cost Playbook",
+                "/RentVerdict/guides/first-time-renter-budget",
+                "View Pet-Focused Route",
+                "/RentVerdict/verdict/with-pet/" + citySlug);
+    } else {
+        persona = new PersonaCta(
+                "Stable Profile",
+                "Your next move is optimizing decision quality, not adding more random applications.",
+                "Use a focused playbook to lower fee waste and keep a safety buffer before lease signing.",
+                "Open First-Time Budget Playbook",
+                "/RentVerdict/guides/first-time-renter-budget",
+                "Compare More City Markets",
+                "/RentVerdict/cities");
     }
 }
 
@@ -85,11 +146,11 @@
         <!-- pSEO Engagement Hook (Behavioral Nudge) -->
         @if(!"GENERAL".equals(pageType))
             <div style="background: #fff8e1; border: 1px solid #ffe082; color: #5d4037; padding: var(--space-4); border-radius: var(--radius-sm); margin-bottom: var(--space-6); text-align: center; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                <div style="font-weight: 600; margin-bottom: 4px;">⚠️ Estimate based on typical ${pageType.replace("CREDIT_", "").toLowerCase()} scenarios</div>
+                <div style="font-weight: 600; margin-bottom: 4px;">?좑툘 Estimate based on typical ${pageType.replace("CREDIT_", "").toLowerCase()} scenarios</div>
                 <div>
                    Results vary by exact rent & cash. 
                    <a href="#simulation-lab" style="color: #e65100; font-weight: 700; text-decoration: underline; margin-left: 4px;">
-                       👇 Customize your calculation below for accuracy.
+                       ?몙 Customize your calculation below for accuracy.
                    </a>
                 </div>
             </div>
@@ -145,7 +206,7 @@
             <div id="factors-container" class="factors-grid">
                 @for(String factor : result.contributingFactors())
                     <div class="factor-item">
-                        <span style="color: var(--accent-primary); margin-right: var(--space-2);">✓</span>
+                        <span style="color: var(--accent-primary); margin-right: var(--space-2);">&#10003;</span>
                         ${factor}
                     </div>
                 @endfor
@@ -153,7 +214,7 @@
                 @if(result.regionalContext() != null && result.regionalContext().contextFactors() != null)
                    @for(String regionFactor : result.regionalContext().contextFactors())
                         <div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);">
-                            <span style="color: var(--text-tertiary); margin-right: var(--space-2);">📍</span>
+                            <span style="color: var(--text-tertiary); margin-right: var(--space-2);">?뱧</span>
                             ${regionFactor}
                         </div>
                    @endfor
@@ -193,6 +254,27 @@
                 </div>
             </div>
         </div>
+
+        <section class="card fade-in-up" style="animation-delay: 0.15s; margin-bottom: var(--space-10); border: 1px solid var(--border-default);">
+            <div style="display: inline-flex; align-items: center; padding: 0.25rem 0.625rem; border-radius: var(--radius-full); background: var(--bg-secondary); color: var(--text-tertiary); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem;">
+                Persona: ${persona.tag()}
+            </div>
+            <h3 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">
+                ${persona.headline()}
+            </h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.6;">
+                ${persona.body()}
+            </p>
+            @if(liquidityGap > 0)
+                <p style="margin-bottom: 1.25rem; color: var(--danger); font-weight: 600;">
+                    Current estimated gap: $${String.format("%,d", liquidityGap)}
+                </p>
+            @endif
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                <a href="${persona.primaryPath()}" class="btn btn-primary">${persona.primaryLabel()}</a>
+                <a href="${persona.secondaryPath()}" class="btn btn-secondary">${persona.secondaryLabel()}</a>
+            </div>
+        </section>
 
         <!-- 4. Split Section: Breakdown & Analysis -->
         <div class="split-section-grid fade-in-up" style="animation-delay: 0.2s;">
@@ -356,10 +438,10 @@
                             </label>
                             <div class="credit-select-wrapper">
                                 <select id="sim-credit" class="credit-select">
-                                    <option value="EXCELLENT" selected="${input.creditTier() == CreditTier.EXCELLENT}">✨ Excellent (750+)</option>
-                                    <option value="GOOD" selected="${input.creditTier() == CreditTier.GOOD}">👍 Good (670-749)</option>
-                                    <option value="FAIR" selected="${input.creditTier() == CreditTier.FAIR}">📊 Fair (580-669)</option>
-                                    <option value="POOR" selected="${input.creditTier() == CreditTier.POOR}">⚠️ Poor (&lt; 580)</option>
+                                    <option value="EXCELLENT" selected="${input.creditTier() == CreditTier.EXCELLENT}">??Excellent (750+)</option>
+                                    <option value="GOOD" selected="${input.creditTier() == CreditTier.GOOD}">?몟 Good (670-749)</option>
+                                    <option value="FAIR" selected="${input.creditTier() == CreditTier.FAIR}">?뱤 Fair (580-669)</option>
+                                    <option value="POOR" selected="${input.creditTier() == CreditTier.POOR}">?좑툘 Poor (&lt; 580)</option>
                                 </select>
                             </div>
                         </div>
@@ -660,7 +742,7 @@
                         </div>
                     @else
                         <div class="step-item">
-                            <div class="step-number" style="background: var(--success);">✓</div>
+                            <div class="step-number" style="background: var(--success);">&#10003;</div>
                             <div class="step-content">
                                 <h4>Application Ready</h4>
                                 <p id="action-step-desc">This rent is within your <strong>safe financial zone</strong>. Proceed with documentation.</p>
@@ -682,7 +764,7 @@
                     </div>
                     <script>
                         function getShareUrl() {
-                            const baseUrl = "https://movecostinfo.com/RentVerdict/verdict";
+                            const baseUrl = "${baseUrl}/RentVerdict/verdict";
                             const params = new URLSearchParams();
                             params.append("cityState", "${input.city()}|${input.state()}"); 
                             // Note: We need the exact 'City|State' format. 
@@ -701,7 +783,7 @@
                         }
 
                         function shareTwitter() {
-                            const text = "Checking my move-in costs for ${result.regionalContext().cityName()} with First Rent Verdict. The hidden costs are real! 🏠💸";
+                            const text = "Checking my move-in costs for ${result.regionalContext().cityName()} with First Rent Verdict. The hidden costs are real! ?룧?뮯";
                             const url = getShareUrl();
                             window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(url), "_blank");
                         }
@@ -1093,11 +1175,11 @@
                 if(factorsContainer) {
                     let html = '';
                     result.contributingFactors.forEach(f => {
-                         html += '<div class="factor-item"><span style="color: var(--accent-primary); margin-right: var(--space-2);">✓</span>' + f + '</div>';
+                         html += '<div class="factor-item"><span style="color: var(--accent-primary); margin-right: var(--space-2);">&#10003;</span>' + f + '</div>';
                     });
                     if (result.regionalContext && result.regionalContext.contextFactors) {
                         result.regionalContext.contextFactors.forEach(rf => {
-                            html += '<div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);"><span style="color: var(--text-tertiary); margin-right: var(--space-2);">📍</span>' + rf + '</div>';
+                            html += '<div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);"><span style="color: var(--text-tertiary); margin-right: var(--space-2);">?뱧</span>' + rf + '</div>';
                         });
                     }
                     factorsContainer.innerHTML = html;
@@ -1113,7 +1195,7 @@
                     if (!isApproved) {
                         actionContainer.innerHTML = '<div class="step-item"><div class="step-number">1</div><div class="step-content"><h4>Bridge the Gap</h4><p id="action-step-desc">You are approximately <strong>' + fmtGap + '</strong> short of a comfortable move. Consider a co-signer.</p></div></div>';
                     } else {
-                        actionContainer.innerHTML = '<div class="step-item"><div class="step-number" style="background: var(--success);">✓</div><div class="step-content"><h4>Application Ready</h4><p id="action-step-desc">This rent is within your <strong>safe financial zone</strong>. Proceed with documentation.</p></div></div>';
+                        actionContainer.innerHTML = '<div class="step-item"><div class="step-number" style="background: var(--success);">&#10003;</div><div class="step-content"><h4>Application Ready</h4><p id="action-step-desc">This rent is within your <strong>safe financial zone</strong>. Proceed with documentation.</p></div></div>';
                     }
                 }
                 
@@ -1157,13 +1239,13 @@
                 let badgeColor, badgeText;
                 if (verdict === 'APPROVED') {
                     badgeColor = 'var(--success)';
-                    badgeText = '✓ APPROVED';
+                    badgeText = '??APPROVED';
                 } else if (verdict === 'BORDERLINE') {
                     badgeColor = 'var(--warning)';
-                    badgeText = '⚠ BORDERLINE';
+                    badgeText = '??BORDERLINE';
                 } else {
                     badgeColor = 'var(--danger)';
-                    badgeText = '✗ DENIED';
+                    badgeText = '??DENIED';
                 }
                 stickyStatusBadge.style.background = badgeColor;
                 stickyStatusBadge.style.color = '#fff';
@@ -1217,3 +1299,4 @@
 
     </div>
 `)
+

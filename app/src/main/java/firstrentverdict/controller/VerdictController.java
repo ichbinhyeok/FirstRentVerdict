@@ -32,7 +32,7 @@ public class VerdictController {
     private final WhatIfService whatIfService;
     private final firstrentverdict.service.seo.CityContentGenerator cityContentGenerator;
 
-    @Value("${app.base-url:https://movecostinfo.com}")
+    @Value("${app.base-url}")
     private String baseUrl;
 
     public VerdictController(
@@ -53,6 +53,15 @@ public class VerdictController {
 
         model.addAttribute("cities", sortedCities);
         return "pages/index";
+    }
+
+    @GetMapping("")
+    public org.springframework.web.servlet.view.RedirectView canonicalRoot() {
+        org.springframework.web.servlet.view.RedirectView rv = new org.springframework.web.servlet.view.RedirectView(
+                "/RentVerdict/");
+        rv.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+        rv.setExposeModelAttributes(false);
+        return rv;
     }
 
     @RequestMapping(value = "/verdict", method = { RequestMethod.GET, RequestMethod.POST })
@@ -156,7 +165,7 @@ public class VerdictController {
         return "pages/city_landing";
     }
 
-    @GetMapping("/verdict/credit/{tier}/{slug}")
+    @GetMapping("/verdict/credit/{tier:poor|fair}/{slug}")
     public String creditPage(
             @PathVariable("tier") String tier,
             @PathVariable("slug") String slug,
@@ -404,34 +413,13 @@ public class VerdictController {
     }
 
     @GetMapping("/verdict/salary-needed/{slug}")
-    public String salaryNeededPage(@PathVariable("slug") String slug, Model model) {
-        String[] location = parseCitySlug(slug);
-        if (location == null || !repository.isValidCity(location[0], location[1])) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
-        }
-
-        var rentData = repository.getRent(location[0], location[1]).orElse(null);
-        var pageContent = cityContentGenerator.generate(location[0], location[1], rentData, null, null, null, null,
-                firstrentverdict.service.seo.CityContentGenerator.Intent.GENERAL, null); // Placeholder for proper
-                                                                                         // intent
-        model.addAttribute("pageData", pageContent);
-        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/salary-needed/" + slug);
-        return "pages/verdict_shell";
+    public String salaryNeededPage(@PathVariable("slug") String slug) {
+        throw new ResponseStatusException(HttpStatus.GONE, "This placeholder content has been permanently removed.");
     }
 
     @GetMapping("/verdict/no-cosigner/{slug}")
-    public String noCosignerPage(@PathVariable("slug") String slug, Model model) {
-        String[] location = parseCitySlug(slug);
-        if (location == null || !repository.isValidCity(location[0], location[1])) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
-        }
-
-        var rentData = repository.getRent(location[0], location[1]).orElse(null);
-        var pageContent = cityContentGenerator.generate(location[0], location[1], rentData, null, null, null, null,
-                firstrentverdict.service.seo.CityContentGenerator.Intent.GENERAL, null); // Placeholder
-        model.addAttribute("pageData", pageContent);
-        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/no-cosigner/" + slug);
-        return "pages/verdict_shell";
+    public String noCosignerPage(@PathVariable("slug") String slug) {
+        throw new ResponseStatusException(HttpStatus.GONE, "This placeholder content has been permanently removed.");
     }
 
     @GetMapping("/verdict/compare/{compareSlug}")

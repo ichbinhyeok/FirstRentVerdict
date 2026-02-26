@@ -2,11 +2,12 @@
 @import firstrentverdict.model.dtos.CitiesData.CityEntry
 
 @param List<CityEntry> cities
+@param String baseUrl = ""
 
 @template.layout.main(
     title = "First Rent Verdict: Can You Afford That Apartment? Free Calculator (2026)",
     description = "Free rent affordability calculator using 2026 market data. Calculate your move-in costs, security deposit, and cash buffer for 100+ US cities.",
-    canonical = "https://movecostinfo.com/RentVerdict/",
+    canonical = baseUrl + "/RentVerdict/",
     content = @`
     <!-- WebApplication Schema -->
     <script type="application/ld+json">
@@ -14,7 +15,7 @@
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "First Rent Verdict",
-      "url": "https://movecostinfo.com/RentVerdict/",
+      "url": "${baseUrl}/RentVerdict/",
       "description": "Free rent affordability calculator using 2026 market data for 100+ US cities.",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Any",
@@ -32,8 +33,8 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "First Rent Verdict",
-      "url": "https://movecostinfo.com/RentVerdict/",
-      "logo": "https://movecostinfo.com/images/favicon.svg"
+      "url": "${baseUrl}/RentVerdict/",
+      "logo": "${baseUrl}/images/favicon.svg"
     }
     </script>
 
@@ -154,7 +155,7 @@
                 <!-- Cluster: Major Markets -->
                 <div class="card" style="padding: var(--space-8); border-top: 4px solid var(--accent-primary);">
                     <h3 style="font-size: 1.25rem; margin-bottom: var(--space-6); color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
-                        <span>🌆</span> Major Markets
+                        <span>?뙀</span> Major Markets
                     </h3>
                     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                         <a href="/RentVerdict/verdict/new-york-ny" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">Audit New York, NY</a>
@@ -166,7 +167,7 @@
                 <!-- Cluster: Case Studies -->
                 <div class="card" style="padding: var(--space-8); border-top: 4px solid #f59e0b;">
                     <h3 style="font-size: 1.25rem; margin-bottom: var(--space-6); color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
-                        <span>🐾</span> Special Intent
+                        <span>?맽</span> Special Intent
                     </h3>
                     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                         <a href="/RentVerdict/verdict/with-pet/new-york-ny" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #f59e0b; color: #d97706;">Pet-Friendly NY Audit</a>
@@ -178,7 +179,7 @@
                 <!-- Cluster: Credit Approval -->
                 <div class="card" style="padding: var(--space-8); border-top: 4px solid #ef4444;">
                     <h3 style="font-size: 1.25rem; margin-bottom: var(--space-6); color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
-                        <span>📉</span> Credit Strategy
+                        <span>?뱣</span> Credit Strategy
                     </h3>
                     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
                         <a href="/RentVerdict/verdict/credit/poor/atlanta-ga" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #ef4444; color: #dc2626;">Poor Credit Atlanta</a>
@@ -188,11 +189,29 @@
                 </div>
             </div>
 
+            <div style="margin-top: var(--space-10);">
+                <h3 style="font-size: 1rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-4);">
+                    Approval Playbooks
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-4);">
+                    <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">
+                        Bad Credit + No Cosigner Plan
+                    </a>
+                    <a href="/RentVerdict/guides/apartment-guarantor-cost-breakdown" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">
+                        Guarantor Cost Breakdown
+                    </a>
+                    <a href="/RentVerdict/guides/second-chance-apartments-qualification" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">
+                        Second-Chance Qualification Guide
+                    </a>
+                </div>
+            </div>
+
             <div style="margin-top: var(--space-12); text-align: center;">
                 <a href="/RentVerdict/cities" class="btn btn-secondary">
-                    Browse All Supporting Cities & States →
+                    Browse All Supporting Cities & States ??
                 </a>
             </div>
         </div>
     </div>
 `)
+

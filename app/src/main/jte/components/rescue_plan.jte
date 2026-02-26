@@ -6,7 +6,7 @@
 
 <div id="rescue-plan-card" style="display: ${result.verdict() == Verdict.DENIED || result.verdict() == Verdict.BORDERLINE ? "block" : "none"}; background: var(--bg-surface); border: 2px solid var(--danger); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 3rem; text-align: left;">
         <h3 style="color: var(--danger); font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
-            <span>🚨</span> Verdict Rescue Plan
+            <span>?슚</span> Verdict Rescue Plan
         </h3>
         <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem;">
             Your profile currently triggers an algorithmic denial in ${input.city()}. However, you can override this by implementing our vetted rescue strategies:
@@ -33,3 +33,4 @@
             </div>
         </div>
     </div>
+

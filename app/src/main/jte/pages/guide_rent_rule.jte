@@ -1,7 +1,9 @@
+@param String baseUrl = ""
+
 @template.layout.main(
     title = "Guide: The 50/30/20 Rule for Renters (2026 Edition)",
     description = "How to apply the 50/30/20 rule to your rent budget. Understand why liquid cash flow matters more than gross income.",
-    canonical = "https://movecostinfo.com/RentVerdict/guide/rent-affordability-rule",
+    canonical = baseUrl + "/RentVerdict/guide/rent-affordability-rule",
     content = @`
     <div style="max-width: 700px; margin: 4rem auto; padding: 0 1.5rem;">
         <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 2rem; line-height: 1.2;">The 50/30/20 Rule: A Renter's Liquidity Framework</h1>
@@ -12,7 +14,7 @@
 
         <h2 style="font-size: 1.5rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1rem;">Why It Matters for Rent</h2>
         <p style="font-size: 1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 1rem;">
-            Rent is your largest "Need". If rent exceeds 30% of your gross income (or approx. 50% of your 'Needs' bucket), you are statistically likely to face liquidity crises—meaning you won't have cash for emergencies.
+            Rent is your largest "Need". If rent exceeds 30% of your gross income (or approx. 50% of your 'Needs' bucket), you are statistically likely to face liquidity crises?봫eaning you won't have cash for emergencies.
         </p>
 
         <h2 style="font-size: 1.5rem; font-weight: 700; margin-top: 3rem; margin-bottom: 1rem;">How We Apply It</h2>
@@ -29,3 +31,4 @@
         </div>
     </div>
 `)
+

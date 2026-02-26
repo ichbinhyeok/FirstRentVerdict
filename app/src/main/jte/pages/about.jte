@@ -1,7 +1,9 @@
+@param String baseUrl = ""
+
 @template.layout.main(
     title = "About Verdict Labs - First Rent Verdict Team",
     description = "Meet Verdict Labs, the data analysts behind First Rent Verdict. We use objective market data to protect renters from financial risk.",
-    canonical = "https://movecostinfo.com/RentVerdict/about",
+    canonical = baseUrl + "/RentVerdict/about",
     content = @`
     <div style="max-width: 800px; margin: 4rem auto; padding: 0 1.5rem;">
         
@@ -35,16 +37,16 @@
             </p>
             <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
                 <li style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); font-weight: 500;">
-                    <span style="color: var(--primary);">✓</span> <a href="https://www.zillow.com/research/data/" target="_blank" rel="nofollow" style="color: inherit; text-decoration: underline; text-decoration-color: var(--border-subtle);">Zillow Research Data</a>
+                    <span style="color: var(--primary);">&#10003;</span> <a href="https://www.zillow.com/research/data/" target="_blank" rel="nofollow" style="color: inherit; text-decoration: underline; text-decoration-color: var(--border-subtle);">Zillow Research Data</a>
                 </li>
                 <li style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); font-weight: 500;">
-                    <span style="color: var(--primary);">✓</span> <a href="https://www.apartmentlist.com/research/category/data-rent-estimates" target="_blank" rel="nofollow" style="color: inherit; text-decoration: underline; text-decoration-color: var(--border-subtle);">Apartment List Trends</a>
+                    <span style="color: var(--primary);">&#10003;</span> <a href="https://www.apartmentlist.com/research/category/data-rent-estimates" target="_blank" rel="nofollow" style="color: inherit; text-decoration: underline; text-decoration-color: var(--border-subtle);">Apartment List Trends</a>
                 </li>
                 <li style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); font-weight: 500;">
-                    <span style="color: var(--primary);">✓</span> <a href="https://www.census.gov/topics/housing/data.html" target="_blank" rel="nofollow" style="color: inherit; text-decoration: underline; text-decoration-color: var(--border-subtle);">US Census Bureau</a>
+                    <span style="color: var(--primary);">&#10003;</span> <a href="https://www.census.gov/topics/housing/data.html" target="_blank" rel="nofollow" style="color: inherit; text-decoration: underline; text-decoration-color: var(--border-subtle);">US Census Bureau</a>
                 </li>
                 <li style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); font-weight: 500;">
-                    <span style="color: var(--primary);">✓</span> State Housing Authorities
+                    <span style="color: var(--primary);">&#10003;</span> State Housing Authorities
                 </li>
             </ul>
         </div>
@@ -78,3 +80,4 @@
         </div>
     </div>
 `)
+

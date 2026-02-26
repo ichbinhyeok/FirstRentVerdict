@@ -1,8 +1,26 @@
 @param String title = "First Rent Verdict"
 @param String description = "First Rent Verdict - Know your true move-in cost before signing the lease."
-@param String canonical = "https://movecostinfo.com/"
+@param String baseUrl = ""
+@param String canonical = null
 @param boolean noindex = false
 @param gg.jte.Content content
+
+!{
+    String resolvedBaseUrl = baseUrl;
+    if ((resolvedBaseUrl == null || resolvedBaseUrl.isBlank()) && canonical != null && canonical.startsWith("http")) {
+        int schemeEnd = canonical.indexOf("://");
+        int slashAfterHost = canonical.indexOf("/", schemeEnd + 3);
+        resolvedBaseUrl = slashAfterHost > 0 ? canonical.substring(0, slashAfterHost) : canonical;
+    }
+    if (resolvedBaseUrl == null) {
+        resolvedBaseUrl = "";
+    }
+
+    String resolvedCanonical = canonical != null && !canonical.isBlank()
+            ? canonical
+            : (resolvedBaseUrl.isBlank() ? "/" : resolvedBaseUrl + "/");
+    String socialImageUrl = (resolvedBaseUrl.isBlank() ? "" : resolvedBaseUrl) + "/images/og-rent-verdict-v1.png";
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${title}</title>
     <meta name="description" content="${description}">
-    <link rel="canonical" href="${canonical}">
+    <link rel="canonical" href="${resolvedCanonical}">
     
     @if(noindex)
         <meta name="robots" content="noindex, nofollow">
@@ -20,10 +38,10 @@
     <!-- Open Graph -->
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="${description}">
-    <meta property="og:url" content="${canonical}">
+    <meta property="og:url" content="${resolvedCanonical}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="First Rent Verdict">
-    <meta property="og:image" content="https://movecostinfo.com/images/og-rent-verdict-v1.png">
+    <meta property="og:image" content="${socialImageUrl}">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
 
@@ -31,7 +49,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="${title}">
     <meta name="twitter:description" content="${description}">
-    <meta name="twitter:image" content="https://movecostinfo.com/images/og-rent-verdict-v1.png">
+    <meta name="twitter:image" content="${socialImageUrl}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -63,3 +81,4 @@
     @template.layout.footer()
 </body>
 </html>
+
