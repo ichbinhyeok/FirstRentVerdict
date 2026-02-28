@@ -5,19 +5,35 @@ import firstrentverdict.model.dtos.SecurityDepositData;
 import firstrentverdict.model.dtos.MovingData;
 import firstrentverdict.model.dtos.PetData;
 import firstrentverdict.model.dtos.CityInsightData;
+import firstrentverdict.model.dtos.CityEconomicFactsData;
 import firstrentverdict.repository.VerdictDataRepository;
+import firstrentverdict.service.calc.DistanceCalculator;
+import firstrentverdict.service.calc.MovingCostCalculator;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CityContentGenerator {
 
-        private final VerdictDataRepository repository;
+        private static final Set<String> BROKER_FEE_CITIES = Set.of(
+                        "new york|ny", "boston|ma", "jersey city|nj", "hoboken|nj");
+        private static final double BROKER_FEE_PERCENT = 0.10;
+        private static final double DEFAULT_RELOCATION_DISTANCE_MILES = 1000.0;
 
-        public CityContentGenerator(VerdictDataRepository repository) {
+        private final VerdictDataRepository repository;
+        private final MovingCostCalculator movingCostCalculator;
+        private final DistanceCalculator distanceCalculator;
+
+        public CityContentGenerator(
+                        VerdictDataRepository repository,
+                        MovingCostCalculator movingCostCalculator,
+                        DistanceCalculator distanceCalculator) {
                 this.repository = repository;
+                this.movingCostCalculator = movingCostCalculator;
+                this.distanceCalculator = distanceCalculator;
         }
 
         public enum Intent {
@@ -40,6 +56,7 @@ public class CityContentGenerator {
                         MovingData.CityMoving movingData,
                         PetData.CityPet petData,
                         CityInsightData.CityInsight insight,
+                        CityEconomicFactsData.CityEconomicFact economicFact,
                         Intent intent,
                         Object contextValue) {
                 int avgRent = rentData.median();
@@ -71,26 +88,29 @@ public class CityContentGenerator {
 
                 int deposit = (int) (avgRent * depositMult);
 
-                // 2. Precise Moving Logic
+                // 2. Precise Moving Logic (aligned with simulation engine)
                 int moving = (movingData != null) ? movingData.typical() : 500;
                 String movingNotes = (movingData != null) ? movingData.assumptions() : "Standard local move.";
+
+                if (intent == Intent.RELOCATION) {
+                        moving = estimateLongDistanceCost(movingData, DEFAULT_RELOCATION_DISTANCE_MILES);
+                        movingNotes = String.format(
+                                        "Long-distance estimate using %,.0f-mile baseline (engine-aligned).",
+                                        DEFAULT_RELOCATION_DISTANCE_MILES);
+                }
 
                 if (intent == Intent.RELOCATION_PAIR && contextValue instanceof String fromCity) {
                         java.util.Optional<firstrentverdict.model.dtos.CityCoordinates.CityCoordinate> toCoord = repository
                                         .getCityCoordinate(city, state);
-                        // Parse fromCity correctly to get its coordinate
                         String[] fromParts = parseCitySlug(fromCity);
                         if (fromParts != null) {
                                 java.util.Optional<firstrentverdict.model.dtos.CityCoordinates.CityCoordinate> fromCoord = repository
                                                 .getCityCoordinate(fromParts[0], fromParts[1]);
                                 if (toCoord.isPresent() && fromCoord.isPresent()) {
-                                        double distance = calculateHaversineDistance(
+                                        double distance = distanceCalculator.calculateMiles(
                                                         fromCoord.get().lat(), fromCoord.get().lng(),
                                                         toCoord.get().lat(), toCoord.get().lng());
-                                        double base = 300;
-                                        double rate = 0.75; // average rate per mile
-                                        int calculatedCost = (int) (base + (distance * rate));
-                                        moving = Math.min(6000, Math.max(300, calculatedCost));
+                                        moving = estimateLongDistanceCost(movingData, distance);
                                         movingNotes = "Estimates based on distance (" + (int) distance + " miles).";
                                 }
                         }
@@ -104,10 +124,18 @@ public class CityContentGenerator {
                 String petNotes = (petData != null && petData.oneTime() != null) ? petData.oneTime().notes()
                                 : "Standard pet fees apply.";
 
-                int upfrontTotal = avgRent + deposit + moving;
+                int brokerFee = hasBrokerFee(city, state) ? (int) (avgRent * 12 * BROKER_FEE_PERCENT) : 0;
+
+                int upfrontTotal = avgRent + deposit + moving + brokerFee;
                 if (intent == Intent.PET_FRIENDLY) {
-                        upfrontTotal += petDeposit;
+                        upfrontTotal += petDeposit + petRentMonthly;
                 }
+
+                Integer medianHouseholdIncome = economicFact != null ? economicFact.medianHouseholdIncome() : null;
+                Double renterSharePct = economicFact != null ? economicFact.renterSharePct() : null;
+                Double rentBurdenSharePct = economicFact != null ? economicFact.rentBurdened35PlusSharePct() : null;
+                Double annualRentToIncomePct = economicFact != null ? economicFact.annualRentToIncomePct() : null;
+                String economicSignal = buildEconomicSignal(annualRentToIncomePct, rentBurdenSharePct);
 
                 // 4. Content Generation
                 String pageTitle;
@@ -236,6 +264,11 @@ public class CityContentGenerator {
                         }
                 }
 
+                if (brokerFee > 0) {
+                        localInsight += String.format(" This market often includes broker fees around $%,d (10%% of annual rent).",
+                                        brokerFee);
+                }
+
                 // Incorporate Human Insights from city_insights.json
                 String qualitativeStory = "";
                 String seasonalTip = "Peak moving season aligns with the general summer cycle.";
@@ -255,10 +288,60 @@ public class CityContentGenerator {
                         qnaList.add(new QnA("When is the best time to move to " + city + "?", insight.seasonalTip()));
                 }
 
+                if (medianHouseholdIncome != null || rentBurdenSharePct != null || annualRentToIncomePct != null) {
+                        StringBuilder econNarrative = new StringBuilder("Market pressure signal: ");
+                        if (medianHouseholdIncome != null) {
+                                econNarrative.append("median household income is $")
+                                                .append(String.format("%,d", medianHouseholdIncome))
+                                                .append(". ");
+                        }
+                        if (annualRentToIncomePct != null) {
+                                econNarrative.append("Median annual rent is about ")
+                                                .append(String.format("%.1f", annualRentToIncomePct))
+                                                .append("% of median household income. ");
+                        }
+                        if (rentBurdenSharePct != null) {
+                                econNarrative.append(String.format("%.1f", rentBurdenSharePct))
+                                                .append("% of renter households spend 35%+ of income on rent.");
+                        }
+                        localInsight = (localInsight + " " + econNarrative).trim();
+
+                        if (annualRentToIncomePct != null) {
+                                qnaList.add(new QnA(
+                                                "How stretched is rent vs income in " + city + "?",
+                                                "ACS data indicates the annual rent-to-income ratio is roughly "
+                                                                + String.format("%.1f", annualRentToIncomePct)
+                                                                + "%, which we classify as " + economicSignal
+                                                                + " pressure."));
+                        }
+                }
+
                 // Universal QnA for every page
+                String universalCostContext = "Usually, you'll need the first month's rent, a security deposit, and moving logistics";
+                if (brokerFee > 0) {
+                        universalCostContext += ", plus a broker fee";
+                }
+                if (intent == Intent.PET_FRIENDLY) {
+                        universalCostContext += ", plus a pet deposit and first-month pet rent";
+                }
+                universalCostContext += ".";
                 qnaList.add(new QnA("What are the typical upfront costs for a rental in " + city + "?",
-                                "Usually, you'll need the first month's rent, a security deposit (often 1x rent), and around $500-$1,000 for moving logistics. Total estimate: $"
+                                universalCostContext + " Total estimate: $"
                                                 + String.format("%,d", upfrontTotal) + "."));
+
+                List<String> dataSources = new ArrayList<>(List.of(
+                                "2026 Internal Market Index",
+                                "US Census ACS",
+                                "Local Rental Survey"));
+                if (economicFact != null && economicFact.sources() != null && !economicFact.sources().isEmpty()) {
+                        dataSources.add("US Census ACS Place-Level API");
+                }
+
+                String riskNarrative = "Liquidity Risk: The total $%,d move-in cost is the primary hurdle for %s renters."
+                                .formatted(upfrontTotal, city);
+                if (annualRentToIncomePct != null || rentBurdenSharePct != null) {
+                        riskNarrative += " Economic pressure is " + economicSignal + " based on ACS affordability metrics.";
+                }
 
                 return new CityPageContent(
                                 pageTitle, metaDescription, city, state, avgRent,
@@ -270,14 +353,15 @@ public class CityContentGenerator {
                                 String.format("Income Verification: You need $%,d/mo to pass the standard 3x income test.",
                                                 avgRent * 3),
                                 "Audited Cost Report",
-                                "Liquidity Risk: The total $%,d move-in cost is the primary hurdle for %s renters."
-                                                .formatted(upfrontTotal, city),
-                                qnaList, List.of("2026 Internal Market Index", "US Census ACS", "Local Rental Survey"),
+                                riskNarrative,
+                                qnaList, dataSources,
                                 depositNotes, movingNotes,
                                 (avgRent > 2000 ? "High-Cost" : "Moderate"), 0,
                                 localLaw,
                                 localInsight,
                                 petDeposit, petRentMonthly, petNotes,
+                                medianHouseholdIncome, renterSharePct, rentBurdenSharePct, annualRentToIncomePct,
+                                economicSignal,
                                 seasonalTip, renterAdvice, intent == Intent.PET_FRIENDLY);
         }
 
@@ -291,10 +375,31 @@ public class CityContentGenerator {
                         String movingAssumptions,
                         String affordabilityTier, int nationalComparison, String legalSummary, String localInsight,
                         int petDeposit, int petRent, String petNotes,
+                        Integer medianHouseholdIncome, Double renterSharePct, Double rentBurdenSharePct,
+                        Double annualRentToIncomePct, String economicSignal,
                         String seasonalTip, String renterAdvice, boolean isPetIntent) {
         }
 
         public record QnA(String question, String answer) {
+        }
+
+        private String buildEconomicSignal(Double annualRentToIncomePct, Double rentBurdenSharePct) {
+                if (annualRentToIncomePct == null && rentBurdenSharePct == null) {
+                        return "moderate";
+                }
+
+                boolean highRentToIncome = annualRentToIncomePct != null && annualRentToIncomePct >= 30.0;
+                boolean highBurden = rentBurdenSharePct != null && rentBurdenSharePct >= 40.0;
+                boolean midRentToIncome = annualRentToIncomePct != null && annualRentToIncomePct >= 24.0;
+                boolean midBurden = rentBurdenSharePct != null && rentBurdenSharePct >= 32.0;
+
+                if (highRentToIncome || highBurden) {
+                        return "high";
+                }
+                if (midRentToIncome || midBurden) {
+                        return "elevated";
+                }
+                return "moderate";
         }
 
         private String[] parseCitySlug(String slug) {
@@ -307,14 +412,15 @@ public class CityContentGenerator {
                 return null;
         }
 
-        private double calculateHaversineDistance(double lat1, double lon1, double lat2, double lon2) {
-                int R = 3958; // Radius of the earth in miles
-                double dLat = Math.toRadians(lat2 - lat1);
-                double dLon = Math.toRadians(lon2 - lon1);
-                double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
-                                                Math.sin(dLon / 2) * Math.sin(dLon / 2);
-                double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-                return R * c;
+        private boolean hasBrokerFee(String city, String state) {
+                String key = city.trim().toLowerCase() + "|" + state.trim().toLowerCase();
+                return BROKER_FEE_CITIES.contains(key);
+        }
+
+        private int estimateLongDistanceCost(MovingData.CityMoving movingData, double distance) {
+                if (movingData == null) {
+                        return movingCostCalculator.estimateLongDistanceCost(Math.max(distance, 50));
+                }
+                return movingCostCalculator.calculateCost(false, distance, movingData);
         }
 }

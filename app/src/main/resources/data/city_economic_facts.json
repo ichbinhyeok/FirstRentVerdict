@@ -1,0 +1,2012 @@
+{
+  "version": "2026-02-28",
+  "dataset": "ACS 2023 5-year",
+  "notes": "City economic facts for SEO uniqueness and market context blocks.",
+  "coverage": {
+    "total_cities": 100,
+    "matched_cities": 100,
+    "unmatched_cities": 0
+  },
+  "cities": [
+    {
+      "city": "New York",
+      "state": "NY",
+      "year": 2023,
+      "census_place_name": "New York city, New York",
+      "census_place_geoid": "3651000",
+      "median_household_income": 79713,
+      "median_gross_rent": 1779,
+      "occupied_households": 3313316,
+      "renter_households": 2226896,
+      "renter_share_pct": 67.2,
+      "rent_burdened_35_plus_households": 906991,
+      "rent_burdened_35_plus_share_pct": 40.7,
+      "annual_rent_to_income_pct": 26.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:36",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Los Angeles",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Los Angeles city, California",
+      "census_place_geoid": "0644000",
+      "median_household_income": 80366,
+      "median_gross_rent": 1879,
+      "occupied_households": 1419663,
+      "renter_households": 903832,
+      "renter_share_pct": 63.7,
+      "rent_burdened_35_plus_households": 427457,
+      "rent_burdened_35_plus_share_pct": 47.3,
+      "annual_rent_to_income_pct": 28.1,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Chicago",
+      "state": "IL",
+      "year": 2023,
+      "census_place_name": "Chicago city, Illinois",
+      "census_place_geoid": "1714000",
+      "median_household_income": 75134,
+      "median_gross_rent": 1380,
+      "occupied_households": 1146547,
+      "renter_households": 624368,
+      "renter_share_pct": 54.5,
+      "rent_burdened_35_plus_households": 229499,
+      "rent_burdened_35_plus_share_pct": 36.8,
+      "annual_rent_to_income_pct": 22,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:17",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Houston",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "Houston city, Texas",
+      "census_place_geoid": "4835000",
+      "median_household_income": 62894,
+      "median_gross_rent": 1313,
+      "occupied_households": 916536,
+      "renter_households": 531864,
+      "renter_share_pct": 58,
+      "rent_burdened_35_plus_households": 221690,
+      "rent_burdened_35_plus_share_pct": 41.7,
+      "annual_rent_to_income_pct": 25.1,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Phoenix",
+      "state": "AZ",
+      "year": 2023,
+      "census_place_name": "Phoenix city, Arizona",
+      "census_place_geoid": "0455000",
+      "median_household_income": 77041,
+      "median_gross_rent": 1458,
+      "occupied_households": 601397,
+      "renter_households": 258028,
+      "renter_share_pct": 42.9,
+      "rent_burdened_35_plus_households": 101078,
+      "rent_burdened_35_plus_share_pct": 39.2,
+      "annual_rent_to_income_pct": 22.7,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:04",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Philadelphia",
+      "state": "PA",
+      "year": 2023,
+      "census_place_name": "Philadelphia city, Pennsylvania",
+      "census_place_geoid": "4260000",
+      "median_household_income": 60698,
+      "median_gross_rent": 1323,
+      "occupied_households": 669222,
+      "renter_households": 319081,
+      "renter_share_pct": 47.7,
+      "rent_burdened_35_plus_households": 129873,
+      "rent_burdened_35_plus_share_pct": 40.7,
+      "annual_rent_to_income_pct": 26.2,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:42",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "San Antonio",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "San Antonio city, Texas",
+      "census_place_geoid": "4865000",
+      "median_household_income": 62917,
+      "median_gross_rent": 1258,
+      "occupied_households": 547883,
+      "renter_households": 260788,
+      "renter_share_pct": 47.6,
+      "rent_burdened_35_plus_households": 108492,
+      "rent_burdened_35_plus_share_pct": 41.6,
+      "annual_rent_to_income_pct": 24,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "San Diego",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "San Diego city, California",
+      "census_place_geoid": "0666000",
+      "median_household_income": 104321,
+      "median_gross_rent": 2223,
+      "occupied_households": 522146,
+      "renter_households": 273751,
+      "renter_share_pct": 52.4,
+      "rent_burdened_35_plus_households": 117129,
+      "rent_burdened_35_plus_share_pct": 42.8,
+      "annual_rent_to_income_pct": 25.6,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Dallas",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "Dallas city, Texas",
+      "census_place_geoid": "4819000",
+      "median_household_income": 67760,
+      "median_gross_rent": 1403,
+      "occupied_households": 528038,
+      "renter_households": 304373,
+      "renter_share_pct": 57.6,
+      "rent_burdened_35_plus_households": 117858,
+      "rent_burdened_35_plus_share_pct": 38.7,
+      "annual_rent_to_income_pct": 24.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "San Jose",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "San Jose city, California",
+      "census_place_geoid": "0668000",
+      "median_household_income": 141565,
+      "median_gross_rent": 2617,
+      "occupied_households": 326767,
+      "renter_households": 143945,
+      "renter_share_pct": 44.1,
+      "rent_burdened_35_plus_households": 55237,
+      "rent_burdened_35_plus_share_pct": 38.4,
+      "annual_rent_to_income_pct": 22.2,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Austin",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "Austin city, Texas",
+      "census_place_geoid": "4805000",
+      "median_household_income": 91461,
+      "median_gross_rent": 1655,
+      "occupied_households": 440294,
+      "renter_households": 244616,
+      "renter_share_pct": 55.6,
+      "rent_burdened_35_plus_households": 90677,
+      "rent_burdened_35_plus_share_pct": 37.1,
+      "annual_rent_to_income_pct": 21.7,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Jacksonville",
+      "state": "FL",
+      "year": 2023,
+      "census_place_name": "Jacksonville city, Florida",
+      "census_place_geoid": "1235000",
+      "median_household_income": 66981,
+      "median_gross_rent": 1375,
+      "occupied_households": 384741,
+      "renter_households": 163765,
+      "renter_share_pct": 42.6,
+      "rent_burdened_35_plus_households": 67326,
+      "rent_burdened_35_plus_share_pct": 41.1,
+      "annual_rent_to_income_pct": 24.6,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:12",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Fort Worth",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "Fort Worth city, Texas",
+      "census_place_geoid": "4827000",
+      "median_household_income": 76602,
+      "median_gross_rent": 1412,
+      "occupied_households": 334230,
+      "renter_households": 144570,
+      "renter_share_pct": 43.3,
+      "rent_burdened_35_plus_households": 63600,
+      "rent_burdened_35_plus_share_pct": 44,
+      "annual_rent_to_income_pct": 22.1,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Columbus",
+      "state": "OH",
+      "year": 2023,
+      "census_place_name": "Columbus city, Ohio",
+      "census_place_geoid": "3918000",
+      "median_household_income": 65327,
+      "median_gross_rent": 1224,
+      "occupied_households": 386581,
+      "renter_households": 215235,
+      "renter_share_pct": 55.7,
+      "rent_burdened_35_plus_households": 75886,
+      "rent_burdened_35_plus_share_pct": 35.3,
+      "annual_rent_to_income_pct": 22.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:39",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Indianapolis",
+      "state": "IN",
+      "year": 2023,
+      "census_place_name": "Indianapolis city (balance), Indiana",
+      "census_place_geoid": "1836003",
+      "median_household_income": 62995,
+      "median_gross_rent": 1112,
+      "occupied_households": 359665,
+      "renter_households": 160653,
+      "renter_share_pct": 44.7,
+      "rent_burdened_35_plus_households": 63664,
+      "rent_burdened_35_plus_share_pct": 39.6,
+      "annual_rent_to_income_pct": 21.2,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:18",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Charlotte",
+      "state": "NC",
+      "year": 2023,
+      "census_place_name": "Charlotte city, North Carolina",
+      "census_place_geoid": "3712000",
+      "median_household_income": 78438,
+      "median_gross_rent": 1504,
+      "occupied_households": 361100,
+      "renter_households": 175055,
+      "renter_share_pct": 48.5,
+      "rent_burdened_35_plus_households": 65503,
+      "rent_burdened_35_plus_share_pct": 37.4,
+      "annual_rent_to_income_pct": 23,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:37",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "San Francisco",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "San Francisco city, California",
+      "census_place_geoid": "0667000",
+      "median_household_income": 141446,
+      "median_gross_rent": 2419,
+      "occupied_households": 362650,
+      "renter_households": 223040,
+      "renter_share_pct": 61.5,
+      "rent_burdened_35_plus_households": 63770,
+      "rent_burdened_35_plus_share_pct": 28.6,
+      "annual_rent_to_income_pct": 20.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Seattle",
+      "state": "WA",
+      "year": 2023,
+      "census_place_name": "Seattle city, Washington",
+      "census_place_geoid": "5363000",
+      "median_household_income": 121984,
+      "median_gross_rent": 1998,
+      "occupied_households": 353019,
+      "renter_households": 196825,
+      "renter_share_pct": 55.8,
+      "rent_burdened_35_plus_households": 66610,
+      "rent_burdened_35_plus_share_pct": 33.8,
+      "annual_rent_to_income_pct": 19.7,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:53",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Denver",
+      "state": "CO",
+      "year": 2023,
+      "census_place_name": "Denver city, Colorado",
+      "census_place_geoid": "0820000",
+      "median_household_income": 91681,
+      "median_gross_rent": 1770,
+      "occupied_households": 329578,
+      "renter_households": 167670,
+      "renter_share_pct": 50.9,
+      "rent_burdened_35_plus_households": 60757,
+      "rent_burdened_35_plus_share_pct": 36.2,
+      "annual_rent_to_income_pct": 23.2,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:08",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Oklahoma City",
+      "state": "OK",
+      "year": 2023,
+      "census_place_name": "Oklahoma City city, Oklahoma",
+      "census_place_geoid": "4055000",
+      "median_household_income": 66702,
+      "median_gross_rent": 1083,
+      "occupied_households": 275193,
+      "renter_households": 112472,
+      "renter_share_pct": 40.9,
+      "rent_burdened_35_plus_households": 41228,
+      "rent_burdened_35_plus_share_pct": 36.7,
+      "annual_rent_to_income_pct": 19.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:40",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Nashville",
+      "state": "TN",
+      "year": 2023,
+      "census_place_name": "Nashville-Davidson metropolitan government (balance), Tennessee",
+      "census_place_geoid": "4752006",
+      "median_household_income": 75197,
+      "median_gross_rent": 1486,
+      "occupied_households": 303539,
+      "renter_households": 142668,
+      "renter_share_pct": 47,
+      "rent_burdened_35_plus_households": 56875,
+      "rent_burdened_35_plus_share_pct": 39.9,
+      "annual_rent_to_income_pct": 23.7,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:47",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "El Paso",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "El Paso city, Texas",
+      "census_place_geoid": "4824000",
+      "median_household_income": 58734,
+      "median_gross_rent": 1041,
+      "occupied_households": 242482,
+      "renter_households": 96529,
+      "renter_share_pct": 39.8,
+      "rent_burdened_35_plus_households": 38466,
+      "rent_burdened_35_plus_share_pct": 39.8,
+      "annual_rent_to_income_pct": 21.3,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Washington",
+      "state": "DC",
+      "year": 2023,
+      "census_place_name": "Washington city, District of Columbia",
+      "census_place_geoid": "1150000",
+      "median_household_income": 106287,
+      "median_gross_rent": 1900,
+      "occupied_households": 321556,
+      "renter_households": 189268,
+      "renter_share_pct": 58.9,
+      "rent_burdened_35_plus_households": 64580,
+      "rent_burdened_35_plus_share_pct": 34.1,
+      "annual_rent_to_income_pct": 21.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:11",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Las Vegas",
+      "state": "NV",
+      "year": 2023,
+      "census_place_name": "Las Vegas city, Nevada",
+      "census_place_geoid": "3240000",
+      "median_household_income": 70723,
+      "median_gross_rent": 1456,
+      "occupied_households": 244429,
+      "renter_households": 108244,
+      "renter_share_pct": 44.3,
+      "rent_burdened_35_plus_households": 49172,
+      "rent_burdened_35_plus_share_pct": 45.4,
+      "annual_rent_to_income_pct": 24.7,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:32",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Boston",
+      "state": "MA",
+      "year": 2023,
+      "census_place_name": "Boston city, Massachusetts",
+      "census_place_geoid": "2507000",
+      "median_household_income": 94755,
+      "median_gross_rent": 2093,
+      "occupied_households": 279216,
+      "renter_households": 180403,
+      "renter_share_pct": 64.6,
+      "rent_burdened_35_plus_households": 70264,
+      "rent_burdened_35_plus_share_pct": 38.9,
+      "annual_rent_to_income_pct": 26.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:25",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Portland",
+      "state": "OR",
+      "year": 2023,
+      "census_place_name": "Portland city, Oregon",
+      "census_place_geoid": "4159000",
+      "median_household_income": 88792,
+      "median_gross_rent": 1596,
+      "occupied_households": 287030,
+      "renter_households": 135346,
+      "renter_share_pct": 47.2,
+      "rent_burdened_35_plus_households": 54325,
+      "rent_burdened_35_plus_share_pct": 40.1,
+      "annual_rent_to_income_pct": 21.6,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:41",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Louisville",
+      "state": "KY",
+      "year": 2023,
+      "census_place_name": "Louisville/Jefferson County metro government (balance), Kentucky",
+      "census_place_geoid": "2148006",
+      "median_household_income": 64731,
+      "median_gross_rent": 1069,
+      "occupied_households": 262740,
+      "renter_households": 103638,
+      "renter_share_pct": 39.4,
+      "rent_burdened_35_plus_households": 36742,
+      "rent_burdened_35_plus_share_pct": 35.5,
+      "annual_rent_to_income_pct": 19.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:21",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Memphis",
+      "state": "TN",
+      "year": 2023,
+      "census_place_name": "Memphis city, Tennessee",
+      "census_place_geoid": "4748000",
+      "median_household_income": 51211,
+      "median_gross_rent": 1123,
+      "occupied_households": 254530,
+      "renter_households": 137469,
+      "renter_share_pct": 54,
+      "rent_burdened_35_plus_households": 59221,
+      "rent_burdened_35_plus_share_pct": 43.1,
+      "annual_rent_to_income_pct": 26.3,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:47",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Detroit",
+      "state": "MI",
+      "year": 2023,
+      "census_place_name": "Detroit city, Michigan",
+      "census_place_geoid": "2622000",
+      "median_household_income": 39575,
+      "median_gross_rent": 1034,
+      "occupied_households": 253207,
+      "renter_households": 127280,
+      "renter_share_pct": 50.3,
+      "rent_burdened_35_plus_households": 56097,
+      "rent_burdened_35_plus_share_pct": 44.1,
+      "annual_rent_to_income_pct": 31.4,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:26",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Baltimore",
+      "state": "MD",
+      "year": 2023,
+      "census_place_name": "Baltimore city, Maryland",
+      "census_place_geoid": "2404000",
+      "median_household_income": 59623,
+      "median_gross_rent": 1290,
+      "occupied_households": 250608,
+      "renter_households": 131531,
+      "renter_share_pct": 52.5,
+      "rent_burdened_35_plus_households": 55730,
+      "rent_burdened_35_plus_share_pct": 42.4,
+      "annual_rent_to_income_pct": 26,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:24",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Milwaukee",
+      "state": "WI",
+      "year": 2023,
+      "census_place_name": "Milwaukee city, Wisconsin",
+      "census_place_geoid": "5553000",
+      "median_household_income": 51888,
+      "median_gross_rent": 1033,
+      "occupied_households": 231084,
+      "renter_households": 135194,
+      "renter_share_pct": 58.5,
+      "rent_burdened_35_plus_households": 54126,
+      "rent_burdened_35_plus_share_pct": 40,
+      "annual_rent_to_income_pct": 23.9,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:55",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Albuquerque",
+      "state": "NM",
+      "year": 2023,
+      "census_place_name": "Albuquerque city, New Mexico",
+      "census_place_geoid": "3502000",
+      "median_household_income": 65604,
+      "median_gross_rent": 1085,
+      "occupied_households": 242117,
+      "renter_households": 93192,
+      "renter_share_pct": 38.5,
+      "rent_burdened_35_plus_households": 37929,
+      "rent_burdened_35_plus_share_pct": 40.7,
+      "annual_rent_to_income_pct": 19.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:35",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Tucson",
+      "state": "AZ",
+      "year": 2023,
+      "census_place_name": "Tucson city, Arizona",
+      "census_place_geoid": "0477000",
+      "median_household_income": 54546,
+      "median_gross_rent": 1079,
+      "occupied_households": 225095,
+      "renter_households": 108821,
+      "renter_share_pct": 48.3,
+      "rent_burdened_35_plus_households": 44907,
+      "rent_burdened_35_plus_share_pct": 41.3,
+      "annual_rent_to_income_pct": 23.7,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:04",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Fresno",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Fresno city, California",
+      "census_place_geoid": "0627000",
+      "median_household_income": 66804,
+      "median_gross_rent": 1324,
+      "occupied_households": 179684,
+      "renter_households": 90449,
+      "renter_share_pct": 50.3,
+      "rent_burdened_35_plus_households": 41596,
+      "rent_burdened_35_plus_share_pct": 46,
+      "annual_rent_to_income_pct": 23.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Sacramento",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Sacramento city, California",
+      "census_place_geoid": "0664000",
+      "median_household_income": 83753,
+      "median_gross_rent": 1694,
+      "occupied_households": 199401,
+      "renter_households": 96750,
+      "renter_share_pct": 48.5,
+      "rent_burdened_35_plus_households": 41100,
+      "rent_burdened_35_plus_share_pct": 42.5,
+      "annual_rent_to_income_pct": 24.3,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Kansas City",
+      "state": "MO",
+      "year": 2023,
+      "census_place_name": "Kansas City city, Missouri",
+      "census_place_geoid": "2938000",
+      "median_household_income": 67449,
+      "median_gross_rent": 1186,
+      "occupied_households": 219486,
+      "renter_households": 99639,
+      "renter_share_pct": 45.4,
+      "rent_burdened_35_plus_households": 35427,
+      "rent_burdened_35_plus_share_pct": 35.6,
+      "annual_rent_to_income_pct": 21.1,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:29",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Mesa",
+      "state": "AZ",
+      "year": 2023,
+      "census_place_name": "Mesa city, Arizona",
+      "census_place_geoid": "0446000",
+      "median_household_income": 78779,
+      "median_gross_rent": 1478,
+      "occupied_households": 196065,
+      "renter_households": 69896,
+      "renter_share_pct": 35.6,
+      "rent_burdened_35_plus_households": 28942,
+      "rent_burdened_35_plus_share_pct": 41.4,
+      "annual_rent_to_income_pct": 22.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:04",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Atlanta",
+      "state": "GA",
+      "year": 2023,
+      "census_place_name": "Atlanta city, Georgia",
+      "census_place_geoid": "1304000",
+      "median_household_income": 81938,
+      "median_gross_rent": 1617,
+      "occupied_households": 231504,
+      "renter_households": 124378,
+      "renter_share_pct": 53.7,
+      "rent_burdened_35_plus_households": 50857,
+      "rent_burdened_35_plus_share_pct": 40.9,
+      "annual_rent_to_income_pct": 23.7,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:13",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Omaha",
+      "state": "NE",
+      "year": 2023,
+      "census_place_name": "Omaha city, Nebraska",
+      "census_place_geoid": "3137000",
+      "median_household_income": 72708,
+      "median_gross_rent": 1150,
+      "occupied_households": 199926,
+      "renter_households": 84533,
+      "renter_share_pct": 42.3,
+      "rent_burdened_35_plus_households": 31520,
+      "rent_burdened_35_plus_share_pct": 37.3,
+      "annual_rent_to_income_pct": 19,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:31",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Colorado Springs",
+      "state": "CO",
+      "year": 2023,
+      "census_place_name": "Colorado Springs city, Colorado",
+      "census_place_geoid": "0816000",
+      "median_household_income": 83198,
+      "median_gross_rent": 1562,
+      "occupied_households": 198070,
+      "renter_households": 76599,
+      "renter_share_pct": 38.7,
+      "rent_burdened_35_plus_households": 31745,
+      "rent_burdened_35_plus_share_pct": 41.4,
+      "annual_rent_to_income_pct": 22.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:08",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Raleigh",
+      "state": "NC",
+      "year": 2023,
+      "census_place_name": "Raleigh city, North Carolina",
+      "census_place_geoid": "3755000",
+      "median_household_income": 82424,
+      "median_gross_rent": 1468,
+      "occupied_households": 196924,
+      "renter_households": 96029,
+      "renter_share_pct": 48.8,
+      "rent_burdened_35_plus_households": 37452,
+      "rent_burdened_35_plus_share_pct": 39,
+      "annual_rent_to_income_pct": 21.4,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:37",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Long Beach",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Long Beach city, California",
+      "census_place_geoid": "0643000",
+      "median_household_income": 83969,
+      "median_gross_rent": 1803,
+      "occupied_households": 171309,
+      "renter_households": 101315,
+      "renter_share_pct": 59.1,
+      "rent_burdened_35_plus_households": 44412,
+      "rent_burdened_35_plus_share_pct": 43.8,
+      "annual_rent_to_income_pct": 25.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Virginia Beach",
+      "state": "VA",
+      "year": 2023,
+      "census_place_name": "Virginia Beach city, Virginia",
+      "census_place_geoid": "5182000",
+      "median_household_income": 90685,
+      "median_gross_rent": 1649,
+      "occupied_households": 179800,
+      "renter_households": 63071,
+      "renter_share_pct": 35.1,
+      "rent_burdened_35_plus_households": 25268,
+      "rent_burdened_35_plus_share_pct": 40.1,
+      "annual_rent_to_income_pct": 21.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:51",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Miami",
+      "state": "FL",
+      "year": 2023,
+      "census_place_name": "Miami city, Florida",
+      "census_place_geoid": "1245000",
+      "median_household_income": 59390,
+      "median_gross_rent": 1657,
+      "occupied_households": 190282,
+      "renter_households": 131801,
+      "renter_share_pct": 69.3,
+      "rent_burdened_35_plus_households": 65834,
+      "rent_burdened_35_plus_share_pct": 49.9,
+      "annual_rent_to_income_pct": 33.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:12",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Oakland",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Oakland city, California",
+      "census_place_geoid": "0653000",
+      "median_household_income": 97369,
+      "median_gross_rent": 1917,
+      "occupied_households": 173179,
+      "renter_households": 100947,
+      "renter_share_pct": 58.3,
+      "rent_burdened_35_plus_households": 40488,
+      "rent_burdened_35_plus_share_pct": 40.1,
+      "annual_rent_to_income_pct": 23.6,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Minneapolis",
+      "state": "MN",
+      "year": 2023,
+      "census_place_name": "Minneapolis city, Minnesota",
+      "census_place_geoid": "2743000",
+      "median_household_income": 80269,
+      "median_gross_rent": 1329,
+      "occupied_households": 188944,
+      "renter_households": 98258,
+      "renter_share_pct": 52,
+      "rent_burdened_35_plus_households": 35301,
+      "rent_burdened_35_plus_share_pct": 35.9,
+      "annual_rent_to_income_pct": 19.9,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:27",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Tulsa",
+      "state": "OK",
+      "year": 2023,
+      "census_place_name": "Tulsa city, Oklahoma",
+      "census_place_geoid": "4075000",
+      "median_household_income": 58407,
+      "median_gross_rent": 998,
+      "occupied_households": 171382,
+      "renter_households": 82241,
+      "renter_share_pct": 48,
+      "rent_burdened_35_plus_households": 29412,
+      "rent_burdened_35_plus_share_pct": 35.8,
+      "annual_rent_to_income_pct": 20.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:40",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Bakersfield",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Bakersfield city, California",
+      "census_place_geoid": "0603526",
+      "median_household_income": 77397,
+      "median_gross_rent": 1371,
+      "occupied_households": 127626,
+      "renter_households": 50859,
+      "renter_share_pct": 39.9,
+      "rent_burdened_35_plus_households": 21543,
+      "rent_burdened_35_plus_share_pct": 42.4,
+      "annual_rent_to_income_pct": 21.3,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Wichita",
+      "state": "KS",
+      "year": 2023,
+      "census_place_name": "Wichita city, Kansas",
+      "census_place_geoid": "2079000",
+      "median_household_income": 63072,
+      "median_gross_rent": 960,
+      "occupied_households": 157646,
+      "renter_households": 65525,
+      "renter_share_pct": 41.6,
+      "rent_burdened_35_plus_households": 21965,
+      "rent_burdened_35_plus_share_pct": 33.5,
+      "annual_rent_to_income_pct": 18.3,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:20",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Arlington",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "Arlington city, Texas",
+      "census_place_geoid": "4804000",
+      "median_household_income": 73519,
+      "median_gross_rent": 1389,
+      "occupied_households": 140408,
+      "renter_households": 63467,
+      "renter_share_pct": 45.2,
+      "rent_burdened_35_plus_households": 28873,
+      "rent_burdened_35_plus_share_pct": 45.5,
+      "annual_rent_to_income_pct": 22.7,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Aurora",
+      "state": "CO",
+      "year": 2023,
+      "census_place_name": "Aurora city, Colorado",
+      "census_place_geoid": "0804000",
+      "median_household_income": 84320,
+      "median_gross_rent": 1759,
+      "occupied_households": 143179,
+      "renter_households": 52603,
+      "renter_share_pct": 36.7,
+      "rent_burdened_35_plus_households": 25015,
+      "rent_burdened_35_plus_share_pct": 47.6,
+      "annual_rent_to_income_pct": 25,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:08",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Tampa",
+      "state": "FL",
+      "year": 2023,
+      "census_place_name": "Tampa city, Florida",
+      "census_place_geoid": "1271000",
+      "median_household_income": 71302,
+      "median_gross_rent": 1567,
+      "occupied_households": 160527,
+      "renter_households": 79930,
+      "renter_share_pct": 49.8,
+      "rent_burdened_35_plus_households": 33825,
+      "rent_burdened_35_plus_share_pct": 42.3,
+      "annual_rent_to_income_pct": 26.4,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:12",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "New Orleans",
+      "state": "LA",
+      "year": 2023,
+      "census_place_name": "New Orleans city, Louisiana",
+      "census_place_geoid": "2255000",
+      "median_household_income": 55339,
+      "median_gross_rent": 1211,
+      "occupied_households": 155060,
+      "renter_households": 76684,
+      "renter_share_pct": 49.5,
+      "rent_burdened_35_plus_households": 34689,
+      "rent_burdened_35_plus_share_pct": 45.2,
+      "annual_rent_to_income_pct": 26.3,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:22",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Cleveland",
+      "state": "OH",
+      "year": 2023,
+      "census_place_name": "Cleveland city, Ohio",
+      "census_place_geoid": "3916000",
+      "median_household_income": 39187,
+      "median_gross_rent": 894,
+      "occupied_households": 168652,
+      "renter_households": 99220,
+      "renter_share_pct": 58.8,
+      "rent_burdened_35_plus_households": 37907,
+      "rent_burdened_35_plus_share_pct": 38.2,
+      "annual_rent_to_income_pct": 27.4,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:39",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Honolulu",
+      "state": "HI",
+      "year": 2023,
+      "census_place_name": "Urban Honolulu CDP, Hawaii",
+      "census_place_geoid": "1571550",
+      "median_household_income": 85428,
+      "median_gross_rent": 1783,
+      "occupied_households": 136228,
+      "renter_households": 70063,
+      "renter_share_pct": 51.4,
+      "rent_burdened_35_plus_households": 28651,
+      "rent_burdened_35_plus_share_pct": 40.9,
+      "annual_rent_to_income_pct": 25,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:15",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Anaheim",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Anaheim city, California",
+      "census_place_geoid": "0602000",
+      "median_household_income": 90583,
+      "median_gross_rent": 2082,
+      "occupied_households": 105819,
+      "renter_households": 57202,
+      "renter_share_pct": 54.1,
+      "rent_burdened_35_plus_households": 28031,
+      "rent_burdened_35_plus_share_pct": 49,
+      "annual_rent_to_income_pct": 27.6,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Lexington",
+      "state": "KY",
+      "year": 2023,
+      "census_place_name": "Lexington-Fayette urban county, Kentucky",
+      "census_place_geoid": "2146027",
+      "median_household_income": 67631,
+      "median_gross_rent": 1101,
+      "occupied_households": 137803,
+      "renter_households": 63922,
+      "renter_share_pct": 46.4,
+      "rent_burdened_35_plus_households": 24545,
+      "rent_burdened_35_plus_share_pct": 38.4,
+      "annual_rent_to_income_pct": 19.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:21",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Stockton",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Stockton city, California",
+      "census_place_geoid": "0675000",
+      "median_household_income": 76851,
+      "median_gross_rent": 1495,
+      "occupied_households": 98295,
+      "renter_households": 45979,
+      "renter_share_pct": 46.8,
+      "rent_burdened_35_plus_households": 19766,
+      "rent_burdened_35_plus_share_pct": 43,
+      "annual_rent_to_income_pct": 23.3,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Corpus Christi",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "Corpus Christi city, Texas",
+      "census_place_geoid": "4817000",
+      "median_household_income": 66325,
+      "median_gross_rent": 1230,
+      "occupied_households": 118038,
+      "renter_households": 49732,
+      "renter_share_pct": 42.1,
+      "rent_burdened_35_plus_households": 20507,
+      "rent_burdened_35_plus_share_pct": 41.2,
+      "annual_rent_to_income_pct": 22.3,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Henderson",
+      "state": "NV",
+      "year": 2023,
+      "census_place_name": "Henderson city, Nevada",
+      "census_place_geoid": "3231900",
+      "median_household_income": 88654,
+      "median_gross_rent": 1750,
+      "occupied_households": 127507,
+      "renter_households": 43857,
+      "renter_share_pct": 34.4,
+      "rent_burdened_35_plus_households": 18078,
+      "rent_burdened_35_plus_share_pct": 41.2,
+      "annual_rent_to_income_pct": 23.7,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:32",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Riverside",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Riverside city, California",
+      "census_place_geoid": "0662000",
+      "median_household_income": 88575,
+      "median_gross_rent": 1812,
+      "occupied_households": 92368,
+      "renter_households": 40391,
+      "renter_share_pct": 43.7,
+      "rent_burdened_35_plus_households": 18447,
+      "rent_burdened_35_plus_share_pct": 45.7,
+      "annual_rent_to_income_pct": 24.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Newark",
+      "state": "NJ",
+      "year": 2023,
+      "census_place_name": "Newark city, New Jersey",
+      "census_place_geoid": "3451000",
+      "median_household_income": 48416,
+      "median_gross_rent": 1330,
+      "occupied_households": 113748,
+      "renter_households": 86314,
+      "renter_share_pct": 75.9,
+      "rent_burdened_35_plus_households": 40106,
+      "rent_burdened_35_plus_share_pct": 46.5,
+      "annual_rent_to_income_pct": 33,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:34",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Saint Paul",
+      "state": "MN",
+      "year": 2023,
+      "census_place_name": "St. Paul city, Minnesota",
+      "census_place_geoid": "2758000",
+      "median_household_income": 73055,
+      "median_gross_rent": 1248,
+      "occupied_households": 123067,
+      "renter_households": 57561,
+      "renter_share_pct": 46.8,
+      "rent_burdened_35_plus_households": 22439,
+      "rent_burdened_35_plus_share_pct": 39,
+      "annual_rent_to_income_pct": 20.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:27",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Santa Ana",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Santa Ana city, California",
+      "census_place_geoid": "0669000",
+      "median_household_income": 88354,
+      "median_gross_rent": 1975,
+      "occupied_households": 79691,
+      "renter_households": 44151,
+      "renter_share_pct": 55.4,
+      "rent_burdened_35_plus_households": 18969,
+      "rent_burdened_35_plus_share_pct": 43,
+      "annual_rent_to_income_pct": 26.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Cincinnati",
+      "state": "OH",
+      "year": 2023,
+      "census_place_name": "Cincinnati city, Ohio",
+      "census_place_geoid": "3915000",
+      "median_household_income": 51707,
+      "median_gross_rent": 953,
+      "occupied_households": 142810,
+      "renter_households": 87208,
+      "renter_share_pct": 61.1,
+      "rent_burdened_35_plus_households": 32682,
+      "rent_burdened_35_plus_share_pct": 37.5,
+      "annual_rent_to_income_pct": 22.1,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:39",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Irvine",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Irvine city, California",
+      "census_place_geoid": "0636770",
+      "median_household_income": 129647,
+      "median_gross_rent": 2893,
+      "occupied_households": 111979,
+      "renter_households": 62906,
+      "renter_share_pct": 56.2,
+      "rent_burdened_35_plus_households": 24938,
+      "rent_burdened_35_plus_share_pct": 39.6,
+      "annual_rent_to_income_pct": 26.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Orlando",
+      "state": "FL",
+      "year": 2023,
+      "census_place_name": "Orlando city, Florida",
+      "census_place_geoid": "1253000",
+      "median_household_income": 69268,
+      "median_gross_rent": 1650,
+      "occupied_households": 126665,
+      "renter_households": 76439,
+      "renter_share_pct": 60.3,
+      "rent_burdened_35_plus_households": 34632,
+      "rent_burdened_35_plus_share_pct": 45.3,
+      "annual_rent_to_income_pct": 28.6,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:12",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Pittsburgh",
+      "state": "PA",
+      "year": 2023,
+      "census_place_name": "Pittsburgh city, Pennsylvania",
+      "census_place_geoid": "4261000",
+      "median_household_income": 64137,
+      "median_gross_rent": 1221,
+      "occupied_households": 137593,
+      "renter_households": 72699,
+      "renter_share_pct": 52.8,
+      "rent_burdened_35_plus_households": 25934,
+      "rent_burdened_35_plus_share_pct": 35.7,
+      "annual_rent_to_income_pct": 22.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:42",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "St. Louis",
+      "state": "MO",
+      "year": 2023,
+      "census_place_name": "St. Louis city, Missouri",
+      "census_place_geoid": "2965000",
+      "median_household_income": 55279,
+      "median_gross_rent": 978,
+      "occupied_households": 144450,
+      "renter_households": 78939,
+      "renter_share_pct": 54.6,
+      "rent_burdened_35_plus_households": 27469,
+      "rent_burdened_35_plus_share_pct": 34.8,
+      "annual_rent_to_income_pct": 21.2,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:29",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Greensboro",
+      "state": "NC",
+      "year": 2023,
+      "census_place_name": "Greensboro city, North Carolina",
+      "census_place_geoid": "3728000",
+      "median_household_income": 58884,
+      "median_gross_rent": 1114,
+      "occupied_households": 121189,
+      "renter_households": 60187,
+      "renter_share_pct": 49.7,
+      "rent_burdened_35_plus_households": 24420,
+      "rent_burdened_35_plus_share_pct": 40.6,
+      "annual_rent_to_income_pct": 22.7,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:37",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Jersey City",
+      "state": "NJ",
+      "year": 2023,
+      "census_place_name": "Jersey City city, New Jersey",
+      "census_place_geoid": "3436000",
+      "median_household_income": 94813,
+      "median_gross_rent": 1902,
+      "occupied_households": 123132,
+      "renter_households": 87685,
+      "renter_share_pct": 71.2,
+      "rent_burdened_35_plus_households": 29524,
+      "rent_burdened_35_plus_share_pct": 33.7,
+      "annual_rent_to_income_pct": 24.1,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:34",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Anchorage",
+      "state": "AK",
+      "year": 2023,
+      "census_place_name": "Anchorage municipality, Alaska",
+      "census_place_geoid": "0203000",
+      "median_household_income": 98152,
+      "median_gross_rent": 1453,
+      "occupied_households": 107868,
+      "renter_households": 39117,
+      "renter_share_pct": 36.3,
+      "rent_burdened_35_plus_households": 14192,
+      "rent_burdened_35_plus_share_pct": 36.3,
+      "annual_rent_to_income_pct": 17.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:02",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Lincoln",
+      "state": "NE",
+      "year": 2023,
+      "census_place_name": "Lincoln city, Nebraska",
+      "census_place_geoid": "3128000",
+      "median_household_income": 69991,
+      "median_gross_rent": 1045,
+      "occupied_households": 120698,
+      "renter_households": 53360,
+      "renter_share_pct": 44.2,
+      "rent_burdened_35_plus_households": 19043,
+      "rent_burdened_35_plus_share_pct": 35.7,
+      "annual_rent_to_income_pct": 17.9,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:31",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Plano",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "Plano city, Texas",
+      "census_place_geoid": "4858016",
+      "median_household_income": 108649,
+      "median_gross_rent": 1792,
+      "occupied_households": 110522,
+      "renter_households": 47930,
+      "renter_share_pct": 43.4,
+      "rent_burdened_35_plus_households": 14976,
+      "rent_burdened_35_plus_share_pct": 31.2,
+      "annual_rent_to_income_pct": 19.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Durham",
+      "state": "NC",
+      "year": 2023,
+      "census_place_name": "Durham city, North Carolina",
+      "census_place_geoid": "3719000",
+      "median_household_income": 79234,
+      "median_gross_rent": 1412,
+      "occupied_households": 123318,
+      "renter_households": 59435,
+      "renter_share_pct": 48.2,
+      "rent_burdened_35_plus_households": 20258,
+      "rent_burdened_35_plus_share_pct": 34.1,
+      "annual_rent_to_income_pct": 21.4,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:37",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Buffalo",
+      "state": "NY",
+      "year": 2023,
+      "census_place_name": "Buffalo city, New York",
+      "census_place_geoid": "3611000",
+      "median_household_income": 48050,
+      "median_gross_rent": 989,
+      "occupied_households": 119548,
+      "renter_households": 68536,
+      "renter_share_pct": 57.3,
+      "rent_burdened_35_plus_households": 28724,
+      "rent_burdened_35_plus_share_pct": 41.9,
+      "annual_rent_to_income_pct": 24.7,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:36",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Chandler",
+      "state": "AZ",
+      "year": 2023,
+      "census_place_name": "Chandler city, Arizona",
+      "census_place_geoid": "0412000",
+      "median_household_income": 103691,
+      "median_gross_rent": 1806,
+      "occupied_households": 105867,
+      "renter_households": 36423,
+      "renter_share_pct": 34.4,
+      "rent_burdened_35_plus_households": 12287,
+      "rent_burdened_35_plus_share_pct": 33.7,
+      "annual_rent_to_income_pct": 20.9,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:04",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Chula Vista",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Chula Vista city, California",
+      "census_place_geoid": "0613392",
+      "median_household_income": 105173,
+      "median_gross_rent": 2122,
+      "occupied_households": 85193,
+      "renter_households": 33929,
+      "renter_share_pct": 39.8,
+      "rent_burdened_35_plus_households": 15663,
+      "rent_burdened_35_plus_share_pct": 46.2,
+      "annual_rent_to_income_pct": 24.2,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Toledo",
+      "state": "OH",
+      "year": 2023,
+      "census_place_name": "Toledo city, Ohio",
+      "census_place_geoid": "3977000",
+      "median_household_income": 47532,
+      "median_gross_rent": 880,
+      "occupied_households": 118508,
+      "renter_households": 56006,
+      "renter_share_pct": 47.3,
+      "rent_burdened_35_plus_households": 19694,
+      "rent_burdened_35_plus_share_pct": 35.2,
+      "annual_rent_to_income_pct": 22.2,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:39",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Madison",
+      "state": "WI",
+      "year": 2023,
+      "census_place_name": "Madison city, Wisconsin",
+      "census_place_geoid": "5548000",
+      "median_household_income": 76983,
+      "median_gross_rent": 1364,
+      "occupied_households": 125787,
+      "renter_households": 67119,
+      "renter_share_pct": 53.4,
+      "rent_burdened_35_plus_households": 25713,
+      "rent_burdened_35_plus_share_pct": 38.3,
+      "annual_rent_to_income_pct": 21.3,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:55",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Gilbert",
+      "state": "AZ",
+      "year": 2023,
+      "census_place_name": "Gilbert town, Arizona",
+      "census_place_geoid": "0427400",
+      "median_household_income": 121351,
+      "median_gross_rent": 2028,
+      "occupied_households": 91712,
+      "renter_households": 23959,
+      "renter_share_pct": 26.1,
+      "rent_burdened_35_plus_households": 7671,
+      "rent_burdened_35_plus_share_pct": 32,
+      "annual_rent_to_income_pct": 20.1,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:04",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Reno",
+      "state": "NV",
+      "year": 2023,
+      "census_place_name": "Reno city, Nevada",
+      "census_place_geoid": "3260600",
+      "median_household_income": 78448,
+      "median_gross_rent": 1453,
+      "occupied_households": 112061,
+      "renter_households": 56727,
+      "renter_share_pct": 50.6,
+      "rent_burdened_35_plus_households": 22219,
+      "rent_burdened_35_plus_share_pct": 39.2,
+      "annual_rent_to_income_pct": 22.2,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:32",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Fort Wayne",
+      "state": "IN",
+      "year": 2023,
+      "census_place_name": "Fort Wayne city, Indiana",
+      "census_place_geoid": "1825000",
+      "median_household_income": 60293,
+      "median_gross_rent": 959,
+      "occupied_households": 109604,
+      "renter_households": 41401,
+      "renter_share_pct": 37.8,
+      "rent_burdened_35_plus_households": 14228,
+      "rent_burdened_35_plus_share_pct": 34.4,
+      "annual_rent_to_income_pct": 19.1,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:18",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "North Las Vegas",
+      "state": "NV",
+      "year": 2023,
+      "census_place_name": "North Las Vegas city, Nevada",
+      "census_place_geoid": "3251800",
+      "median_household_income": 76772,
+      "median_gross_rent": 1605,
+      "occupied_households": 85814,
+      "renter_households": 32044,
+      "renter_share_pct": 37.3,
+      "rent_burdened_35_plus_households": 14267,
+      "rent_burdened_35_plus_share_pct": 44.5,
+      "annual_rent_to_income_pct": 25.1,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:32",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "St. Petersburg",
+      "state": "FL",
+      "year": 2023,
+      "census_place_name": "St. Petersburg city, Florida",
+      "census_place_geoid": "1263000",
+      "median_household_income": 73118,
+      "median_gross_rent": 1542,
+      "occupied_households": 116772,
+      "renter_households": 43215,
+      "renter_share_pct": 37,
+      "rent_burdened_35_plus_households": 18906,
+      "rent_burdened_35_plus_share_pct": 43.7,
+      "annual_rent_to_income_pct": 25.3,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:12",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Lubbock",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "Lubbock city, Texas",
+      "census_place_geoid": "4845000",
+      "median_household_income": 60487,
+      "median_gross_rent": 1137,
+      "occupied_households": 105259,
+      "renter_households": 51785,
+      "renter_share_pct": 49.2,
+      "rent_burdened_35_plus_households": 21647,
+      "rent_burdened_35_plus_share_pct": 41.8,
+      "annual_rent_to_income_pct": 22.6,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Irving",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "Irving city, Texas",
+      "census_place_geoid": "4837000",
+      "median_household_income": 79641,
+      "median_gross_rent": 1517,
+      "occupied_households": 94252,
+      "renter_households": 58148,
+      "renter_share_pct": 61.7,
+      "rent_burdened_35_plus_households": 18916,
+      "rent_burdened_35_plus_share_pct": 32.5,
+      "annual_rent_to_income_pct": 22.9,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Laredo",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "Laredo city, Texas",
+      "census_place_geoid": "4841464",
+      "median_household_income": 63264,
+      "median_gross_rent": 1001,
+      "occupied_households": 76259,
+      "renter_households": 27959,
+      "renter_share_pct": 36.7,
+      "rent_burdened_35_plus_households": 10847,
+      "rent_burdened_35_plus_share_pct": 38.8,
+      "annual_rent_to_income_pct": 19,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Winston-Salem",
+      "state": "NC",
+      "year": 2023,
+      "census_place_name": "Winston-Salem city, North Carolina",
+      "census_place_geoid": "3775000",
+      "median_household_income": 57673,
+      "median_gross_rent": 1033,
+      "occupied_households": 100278,
+      "renter_households": 45479,
+      "renter_share_pct": 45.4,
+      "rent_burdened_35_plus_households": 17298,
+      "rent_burdened_35_plus_share_pct": 38,
+      "annual_rent_to_income_pct": 21.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:37",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Chesapeake",
+      "state": "VA",
+      "year": 2023,
+      "census_place_name": "Chesapeake city, Virginia",
+      "census_place_geoid": "5116000",
+      "median_household_income": 94189,
+      "median_gross_rent": 1523,
+      "occupied_households": 92361,
+      "renter_households": 24221,
+      "renter_share_pct": 26.2,
+      "rent_burdened_35_plus_households": 10706,
+      "rent_burdened_35_plus_share_pct": 44.2,
+      "annual_rent_to_income_pct": 19.4,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:51",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Glendale",
+      "state": "AZ",
+      "year": 2023,
+      "census_place_name": "Glendale city, Arizona",
+      "census_place_geoid": "0427820",
+      "median_household_income": 70139,
+      "median_gross_rent": 1397,
+      "occupied_households": 86733,
+      "renter_households": 36748,
+      "renter_share_pct": 42.4,
+      "rent_burdened_35_plus_households": 17007,
+      "rent_burdened_35_plus_share_pct": 46.3,
+      "annual_rent_to_income_pct": 23.9,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:04",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Garland",
+      "state": "TX",
+      "year": 2023,
+      "census_place_name": "Garland city, Texas",
+      "census_place_geoid": "4829000",
+      "median_household_income": 74717,
+      "median_gross_rent": 1525,
+      "occupied_households": 80811,
+      "renter_households": 31002,
+      "renter_share_pct": 38.4,
+      "rent_burdened_35_plus_households": 13293,
+      "rent_burdened_35_plus_share_pct": 42.9,
+      "annual_rent_to_income_pct": 24.5,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:48",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Scottsdale",
+      "state": "AZ",
+      "year": 2023,
+      "census_place_name": "Scottsdale city, Arizona",
+      "census_place_geoid": "0465000",
+      "median_household_income": 107372,
+      "median_gross_rent": 1910,
+      "occupied_households": 117787,
+      "renter_households": 38202,
+      "renter_share_pct": 32.4,
+      "rent_burdened_35_plus_households": 13619,
+      "rent_burdened_35_plus_share_pct": 35.6,
+      "annual_rent_to_income_pct": 21.3,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:04",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Norfolk",
+      "state": "VA",
+      "year": 2023,
+      "census_place_name": "Norfolk city, Virginia",
+      "census_place_geoid": "5157000",
+      "median_household_income": 64017,
+      "median_gross_rent": 1246,
+      "occupied_households": 94457,
+      "renter_households": 51298,
+      "renter_share_pct": 54.3,
+      "rent_burdened_35_plus_households": 21603,
+      "rent_burdened_35_plus_share_pct": 42.1,
+      "annual_rent_to_income_pct": 23.4,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:51",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Boise",
+      "state": "ID",
+      "year": 2023,
+      "census_place_name": "Boise City city, Idaho",
+      "census_place_geoid": "1608830",
+      "median_household_income": 81308,
+      "median_gross_rent": 1359,
+      "occupied_households": 99616,
+      "renter_households": 36811,
+      "renter_share_pct": 37,
+      "rent_burdened_35_plus_households": 12828,
+      "rent_burdened_35_plus_share_pct": 34.8,
+      "annual_rent_to_income_pct": 20.1,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:16",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Fremont",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Fremont city, California",
+      "census_place_geoid": "0626000",
+      "median_household_income": 176350,
+      "median_gross_rent": 2905,
+      "occupied_households": 77019,
+      "renter_households": 30635,
+      "renter_share_pct": 39.8,
+      "rent_burdened_35_plus_households": 9989,
+      "rent_burdened_35_plus_share_pct": 32.6,
+      "annual_rent_to_income_pct": 19.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Spokane",
+      "state": "WA",
+      "year": 2023,
+      "census_place_name": "Spokane city, Washington",
+      "census_place_geoid": "5367000",
+      "median_household_income": 65745,
+      "median_gross_rent": 1141,
+      "occupied_households": 96602,
+      "renter_households": 40273,
+      "renter_share_pct": 41.7,
+      "rent_burdened_35_plus_households": 16808,
+      "rent_burdened_35_plus_share_pct": 41.7,
+      "annual_rent_to_income_pct": 20.8,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:53",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Santa Clarita",
+      "state": "CA",
+      "year": 2023,
+      "census_place_name": "Santa Clarita city, California",
+      "census_place_geoid": "0669088",
+      "median_household_income": 119926,
+      "median_gross_rent": 2486,
+      "occupied_households": 75281,
+      "renter_households": 21061,
+      "renter_share_pct": 28,
+      "rent_burdened_35_plus_households": 10430,
+      "rent_burdened_35_plus_share_pct": 49.5,
+      "annual_rent_to_income_pct": 24.9,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:06",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Baton Rouge",
+      "state": "LA",
+      "year": 2023,
+      "census_place_name": "Baton Rouge city, Louisiana",
+      "census_place_geoid": "2205000",
+      "median_household_income": 49944,
+      "median_gross_rent": 1044,
+      "occupied_households": 87607,
+      "renter_households": 46533,
+      "renter_share_pct": 53.1,
+      "rent_burdened_35_plus_households": 20980,
+      "rent_burdened_35_plus_share_pct": 45.1,
+      "annual_rent_to_income_pct": 25.1,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:22",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    },
+    {
+      "city": "Richmond",
+      "state": "VA",
+      "year": 2023,
+      "census_place_name": "Richmond city, Virginia",
+      "census_place_geoid": "5167000",
+      "median_household_income": 62671,
+      "median_gross_rent": 1314,
+      "occupied_households": 102145,
+      "renter_households": 57759,
+      "renter_share_pct": 56.5,
+      "rent_burdened_35_plus_households": 23952,
+      "rent_burdened_35_plus_share_pct": 41.5,
+      "annual_rent_to_income_pct": 25.2,
+      "sources": [
+        "https://api.census.gov/data/2023/acs/acs5?get=NAME,B19013_001E,B25064_001E,B25003_001E,B25003_003E,B25070_008E,B25070_009E,B25070_010E&for=place:*&in=state:51",
+        "https://www.census.gov/programs-surveys/acs/data/data-via-api.html"
+      ],
+      "missing_reason": null
+    }
+  ]
+}

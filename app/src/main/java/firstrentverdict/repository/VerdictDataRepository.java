@@ -21,6 +21,8 @@ public class VerdictDataRepository {
     private final Map<String, StateLawData.StateLaw> stateLaws = new ConcurrentHashMap<>();
     private final Map<String, CityCoordinates.CityCoordinate> cityCoordinates = new ConcurrentHashMap<>();
     private final Map<String, CityInsightData.CityInsight> cityInsights = new ConcurrentHashMap<>();
+    private final Map<String, CityEconomicFactsData.CityEconomicFact> cityEconomicFacts = new ConcurrentHashMap<>();
+    private final Map<String, StateMigrationFlowsData.StateFlow> stateMigrationFlows = new ConcurrentHashMap<>();
 
     // Valid cities set
     private final Map<String, CitiesData.CityEntry> validCities = new ConcurrentHashMap<>();
@@ -70,6 +72,16 @@ public class VerdictDataRepository {
         cityInsights.put(generateKey(insight.city(), insight.state()), insight);
     }
 
+    public void addCityEconomicFact(CityEconomicFactsData.CityEconomicFact fact) {
+        cityEconomicFacts.put(generateKey(fact.city(), fact.state()), fact);
+    }
+
+    public void addStateMigrationFlow(StateMigrationFlowsData.StateFlow flow) {
+        if (flow.toState() != null) {
+            stateMigrationFlows.put(flow.toState().toUpperCase(), flow);
+        }
+    }
+
     // Accessors
     public Optional<RentData.CityRent> getRent(String city, String state) {
         return Optional.ofNullable(rentMap.get(generateKey(city, state)));
@@ -113,5 +125,16 @@ public class VerdictDataRepository {
 
     public Optional<CityInsightData.CityInsight> getCityInsight(String city, String state) {
         return Optional.ofNullable(cityInsights.get(generateKey(city, state)));
+    }
+
+    public Optional<CityEconomicFactsData.CityEconomicFact> getCityEconomicFact(String city, String state) {
+        return Optional.ofNullable(cityEconomicFacts.get(generateKey(city, state)));
+    }
+
+    public Optional<StateMigrationFlowsData.StateFlow> getStateMigrationFlow(String toState) {
+        if (toState == null) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(stateMigrationFlows.get(toState.toUpperCase()));
     }
 }

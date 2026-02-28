@@ -24,7 +24,7 @@
             <!-- Email Card -->
             <div style="background: var(--bg-surface); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
                 <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                    <div style="font-size: 1.5rem;">?벁</div>
+                    <div style="font-size: 1.5rem;">Email</div>
                     <div>
                         <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Email</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 1rem;">For general inquiries, feedback, or support.</p>
@@ -38,7 +38,7 @@
             <!-- Data Corrections Card -->
             <div style="background: var(--bg-surface); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
                 <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                    <div style="font-size: 1.5rem;">📊</div>
+                    <div style="font-size: 1.5rem;">Data</div>
                     <div>
                         <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Data Corrections</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 1rem;">
@@ -47,7 +47,7 @@
                         </p>
                         <a href="mailto:spainhyeok@gmail.com?subject=Data%20Correction%20Request" 
                            style="color: var(--text-primary); font-weight: 600; text-decoration: underline;">
-                            Submit a Correction ??
+                            Submit a Correction ->
                         </a>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
             <!-- Partnership Card -->
             <div style="background: var(--bg-surface); padding: 2rem; border-radius: 12px; border: 1px solid var(--border-subtle);">
                 <div style="display: flex; align-items: flex-start; gap: 1rem;">
-                    <div style="font-size: 1.5rem;">?쩃</div>
+                    <div style="font-size: 1.5rem;">Partner</div>
                     <div>
                         <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">Partnerships</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 1rem;">
@@ -68,7 +68,7 @@
                            data-track-category="monetization"
                            data-track-label="contact_partnership_mailto"
                            style="color: var(--text-primary); font-weight: 600; text-decoration: underline;">
-                            Explore Partnership ??
+                            Explore Partnership ->
                         </a>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
         <!-- Location Info -->
         <div style="text-align: center; margin-bottom: 4rem;">
             <p style="font-size: 0.9rem; color: var(--text-tertiary);">
-                ?뙊 Based in <strong>Seoul, Republic of Korea</strong> 쨌 Serving Users Worldwide
+                Based in <strong>Seoul, Republic of Korea</strong> | Serving Users Worldwide
             </p>
         </div>
 

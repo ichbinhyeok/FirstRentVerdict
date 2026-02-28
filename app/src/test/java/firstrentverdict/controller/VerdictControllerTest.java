@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -29,6 +31,20 @@ class VerdictControllerTest {
     }
 
     @Test
+    void testHomeRedirectIsPermanent() throws Exception {
+        mockMvc.perform(get("/"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/RentVerdict/"));
+    }
+
+    @Test
+    void testDottedSlugRedirectsToCanonicalSlug() throws Exception {
+        mockMvc.perform(get("/RentVerdict/verdict/st.-louis-mo"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/RentVerdict/verdict/st-louis-mo"));
+    }
+
+    @Test
     void testVerdictSubmission_Approved() throws Exception {
         // High cash scenario for NYC
         mockMvc.perform(post("/RentVerdict/verdict")
@@ -41,6 +57,125 @@ class VerdictControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("pages/result"))
                 .andExpect(model().attribute("result", notNullValue()));
+    }
+
+    @Test
+    void testVerdictSubmissionRejectsInvalidFormRange() throws Exception {
+        mockMvc.perform(post("/RentVerdict/verdict")
+                .param("cityState", "New York|NY")
+                .param("monthlyRent", "-1000")
+                .param("availableCash", "5000")
+                .param("hasPet", "false")
+                .param("isLocalMove", "true")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testVerdictSubmissionRejectsUnsupportedCity() throws Exception {
+        mockMvc.perform(post("/RentVerdict/verdict")
+                .param("cityState", "Fake City|NY")
+                .param("monthlyRent", "3000")
+                .param("availableCash", "5000")
+                .param("hasPet", "false")
+                .param("isLocalMove", "true")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testResultPageContainsNoindexMetaTag() throws Exception {
+        mockMvc.perform(post("/RentVerdict/verdict")
+                .param("cityState", "New York|NY")
+                .param("monthlyRent", "3000")
+                .param("availableCash", "15000")
+                .param("hasPet", "false")
+                .param("isLocalMove", "true")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("<meta name=\"robots\" content=\"noindex, nofollow\">")));
+    }
+
+    @Test
+    void testCompareRouteIsGone() throws Exception {
+        mockMvc.perform(get("/RentVerdict/verdict/compare/austin-tx-vs-new-york-ny"))
+                .andExpect(status().isGone());
+    }
+
+    @Test
+    void testSitemapExcludesCompareAndUsesCanonicalStLouisSlug() throws Exception {
+        mockMvc.perform(get("/sitemap.xml"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("/RentVerdict/verdict/st-louis-mo")))
+                .andExpect(content().string(not(containsString("/RentVerdict/verdict/st.-louis-mo"))))
+                .andExpect(content().string(not(containsString("/verdict/compare/"))));
+    }
+
+    @Test
+    void testSitemapHasNoSelfRelocationPair() throws Exception {
+        mockMvc.perform(get("/sitemap.xml"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(not(containsString("/RentVerdict/verdict/moving-from/new-york-ny/to/new-york-ny"))));
+    }
+
+    @Test
+    void testRobotsServesSitemapDirective() throws Exception {
+        mockMvc.perform(get("/robots.txt"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Sitemap: ")));
+    }
+
+    @Test
+    void testSimulateRejectsUnsupportedCity() throws Exception {
+        mockMvc.perform(post("/RentVerdict/api/simulate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                        {
+                          "city":"Fake City",
+                          "state":"NY",
+                          "monthlyRent":3000,
+                          "availableCash":12000,
+                          "hasPet":false,
+                          "isLocalMove":true,
+                          "creditTier":"GOOD"
+                        }
+                        """))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testSimulateRequiresCreditTier() throws Exception {
+        mockMvc.perform(post("/RentVerdict/api/simulate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                        {
+                          "city":"New York",
+                          "state":"NY",
+                          "monthlyRent":3000,
+                          "availableCash":12000,
+                          "hasPet":false,
+                          "isLocalMove":true
+                        }
+                        """))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void testLongDistanceSimulateRequiresOrigin() throws Exception {
+        mockMvc.perform(post("/RentVerdict/api/simulate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                        {
+                          "city":"New York",
+                          "state":"NY",
+                          "monthlyRent":3000,
+                          "availableCash":12000,
+                          "hasPet":false,
+                          "isLocalMove":false,
+                          "creditTier":"GOOD"
+                        }
+                        """))
+                .andExpect(status().isBadRequest());
     }
 
     @Test

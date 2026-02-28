@@ -1,0 +1,4598 @@
+{
+  "version": "2026-02-28",
+  "dataset": "IRS SOI State-to-State Migration 2021-2022",
+  "source_url": "https://www.irs.gov/pub/irs-soi/stateinflow2122.csv",
+  "notes": "Top inbound origin states by number of tax returns for each destination state.",
+  "states": [
+    {
+      "to_state": "AK",
+      "total_inbound_returns": 14307,
+      "top_origins": [
+        {
+          "from_state": "WA",
+          "returns": 1365,
+          "exemptions": 2444,
+          "agi_thousands": 103542,
+          "share_pct": 9.5
+        },
+        {
+          "from_state": "CA",
+          "returns": 1336,
+          "exemptions": 2296,
+          "agi_thousands": 90403,
+          "share_pct": 9.3
+        },
+        {
+          "from_state": "TX",
+          "returns": 1157,
+          "exemptions": 2379,
+          "agi_thousands": 82539,
+          "share_pct": 8.1
+        },
+        {
+          "from_state": "FL",
+          "returns": 715,
+          "exemptions": 1303,
+          "agi_thousands": 43641,
+          "share_pct": 5
+        },
+        {
+          "from_state": "AZ",
+          "returns": 637,
+          "exemptions": 1199,
+          "agi_thousands": 46025,
+          "share_pct": 4.5
+        },
+        {
+          "from_state": "OR",
+          "returns": 634,
+          "exemptions": 1070,
+          "agi_thousands": 38007,
+          "share_pct": 4.4
+        },
+        {
+          "from_state": "CO",
+          "returns": 618,
+          "exemptions": 1130,
+          "agi_thousands": 44001,
+          "share_pct": 4.3
+        },
+        {
+          "from_state": "GA",
+          "returns": 463,
+          "exemptions": 978,
+          "agi_thousands": 27339,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "NC",
+          "returns": 454,
+          "exemptions": 947,
+          "agi_thousands": 26757,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "VA",
+          "returns": 394,
+          "exemptions": 754,
+          "agi_thousands": 29879,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "UT",
+          "returns": 346,
+          "exemptions": 683,
+          "agi_thousands": 20796,
+          "share_pct": 2.4
+        },
+        {
+          "from_state": "ID",
+          "returns": 319,
+          "exemptions": 549,
+          "agi_thousands": 19011,
+          "share_pct": 2.2
+        }
+      ]
+    },
+    {
+      "to_state": "AL",
+      "total_inbound_returns": 55653,
+      "top_origins": [
+        {
+          "from_state": "GA",
+          "returns": 8895,
+          "exemptions": 17200,
+          "agi_thousands": 603840,
+          "share_pct": 16
+        },
+        {
+          "from_state": "FL",
+          "returns": 8102,
+          "exemptions": 15094,
+          "agi_thousands": 545215,
+          "share_pct": 14.6
+        },
+        {
+          "from_state": "TN",
+          "returns": 4776,
+          "exemptions": 8923,
+          "agi_thousands": 336290,
+          "share_pct": 8.6
+        },
+        {
+          "from_state": "TX",
+          "returns": 3925,
+          "exemptions": 7799,
+          "agi_thousands": 286378,
+          "share_pct": 7.1
+        },
+        {
+          "from_state": "MS",
+          "returns": 3014,
+          "exemptions": 5669,
+          "agi_thousands": 170188,
+          "share_pct": 5.4
+        },
+        {
+          "from_state": "CA",
+          "returns": 2768,
+          "exemptions": 5422,
+          "agi_thousands": 253786,
+          "share_pct": 5
+        },
+        {
+          "from_state": "NC",
+          "returns": 1739,
+          "exemptions": 3381,
+          "agi_thousands": 125813,
+          "share_pct": 3.1
+        },
+        {
+          "from_state": "VA",
+          "returns": 1540,
+          "exemptions": 3274,
+          "agi_thousands": 150479,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "LA",
+          "returns": 1522,
+          "exemptions": 2930,
+          "agi_thousands": 121355,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "IL",
+          "returns": 1452,
+          "exemptions": 2770,
+          "agi_thousands": 113261,
+          "share_pct": 2.6
+        },
+        {
+          "from_state": "CO",
+          "returns": 1275,
+          "exemptions": 2474,
+          "agi_thousands": 108600,
+          "share_pct": 2.3
+        },
+        {
+          "from_state": "NY",
+          "returns": 1128,
+          "exemptions": 2035,
+          "agi_thousands": 73440,
+          "share_pct": 2
+        }
+      ]
+    },
+    {
+      "to_state": "AR",
+      "total_inbound_returns": 37684,
+      "top_origins": [
+        {
+          "from_state": "TX",
+          "returns": 7182,
+          "exemptions": 13568,
+          "agi_thousands": 492380,
+          "share_pct": 19.1
+        },
+        {
+          "from_state": "CA",
+          "returns": 3311,
+          "exemptions": 6728,
+          "agi_thousands": 262375,
+          "share_pct": 8.8
+        },
+        {
+          "from_state": "MO",
+          "returns": 3157,
+          "exemptions": 5859,
+          "agi_thousands": 165310,
+          "share_pct": 8.4
+        },
+        {
+          "from_state": "OK",
+          "returns": 2774,
+          "exemptions": 5260,
+          "agi_thousands": 129090,
+          "share_pct": 7.4
+        },
+        {
+          "from_state": "TN",
+          "returns": 1970,
+          "exemptions": 3696,
+          "agi_thousands": 116940,
+          "share_pct": 5.2
+        },
+        {
+          "from_state": "FL",
+          "returns": 1818,
+          "exemptions": 3312,
+          "agi_thousands": 110595,
+          "share_pct": 4.8
+        },
+        {
+          "from_state": "LA",
+          "returns": 1490,
+          "exemptions": 2872,
+          "agi_thousands": 88828,
+          "share_pct": 4
+        },
+        {
+          "from_state": "CO",
+          "returns": 1324,
+          "exemptions": 2574,
+          "agi_thousands": 105360,
+          "share_pct": 3.5
+        },
+        {
+          "from_state": "IL",
+          "returns": 1197,
+          "exemptions": 2221,
+          "agi_thousands": 91750,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "AZ",
+          "returns": 1009,
+          "exemptions": 1951,
+          "agi_thousands": 54846,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "MS",
+          "returns": 1005,
+          "exemptions": 1903,
+          "agi_thousands": 49227,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "GA",
+          "returns": 797,
+          "exemptions": 1500,
+          "agi_thousands": 59186,
+          "share_pct": 2.1
+        }
+      ]
+    },
+    {
+      "to_state": "AZ",
+      "total_inbound_returns": 130273,
+      "top_origins": [
+        {
+          "from_state": "CA",
+          "returns": 32864,
+          "exemptions": 57857,
+          "agi_thousands": 3299502,
+          "share_pct": 25.2
+        },
+        {
+          "from_state": "WA",
+          "returns": 9204,
+          "exemptions": 16600,
+          "agi_thousands": 1068058,
+          "share_pct": 7.1
+        },
+        {
+          "from_state": "TX",
+          "returns": 8008,
+          "exemptions": 14401,
+          "agi_thousands": 724601,
+          "share_pct": 6.1
+        },
+        {
+          "from_state": "IL",
+          "returns": 6353,
+          "exemptions": 10558,
+          "agi_thousands": 746742,
+          "share_pct": 4.9
+        },
+        {
+          "from_state": "CO",
+          "returns": 6230,
+          "exemptions": 10295,
+          "agi_thousands": 657465,
+          "share_pct": 4.8
+        },
+        {
+          "from_state": "OR",
+          "returns": 4433,
+          "exemptions": 7549,
+          "agi_thousands": 484817,
+          "share_pct": 3.4
+        },
+        {
+          "from_state": "NV",
+          "returns": 4333,
+          "exemptions": 7617,
+          "agi_thousands": 354512,
+          "share_pct": 3.3
+        },
+        {
+          "from_state": "FL",
+          "returns": 4239,
+          "exemptions": 6837,
+          "agi_thousands": 381638,
+          "share_pct": 3.3
+        },
+        {
+          "from_state": "NM",
+          "returns": 3254,
+          "exemptions": 5727,
+          "agi_thousands": 204483,
+          "share_pct": 2.5
+        },
+        {
+          "from_state": "NY",
+          "returns": 3226,
+          "exemptions": 4964,
+          "agi_thousands": 299422,
+          "share_pct": 2.5
+        },
+        {
+          "from_state": "MN",
+          "returns": 3171,
+          "exemptions": 5181,
+          "agi_thousands": 426823,
+          "share_pct": 2.4
+        },
+        {
+          "from_state": "UT",
+          "returns": 3144,
+          "exemptions": 6065,
+          "agi_thousands": 271178,
+          "share_pct": 2.4
+        }
+      ]
+    },
+    {
+      "to_state": "CA",
+      "total_inbound_returns": 254935,
+      "top_origins": [
+        {
+          "from_state": "TX",
+          "returns": 23316,
+          "exemptions": 39032,
+          "agi_thousands": 2476091,
+          "share_pct": 9.1
+        },
+        {
+          "from_state": "NY",
+          "returns": 19708,
+          "exemptions": 26821,
+          "agi_thousands": 3386400,
+          "share_pct": 7.7
+        },
+        {
+          "from_state": "WA",
+          "returns": 18275,
+          "exemptions": 29096,
+          "agi_thousands": 2972701,
+          "share_pct": 7.2
+        },
+        {
+          "from_state": "AZ",
+          "returns": 16115,
+          "exemptions": 25677,
+          "agi_thousands": 1240884,
+          "share_pct": 6.3
+        },
+        {
+          "from_state": "NV",
+          "returns": 14518,
+          "exemptions": 23983,
+          "agi_thousands": 1249124,
+          "share_pct": 5.7
+        },
+        {
+          "from_state": "FL",
+          "returns": 13064,
+          "exemptions": 19928,
+          "agi_thousands": 1580066,
+          "share_pct": 5.1
+        },
+        {
+          "from_state": "IL",
+          "returns": 11280,
+          "exemptions": 16642,
+          "agi_thousands": 1440823,
+          "share_pct": 4.4
+        },
+        {
+          "from_state": "OR",
+          "returns": 10550,
+          "exemptions": 15806,
+          "agi_thousands": 981853,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "CO",
+          "returns": 9895,
+          "exemptions": 14929,
+          "agi_thousands": 1046599,
+          "share_pct": 3.9
+        },
+        {
+          "from_state": "VA",
+          "returns": 8352,
+          "exemptions": 14156,
+          "agi_thousands": 815307,
+          "share_pct": 3.3
+        },
+        {
+          "from_state": "MA",
+          "returns": 8334,
+          "exemptions": 11233,
+          "agi_thousands": 1074203,
+          "share_pct": 3.3
+        },
+        {
+          "from_state": "PA",
+          "returns": 6787,
+          "exemptions": 9522,
+          "agi_thousands": 730674,
+          "share_pct": 2.7
+        }
+      ]
+    },
+    {
+      "to_state": "CO",
+      "total_inbound_returns": 124805,
+      "top_origins": [
+        {
+          "from_state": "CA",
+          "returns": 15585,
+          "exemptions": 24864,
+          "agi_thousands": 2012297,
+          "share_pct": 12.5
+        },
+        {
+          "from_state": "TX",
+          "returns": 14499,
+          "exemptions": 25224,
+          "agi_thousands": 1450560,
+          "share_pct": 11.6
+        },
+        {
+          "from_state": "FL",
+          "returns": 8124,
+          "exemptions": 12508,
+          "agi_thousands": 811198,
+          "share_pct": 6.5
+        },
+        {
+          "from_state": "AZ",
+          "returns": 5950,
+          "exemptions": 9729,
+          "agi_thousands": 492160,
+          "share_pct": 4.8
+        },
+        {
+          "from_state": "IL",
+          "returns": 5473,
+          "exemptions": 8015,
+          "agi_thousands": 859286,
+          "share_pct": 4.4
+        },
+        {
+          "from_state": "NY",
+          "returns": 4420,
+          "exemptions": 6093,
+          "agi_thousands": 667857,
+          "share_pct": 3.5
+        },
+        {
+          "from_state": "WA",
+          "returns": 3879,
+          "exemptions": 6356,
+          "agi_thousands": 533713,
+          "share_pct": 3.1
+        },
+        {
+          "from_state": "VA",
+          "returns": 3191,
+          "exemptions": 5256,
+          "agi_thousands": 335469,
+          "share_pct": 2.6
+        },
+        {
+          "from_state": "GA",
+          "returns": 3087,
+          "exemptions": 5195,
+          "agi_thousands": 256109,
+          "share_pct": 2.5
+        },
+        {
+          "from_state": "NC",
+          "returns": 2970,
+          "exemptions": 4909,
+          "agi_thousands": 231989,
+          "share_pct": 2.4
+        },
+        {
+          "from_state": "OH",
+          "returns": 2771,
+          "exemptions": 4079,
+          "agi_thousands": 230350,
+          "share_pct": 2.2
+        },
+        {
+          "from_state": "MO",
+          "returns": 2658,
+          "exemptions": 4148,
+          "agi_thousands": 215273,
+          "share_pct": 2.1
+        }
+      ]
+    },
+    {
+      "to_state": "CT",
+      "total_inbound_returns": 49104,
+      "top_origins": [
+        {
+          "from_state": "NY",
+          "returns": 17311,
+          "exemptions": 30993,
+          "agi_thousands": 3194381,
+          "share_pct": 35.3
+        },
+        {
+          "from_state": "MA",
+          "returns": 6184,
+          "exemptions": 9477,
+          "agi_thousands": 596592,
+          "share_pct": 12.6
+        },
+        {
+          "from_state": "FL",
+          "returns": 3945,
+          "exemptions": 6296,
+          "agi_thousands": 546128,
+          "share_pct": 8
+        },
+        {
+          "from_state": "CA",
+          "returns": 2320,
+          "exemptions": 3877,
+          "agi_thousands": 424068,
+          "share_pct": 4.7
+        },
+        {
+          "from_state": "NJ",
+          "returns": 2208,
+          "exemptions": 3770,
+          "agi_thousands": 421216,
+          "share_pct": 4.5
+        },
+        {
+          "from_state": "RI",
+          "returns": 1882,
+          "exemptions": 3079,
+          "agi_thousands": 137167,
+          "share_pct": 3.8
+        },
+        {
+          "from_state": "PA",
+          "returns": 1416,
+          "exemptions": 2261,
+          "agi_thousands": 145770,
+          "share_pct": 2.9
+        },
+        {
+          "from_state": "TX",
+          "returns": 1285,
+          "exemptions": 2307,
+          "agi_thousands": 150750,
+          "share_pct": 2.6
+        },
+        {
+          "from_state": "NC",
+          "returns": 1126,
+          "exemptions": 1844,
+          "agi_thousands": 99197,
+          "share_pct": 2.3
+        },
+        {
+          "from_state": "VA",
+          "returns": 1017,
+          "exemptions": 1730,
+          "agi_thousands": 113473,
+          "share_pct": 2.1
+        },
+        {
+          "from_state": "GA",
+          "returns": 770,
+          "exemptions": 1255,
+          "agi_thousands": 62491,
+          "share_pct": 1.6
+        },
+        {
+          "from_state": "SC",
+          "returns": 730,
+          "exemptions": 1219,
+          "agi_thousands": 52910,
+          "share_pct": 1.5
+        }
+      ]
+    },
+    {
+      "to_state": "DC",
+      "total_inbound_returns": 30491,
+      "top_origins": [
+        {
+          "from_state": "MD",
+          "returns": 7218,
+          "exemptions": 10389,
+          "agi_thousands": 660896,
+          "share_pct": 23.7
+        },
+        {
+          "from_state": "VA",
+          "returns": 5323,
+          "exemptions": 6399,
+          "agi_thousands": 534664,
+          "share_pct": 17.5
+        },
+        {
+          "from_state": "NY",
+          "returns": 2140,
+          "exemptions": 2522,
+          "agi_thousands": 291020,
+          "share_pct": 7
+        },
+        {
+          "from_state": "CA",
+          "returns": 1931,
+          "exemptions": 2407,
+          "agi_thousands": 300833,
+          "share_pct": 6.3
+        },
+        {
+          "from_state": "FL",
+          "returns": 1334,
+          "exemptions": 1704,
+          "agi_thousands": 138746,
+          "share_pct": 4.4
+        },
+        {
+          "from_state": "MA",
+          "returns": 1082,
+          "exemptions": 1267,
+          "agi_thousands": 112060,
+          "share_pct": 3.5
+        },
+        {
+          "from_state": "PA",
+          "returns": 1081,
+          "exemptions": 1238,
+          "agi_thousands": 93130,
+          "share_pct": 3.5
+        },
+        {
+          "from_state": "TX",
+          "returns": 1022,
+          "exemptions": 1331,
+          "agi_thousands": 109440,
+          "share_pct": 3.4
+        },
+        {
+          "from_state": "NC",
+          "returns": 962,
+          "exemptions": 1186,
+          "agi_thousands": 70283,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "NJ",
+          "returns": 827,
+          "exemptions": 953,
+          "agi_thousands": 78390,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "IL",
+          "returns": 767,
+          "exemptions": 892,
+          "agi_thousands": 79570,
+          "share_pct": 2.5
+        },
+        {
+          "from_state": "GA",
+          "returns": 728,
+          "exemptions": 885,
+          "agi_thousands": 58762,
+          "share_pct": 2.4
+        }
+      ]
+    },
+    {
+      "to_state": "DE",
+      "total_inbound_returns": 22232,
+      "top_origins": [
+        {
+          "from_state": "PA",
+          "returns": 6256,
+          "exemptions": 11036,
+          "agi_thousands": 525571,
+          "share_pct": 28.1
+        },
+        {
+          "from_state": "MD",
+          "returns": 4013,
+          "exemptions": 6803,
+          "agi_thousands": 419494,
+          "share_pct": 18.1
+        },
+        {
+          "from_state": "NJ",
+          "returns": 2586,
+          "exemptions": 4532,
+          "agi_thousands": 256164,
+          "share_pct": 11.6
+        },
+        {
+          "from_state": "NY",
+          "returns": 1974,
+          "exemptions": 3439,
+          "agi_thousands": 186998,
+          "share_pct": 8.9
+        },
+        {
+          "from_state": "VA",
+          "returns": 1067,
+          "exemptions": 1879,
+          "agi_thousands": 155957,
+          "share_pct": 4.8
+        },
+        {
+          "from_state": "FL",
+          "returns": 983,
+          "exemptions": 1672,
+          "agi_thousands": 83485,
+          "share_pct": 4.4
+        },
+        {
+          "from_state": "CA",
+          "returns": 574,
+          "exemptions": 968,
+          "agi_thousands": 67397,
+          "share_pct": 2.6
+        },
+        {
+          "from_state": "TX",
+          "returns": 491,
+          "exemptions": 892,
+          "agi_thousands": 41745,
+          "share_pct": 2.2
+        },
+        {
+          "from_state": "NC",
+          "returns": 484,
+          "exemptions": 809,
+          "agi_thousands": 33249,
+          "share_pct": 2.2
+        },
+        {
+          "from_state": "GA",
+          "returns": 314,
+          "exemptions": 551,
+          "agi_thousands": 20837,
+          "share_pct": 1.4
+        },
+        {
+          "from_state": "MA",
+          "returns": 268,
+          "exemptions": 408,
+          "agi_thousands": 35507,
+          "share_pct": 1.2
+        },
+        {
+          "from_state": "CT",
+          "returns": 265,
+          "exemptions": 448,
+          "agi_thousands": 32770,
+          "share_pct": 1.2
+        }
+      ]
+    },
+    {
+      "to_state": "FL",
+      "total_inbound_returns": 398307,
+      "top_origins": [
+        {
+          "from_state": "NY",
+          "returns": 51967,
+          "exemptions": 88344,
+          "agi_thousands": 9504484,
+          "share_pct": 13
+        },
+        {
+          "from_state": "GA",
+          "returns": 24383,
+          "exemptions": 43402,
+          "agi_thousands": 2722787,
+          "share_pct": 6.1
+        },
+        {
+          "from_state": "CA",
+          "returns": 24011,
+          "exemptions": 42412,
+          "agi_thousands": 4490657,
+          "share_pct": 6
+        },
+        {
+          "from_state": "NJ",
+          "returns": 23128,
+          "exemptions": 41610,
+          "agi_thousands": 5277917,
+          "share_pct": 5.8
+        },
+        {
+          "from_state": "TX",
+          "returns": 21221,
+          "exemptions": 37777,
+          "agi_thousands": 2422908,
+          "share_pct": 5.3
+        },
+        {
+          "from_state": "PA",
+          "returns": 18666,
+          "exemptions": 32347,
+          "agi_thousands": 2932869,
+          "share_pct": 4.7
+        },
+        {
+          "from_state": "IL",
+          "returns": 17728,
+          "exemptions": 31620,
+          "agi_thousands": 4101617,
+          "share_pct": 4.5
+        },
+        {
+          "from_state": "VA",
+          "returns": 15486,
+          "exemptions": 28685,
+          "agi_thousands": 2240396,
+          "share_pct": 3.9
+        },
+        {
+          "from_state": "NC",
+          "returns": 15362,
+          "exemptions": 27207,
+          "agi_thousands": 1827768,
+          "share_pct": 3.9
+        },
+        {
+          "from_state": "OH",
+          "returns": 14584,
+          "exemptions": 24851,
+          "agi_thousands": 2376890,
+          "share_pct": 3.7
+        },
+        {
+          "from_state": "MA",
+          "returns": 14018,
+          "exemptions": 23596,
+          "agi_thousands": 2855657,
+          "share_pct": 3.5
+        },
+        {
+          "from_state": "MI",
+          "returns": 12107,
+          "exemptions": 20842,
+          "agi_thousands": 1777002,
+          "share_pct": 3
+        }
+      ]
+    },
+    {
+      "to_state": "GA",
+      "total_inbound_returns": 153844,
+      "top_origins": [
+        {
+          "from_state": "FL",
+          "returns": 26876,
+          "exemptions": 48301,
+          "agi_thousands": 1857012,
+          "share_pct": 17.5
+        },
+        {
+          "from_state": "NY",
+          "returns": 10225,
+          "exemptions": 17830,
+          "agi_thousands": 713922,
+          "share_pct": 6.6
+        },
+        {
+          "from_state": "CA",
+          "returns": 9962,
+          "exemptions": 18479,
+          "agi_thousands": 975710,
+          "share_pct": 6.5
+        },
+        {
+          "from_state": "TX",
+          "returns": 9328,
+          "exemptions": 17714,
+          "agi_thousands": 727179,
+          "share_pct": 6.1
+        },
+        {
+          "from_state": "NC",
+          "returns": 8527,
+          "exemptions": 15145,
+          "agi_thousands": 578776,
+          "share_pct": 5.5
+        },
+        {
+          "from_state": "SC",
+          "returns": 8283,
+          "exemptions": 14698,
+          "agi_thousands": 508454,
+          "share_pct": 5.4
+        },
+        {
+          "from_state": "AL",
+          "returns": 8159,
+          "exemptions": 14709,
+          "agi_thousands": 482328,
+          "share_pct": 5.3
+        },
+        {
+          "from_state": "TN",
+          "returns": 8101,
+          "exemptions": 14617,
+          "agi_thousands": 556904,
+          "share_pct": 5.3
+        },
+        {
+          "from_state": "VA",
+          "returns": 5442,
+          "exemptions": 10038,
+          "agi_thousands": 469766,
+          "share_pct": 3.5
+        },
+        {
+          "from_state": "IL",
+          "returns": 4597,
+          "exemptions": 8433,
+          "agi_thousands": 426672,
+          "share_pct": 3
+        },
+        {
+          "from_state": "NJ",
+          "returns": 4220,
+          "exemptions": 8001,
+          "agi_thousands": 386989,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "PA",
+          "returns": 4096,
+          "exemptions": 7390,
+          "agi_thousands": 326157,
+          "share_pct": 2.7
+        }
+      ]
+    },
+    {
+      "to_state": "HI",
+      "total_inbound_returns": 25286,
+      "top_origins": [
+        {
+          "from_state": "CA",
+          "returns": 6123,
+          "exemptions": 10576,
+          "agi_thousands": 834153,
+          "share_pct": 24.2
+        },
+        {
+          "from_state": "WA",
+          "returns": 1893,
+          "exemptions": 3504,
+          "agi_thousands": 207751,
+          "share_pct": 7.5
+        },
+        {
+          "from_state": "TX",
+          "returns": 1865,
+          "exemptions": 3797,
+          "agi_thousands": 147391,
+          "share_pct": 7.4
+        },
+        {
+          "from_state": "FL",
+          "returns": 1244,
+          "exemptions": 2230,
+          "agi_thousands": 94797,
+          "share_pct": 4.9
+        },
+        {
+          "from_state": "VA",
+          "returns": 1068,
+          "exemptions": 2396,
+          "agi_thousands": 92365,
+          "share_pct": 4.2
+        },
+        {
+          "from_state": "CO",
+          "returns": 1013,
+          "exemptions": 1857,
+          "agi_thousands": 89431,
+          "share_pct": 4
+        },
+        {
+          "from_state": "AZ",
+          "returns": 839,
+          "exemptions": 1435,
+          "agi_thousands": 62333,
+          "share_pct": 3.3
+        },
+        {
+          "from_state": "NY",
+          "returns": 808,
+          "exemptions": 1299,
+          "agi_thousands": 105603,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "NV",
+          "returns": 795,
+          "exemptions": 1387,
+          "agi_thousands": 52356,
+          "share_pct": 3.1
+        },
+        {
+          "from_state": "OR",
+          "returns": 786,
+          "exemptions": 1298,
+          "agi_thousands": 83870,
+          "share_pct": 3.1
+        },
+        {
+          "from_state": "GA",
+          "returns": 669,
+          "exemptions": 1346,
+          "agi_thousands": 40295,
+          "share_pct": 2.6
+        },
+        {
+          "from_state": "NC",
+          "returns": 633,
+          "exemptions": 1403,
+          "agi_thousands": 41325,
+          "share_pct": 2.5
+        }
+      ]
+    },
+    {
+      "to_state": "IA",
+      "total_inbound_returns": 32859,
+      "top_origins": [
+        {
+          "from_state": "IL",
+          "returns": 4904,
+          "exemptions": 8368,
+          "agi_thousands": 311203,
+          "share_pct": 14.9
+        },
+        {
+          "from_state": "NE",
+          "returns": 3123,
+          "exemptions": 5571,
+          "agi_thousands": 171037,
+          "share_pct": 9.5
+        },
+        {
+          "from_state": "MN",
+          "returns": 2269,
+          "exemptions": 3824,
+          "agi_thousands": 157331,
+          "share_pct": 6.9
+        },
+        {
+          "from_state": "TX",
+          "returns": 1913,
+          "exemptions": 3473,
+          "agi_thousands": 121062,
+          "share_pct": 5.8
+        },
+        {
+          "from_state": "CA",
+          "returns": 1886,
+          "exemptions": 3342,
+          "agi_thousands": 142091,
+          "share_pct": 5.7
+        },
+        {
+          "from_state": "MO",
+          "returns": 1672,
+          "exemptions": 2948,
+          "agi_thousands": 88828,
+          "share_pct": 5.1
+        },
+        {
+          "from_state": "FL",
+          "returns": 1498,
+          "exemptions": 2535,
+          "agi_thousands": 108254,
+          "share_pct": 4.6
+        },
+        {
+          "from_state": "WI",
+          "returns": 1480,
+          "exemptions": 2422,
+          "agi_thousands": 93617,
+          "share_pct": 4.5
+        },
+        {
+          "from_state": "CO",
+          "returns": 1442,
+          "exemptions": 2422,
+          "agi_thousands": 97833,
+          "share_pct": 4.4
+        },
+        {
+          "from_state": "AZ",
+          "returns": 1255,
+          "exemptions": 2148,
+          "agi_thousands": 82509,
+          "share_pct": 3.8
+        },
+        {
+          "from_state": "SD",
+          "returns": 1018,
+          "exemptions": 1733,
+          "agi_thousands": 62509,
+          "share_pct": 3.1
+        },
+        {
+          "from_state": "KS",
+          "returns": 719,
+          "exemptions": 1321,
+          "agi_thousands": 47026,
+          "share_pct": 2.2
+        }
+      ]
+    },
+    {
+      "to_state": "ID",
+      "total_inbound_returns": 38679,
+      "top_origins": [
+        {
+          "from_state": "CA",
+          "returns": 10405,
+          "exemptions": 21408,
+          "agi_thousands": 1312803,
+          "share_pct": 26.9
+        },
+        {
+          "from_state": "WA",
+          "returns": 6878,
+          "exemptions": 13664,
+          "agi_thousands": 673363,
+          "share_pct": 17.8
+        },
+        {
+          "from_state": "OR",
+          "returns": 3175,
+          "exemptions": 6190,
+          "agi_thousands": 317116,
+          "share_pct": 8.2
+        },
+        {
+          "from_state": "UT",
+          "returns": 3146,
+          "exemptions": 6809,
+          "agi_thousands": 211689,
+          "share_pct": 8.1
+        },
+        {
+          "from_state": "AZ",
+          "returns": 1712,
+          "exemptions": 3272,
+          "agi_thousands": 135234,
+          "share_pct": 4.4
+        },
+        {
+          "from_state": "TX",
+          "returns": 1444,
+          "exemptions": 2960,
+          "agi_thousands": 128150,
+          "share_pct": 3.7
+        },
+        {
+          "from_state": "NV",
+          "returns": 1315,
+          "exemptions": 2465,
+          "agi_thousands": 96656,
+          "share_pct": 3.4
+        },
+        {
+          "from_state": "CO",
+          "returns": 1229,
+          "exemptions": 2218,
+          "agi_thousands": 104505,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "MT",
+          "returns": 942,
+          "exemptions": 1637,
+          "agi_thousands": 102319,
+          "share_pct": 2.4
+        },
+        {
+          "from_state": "FL",
+          "returns": 672,
+          "exemptions": 1183,
+          "agi_thousands": 56596,
+          "share_pct": 1.7
+        },
+        {
+          "from_state": "WY",
+          "returns": 610,
+          "exemptions": 1155,
+          "agi_thousands": 55702,
+          "share_pct": 1.6
+        },
+        {
+          "from_state": "AK",
+          "returns": 424,
+          "exemptions": 775,
+          "agi_thousands": 35437,
+          "share_pct": 1.1
+        }
+      ]
+    },
+    {
+      "to_state": "IL",
+      "total_inbound_returns": 110797,
+      "top_origins": [
+        {
+          "from_state": "CA",
+          "returns": 9284,
+          "exemptions": 14486,
+          "agi_thousands": 1512360,
+          "share_pct": 8.4
+        },
+        {
+          "from_state": "IN",
+          "returns": 9007,
+          "exemptions": 14745,
+          "agi_thousands": 516060,
+          "share_pct": 8.1
+        },
+        {
+          "from_state": "FL",
+          "returns": 7973,
+          "exemptions": 12521,
+          "agi_thousands": 821187,
+          "share_pct": 7.2
+        },
+        {
+          "from_state": "WI",
+          "returns": 7792,
+          "exemptions": 11909,
+          "agi_thousands": 531964,
+          "share_pct": 7
+        },
+        {
+          "from_state": "MO",
+          "returns": 7648,
+          "exemptions": 12354,
+          "agi_thousands": 449603,
+          "share_pct": 6.9
+        },
+        {
+          "from_state": "TX",
+          "returns": 7486,
+          "exemptions": 12786,
+          "agi_thousands": 608152,
+          "share_pct": 6.8
+        },
+        {
+          "from_state": "MI",
+          "returns": 5272,
+          "exemptions": 7427,
+          "agi_thousands": 431114,
+          "share_pct": 4.8
+        },
+        {
+          "from_state": "IA",
+          "returns": 4623,
+          "exemptions": 7630,
+          "agi_thousands": 249036,
+          "share_pct": 4.2
+        },
+        {
+          "from_state": "NY",
+          "returns": 4215,
+          "exemptions": 6117,
+          "agi_thousands": 507699,
+          "share_pct": 3.8
+        },
+        {
+          "from_state": "OH",
+          "returns": 3727,
+          "exemptions": 5372,
+          "agi_thousands": 293979,
+          "share_pct": 3.4
+        },
+        {
+          "from_state": "AZ",
+          "returns": 3576,
+          "exemptions": 5774,
+          "agi_thousands": 303747,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "CO",
+          "returns": 3077,
+          "exemptions": 4601,
+          "agi_thousands": 244352,
+          "share_pct": 2.8
+        }
+      ]
+    },
+    {
+      "to_state": "IN",
+      "total_inbound_returns": 69272,
+      "top_origins": [
+        {
+          "from_state": "IL",
+          "returns": 13099,
+          "exemptions": 23941,
+          "agi_thousands": 961079,
+          "share_pct": 18.9
+        },
+        {
+          "from_state": "FL",
+          "returns": 6394,
+          "exemptions": 11076,
+          "agi_thousands": 486442,
+          "share_pct": 9.2
+        },
+        {
+          "from_state": "KY",
+          "returns": 5691,
+          "exemptions": 9732,
+          "agi_thousands": 328043,
+          "share_pct": 8.2
+        },
+        {
+          "from_state": "OH",
+          "returns": 5389,
+          "exemptions": 9195,
+          "agi_thousands": 353148,
+          "share_pct": 7.8
+        },
+        {
+          "from_state": "MI",
+          "returns": 4590,
+          "exemptions": 8019,
+          "agi_thousands": 295847,
+          "share_pct": 6.6
+        },
+        {
+          "from_state": "CA",
+          "returns": 3776,
+          "exemptions": 7073,
+          "agi_thousands": 324233,
+          "share_pct": 5.5
+        },
+        {
+          "from_state": "TX",
+          "returns": 3519,
+          "exemptions": 6631,
+          "agi_thousands": 241147,
+          "share_pct": 5.1
+        },
+        {
+          "from_state": "TN",
+          "returns": 2071,
+          "exemptions": 3806,
+          "agi_thousands": 146452,
+          "share_pct": 3
+        },
+        {
+          "from_state": "NY",
+          "returns": 1939,
+          "exemptions": 3556,
+          "agi_thousands": 125197,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "AZ",
+          "returns": 1614,
+          "exemptions": 2875,
+          "agi_thousands": 108890,
+          "share_pct": 2.3
+        },
+        {
+          "from_state": "GA",
+          "returns": 1610,
+          "exemptions": 2969,
+          "agi_thousands": 94097,
+          "share_pct": 2.3
+        },
+        {
+          "from_state": "CO",
+          "returns": 1475,
+          "exemptions": 2558,
+          "agi_thousands": 123191,
+          "share_pct": 2.1
+        }
+      ]
+    },
+    {
+      "to_state": "KS",
+      "total_inbound_returns": 39452,
+      "top_origins": [
+        {
+          "from_state": "MO",
+          "returns": 10657,
+          "exemptions": 17386,
+          "agi_thousands": 723132,
+          "share_pct": 27
+        },
+        {
+          "from_state": "TX",
+          "returns": 3837,
+          "exemptions": 7580,
+          "agi_thousands": 281495,
+          "share_pct": 9.7
+        },
+        {
+          "from_state": "CA",
+          "returns": 2475,
+          "exemptions": 4626,
+          "agi_thousands": 172709,
+          "share_pct": 6.3
+        },
+        {
+          "from_state": "CO",
+          "returns": 2457,
+          "exemptions": 4721,
+          "agi_thousands": 164628,
+          "share_pct": 6.2
+        },
+        {
+          "from_state": "OK",
+          "returns": 2148,
+          "exemptions": 4050,
+          "agi_thousands": 111179,
+          "share_pct": 5.4
+        },
+        {
+          "from_state": "FL",
+          "returns": 1606,
+          "exemptions": 2841,
+          "agi_thousands": 110050,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "AZ",
+          "returns": 1168,
+          "exemptions": 2281,
+          "agi_thousands": 76289,
+          "share_pct": 3
+        },
+        {
+          "from_state": "NE",
+          "returns": 1144,
+          "exemptions": 1980,
+          "agi_thousands": 69920,
+          "share_pct": 2.9
+        },
+        {
+          "from_state": "IL",
+          "returns": 935,
+          "exemptions": 1675,
+          "agi_thousands": 92017,
+          "share_pct": 2.4
+        },
+        {
+          "from_state": "WA",
+          "returns": 861,
+          "exemptions": 1729,
+          "agi_thousands": 71919,
+          "share_pct": 2.2
+        },
+        {
+          "from_state": "GA",
+          "returns": 798,
+          "exemptions": 1722,
+          "agi_thousands": 51774,
+          "share_pct": 2
+        },
+        {
+          "from_state": "IA",
+          "returns": 711,
+          "exemptions": 1296,
+          "agi_thousands": 50382,
+          "share_pct": 1.8
+        }
+      ]
+    },
+    {
+      "to_state": "KY",
+      "total_inbound_returns": 49057,
+      "top_origins": [
+        {
+          "from_state": "OH",
+          "returns": 6545,
+          "exemptions": 10615,
+          "agi_thousands": 413784,
+          "share_pct": 13.3
+        },
+        {
+          "from_state": "TN",
+          "returns": 5424,
+          "exemptions": 10240,
+          "agi_thousands": 284943,
+          "share_pct": 11.1
+        },
+        {
+          "from_state": "IN",
+          "returns": 5155,
+          "exemptions": 8737,
+          "agi_thousands": 293820,
+          "share_pct": 10.5
+        },
+        {
+          "from_state": "FL",
+          "returns": 4296,
+          "exemptions": 7422,
+          "agi_thousands": 300637,
+          "share_pct": 8.8
+        },
+        {
+          "from_state": "CA",
+          "returns": 2507,
+          "exemptions": 4801,
+          "agi_thousands": 227155,
+          "share_pct": 5.1
+        },
+        {
+          "from_state": "TX",
+          "returns": 2454,
+          "exemptions": 4868,
+          "agi_thousands": 169052,
+          "share_pct": 5
+        },
+        {
+          "from_state": "IL",
+          "returns": 2217,
+          "exemptions": 3850,
+          "agi_thousands": 147757,
+          "share_pct": 4.5
+        },
+        {
+          "from_state": "GA",
+          "returns": 1599,
+          "exemptions": 3113,
+          "agi_thousands": 97028,
+          "share_pct": 3.3
+        },
+        {
+          "from_state": "NC",
+          "returns": 1393,
+          "exemptions": 2733,
+          "agi_thousands": 89865,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "MI",
+          "returns": 1280,
+          "exemptions": 2312,
+          "agi_thousands": 83386,
+          "share_pct": 2.6
+        },
+        {
+          "from_state": "VA",
+          "returns": 1227,
+          "exemptions": 2349,
+          "agi_thousands": 89100,
+          "share_pct": 2.5
+        },
+        {
+          "from_state": "NY",
+          "returns": 1201,
+          "exemptions": 2292,
+          "agi_thousands": 83759,
+          "share_pct": 2.4
+        }
+      ]
+    },
+    {
+      "to_state": "LA",
+      "total_inbound_returns": 35704,
+      "top_origins": [
+        {
+          "from_state": "TX",
+          "returns": 9633,
+          "exemptions": 18095,
+          "agi_thousands": 557864,
+          "share_pct": 27
+        },
+        {
+          "from_state": "MS",
+          "returns": 2829,
+          "exemptions": 5141,
+          "agi_thousands": 135519,
+          "share_pct": 7.9
+        },
+        {
+          "from_state": "FL",
+          "returns": 2551,
+          "exemptions": 4391,
+          "agi_thousands": 162670,
+          "share_pct": 7.1
+        },
+        {
+          "from_state": "CA",
+          "returns": 2186,
+          "exemptions": 3761,
+          "agi_thousands": 160317,
+          "share_pct": 6.1
+        },
+        {
+          "from_state": "GA",
+          "returns": 1551,
+          "exemptions": 2866,
+          "agi_thousands": 111883,
+          "share_pct": 4.3
+        },
+        {
+          "from_state": "NY",
+          "returns": 1132,
+          "exemptions": 1878,
+          "agi_thousands": 96058,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "AR",
+          "returns": 1057,
+          "exemptions": 1979,
+          "agi_thousands": 59132,
+          "share_pct": 3
+        },
+        {
+          "from_state": "TN",
+          "returns": 1012,
+          "exemptions": 1802,
+          "agi_thousands": 64663,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "AL",
+          "returns": 948,
+          "exemptions": 1721,
+          "agi_thousands": 69671,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "NC",
+          "returns": 942,
+          "exemptions": 1717,
+          "agi_thousands": 57121,
+          "share_pct": 2.6
+        },
+        {
+          "from_state": "CO",
+          "returns": 938,
+          "exemptions": 1595,
+          "agi_thousands": 74582,
+          "share_pct": 2.6
+        },
+        {
+          "from_state": "VA",
+          "returns": 842,
+          "exemptions": 1626,
+          "agi_thousands": 108176,
+          "share_pct": 2.4
+        }
+      ]
+    },
+    {
+      "to_state": "MA",
+      "total_inbound_returns": 77764,
+      "top_origins": [
+        {
+          "from_state": "NY",
+          "returns": 10004,
+          "exemptions": 13811,
+          "agi_thousands": 1232072,
+          "share_pct": 12.9
+        },
+        {
+          "from_state": "FL",
+          "returns": 6985,
+          "exemptions": 10490,
+          "agi_thousands": 1396706,
+          "share_pct": 9
+        },
+        {
+          "from_state": "CA",
+          "returns": 6311,
+          "exemptions": 9344,
+          "agi_thousands": 1152200,
+          "share_pct": 8.1
+        },
+        {
+          "from_state": "NH",
+          "returns": 6131,
+          "exemptions": 8647,
+          "agi_thousands": 561735,
+          "share_pct": 7.9
+        },
+        {
+          "from_state": "CT",
+          "returns": 5895,
+          "exemptions": 8106,
+          "agi_thousands": 643754,
+          "share_pct": 7.6
+        },
+        {
+          "from_state": "RI",
+          "returns": 5147,
+          "exemptions": 7523,
+          "agi_thousands": 431038,
+          "share_pct": 6.6
+        },
+        {
+          "from_state": "NJ",
+          "returns": 3161,
+          "exemptions": 4637,
+          "agi_thousands": 448283,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "PA",
+          "returns": 3065,
+          "exemptions": 4395,
+          "agi_thousands": 296001,
+          "share_pct": 3.9
+        },
+        {
+          "from_state": "TX",
+          "returns": 3054,
+          "exemptions": 4912,
+          "agi_thousands": 398550,
+          "share_pct": 3.9
+        },
+        {
+          "from_state": "VA",
+          "returns": 2091,
+          "exemptions": 3073,
+          "agi_thousands": 218433,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "NC",
+          "returns": 2062,
+          "exemptions": 3116,
+          "agi_thousands": 174553,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "ME",
+          "returns": 1931,
+          "exemptions": 2663,
+          "agi_thousands": 169270,
+          "share_pct": 2.5
+        }
+      ]
+    },
+    {
+      "to_state": "MD",
+      "total_inbound_returns": 82299,
+      "top_origins": [
+        {
+          "from_state": "VA",
+          "returns": 13424,
+          "exemptions": 22139,
+          "agi_thousands": 1235495,
+          "share_pct": 16.3
+        },
+        {
+          "from_state": "DC",
+          "returns": 10005,
+          "exemptions": 16605,
+          "agi_thousands": 1055055,
+          "share_pct": 12.2
+        },
+        {
+          "from_state": "PA",
+          "returns": 7334,
+          "exemptions": 11524,
+          "agi_thousands": 573214,
+          "share_pct": 8.9
+        },
+        {
+          "from_state": "NY",
+          "returns": 5650,
+          "exemptions": 8950,
+          "agi_thousands": 493176,
+          "share_pct": 6.9
+        },
+        {
+          "from_state": "FL",
+          "returns": 5495,
+          "exemptions": 9056,
+          "agi_thousands": 524718,
+          "share_pct": 6.7
+        },
+        {
+          "from_state": "CA",
+          "returns": 4450,
+          "exemptions": 7696,
+          "agi_thousands": 492017,
+          "share_pct": 5.4
+        },
+        {
+          "from_state": "TX",
+          "returns": 3377,
+          "exemptions": 6095,
+          "agi_thousands": 323845,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "NC",
+          "returns": 3221,
+          "exemptions": 5466,
+          "agi_thousands": 213201,
+          "share_pct": 3.9
+        },
+        {
+          "from_state": "NJ",
+          "returns": 3096,
+          "exemptions": 4979,
+          "agi_thousands": 283747,
+          "share_pct": 3.8
+        },
+        {
+          "from_state": "DE",
+          "returns": 3014,
+          "exemptions": 5032,
+          "agi_thousands": 207957,
+          "share_pct": 3.7
+        },
+        {
+          "from_state": "GA",
+          "returns": 2343,
+          "exemptions": 3993,
+          "agi_thousands": 175157,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "WV",
+          "returns": 1599,
+          "exemptions": 2598,
+          "agi_thousands": 86904,
+          "share_pct": 1.9
+        }
+      ]
+    },
+    {
+      "to_state": "ME",
+      "total_inbound_returns": 21469,
+      "top_origins": [
+        {
+          "from_state": "MA",
+          "returns": 3761,
+          "exemptions": 5748,
+          "agi_thousands": 506173,
+          "share_pct": 17.5
+        },
+        {
+          "from_state": "NH",
+          "returns": 2595,
+          "exemptions": 4019,
+          "agi_thousands": 189659,
+          "share_pct": 12.1
+        },
+        {
+          "from_state": "FL",
+          "returns": 1935,
+          "exemptions": 3097,
+          "agi_thousands": 172272,
+          "share_pct": 9
+        },
+        {
+          "from_state": "NY",
+          "returns": 1458,
+          "exemptions": 2132,
+          "agi_thousands": 153967,
+          "share_pct": 6.8
+        },
+        {
+          "from_state": "CA",
+          "returns": 1064,
+          "exemptions": 1772,
+          "agi_thousands": 112503,
+          "share_pct": 5
+        },
+        {
+          "from_state": "CT",
+          "returns": 884,
+          "exemptions": 1345,
+          "agi_thousands": 90853,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "TX",
+          "returns": 737,
+          "exemptions": 1318,
+          "agi_thousands": 61905,
+          "share_pct": 3.4
+        },
+        {
+          "from_state": "PA",
+          "returns": 635,
+          "exemptions": 959,
+          "agi_thousands": 86137,
+          "share_pct": 3
+        },
+        {
+          "from_state": "VA",
+          "returns": 578,
+          "exemptions": 1041,
+          "agi_thousands": 67535,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "CO",
+          "returns": 573,
+          "exemptions": 961,
+          "agi_thousands": 54630,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "NC",
+          "returns": 527,
+          "exemptions": 894,
+          "agi_thousands": 41636,
+          "share_pct": 2.5
+        },
+        {
+          "from_state": "VT",
+          "returns": 499,
+          "exemptions": 717,
+          "agi_thousands": 31476,
+          "share_pct": 2.3
+        }
+      ]
+    },
+    {
+      "to_state": "MI",
+      "total_inbound_returns": 70638,
+      "top_origins": [
+        {
+          "from_state": "FL",
+          "returns": 7830,
+          "exemptions": 12733,
+          "agi_thousands": 810380,
+          "share_pct": 11.1
+        },
+        {
+          "from_state": "OH",
+          "returns": 5597,
+          "exemptions": 9133,
+          "agi_thousands": 377128,
+          "share_pct": 7.9
+        },
+        {
+          "from_state": "IL",
+          "returns": 5582,
+          "exemptions": 9265,
+          "agi_thousands": 726573,
+          "share_pct": 7.9
+        },
+        {
+          "from_state": "CA",
+          "returns": 5168,
+          "exemptions": 8808,
+          "agi_thousands": 600996,
+          "share_pct": 7.3
+        },
+        {
+          "from_state": "IN",
+          "returns": 4986,
+          "exemptions": 8773,
+          "agi_thousands": 468373,
+          "share_pct": 7.1
+        },
+        {
+          "from_state": "TX",
+          "returns": 4366,
+          "exemptions": 8207,
+          "agi_thousands": 342453,
+          "share_pct": 6.2
+        },
+        {
+          "from_state": "NY",
+          "returns": 2699,
+          "exemptions": 4902,
+          "agi_thousands": 233569,
+          "share_pct": 3.8
+        },
+        {
+          "from_state": "AZ",
+          "returns": 2556,
+          "exemptions": 4468,
+          "agi_thousands": 189193,
+          "share_pct": 3.6
+        },
+        {
+          "from_state": "WI",
+          "returns": 2513,
+          "exemptions": 4161,
+          "agi_thousands": 168004,
+          "share_pct": 3.6
+        },
+        {
+          "from_state": "CO",
+          "returns": 2257,
+          "exemptions": 3762,
+          "agi_thousands": 182105,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "TN",
+          "returns": 2060,
+          "exemptions": 3678,
+          "agi_thousands": 126998,
+          "share_pct": 2.9
+        },
+        {
+          "from_state": "NC",
+          "returns": 2056,
+          "exemptions": 3735,
+          "agi_thousands": 148358,
+          "share_pct": 2.9
+        }
+      ]
+    },
+    {
+      "to_state": "MN",
+      "total_inbound_returns": 50994,
+      "top_origins": [
+        {
+          "from_state": "WI",
+          "returns": 7559,
+          "exemptions": 11108,
+          "agi_thousands": 484236,
+          "share_pct": 14.8
+        },
+        {
+          "from_state": "ND",
+          "returns": 4079,
+          "exemptions": 6573,
+          "agi_thousands": 237693,
+          "share_pct": 8
+        },
+        {
+          "from_state": "CA",
+          "returns": 3697,
+          "exemptions": 6363,
+          "agi_thousands": 378249,
+          "share_pct": 7.2
+        },
+        {
+          "from_state": "TX",
+          "returns": 2948,
+          "exemptions": 5380,
+          "agi_thousands": 221446,
+          "share_pct": 5.8
+        },
+        {
+          "from_state": "FL",
+          "returns": 2655,
+          "exemptions": 4258,
+          "agi_thousands": 271379,
+          "share_pct": 5.2
+        },
+        {
+          "from_state": "IA",
+          "returns": 2615,
+          "exemptions": 4209,
+          "agi_thousands": 161945,
+          "share_pct": 5.1
+        },
+        {
+          "from_state": "IL",
+          "returns": 2531,
+          "exemptions": 4109,
+          "agi_thousands": 221851,
+          "share_pct": 5
+        },
+        {
+          "from_state": "AZ",
+          "returns": 2258,
+          "exemptions": 3652,
+          "agi_thousands": 190872,
+          "share_pct": 4.4
+        },
+        {
+          "from_state": "CO",
+          "returns": 2095,
+          "exemptions": 3463,
+          "agi_thousands": 168302,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "SD",
+          "returns": 1586,
+          "exemptions": 2714,
+          "agi_thousands": 95103,
+          "share_pct": 3.1
+        },
+        {
+          "from_state": "WA",
+          "returns": 1423,
+          "exemptions": 2488,
+          "agi_thousands": 148612,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "NY",
+          "returns": 1327,
+          "exemptions": 2116,
+          "agi_thousands": 117626,
+          "share_pct": 2.6
+        }
+      ]
+    },
+    {
+      "to_state": "MO",
+      "total_inbound_returns": 73289,
+      "top_origins": [
+        {
+          "from_state": "KS",
+          "returns": 11813,
+          "exemptions": 19284,
+          "agi_thousands": 889555,
+          "share_pct": 16.1
+        },
+        {
+          "from_state": "IL",
+          "returns": 8753,
+          "exemptions": 14196,
+          "agi_thousands": 637760,
+          "share_pct": 11.9
+        },
+        {
+          "from_state": "TX",
+          "returns": 5603,
+          "exemptions": 10627,
+          "agi_thousands": 394052,
+          "share_pct": 7.6
+        },
+        {
+          "from_state": "CA",
+          "returns": 5029,
+          "exemptions": 9629,
+          "agi_thousands": 429702,
+          "share_pct": 6.9
+        },
+        {
+          "from_state": "FL",
+          "returns": 3816,
+          "exemptions": 6627,
+          "agi_thousands": 311492,
+          "share_pct": 5.2
+        },
+        {
+          "from_state": "AR",
+          "returns": 3176,
+          "exemptions": 5948,
+          "agi_thousands": 153857,
+          "share_pct": 4.3
+        },
+        {
+          "from_state": "CO",
+          "returns": 2935,
+          "exemptions": 5278,
+          "agi_thousands": 219089,
+          "share_pct": 4
+        },
+        {
+          "from_state": "AZ",
+          "returns": 2052,
+          "exemptions": 3846,
+          "agi_thousands": 140491,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "IA",
+          "returns": 2005,
+          "exemptions": 3451,
+          "agi_thousands": 124461,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "OK",
+          "returns": 1956,
+          "exemptions": 3700,
+          "agi_thousands": 106978,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "TN",
+          "returns": 1753,
+          "exemptions": 3074,
+          "agi_thousands": 129822,
+          "share_pct": 2.4
+        },
+        {
+          "from_state": "WA",
+          "returns": 1496,
+          "exemptions": 3123,
+          "agi_thousands": 126157,
+          "share_pct": 2
+        }
+      ]
+    },
+    {
+      "to_state": "MS",
+      "total_inbound_returns": 30573,
+      "top_origins": [
+        {
+          "from_state": "TN",
+          "returns": 5542,
+          "exemptions": 10555,
+          "agi_thousands": 289294,
+          "share_pct": 18.1
+        },
+        {
+          "from_state": "LA",
+          "returns": 3979,
+          "exemptions": 7710,
+          "agi_thousands": 243798,
+          "share_pct": 13
+        },
+        {
+          "from_state": "TX",
+          "returns": 3211,
+          "exemptions": 6112,
+          "agi_thousands": 205137,
+          "share_pct": 10.5
+        },
+        {
+          "from_state": "AL",
+          "returns": 2542,
+          "exemptions": 4627,
+          "agi_thousands": 132309,
+          "share_pct": 8.3
+        },
+        {
+          "from_state": "FL",
+          "returns": 2091,
+          "exemptions": 3806,
+          "agi_thousands": 158595,
+          "share_pct": 6.8
+        },
+        {
+          "from_state": "GA",
+          "returns": 1484,
+          "exemptions": 2755,
+          "agi_thousands": 85335,
+          "share_pct": 4.9
+        },
+        {
+          "from_state": "CA",
+          "returns": 1279,
+          "exemptions": 2380,
+          "agi_thousands": 91744,
+          "share_pct": 4.2
+        },
+        {
+          "from_state": "AR",
+          "returns": 842,
+          "exemptions": 1640,
+          "agi_thousands": 44970,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "IL",
+          "returns": 800,
+          "exemptions": 1494,
+          "agi_thousands": 49310,
+          "share_pct": 2.6
+        },
+        {
+          "from_state": "NC",
+          "returns": 655,
+          "exemptions": 1284,
+          "agi_thousands": 37435,
+          "share_pct": 2.1
+        },
+        {
+          "from_state": "VA",
+          "returns": 586,
+          "exemptions": 1167,
+          "agi_thousands": 38224,
+          "share_pct": 1.9
+        },
+        {
+          "from_state": "CO",
+          "returns": 570,
+          "exemptions": 1121,
+          "agi_thousands": 36246,
+          "share_pct": 1.9
+        }
+      ]
+    },
+    {
+      "to_state": "MT",
+      "total_inbound_returns": 22916,
+      "top_origins": [
+        {
+          "from_state": "CA",
+          "returns": 3268,
+          "exemptions": 5878,
+          "agi_thousands": 543225,
+          "share_pct": 14.3
+        },
+        {
+          "from_state": "WA",
+          "returns": 3040,
+          "exemptions": 5737,
+          "agi_thousands": 349113,
+          "share_pct": 13.3
+        },
+        {
+          "from_state": "CO",
+          "returns": 1551,
+          "exemptions": 2497,
+          "agi_thousands": 154929,
+          "share_pct": 6.8
+        },
+        {
+          "from_state": "OR",
+          "returns": 1430,
+          "exemptions": 2587,
+          "agi_thousands": 113549,
+          "share_pct": 6.2
+        },
+        {
+          "from_state": "ID",
+          "returns": 1126,
+          "exemptions": 2020,
+          "agi_thousands": 77753,
+          "share_pct": 4.9
+        },
+        {
+          "from_state": "TX",
+          "returns": 1049,
+          "exemptions": 1969,
+          "agi_thousands": 101365,
+          "share_pct": 4.6
+        },
+        {
+          "from_state": "AZ",
+          "returns": 1005,
+          "exemptions": 1713,
+          "agi_thousands": 75030,
+          "share_pct": 4.4
+        },
+        {
+          "from_state": "UT",
+          "returns": 747,
+          "exemptions": 1406,
+          "agi_thousands": 57565,
+          "share_pct": 3.3
+        },
+        {
+          "from_state": "WY",
+          "returns": 701,
+          "exemptions": 1171,
+          "agi_thousands": 50605,
+          "share_pct": 3.1
+        },
+        {
+          "from_state": "FL",
+          "returns": 645,
+          "exemptions": 1042,
+          "agi_thousands": 55609,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "NV",
+          "returns": 613,
+          "exemptions": 1051,
+          "agi_thousands": 65030,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "MN",
+          "returns": 519,
+          "exemptions": 786,
+          "agi_thousands": 53145,
+          "share_pct": 2.3
+        }
+      ]
+    },
+    {
+      "to_state": "NC",
+      "total_inbound_returns": 173661,
+      "top_origins": [
+        {
+          "from_state": "FL",
+          "returns": 18962,
+          "exemptions": 33289,
+          "agi_thousands": 1555210,
+          "share_pct": 10.9
+        },
+        {
+          "from_state": "VA",
+          "returns": 15556,
+          "exemptions": 27771,
+          "agi_thousands": 1342524,
+          "share_pct": 9
+        },
+        {
+          "from_state": "NY",
+          "returns": 15121,
+          "exemptions": 26705,
+          "agi_thousands": 1202608,
+          "share_pct": 8.7
+        },
+        {
+          "from_state": "SC",
+          "returns": 14681,
+          "exemptions": 25095,
+          "agi_thousands": 1041466,
+          "share_pct": 8.5
+        },
+        {
+          "from_state": "CA",
+          "returns": 11482,
+          "exemptions": 21983,
+          "agi_thousands": 1308629,
+          "share_pct": 6.6
+        },
+        {
+          "from_state": "GA",
+          "returns": 8895,
+          "exemptions": 15795,
+          "agi_thousands": 690971,
+          "share_pct": 5.1
+        },
+        {
+          "from_state": "TX",
+          "returns": 8396,
+          "exemptions": 15812,
+          "agi_thousands": 742406,
+          "share_pct": 4.8
+        },
+        {
+          "from_state": "PA",
+          "returns": 7149,
+          "exemptions": 12497,
+          "agi_thousands": 593885,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "NJ",
+          "returns": 6510,
+          "exemptions": 12018,
+          "agi_thousands": 680094,
+          "share_pct": 3.7
+        },
+        {
+          "from_state": "MD",
+          "returns": 5518,
+          "exemptions": 9799,
+          "agi_thousands": 487919,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "OH",
+          "returns": 5137,
+          "exemptions": 8780,
+          "agi_thousands": 411494,
+          "share_pct": 3
+        },
+        {
+          "from_state": "TN",
+          "returns": 4690,
+          "exemptions": 8332,
+          "agi_thousands": 349246,
+          "share_pct": 2.7
+        }
+      ]
+    },
+    {
+      "to_state": "ND",
+      "total_inbound_returns": 13187,
+      "top_origins": [
+        {
+          "from_state": "MN",
+          "returns": 3874,
+          "exemptions": 5787,
+          "agi_thousands": 215822,
+          "share_pct": 29.4
+        },
+        {
+          "from_state": "CA",
+          "returns": 757,
+          "exemptions": 1434,
+          "agi_thousands": 43948,
+          "share_pct": 5.7
+        },
+        {
+          "from_state": "TX",
+          "returns": 744,
+          "exemptions": 1514,
+          "agi_thousands": 45447,
+          "share_pct": 5.6
+        },
+        {
+          "from_state": "SD",
+          "returns": 670,
+          "exemptions": 1159,
+          "agi_thousands": 47043,
+          "share_pct": 5.1
+        },
+        {
+          "from_state": "MT",
+          "returns": 640,
+          "exemptions": 1189,
+          "agi_thousands": 36014,
+          "share_pct": 4.9
+        },
+        {
+          "from_state": "AZ",
+          "returns": 544,
+          "exemptions": 903,
+          "agi_thousands": 38260,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "CO",
+          "returns": 526,
+          "exemptions": 959,
+          "agi_thousands": 31742,
+          "share_pct": 4
+        },
+        {
+          "from_state": "FL",
+          "returns": 498,
+          "exemptions": 864,
+          "agi_thousands": 23362,
+          "share_pct": 3.8
+        },
+        {
+          "from_state": "WA",
+          "returns": 398,
+          "exemptions": 716,
+          "agi_thousands": 21925,
+          "share_pct": 3
+        },
+        {
+          "from_state": "WI",
+          "returns": 230,
+          "exemptions": 368,
+          "agi_thousands": 14952,
+          "share_pct": 1.7
+        },
+        {
+          "from_state": "ID",
+          "returns": 214,
+          "exemptions": 427,
+          "agi_thousands": 10537,
+          "share_pct": 1.6
+        },
+        {
+          "from_state": "IL",
+          "returns": 202,
+          "exemptions": 335,
+          "agi_thousands": 11593,
+          "share_pct": 1.5
+        }
+      ]
+    },
+    {
+      "to_state": "NE",
+      "total_inbound_returns": 21974,
+      "top_origins": [
+        {
+          "from_state": "IA",
+          "returns": 3108,
+          "exemptions": 5154,
+          "agi_thousands": 160941,
+          "share_pct": 14.1
+        },
+        {
+          "from_state": "CO",
+          "returns": 2162,
+          "exemptions": 3853,
+          "agi_thousands": 150495,
+          "share_pct": 9.8
+        },
+        {
+          "from_state": "TX",
+          "returns": 1644,
+          "exemptions": 2964,
+          "agi_thousands": 122429,
+          "share_pct": 7.5
+        },
+        {
+          "from_state": "CA",
+          "returns": 1590,
+          "exemptions": 3012,
+          "agi_thousands": 111505,
+          "share_pct": 7.2
+        },
+        {
+          "from_state": "KS",
+          "returns": 1217,
+          "exemptions": 2150,
+          "agi_thousands": 71189,
+          "share_pct": 5.5
+        },
+        {
+          "from_state": "FL",
+          "returns": 1025,
+          "exemptions": 1769,
+          "agi_thousands": 71282,
+          "share_pct": 4.7
+        },
+        {
+          "from_state": "MO",
+          "returns": 896,
+          "exemptions": 1610,
+          "agi_thousands": 58807,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "AZ",
+          "returns": 881,
+          "exemptions": 1571,
+          "agi_thousands": 59148,
+          "share_pct": 4
+        },
+        {
+          "from_state": "SD",
+          "returns": 848,
+          "exemptions": 1488,
+          "agi_thousands": 43175,
+          "share_pct": 3.9
+        },
+        {
+          "from_state": "IL",
+          "returns": 613,
+          "exemptions": 1038,
+          "agi_thousands": 54036,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "MN",
+          "returns": 604,
+          "exemptions": 1045,
+          "agi_thousands": 58083,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "WA",
+          "returns": 470,
+          "exemptions": 871,
+          "agi_thousands": 42535,
+          "share_pct": 2.1
+        }
+      ]
+    },
+    {
+      "to_state": "NH",
+      "total_inbound_returns": 28010,
+      "top_origins": [
+        {
+          "from_state": "MA",
+          "returns": 11606,
+          "exemptions": 18189,
+          "agi_thousands": 1422229,
+          "share_pct": 41.4
+        },
+        {
+          "from_state": "ME",
+          "returns": 1926,
+          "exemptions": 2834,
+          "agi_thousands": 150549,
+          "share_pct": 6.9
+        },
+        {
+          "from_state": "FL",
+          "returns": 1772,
+          "exemptions": 2855,
+          "agi_thousands": 175362,
+          "share_pct": 6.3
+        },
+        {
+          "from_state": "NY",
+          "returns": 1524,
+          "exemptions": 2374,
+          "agi_thousands": 200331,
+          "share_pct": 5.4
+        },
+        {
+          "from_state": "VT",
+          "returns": 1341,
+          "exemptions": 2018,
+          "agi_thousands": 99185,
+          "share_pct": 4.8
+        },
+        {
+          "from_state": "CA",
+          "returns": 1016,
+          "exemptions": 1687,
+          "agi_thousands": 207879,
+          "share_pct": 3.6
+        },
+        {
+          "from_state": "CT",
+          "returns": 930,
+          "exemptions": 1424,
+          "agi_thousands": 124055,
+          "share_pct": 3.3
+        },
+        {
+          "from_state": "TX",
+          "returns": 637,
+          "exemptions": 1200,
+          "agi_thousands": 66168,
+          "share_pct": 2.3
+        },
+        {
+          "from_state": "PA",
+          "returns": 551,
+          "exemptions": 912,
+          "agi_thousands": 62541,
+          "share_pct": 2
+        },
+        {
+          "from_state": "NC",
+          "returns": 521,
+          "exemptions": 844,
+          "agi_thousands": 81359,
+          "share_pct": 1.9
+        },
+        {
+          "from_state": "NJ",
+          "returns": 501,
+          "exemptions": 805,
+          "agi_thousands": 75288,
+          "share_pct": 1.8
+        },
+        {
+          "from_state": "VA",
+          "returns": 467,
+          "exemptions": 819,
+          "agi_thousands": 57373,
+          "share_pct": 1.7
+        }
+      ]
+    },
+    {
+      "to_state": "NJ",
+      "total_inbound_returns": 109235,
+      "top_origins": [
+        {
+          "from_state": "NY",
+          "returns": 46761,
+          "exemptions": 79883,
+          "agi_thousands": 5902928,
+          "share_pct": 42.8
+        },
+        {
+          "from_state": "PA",
+          "returns": 16196,
+          "exemptions": 26428,
+          "agi_thousands": 1481786,
+          "share_pct": 14.8
+        },
+        {
+          "from_state": "FL",
+          "returns": 7976,
+          "exemptions": 12539,
+          "agi_thousands": 870466,
+          "share_pct": 7.3
+        },
+        {
+          "from_state": "CA",
+          "returns": 4958,
+          "exemptions": 7814,
+          "agi_thousands": 811489,
+          "share_pct": 4.5
+        },
+        {
+          "from_state": "TX",
+          "returns": 2879,
+          "exemptions": 5024,
+          "agi_thousands": 292392,
+          "share_pct": 2.6
+        },
+        {
+          "from_state": "MA",
+          "returns": 2742,
+          "exemptions": 4026,
+          "agi_thousands": 372003,
+          "share_pct": 2.5
+        },
+        {
+          "from_state": "MD",
+          "returns": 2596,
+          "exemptions": 4137,
+          "agi_thousands": 242999,
+          "share_pct": 2.4
+        },
+        {
+          "from_state": "VA",
+          "returns": 2592,
+          "exemptions": 4171,
+          "agi_thousands": 264548,
+          "share_pct": 2.4
+        },
+        {
+          "from_state": "NC",
+          "returns": 2460,
+          "exemptions": 3950,
+          "agi_thousands": 197513,
+          "share_pct": 2.3
+        },
+        {
+          "from_state": "CT",
+          "returns": 2071,
+          "exemptions": 3320,
+          "agi_thousands": 236088,
+          "share_pct": 1.9
+        },
+        {
+          "from_state": "GA",
+          "returns": 1731,
+          "exemptions": 2865,
+          "agi_thousands": 129621,
+          "share_pct": 1.6
+        },
+        {
+          "from_state": "IL",
+          "returns": 1489,
+          "exemptions": 2349,
+          "agi_thousands": 186110,
+          "share_pct": 1.4
+        }
+      ]
+    },
+    {
+      "to_state": "NM",
+      "total_inbound_returns": 31092,
+      "top_origins": [
+        {
+          "from_state": "TX",
+          "returns": 6601,
+          "exemptions": 12314,
+          "agi_thousands": 491494,
+          "share_pct": 21.2
+        },
+        {
+          "from_state": "CA",
+          "returns": 3643,
+          "exemptions": 6164,
+          "agi_thousands": 353402,
+          "share_pct": 11.7
+        },
+        {
+          "from_state": "CO",
+          "returns": 3072,
+          "exemptions": 5143,
+          "agi_thousands": 209442,
+          "share_pct": 9.9
+        },
+        {
+          "from_state": "AZ",
+          "returns": 3022,
+          "exemptions": 5385,
+          "agi_thousands": 176773,
+          "share_pct": 9.7
+        },
+        {
+          "from_state": "FL",
+          "returns": 1320,
+          "exemptions": 2198,
+          "agi_thousands": 95165,
+          "share_pct": 4.2
+        },
+        {
+          "from_state": "WA",
+          "returns": 997,
+          "exemptions": 1724,
+          "agi_thousands": 91110,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "NV",
+          "returns": 769,
+          "exemptions": 1306,
+          "agi_thousands": 47148,
+          "share_pct": 2.5
+        },
+        {
+          "from_state": "NY",
+          "returns": 644,
+          "exemptions": 971,
+          "agi_thousands": 61281,
+          "share_pct": 2.1
+        },
+        {
+          "from_state": "OR",
+          "returns": 624,
+          "exemptions": 1022,
+          "agi_thousands": 48847,
+          "share_pct": 2
+        },
+        {
+          "from_state": "OK",
+          "returns": 588,
+          "exemptions": 1117,
+          "agi_thousands": 35029,
+          "share_pct": 1.9
+        },
+        {
+          "from_state": "IL",
+          "returns": 573,
+          "exemptions": 934,
+          "agi_thousands": 59076,
+          "share_pct": 1.8
+        },
+        {
+          "from_state": "VA",
+          "returns": 554,
+          "exemptions": 1005,
+          "agi_thousands": 51433,
+          "share_pct": 1.8
+        }
+      ]
+    },
+    {
+      "to_state": "NV",
+      "total_inbound_returns": 72536,
+      "top_origins": [
+        {
+          "from_state": "CA",
+          "returns": 30571,
+          "exemptions": 52332,
+          "agi_thousands": 4120848,
+          "share_pct": 42.1
+        },
+        {
+          "from_state": "TX",
+          "returns": 3568,
+          "exemptions": 6072,
+          "agi_thousands": 313021,
+          "share_pct": 4.9
+        },
+        {
+          "from_state": "AZ",
+          "returns": 3337,
+          "exemptions": 5533,
+          "agi_thousands": 339444,
+          "share_pct": 4.6
+        },
+        {
+          "from_state": "WA",
+          "returns": 3004,
+          "exemptions": 5125,
+          "agi_thousands": 620022,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "FL",
+          "returns": 2611,
+          "exemptions": 4102,
+          "agi_thousands": 244465,
+          "share_pct": 3.6
+        },
+        {
+          "from_state": "UT",
+          "returns": 2385,
+          "exemptions": 4283,
+          "agi_thousands": 235861,
+          "share_pct": 3.3
+        },
+        {
+          "from_state": "IL",
+          "returns": 1954,
+          "exemptions": 3246,
+          "agi_thousands": 230042,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "HI",
+          "returns": 1953,
+          "exemptions": 3583,
+          "agi_thousands": 143725,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "CO",
+          "returns": 1931,
+          "exemptions": 3167,
+          "agi_thousands": 323941,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "NY",
+          "returns": 1728,
+          "exemptions": 2608,
+          "agi_thousands": 176071,
+          "share_pct": 2.4
+        },
+        {
+          "from_state": "OR",
+          "returns": 1712,
+          "exemptions": 2745,
+          "agi_thousands": 189158,
+          "share_pct": 2.4
+        },
+        {
+          "from_state": "GA",
+          "returns": 1043,
+          "exemptions": 1779,
+          "agi_thousands": 90481,
+          "share_pct": 1.4
+        }
+      ]
+    },
+    {
+      "to_state": "NY",
+      "total_inbound_returns": 177619,
+      "top_origins": [
+        {
+          "from_state": "NJ",
+          "returns": 24960,
+          "exemptions": 36609,
+          "agi_thousands": 3161138,
+          "share_pct": 14.1
+        },
+        {
+          "from_state": "CA",
+          "returns": 19656,
+          "exemptions": 25453,
+          "agi_thousands": 3356864,
+          "share_pct": 11.1
+        },
+        {
+          "from_state": "FL",
+          "returns": 18948,
+          "exemptions": 28134,
+          "agi_thousands": 3558090,
+          "share_pct": 10.7
+        },
+        {
+          "from_state": "PA",
+          "returns": 13101,
+          "exemptions": 19332,
+          "agi_thousands": 1097510,
+          "share_pct": 7.4
+        },
+        {
+          "from_state": "MA",
+          "returns": 10465,
+          "exemptions": 13111,
+          "agi_thousands": 1353689,
+          "share_pct": 5.9
+        },
+        {
+          "from_state": "CT",
+          "returns": 9991,
+          "exemptions": 14022,
+          "agi_thousands": 1704283,
+          "share_pct": 5.6
+        },
+        {
+          "from_state": "TX",
+          "returns": 8094,
+          "exemptions": 12180,
+          "agi_thousands": 980451,
+          "share_pct": 4.6
+        },
+        {
+          "from_state": "NC",
+          "returns": 6439,
+          "exemptions": 9780,
+          "agi_thousands": 482024,
+          "share_pct": 3.6
+        },
+        {
+          "from_state": "VA",
+          "returns": 6160,
+          "exemptions": 9020,
+          "agi_thousands": 637464,
+          "share_pct": 3.5
+        },
+        {
+          "from_state": "GA",
+          "returns": 5157,
+          "exemptions": 7926,
+          "agi_thousands": 452377,
+          "share_pct": 2.9
+        },
+        {
+          "from_state": "IL",
+          "returns": 4917,
+          "exemptions": 6274,
+          "agi_thousands": 594274,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "MD",
+          "returns": 4662,
+          "exemptions": 6509,
+          "agi_thousands": 419900,
+          "share_pct": 2.6
+        }
+      ]
+    },
+    {
+      "to_state": "OH",
+      "total_inbound_returns": 93633,
+      "top_origins": [
+        {
+          "from_state": "FL",
+          "returns": 10157,
+          "exemptions": 17046,
+          "agi_thousands": 856526,
+          "share_pct": 10.8
+        },
+        {
+          "from_state": "KY",
+          "returns": 6206,
+          "exemptions": 10244,
+          "agi_thousands": 358608,
+          "share_pct": 6.6
+        },
+        {
+          "from_state": "PA",
+          "returns": 6039,
+          "exemptions": 10061,
+          "agi_thousands": 395370,
+          "share_pct": 6.4
+        },
+        {
+          "from_state": "MI",
+          "returns": 5894,
+          "exemptions": 9633,
+          "agi_thousands": 385997,
+          "share_pct": 6.3
+        },
+        {
+          "from_state": "CA",
+          "returns": 5544,
+          "exemptions": 9480,
+          "agi_thousands": 551896,
+          "share_pct": 5.9
+        },
+        {
+          "from_state": "IN",
+          "returns": 5047,
+          "exemptions": 8417,
+          "agi_thousands": 299231,
+          "share_pct": 5.4
+        },
+        {
+          "from_state": "TX",
+          "returns": 5008,
+          "exemptions": 9101,
+          "agi_thousands": 385972,
+          "share_pct": 5.3
+        },
+        {
+          "from_state": "NY",
+          "returns": 4508,
+          "exemptions": 7954,
+          "agi_thousands": 342535,
+          "share_pct": 4.8
+        },
+        {
+          "from_state": "IL",
+          "returns": 3693,
+          "exemptions": 6121,
+          "agi_thousands": 751388,
+          "share_pct": 3.9
+        },
+        {
+          "from_state": "NC",
+          "returns": 3430,
+          "exemptions": 6044,
+          "agi_thousands": 226830,
+          "share_pct": 3.7
+        },
+        {
+          "from_state": "WV",
+          "returns": 3184,
+          "exemptions": 5526,
+          "agi_thousands": 195901,
+          "share_pct": 3.4
+        },
+        {
+          "from_state": "VA",
+          "returns": 2928,
+          "exemptions": 5438,
+          "agi_thousands": 238525,
+          "share_pct": 3.1
+        }
+      ]
+    },
+    {
+      "to_state": "OK",
+      "total_inbound_returns": 47743,
+      "top_origins": [
+        {
+          "from_state": "TX",
+          "returns": 11557,
+          "exemptions": 22323,
+          "agi_thousands": 791614,
+          "share_pct": 24.2
+        },
+        {
+          "from_state": "CA",
+          "returns": 5069,
+          "exemptions": 10301,
+          "agi_thousands": 335215,
+          "share_pct": 10.6
+        },
+        {
+          "from_state": "AR",
+          "returns": 2938,
+          "exemptions": 5786,
+          "agi_thousands": 136970,
+          "share_pct": 6.2
+        },
+        {
+          "from_state": "CO",
+          "returns": 2702,
+          "exemptions": 5164,
+          "agi_thousands": 187436,
+          "share_pct": 5.7
+        },
+        {
+          "from_state": "KS",
+          "returns": 2581,
+          "exemptions": 4843,
+          "agi_thousands": 149443,
+          "share_pct": 5.4
+        },
+        {
+          "from_state": "FL",
+          "returns": 2071,
+          "exemptions": 3777,
+          "agi_thousands": 114040,
+          "share_pct": 4.3
+        },
+        {
+          "from_state": "MO",
+          "returns": 1917,
+          "exemptions": 3594,
+          "agi_thousands": 98285,
+          "share_pct": 4
+        },
+        {
+          "from_state": "AZ",
+          "returns": 1527,
+          "exemptions": 3047,
+          "agi_thousands": 101369,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "WA",
+          "returns": 1284,
+          "exemptions": 2846,
+          "agi_thousands": 86398,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "IL",
+          "returns": 910,
+          "exemptions": 1745,
+          "agi_thousands": 63327,
+          "share_pct": 1.9
+        },
+        {
+          "from_state": "GA",
+          "returns": 907,
+          "exemptions": 1765,
+          "agi_thousands": 53561,
+          "share_pct": 1.9
+        },
+        {
+          "from_state": "NC",
+          "returns": 851,
+          "exemptions": 1663,
+          "agi_thousands": 58361,
+          "share_pct": 1.8
+        }
+      ]
+    },
+    {
+      "to_state": "OR",
+      "total_inbound_returns": 68554,
+      "top_origins": [
+        {
+          "from_state": "CA",
+          "returns": 19288,
+          "exemptions": 30421,
+          "agi_thousands": 2020478,
+          "share_pct": 28.1
+        },
+        {
+          "from_state": "WA",
+          "returns": 12358,
+          "exemptions": 19487,
+          "agi_thousands": 999758,
+          "share_pct": 18
+        },
+        {
+          "from_state": "AZ",
+          "returns": 3295,
+          "exemptions": 5231,
+          "agi_thousands": 234972,
+          "share_pct": 4.8
+        },
+        {
+          "from_state": "TX",
+          "returns": 3198,
+          "exemptions": 5224,
+          "agi_thousands": 301372,
+          "share_pct": 4.7
+        },
+        {
+          "from_state": "ID",
+          "returns": 2643,
+          "exemptions": 4645,
+          "agi_thousands": 141971,
+          "share_pct": 3.9
+        },
+        {
+          "from_state": "CO",
+          "returns": 2411,
+          "exemptions": 3605,
+          "agi_thousands": 205116,
+          "share_pct": 3.5
+        },
+        {
+          "from_state": "FL",
+          "returns": 1840,
+          "exemptions": 2823,
+          "agi_thousands": 120189,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "NV",
+          "returns": 1755,
+          "exemptions": 2901,
+          "agi_thousands": 120649,
+          "share_pct": 2.6
+        },
+        {
+          "from_state": "UT",
+          "returns": 1606,
+          "exemptions": 2720,
+          "agi_thousands": 108157,
+          "share_pct": 2.3
+        },
+        {
+          "from_state": "NY",
+          "returns": 1492,
+          "exemptions": 2075,
+          "agi_thousands": 145578,
+          "share_pct": 2.2
+        },
+        {
+          "from_state": "IL",
+          "returns": 1178,
+          "exemptions": 1701,
+          "agi_thousands": 101544,
+          "share_pct": 1.7
+        },
+        {
+          "from_state": "HI",
+          "returns": 1011,
+          "exemptions": 1764,
+          "agi_thousands": 65228,
+          "share_pct": 1.5
+        }
+      ]
+    },
+    {
+      "to_state": "PA",
+      "total_inbound_returns": 122586,
+      "top_origins": [
+        {
+          "from_state": "NY",
+          "returns": 21636,
+          "exemptions": 37906,
+          "agi_thousands": 1707418,
+          "share_pct": 17.6
+        },
+        {
+          "from_state": "NJ",
+          "returns": 18226,
+          "exemptions": 29552,
+          "agi_thousands": 1783751,
+          "share_pct": 14.9
+        },
+        {
+          "from_state": "FL",
+          "returns": 9878,
+          "exemptions": 16040,
+          "agi_thousands": 1062659,
+          "share_pct": 8.1
+        },
+        {
+          "from_state": "MD",
+          "returns": 8973,
+          "exemptions": 14734,
+          "agi_thousands": 720114,
+          "share_pct": 7.3
+        },
+        {
+          "from_state": "CA",
+          "returns": 6021,
+          "exemptions": 9561,
+          "agi_thousands": 686363,
+          "share_pct": 4.9
+        },
+        {
+          "from_state": "VA",
+          "returns": 5550,
+          "exemptions": 9170,
+          "agi_thousands": 489353,
+          "share_pct": 4.5
+        },
+        {
+          "from_state": "OH",
+          "returns": 4898,
+          "exemptions": 7910,
+          "agi_thousands": 316073,
+          "share_pct": 4
+        },
+        {
+          "from_state": "TX",
+          "returns": 4295,
+          "exemptions": 7541,
+          "agi_thousands": 362273,
+          "share_pct": 3.5
+        },
+        {
+          "from_state": "NC",
+          "returns": 4159,
+          "exemptions": 7183,
+          "agi_thousands": 272554,
+          "share_pct": 3.4
+        },
+        {
+          "from_state": "DE",
+          "returns": 3691,
+          "exemptions": 6096,
+          "agi_thousands": 371336,
+          "share_pct": 3
+        },
+        {
+          "from_state": "MA",
+          "returns": 3022,
+          "exemptions": 4631,
+          "agi_thousands": 290336,
+          "share_pct": 2.5
+        },
+        {
+          "from_state": "GA",
+          "returns": 2504,
+          "exemptions": 4297,
+          "agi_thousands": 175049,
+          "share_pct": 2
+        }
+      ]
+    },
+    {
+      "to_state": "RI",
+      "total_inbound_returns": 17611,
+      "top_origins": [
+        {
+          "from_state": "MA",
+          "returns": 6857,
+          "exemptions": 10255,
+          "agi_thousands": 605529,
+          "share_pct": 38.9
+        },
+        {
+          "from_state": "NY",
+          "returns": 1594,
+          "exemptions": 2478,
+          "agi_thousands": 200595,
+          "share_pct": 9.1
+        },
+        {
+          "from_state": "CT",
+          "returns": 1453,
+          "exemptions": 2127,
+          "agi_thousands": 151211,
+          "share_pct": 8.3
+        },
+        {
+          "from_state": "FL",
+          "returns": 1391,
+          "exemptions": 2232,
+          "agi_thousands": 110215,
+          "share_pct": 7.9
+        },
+        {
+          "from_state": "CA",
+          "returns": 850,
+          "exemptions": 1363,
+          "agi_thousands": 94105,
+          "share_pct": 4.8
+        },
+        {
+          "from_state": "NJ",
+          "returns": 471,
+          "exemptions": 720,
+          "agi_thousands": 65185,
+          "share_pct": 2.7
+        },
+        {
+          "from_state": "PA",
+          "returns": 396,
+          "exemptions": 618,
+          "agi_thousands": 43669,
+          "share_pct": 2.2
+        },
+        {
+          "from_state": "TX",
+          "returns": 395,
+          "exemptions": 648,
+          "agi_thousands": 32553,
+          "share_pct": 2.2
+        },
+        {
+          "from_state": "VA",
+          "returns": 377,
+          "exemptions": 696,
+          "agi_thousands": 36224,
+          "share_pct": 2.1
+        },
+        {
+          "from_state": "NC",
+          "returns": 326,
+          "exemptions": 546,
+          "agi_thousands": 20573,
+          "share_pct": 1.9
+        },
+        {
+          "from_state": "NH",
+          "returns": 296,
+          "exemptions": 450,
+          "agi_thousands": 24303,
+          "share_pct": 1.7
+        },
+        {
+          "from_state": "GA",
+          "returns": 227,
+          "exemptions": 419,
+          "agi_thousands": 16776,
+          "share_pct": 1.3
+        }
+      ]
+    },
+    {
+      "to_state": "SC",
+      "total_inbound_returns": 101296,
+      "top_origins": [
+        {
+          "from_state": "NC",
+          "returns": 17933,
+          "exemptions": 32901,
+          "agi_thousands": 1476329,
+          "share_pct": 17.7
+        },
+        {
+          "from_state": "GA",
+          "returns": 8996,
+          "exemptions": 16349,
+          "agi_thousands": 835286,
+          "share_pct": 8.9
+        },
+        {
+          "from_state": "FL",
+          "returns": 8412,
+          "exemptions": 15000,
+          "agi_thousands": 667233,
+          "share_pct": 8.3
+        },
+        {
+          "from_state": "NY",
+          "returns": 8087,
+          "exemptions": 14971,
+          "agi_thousands": 792205,
+          "share_pct": 8
+        },
+        {
+          "from_state": "VA",
+          "returns": 4967,
+          "exemptions": 9205,
+          "agi_thousands": 561788,
+          "share_pct": 4.9
+        },
+        {
+          "from_state": "CA",
+          "returns": 4851,
+          "exemptions": 9949,
+          "agi_thousands": 534271,
+          "share_pct": 4.8
+        },
+        {
+          "from_state": "PA",
+          "returns": 4523,
+          "exemptions": 8309,
+          "agi_thousands": 463111,
+          "share_pct": 4.5
+        },
+        {
+          "from_state": "NJ",
+          "returns": 4005,
+          "exemptions": 7582,
+          "agi_thousands": 499109,
+          "share_pct": 4
+        },
+        {
+          "from_state": "TX",
+          "returns": 3602,
+          "exemptions": 7087,
+          "agi_thousands": 335584,
+          "share_pct": 3.6
+        },
+        {
+          "from_state": "OH",
+          "returns": 3166,
+          "exemptions": 5689,
+          "agi_thousands": 308259,
+          "share_pct": 3.1
+        },
+        {
+          "from_state": "MD",
+          "returns": 2832,
+          "exemptions": 5057,
+          "agi_thousands": 307066,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "TN",
+          "returns": 2364,
+          "exemptions": 4373,
+          "agi_thousands": 190547,
+          "share_pct": 2.3
+        }
+      ]
+    },
+    {
+      "to_state": "SD",
+      "total_inbound_returns": 16777,
+      "top_origins": [
+        {
+          "from_state": "MN",
+          "returns": 2166,
+          "exemptions": 3665,
+          "agi_thousands": 238422,
+          "share_pct": 12.9
+        },
+        {
+          "from_state": "CA",
+          "returns": 1479,
+          "exemptions": 2788,
+          "agi_thousands": 144801,
+          "share_pct": 8.8
+        },
+        {
+          "from_state": "IA",
+          "returns": 1243,
+          "exemptions": 2104,
+          "agi_thousands": 114687,
+          "share_pct": 7.4
+        },
+        {
+          "from_state": "CO",
+          "returns": 1160,
+          "exemptions": 2027,
+          "agi_thousands": 106902,
+          "share_pct": 6.9
+        },
+        {
+          "from_state": "NE",
+          "returns": 990,
+          "exemptions": 1717,
+          "agi_thousands": 71175,
+          "share_pct": 5.9
+        },
+        {
+          "from_state": "TX",
+          "returns": 804,
+          "exemptions": 1518,
+          "agi_thousands": 66085,
+          "share_pct": 4.8
+        },
+        {
+          "from_state": "AZ",
+          "returns": 699,
+          "exemptions": 1230,
+          "agi_thousands": 66904,
+          "share_pct": 4.2
+        },
+        {
+          "from_state": "ND",
+          "returns": 664,
+          "exemptions": 1172,
+          "agi_thousands": 41194,
+          "share_pct": 4
+        },
+        {
+          "from_state": "WA",
+          "returns": 605,
+          "exemptions": 1185,
+          "agi_thousands": 64843,
+          "share_pct": 3.6
+        },
+        {
+          "from_state": "FL",
+          "returns": 542,
+          "exemptions": 960,
+          "agi_thousands": 34078,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "WY",
+          "returns": 465,
+          "exemptions": 828,
+          "agi_thousands": 27828,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "IL",
+          "returns": 364,
+          "exemptions": 661,
+          "agi_thousands": 44497,
+          "share_pct": 2.2
+        }
+      ]
+    },
+    {
+      "to_state": "TN",
+      "total_inbound_returns": 119082,
+      "top_origins": [
+        {
+          "from_state": "CA",
+          "returns": 13086,
+          "exemptions": 27295,
+          "agi_thousands": 1891495,
+          "share_pct": 11
+        },
+        {
+          "from_state": "FL",
+          "returns": 12192,
+          "exemptions": 21485,
+          "agi_thousands": 1118667,
+          "share_pct": 10.2
+        },
+        {
+          "from_state": "GA",
+          "returns": 8198,
+          "exemptions": 14329,
+          "agi_thousands": 613331,
+          "share_pct": 6.9
+        },
+        {
+          "from_state": "TX",
+          "returns": 6766,
+          "exemptions": 12783,
+          "agi_thousands": 676075,
+          "share_pct": 5.7
+        },
+        {
+          "from_state": "IL",
+          "returns": 5996,
+          "exemptions": 10855,
+          "agi_thousands": 732241,
+          "share_pct": 5
+        },
+        {
+          "from_state": "KY",
+          "returns": 5522,
+          "exemptions": 9782,
+          "agi_thousands": 329043,
+          "share_pct": 4.6
+        },
+        {
+          "from_state": "MS",
+          "returns": 5414,
+          "exemptions": 9443,
+          "agi_thousands": 285691,
+          "share_pct": 4.5
+        },
+        {
+          "from_state": "NC",
+          "returns": 5123,
+          "exemptions": 9022,
+          "agi_thousands": 453264,
+          "share_pct": 4.3
+        },
+        {
+          "from_state": "VA",
+          "returns": 4385,
+          "exemptions": 8036,
+          "agi_thousands": 362035,
+          "share_pct": 3.7
+        },
+        {
+          "from_state": "NY",
+          "returns": 4345,
+          "exemptions": 7628,
+          "agi_thousands": 455765,
+          "share_pct": 3.6
+        },
+        {
+          "from_state": "AL",
+          "returns": 4344,
+          "exemptions": 7603,
+          "agi_thousands": 284335,
+          "share_pct": 3.6
+        },
+        {
+          "from_state": "OH",
+          "returns": 3389,
+          "exemptions": 5682,
+          "agi_thousands": 296166,
+          "share_pct": 2.8
+        }
+      ]
+    },
+    {
+      "to_state": "TX",
+      "total_inbound_returns": 327817,
+      "top_origins": [
+        {
+          "from_state": "CA",
+          "returns": 54136,
+          "exemptions": 106882,
+          "agi_thousands": 7901692,
+          "share_pct": 16.5
+        },
+        {
+          "from_state": "FL",
+          "returns": 22277,
+          "exemptions": 38873,
+          "agi_thousands": 1796256,
+          "share_pct": 6.8
+        },
+        {
+          "from_state": "LA",
+          "returns": 16310,
+          "exemptions": 30399,
+          "agi_thousands": 865060,
+          "share_pct": 5
+        },
+        {
+          "from_state": "NY",
+          "returns": 13947,
+          "exemptions": 24451,
+          "agi_thousands": 1526747,
+          "share_pct": 4.3
+        },
+        {
+          "from_state": "CO",
+          "returns": 13576,
+          "exemptions": 25101,
+          "agi_thousands": 1155672,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "IL",
+          "returns": 13495,
+          "exemptions": 25045,
+          "agi_thousands": 1613347,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "WA",
+          "returns": 11775,
+          "exemptions": 24308,
+          "agi_thousands": 1436506,
+          "share_pct": 3.6
+        },
+        {
+          "from_state": "AZ",
+          "returns": 10929,
+          "exemptions": 20474,
+          "agi_thousands": 1084203,
+          "share_pct": 3.3
+        },
+        {
+          "from_state": "GA",
+          "returns": 10270,
+          "exemptions": 18960,
+          "agi_thousands": 767799,
+          "share_pct": 3.1
+        },
+        {
+          "from_state": "OK",
+          "returns": 10188,
+          "exemptions": 18770,
+          "agi_thousands": 683085,
+          "share_pct": 3.1
+        },
+        {
+          "from_state": "VA",
+          "returns": 9281,
+          "exemptions": 18001,
+          "agi_thousands": 944404,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "NC",
+          "returns": 8541,
+          "exemptions": 16026,
+          "agi_thousands": 685811,
+          "share_pct": 2.6
+        }
+      ]
+    },
+    {
+      "to_state": "UT",
+      "total_inbound_returns": 45128,
+      "top_origins": [
+        {
+          "from_state": "CA",
+          "returns": 8863,
+          "exemptions": 16645,
+          "agi_thousands": 1394119,
+          "share_pct": 19.6
+        },
+        {
+          "from_state": "AZ",
+          "returns": 3175,
+          "exemptions": 6262,
+          "agi_thousands": 288781,
+          "share_pct": 7
+        },
+        {
+          "from_state": "ID",
+          "returns": 3153,
+          "exemptions": 6102,
+          "agi_thousands": 174392,
+          "share_pct": 7
+        },
+        {
+          "from_state": "TX",
+          "returns": 2913,
+          "exemptions": 5883,
+          "agi_thousands": 297223,
+          "share_pct": 6.5
+        },
+        {
+          "from_state": "NV",
+          "returns": 2715,
+          "exemptions": 5302,
+          "agi_thousands": 247433,
+          "share_pct": 6
+        },
+        {
+          "from_state": "CO",
+          "returns": 2446,
+          "exemptions": 4321,
+          "agi_thousands": 205675,
+          "share_pct": 5.4
+        },
+        {
+          "from_state": "WA",
+          "returns": 2255,
+          "exemptions": 4433,
+          "agi_thousands": 209013,
+          "share_pct": 5
+        },
+        {
+          "from_state": "FL",
+          "returns": 1785,
+          "exemptions": 3151,
+          "agi_thousands": 183578,
+          "share_pct": 4
+        },
+        {
+          "from_state": "OR",
+          "returns": 1325,
+          "exemptions": 2361,
+          "agi_thousands": 117210,
+          "share_pct": 2.9
+        },
+        {
+          "from_state": "NY",
+          "returns": 1035,
+          "exemptions": 1588,
+          "agi_thousands": 162821,
+          "share_pct": 2.3
+        },
+        {
+          "from_state": "WY",
+          "returns": 844,
+          "exemptions": 1570,
+          "agi_thousands": 102536,
+          "share_pct": 1.9
+        },
+        {
+          "from_state": "IL",
+          "returns": 833,
+          "exemptions": 1355,
+          "agi_thousands": 148505,
+          "share_pct": 1.8
+        }
+      ]
+    },
+    {
+      "to_state": "VA",
+      "total_inbound_returns": 133320,
+      "top_origins": [
+        {
+          "from_state": "MD",
+          "returns": 15104,
+          "exemptions": 24637,
+          "agi_thousands": 1287218,
+          "share_pct": 11.3
+        },
+        {
+          "from_state": "NC",
+          "returns": 12070,
+          "exemptions": 21942,
+          "agi_thousands": 869024,
+          "share_pct": 9.1
+        },
+        {
+          "from_state": "FL",
+          "returns": 11342,
+          "exemptions": 20073,
+          "agi_thousands": 902350,
+          "share_pct": 8.5
+        },
+        {
+          "from_state": "CA",
+          "returns": 9500,
+          "exemptions": 17848,
+          "agi_thousands": 1060789,
+          "share_pct": 7.1
+        },
+        {
+          "from_state": "NY",
+          "returns": 8350,
+          "exemptions": 13806,
+          "agi_thousands": 719985,
+          "share_pct": 6.3
+        },
+        {
+          "from_state": "TX",
+          "returns": 7415,
+          "exemptions": 13895,
+          "agi_thousands": 717243,
+          "share_pct": 5.6
+        },
+        {
+          "from_state": "DC",
+          "returns": 6481,
+          "exemptions": 9136,
+          "agi_thousands": 888469,
+          "share_pct": 4.9
+        },
+        {
+          "from_state": "PA",
+          "returns": 6274,
+          "exemptions": 10147,
+          "agi_thousands": 493873,
+          "share_pct": 4.7
+        },
+        {
+          "from_state": "GA",
+          "returns": 4621,
+          "exemptions": 8322,
+          "agi_thousands": 341295,
+          "share_pct": 3.5
+        },
+        {
+          "from_state": "NJ",
+          "returns": 4095,
+          "exemptions": 6926,
+          "agi_thousands": 364682,
+          "share_pct": 3.1
+        },
+        {
+          "from_state": "SC",
+          "returns": 3672,
+          "exemptions": 6449,
+          "agi_thousands": 267054,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "TN",
+          "returns": 3415,
+          "exemptions": 6160,
+          "agi_thousands": 239688,
+          "share_pct": 2.6
+        }
+      ]
+    },
+    {
+      "to_state": "VT",
+      "total_inbound_returns": 11706,
+      "top_origins": [
+        {
+          "from_state": "NY",
+          "returns": 1653,
+          "exemptions": 2451,
+          "agi_thousands": 168404,
+          "share_pct": 14.1
+        },
+        {
+          "from_state": "MA",
+          "returns": 1591,
+          "exemptions": 2439,
+          "agi_thousands": 202321,
+          "share_pct": 13.6
+        },
+        {
+          "from_state": "NH",
+          "returns": 1267,
+          "exemptions": 2021,
+          "agi_thousands": 102635,
+          "share_pct": 10.8
+        },
+        {
+          "from_state": "FL",
+          "returns": 786,
+          "exemptions": 1272,
+          "agi_thousands": 82929,
+          "share_pct": 6.7
+        },
+        {
+          "from_state": "CT",
+          "returns": 601,
+          "exemptions": 941,
+          "agi_thousands": 71516,
+          "share_pct": 5.1
+        },
+        {
+          "from_state": "CA",
+          "returns": 580,
+          "exemptions": 978,
+          "agi_thousands": 72722,
+          "share_pct": 5
+        },
+        {
+          "from_state": "NJ",
+          "returns": 434,
+          "exemptions": 691,
+          "agi_thousands": 67799,
+          "share_pct": 3.7
+        },
+        {
+          "from_state": "PA",
+          "returns": 396,
+          "exemptions": 601,
+          "agi_thousands": 34067,
+          "share_pct": 3.4
+        },
+        {
+          "from_state": "CO",
+          "returns": 361,
+          "exemptions": 585,
+          "agi_thousands": 32003,
+          "share_pct": 3.1
+        },
+        {
+          "from_state": "TX",
+          "returns": 322,
+          "exemptions": 599,
+          "agi_thousands": 30598,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "ME",
+          "returns": 297,
+          "exemptions": 414,
+          "agi_thousands": 17415,
+          "share_pct": 2.5
+        },
+        {
+          "from_state": "NC",
+          "returns": 281,
+          "exemptions": 459,
+          "agi_thousands": 20193,
+          "share_pct": 2.4
+        }
+      ]
+    },
+    {
+      "to_state": "WA",
+      "total_inbound_returns": 125668,
+      "top_origins": [
+        {
+          "from_state": "CA",
+          "returns": 27550,
+          "exemptions": 44160,
+          "agi_thousands": 3854988,
+          "share_pct": 21.9
+        },
+        {
+          "from_state": "OR",
+          "returns": 15880,
+          "exemptions": 25470,
+          "agi_thousands": 1611384,
+          "share_pct": 12.6
+        },
+        {
+          "from_state": "TX",
+          "returns": 8801,
+          "exemptions": 15167,
+          "agi_thousands": 872113,
+          "share_pct": 7
+        },
+        {
+          "from_state": "AZ",
+          "returns": 5554,
+          "exemptions": 9125,
+          "agi_thousands": 592338,
+          "share_pct": 4.4
+        },
+        {
+          "from_state": "ID",
+          "returns": 5154,
+          "exemptions": 8789,
+          "agi_thousands": 339278,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "FL",
+          "returns": 4761,
+          "exemptions": 7653,
+          "agi_thousands": 388204,
+          "share_pct": 3.8
+        },
+        {
+          "from_state": "CO",
+          "returns": 4149,
+          "exemptions": 6473,
+          "agi_thousands": 364142,
+          "share_pct": 3.3
+        },
+        {
+          "from_state": "NY",
+          "returns": 3641,
+          "exemptions": 5160,
+          "agi_thousands": 394496,
+          "share_pct": 2.9
+        },
+        {
+          "from_state": "IL",
+          "returns": 2981,
+          "exemptions": 4403,
+          "agi_thousands": 452895,
+          "share_pct": 2.4
+        },
+        {
+          "from_state": "VA",
+          "returns": 2794,
+          "exemptions": 4917,
+          "agi_thousands": 283741,
+          "share_pct": 2.2
+        },
+        {
+          "from_state": "NV",
+          "returns": 2792,
+          "exemptions": 4738,
+          "agi_thousands": 237969,
+          "share_pct": 2.2
+        },
+        {
+          "from_state": "HI",
+          "returns": 2497,
+          "exemptions": 4657,
+          "agi_thousands": 188035,
+          "share_pct": 2
+        }
+      ]
+    },
+    {
+      "to_state": "WI",
+      "total_inbound_returns": 55623,
+      "top_origins": [
+        {
+          "from_state": "IL",
+          "returns": 11277,
+          "exemptions": 18232,
+          "agi_thousands": 1004223,
+          "share_pct": 20.3
+        },
+        {
+          "from_state": "MN",
+          "returns": 8211,
+          "exemptions": 13191,
+          "agi_thousands": 673310,
+          "share_pct": 14.8
+        },
+        {
+          "from_state": "FL",
+          "returns": 3503,
+          "exemptions": 5675,
+          "agi_thousands": 320662,
+          "share_pct": 6.3
+        },
+        {
+          "from_state": "CA",
+          "returns": 3176,
+          "exemptions": 5435,
+          "agi_thousands": 308833,
+          "share_pct": 5.7
+        },
+        {
+          "from_state": "TX",
+          "returns": 2705,
+          "exemptions": 4921,
+          "agi_thousands": 196907,
+          "share_pct": 4.9
+        },
+        {
+          "from_state": "MI",
+          "returns": 2546,
+          "exemptions": 3984,
+          "agi_thousands": 152098,
+          "share_pct": 4.6
+        },
+        {
+          "from_state": "AZ",
+          "returns": 2093,
+          "exemptions": 3630,
+          "agi_thousands": 161446,
+          "share_pct": 3.8
+        },
+        {
+          "from_state": "CO",
+          "returns": 1862,
+          "exemptions": 3063,
+          "agi_thousands": 143380,
+          "share_pct": 3.3
+        },
+        {
+          "from_state": "IA",
+          "returns": 1691,
+          "exemptions": 2778,
+          "agi_thousands": 112124,
+          "share_pct": 3
+        },
+        {
+          "from_state": "IN",
+          "returns": 1178,
+          "exemptions": 2016,
+          "agi_thousands": 92826,
+          "share_pct": 2.1
+        },
+        {
+          "from_state": "WA",
+          "returns": 1130,
+          "exemptions": 2009,
+          "agi_thousands": 105977,
+          "share_pct": 2
+        },
+        {
+          "from_state": "NY",
+          "returns": 1119,
+          "exemptions": 1727,
+          "agi_thousands": 91717,
+          "share_pct": 2
+        }
+      ]
+    },
+    {
+      "to_state": "WV",
+      "total_inbound_returns": 20532,
+      "top_origins": [
+        {
+          "from_state": "VA",
+          "returns": 3686,
+          "exemptions": 6650,
+          "agi_thousands": 249869,
+          "share_pct": 18
+        },
+        {
+          "from_state": "OH",
+          "returns": 2627,
+          "exemptions": 4510,
+          "agi_thousands": 113145,
+          "share_pct": 12.8
+        },
+        {
+          "from_state": "MD",
+          "returns": 2517,
+          "exemptions": 4545,
+          "agi_thousands": 181183,
+          "share_pct": 12.3
+        },
+        {
+          "from_state": "PA",
+          "returns": 1961,
+          "exemptions": 3201,
+          "agi_thousands": 118575,
+          "share_pct": 9.6
+        },
+        {
+          "from_state": "FL",
+          "returns": 1416,
+          "exemptions": 2506,
+          "agi_thousands": 80226,
+          "share_pct": 6.9
+        },
+        {
+          "from_state": "NC",
+          "returns": 1102,
+          "exemptions": 1985,
+          "agi_thousands": 56512,
+          "share_pct": 5.4
+        },
+        {
+          "from_state": "KY",
+          "returns": 655,
+          "exemptions": 1210,
+          "agi_thousands": 22174,
+          "share_pct": 3.2
+        },
+        {
+          "from_state": "TX",
+          "returns": 607,
+          "exemptions": 1184,
+          "agi_thousands": 44903,
+          "share_pct": 3
+        },
+        {
+          "from_state": "CA",
+          "returns": 534,
+          "exemptions": 952,
+          "agi_thousands": 46964,
+          "share_pct": 2.6
+        },
+        {
+          "from_state": "NY",
+          "returns": 460,
+          "exemptions": 802,
+          "agi_thousands": 29428,
+          "share_pct": 2.2
+        },
+        {
+          "from_state": "SC",
+          "returns": 447,
+          "exemptions": 814,
+          "agi_thousands": 28075,
+          "share_pct": 2.2
+        },
+        {
+          "from_state": "TN",
+          "returns": 404,
+          "exemptions": 731,
+          "agi_thousands": 23629,
+          "share_pct": 2
+        }
+      ]
+    },
+    {
+      "to_state": "WY",
+      "total_inbound_returns": 13421,
+      "top_origins": [
+        {
+          "from_state": "CO",
+          "returns": 2443,
+          "exemptions": 4260,
+          "agi_thousands": 257278,
+          "share_pct": 18.2
+        },
+        {
+          "from_state": "CA",
+          "returns": 1368,
+          "exemptions": 2498,
+          "agi_thousands": 388694,
+          "share_pct": 10.2
+        },
+        {
+          "from_state": "UT",
+          "returns": 823,
+          "exemptions": 1619,
+          "agi_thousands": 78366,
+          "share_pct": 6.1
+        },
+        {
+          "from_state": "TX",
+          "returns": 720,
+          "exemptions": 1375,
+          "agi_thousands": 66698,
+          "share_pct": 5.4
+        },
+        {
+          "from_state": "MT",
+          "returns": 607,
+          "exemptions": 1116,
+          "agi_thousands": 43887,
+          "share_pct": 4.5
+        },
+        {
+          "from_state": "WA",
+          "returns": 602,
+          "exemptions": 1203,
+          "agi_thousands": 171655,
+          "share_pct": 4.5
+        },
+        {
+          "from_state": "AZ",
+          "returns": 547,
+          "exemptions": 991,
+          "agi_thousands": 85105,
+          "share_pct": 4.1
+        },
+        {
+          "from_state": "ID",
+          "returns": 504,
+          "exemptions": 1010,
+          "agi_thousands": 34582,
+          "share_pct": 3.8
+        },
+        {
+          "from_state": "OR",
+          "returns": 408,
+          "exemptions": 765,
+          "agi_thousands": 33990,
+          "share_pct": 3
+        },
+        {
+          "from_state": "FL",
+          "returns": 405,
+          "exemptions": 702,
+          "agi_thousands": 33022,
+          "share_pct": 3
+        },
+        {
+          "from_state": "SD",
+          "returns": 381,
+          "exemptions": 659,
+          "agi_thousands": 25419,
+          "share_pct": 2.8
+        },
+        {
+          "from_state": "NE",
+          "returns": 340,
+          "exemptions": 623,
+          "agi_thousands": 23294,
+          "share_pct": 2.5
+        }
+      ]
+    }
+  ]
+}

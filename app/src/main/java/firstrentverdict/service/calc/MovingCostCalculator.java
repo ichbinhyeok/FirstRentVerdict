@@ -18,10 +18,19 @@ public class MovingCostCalculator {
      */
     public int calculateCost(boolean isLocalMove, double distanceMiles, MovingData.CityMoving localData) {
         if (isLocalMove || distanceMiles < 50) {
+            if (localData == null) {
+                return estimateLongDistanceCost(Math.max(distanceMiles, 50));
+            }
             return localData.typical();
         }
 
-        // Long distance formula
+        return estimateLongDistanceCost(distanceMiles);
+    }
+
+    /**
+     * Canonical long-distance estimate used by both simulation and pSEO pages.
+     */
+    public int estimateLongDistanceCost(double distanceMiles) {
         return (int) (BASE_COST + (distanceMiles * RATE_PER_MILE) + ONE_BR_WEIGHT_FACTOR);
     }
 }

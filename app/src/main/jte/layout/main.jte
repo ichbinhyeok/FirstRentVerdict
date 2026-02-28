@@ -98,8 +98,9 @@
                 });
             }
 
-            const isExternalHttp = /^https?:\/\//i.test(href);
-            const isMailOrTel = /^(mailto:|tel:)/i.test(href);
+            const lowerHref = href.toLowerCase();
+            const isExternalHttp = lowerHref.startsWith('http://') || lowerHref.startsWith('https://');
+            const isMailOrTel = lowerHref.startsWith('mailto:') || lowerHref.startsWith('tel:');
             if (isExternalHttp || isMailOrTel) {
                 if (customEvent !== 'outbound_click') {
                     window.frvTrack('outbound_click', {

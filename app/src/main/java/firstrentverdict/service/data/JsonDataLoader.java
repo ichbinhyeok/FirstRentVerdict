@@ -3,6 +3,8 @@ package firstrentverdict.service.data;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import firstrentverdict.model.dtos.*;
 import firstrentverdict.repository.VerdictDataRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,8 @@ import java.util.List;
 
 @Service
 public class JsonDataLoader implements CommandLineRunner {
+
+    private static final Logger log = LoggerFactory.getLogger(JsonDataLoader.class);
 
     private final VerdictDataRepository repository;
     private final ObjectMapper objectMapper;
@@ -31,51 +35,63 @@ public class JsonDataLoader implements CommandLineRunner {
         loadCashBufferData();
         loadCityCoordinates();
         loadCityInsights();
+        loadCityEconomicFacts();
+        loadStateMigrationFlows();
 
-        System.out.println("✅ Data Loading Complete. Total cities supported: " + repository.getAllCities().size());
+        log.info("Data loading complete. Total cities supported: {}", repository.getAllCities().size());
     }
 
     private void loadCities() throws Exception {
-        ClassPathResource resource = new ClassPathResource("data/cities.json");
-        if (resource.exists()) {
-            try (InputStream is = resource.getInputStream()) {
-                CitiesData data = objectMapper.readValue(is, CitiesData.class);
-                data.cities().forEach(repository::addCity);
-                System.out.println("Loaded " + data.cities().size() + " cities.");
-            }
-        } else {
-            System.err.println("❌ cities.json not found!");
+        CitiesData data = readRequired("cities data", CitiesData.class, "data/cities.json");
+        data.cities().forEach(repository::addCity);
+        log.info("Loaded {} cities.", data.cities().size());
+    }
+
+    private <T> T readRequired(String label, Class<T> type, String... candidatePaths) throws Exception {
+        T data = readOptional(label, type, candidatePaths);
+        if (data == null) {
+            throw new IllegalStateException("Missing required resource for " + label);
         }
+        return data;
+    }
+
+    private <T> T readOptional(String label, Class<T> type, String... candidatePaths) throws Exception {
+        for (String path : candidatePaths) {
+            ClassPathResource resource = new ClassPathResource(path);
+            if (resource.exists()) {
+                try (InputStream is = resource.getInputStream()) {
+                    log.info("Loading {} from {}", label, path);
+                    return objectMapper.readValue(is, type);
+                }
+            }
+        }
+        log.warn("Could not find {}. Tried: {}", label, java.util.Arrays.toString(candidatePaths));
+        return null;
     }
 
     private void loadRentData() throws Exception {
-        ClassPathResource resource = new ClassPathResource("data/rent_data.json");
-        if (resource.exists()) {
-            try (InputStream is = resource.getInputStream()) {
-                RentData data = objectMapper.readValue(is, RentData.class);
-                data.cities().forEach(repository::addRent);
-                System.out.println("Loaded rent data for " + data.cities().size() + " cities.");
-            }
-        }
+        RentData data = readRequired("rent data", RentData.class, "data/rent_data.json");
+        data.cities().forEach(repository::addRent);
+        log.info("Loaded rent data for {} cities.", data.cities().size());
     }
 
     private void loadSecurityDepositData() throws Exception {
-        ClassPathResource resource = new ClassPathResource("data/security_deposit.json");
-        if (resource.exists()) {
-            try (InputStream is = resource.getInputStream()) {
-                SecurityDepositWrapper wrapper = objectMapper.readValue(is, SecurityDepositWrapper.class);
+        SecurityDepositWrapper wrapper = readRequired(
+                "security deposit data",
+                SecurityDepositWrapper.class,
+                "data/security_deposit.json");
 
-                if (wrapper.state_laws() != null) {
-                    wrapper.state_laws().forEach(repository::addStateLaw);
-                }
-
-                if (wrapper.cities() != null) {
-                    wrapper.cities().forEach(repository::addSecurityDeposit);
-                }
-                System.out.println("Loaded security deposit data for " + wrapper.cities().size() + " cities and "
-                        + (wrapper.state_laws() != null ? wrapper.state_laws().size() : 0) + " states.");
-            }
+        if (wrapper.state_laws() != null) {
+            wrapper.state_laws().forEach(repository::addStateLaw);
         }
+
+        if (wrapper.cities() != null) {
+            wrapper.cities().forEach(repository::addSecurityDeposit);
+        }
+        log.info(
+                "Loaded security deposit data for {} cities and {} states.",
+                wrapper.cities() != null ? wrapper.cities().size() : 0,
+                wrapper.state_laws() != null ? wrapper.state_laws().size() : 0);
     }
 
     @com.fasterxml.jackson.annotation.JsonIgnoreProperties(ignoreUnknown = true)
@@ -85,59 +101,74 @@ public class JsonDataLoader implements CommandLineRunner {
     }
 
     private void loadMovingData() throws Exception {
-        ClassPathResource resource = new ClassPathResource("data/moving_data.json");
-        if (resource.exists()) {
-            try (InputStream is = resource.getInputStream()) {
-                MovingData data = objectMapper.readValue(is, MovingData.class);
-                data.cities().forEach(repository::addMoving);
-                System.out.println("Loaded moving data for " + data.cities().size() + " cities.");
-            }
-        }
+        MovingData data = readRequired("moving data", MovingData.class, "data/moving_data.json");
+        data.cities().forEach(repository::addMoving);
+        log.info("Loaded moving data for {} cities.", data.cities().size());
     }
 
     private void loadPetData() throws Exception {
-        ClassPathResource resource = new ClassPathResource("data/pet_data.json");
-        if (resource.exists()) {
-            try (InputStream is = resource.getInputStream()) {
-                PetData data = objectMapper.readValue(is, PetData.class);
-                data.cities().forEach(repository::addPet);
-                System.out.println("Loaded pet data for " + data.cities().size() + " cities.");
-            }
-        }
+        PetData data = readRequired("pet data", PetData.class, "data/pet_data.json");
+        data.cities().forEach(repository::addPet);
+        log.info("Loaded pet data for {} cities.", data.cities().size());
     }
 
     private void loadCashBufferData() throws Exception {
-        ClassPathResource resource = new ClassPathResource("data/cash_buffer.json");
-        if (resource.exists()) {
-            try (InputStream is = resource.getInputStream()) {
-                CashBufferData data = objectMapper.readValue(is, CashBufferData.class);
-                data.cities().forEach(repository::addCashBuffer);
-                System.out.println("Loaded cash buffer data for " + data.cities().size() + " cities.");
-            }
-        }
+        CashBufferData data = readRequired("cash buffer data", CashBufferData.class, "data/cash_buffer.json");
+        data.cities().forEach(repository::addCashBuffer);
+        log.info("Loaded cash buffer data for {} cities.", data.cities().size());
     }
 
     private void loadCityCoordinates() throws Exception {
-        ClassPathResource resource = new ClassPathResource("data/city_coordinates.json");
-        if (resource.exists()) {
-            try (InputStream is = resource.getInputStream()) {
-                CityCoordinates data = objectMapper.readValue(is, CityCoordinates.class);
-                data.cities().forEach(repository::addCityCoordinate);
-                System.out.println("Loaded coordinates for " + data.cities().size() + " cities.");
-            }
-        } else {
-            System.err.println("❌ city_coordinates.json not found!");
-        }
+        CityCoordinates data = readRequired("city coordinates", CityCoordinates.class, "data/city_coordinates.json");
+        data.cities().forEach(repository::addCityCoordinate);
+        log.info("Loaded coordinates for {} cities.", data.cities().size());
     }
 
     private void loadCityInsights() throws Exception {
-        ClassPathResource resource = new ClassPathResource("data/city_insights.json");
-        if (resource.exists()) {
-            try (InputStream is = resource.getInputStream()) {
-                CityInsightData data = objectMapper.readValue(is, CityInsightData.class);
-                data.data().forEach(repository::addCityInsight);
-                System.out.println("Loaded qualitative insights for " + data.data().size() + " cities.");
-            }
+        CityInsightData data = readOptional(
+                "city insights",
+                CityInsightData.class,
+                "data/city_insights.json");
+
+        if (data == null || data.data() == null || data.data().isEmpty()) {
+            log.warn("City insights were not loaded; SEO pages will use generic local insights.");
+            return;
         }
+
+        data.data().forEach(repository::addCityInsight);
+        log.info("Loaded qualitative insights for {} cities.", data.data().size());
+    }
+
+    private void loadCityEconomicFacts() throws Exception {
+        CityEconomicFactsData data = readOptional(
+                "city economic facts",
+                CityEconomicFactsData.class,
+                "data/city_economic_facts.json");
+
+        if (data == null || data.cities() == null || data.cities().isEmpty()) {
+            log.warn("City economic facts were not loaded; SEO pages will use base market metrics only.");
+            return;
+        }
+
+        data.cities().stream()
+                .filter(fact -> fact.missingReason() == null)
+                .forEach(repository::addCityEconomicFact);
+
+        log.info("Loaded economic facts for {} cities.", data.cities().size());
+    }
+
+    private void loadStateMigrationFlows() throws Exception {
+        StateMigrationFlowsData data = readOptional(
+                "state migration flows",
+                StateMigrationFlowsData.class,
+                "data/state_migration_flows.json");
+
+        if (data == null || data.states() == null || data.states().isEmpty()) {
+            log.warn("State migration flows were not loaded; moving-pair sitemap uses fallback selection.");
+            return;
+        }
+
+        data.states().forEach(repository::addStateMigrationFlow);
+        log.info("Loaded migration flows for {} destination states.", data.states().size());
     }
 }

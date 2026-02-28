@@ -3,6 +3,7 @@ package firstrentverdict.service.whatif;
 import firstrentverdict.model.dtos.WhatIfRequest;
 import firstrentverdict.model.verdict.VerdictInput;
 import firstrentverdict.model.verdict.VerdictResult;
+import firstrentverdict.repository.VerdictDataRepository;
 import firstrentverdict.service.core.VerdictService;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +15,11 @@ import org.springframework.stereotype.Service;
 public class WhatIfService {
 
     private final VerdictService verdictService;
+    private final VerdictDataRepository repository;
 
-    public WhatIfService(VerdictService verdictService) {
+    public WhatIfService(VerdictService verdictService, VerdictDataRepository repository) {
         this.verdictService = verdictService;
+        this.repository = repository;
     }
 
     /**
@@ -42,33 +45,18 @@ public class WhatIfService {
         if (original == null) {
             throw new IllegalStateException("No original verdict found in session");
         }
-
-        // We will fetch p25 data via VerdictService (or Repository directly).
-        // Ideally WhatIfService should have access to Repository.
-        // For now, we will assume the caller might pass the target rent or we fetch it
-        // here.
-        // Let's refactor to inject Repository if needed, but VerdictService calculates
-        // MarketPosition.
-        // Actually, cleaner way:
-        // We let Controller pass the target rent (which it can get from
-        // originalResult.marketPosition().p25Rent()).
-        // But WhatIfService logic is best place.
-
-        // Stub for now: The controller will likely call a variant or we add logic here.
-        // Let's stick to the plan: WhatIfService implements the logic.
-        // We need repository access to get p25 if it's not passed.
-        // But `VerdictResult` already has `MarketPosition`.
-        // So the Controller can extract p25 from result and pass it as a regular
-        // "WhatIfRequest"
-        // OR we add a specific method.
-
-        // Let's support a specific method that takes the p25 value directly to avoid
-        // circular dependency or extra lookups.
-        return null; // Placeholder as we decide architecture.
+        int targetRent = repository.getRent(original.city(), original.state())
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Cannot apply market correction for unsupported city: " + original.city() + ", " + original.state()))
+                .p25();
+        return recalculate(original, new WhatIfRequest(targetRent, null));
     }
 
-    // Actual implementation using existing `recalculate` but with a helper for p25
+    // Allows callers to run market-correction with an explicit target rent.
     public VerdictResult simulateMarketCorrection(VerdictInput original, int targetP25Rent) {
+        if (targetP25Rent < 0) {
+            throw new IllegalArgumentException("Target corrected rent cannot be negative");
+        }
         return recalculate(original, new WhatIfRequest(targetP25Rent, null));
     }
 

@@ -17,7 +17,7 @@
 @template.layout.main(
     title = pageData.pageTitle(),
     description = pageData.metaDescription(),
-    canonical = (canonicalUrl != null ? canonicalUrl : baseUrl + "/RentVerdict/verdict/credit/" + tier.toLowerCase() + "/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase()),
+    canonical = (canonicalUrl != null ? canonicalUrl : baseUrl + "/RentVerdict/verdict/credit/" + tier.toLowerCase() + "/" + pageData.city().toLowerCase().replace(" ", "-").replace(".", "") + "-" + pageData.state().toLowerCase()),
     content = @`
     
     <!-- BreadcrumbList Schema -->
@@ -27,7 +27,7 @@
       "@type": "BreadcrumbList",
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "${baseUrl}/RentVerdict/"},
-        {"@type": "ListItem", "position": 2, "name": "${pageData.city()}", "item": "${baseUrl}/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}"},
+        {"@type": "ListItem", "position": 2, "name": "${pageData.city()}", "item": "${baseUrl}/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-").replace(".", "")}-${pageData.state().toLowerCase()}"},
         {"@type": "ListItem", "position": 3, "name": "${tier} Credit Guide"}
       ]
     }
@@ -38,7 +38,7 @@
         <nav style="margin-bottom: 2rem; font-size: 0.85rem; color: var(--text-tertiary);">
             <a href="/RentVerdict/" style="color: inherit; text-decoration: none;">Home</a> 
             <span style="margin: 0 0.5rem;">/</span> 
-            <a href="/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}" style="color: inherit; text-decoration: none;">${pageData.city()}</a> 
+            <a href="/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-").replace(".", "")}-${pageData.state().toLowerCase()}" style="color: inherit; text-decoration: none;">${pageData.city()}</a> 
             <span style="margin: 0 0.5rem;">/</span> 
             <span style="color: var(--text-secondary);">${tier} Credit Guide</span>
         </nav>
@@ -75,15 +75,28 @@
             </div>
         </div>
 
+        @if(pageData.rentBurdenSharePct() != null || pageData.annualRentToIncomePct() != null)
+        <div style="margin-bottom: 4rem; padding: 1.25rem 1.5rem; border: 1px solid var(--border-subtle); border-radius: 12px; background: var(--bg-surface);">
+            <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 0.5rem;">City Affordability Signal (ACS)</div>
+            <p style="margin: 0; color: var(--text-secondary); line-height: 1.6;">
+                ${pageData.city()} currently shows
+                @if(pageData.rentBurdenSharePct() != null)<strong>${String.format("%.1f", pageData.rentBurdenSharePct())}%</strong> of renters spending 35%+ income on rent@endif
+                @if(pageData.rentBurdenSharePct() != null && pageData.annualRentToIncomePct() != null), and@endif
+                @if(pageData.annualRentToIncomePct() != null) an annual rent-to-income ratio near <strong>${String.format("%.1f", pageData.annualRentToIncomePct())}%</strong>@endif.
+                This is a <strong>${pageData.economicSignal()}</strong>-pressure market for low-margin applicants.
+            </p>
+        </div>
+        @endif
+
         <!-- The "Credit Wall" Article Section -->
         <div style="margin-bottom: 4rem;">
             <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">Navigating the ${pageData.city()} "Credit Wall"</h2>
             <div style="font-size: 1.1rem; line-height: 1.7; color: var(--text-secondary);">
                 <p style="margin-bottom: 1.5rem;">
-                    Our 2026 market audit shows that ${pageData.city()} landlords are increasingly using algorithmic screening. For applicants with ${tier} credit, this often results in a "Conditional Approval" — meaning you're approved only if you meet a higher deposit threshold. The exact amount varies by local market and state law.
+                    Our 2026 market audit shows that ${pageData.city()} landlords are increasingly using algorithmic screening. For applicants with ${tier} credit, this often results in a "Conditional Approval" - meaning you're approved only if you meet a higher deposit threshold. The exact amount varies by local market and state law.
                 </p>
                 <div style="background: var(--bg-surface); padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">💡 Expert Strategy for ${tier} Credit</h3>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">Expert Strategy for ${tier} Credit</h3>
                     <ul style="list-style: none; padding: 0;">
                         <li style="margin-bottom: 1rem; display: flex; gap: 0.75rem;">
                             <span style="color: var(--primary);">01.</span>
@@ -112,7 +125,7 @@
                 Run Approval Test Now
             </a>
             <div style="margin-top: 1.5rem; font-size: 0.875rem; opacity: 0.6;">
-                100% Free ??No Sign-up ??Instant Verdict
+                100% Free - No Sign-up - Instant Verdict
             </div>
         </div>
 
@@ -120,7 +133,7 @@
         <div style="margin-bottom: 4rem; padding: 1.5rem; border: 1px solid var(--border-subtle); border-radius: 12px; background: var(--bg-panel);">
             <h3 style="font-size: 1rem; margin-bottom: 0.75rem;">Need extra approval support?</h3>
             <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1rem;">
-                Compare guarantor providers and request a direct partnership intro if you want manual help.
+                Demo provider links are shown for UX testing only. Use the contact form for manual support.
             </p>
             <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                 <a href="https://www.theguarantors.com/" target="_blank" rel="noopener nofollow"
@@ -128,14 +141,14 @@
                    data-track-event="lead_submit"
                    data-track-category="monetization"
                    data-track-label="credit_partner_theguarantors_click">
-                    Compare Guarantor Providers
+                    Open Demo Guarantor Provider
                 </a>
                 <a href="/RentVerdict/contact"
                    class="btn btn-secondary btn-sm"
                    data-track-event="lead_submit"
                    data-track-category="monetization"
                    data-track-label="credit_contact_partner_intro_click">
-                    Request Partner Intro
+                    Request Manual Support
                 </a>
             </div>
         </div>
@@ -158,7 +171,7 @@
             <h3 style="font-size: 0.9rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 1.5rem;">Compare with Nearby Cities</h3>
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
                 @for(CityEntry related : relatedCities)
-                    <a href="/RentVerdict/verdict/credit/${tier.toLowerCase()}/${related.city().toLowerCase().replace(" ", "-")}-${related.state().toLowerCase()}" 
+                    <a href="/RentVerdict/verdict/credit/${tier.toLowerCase()}/${related.city().toLowerCase().replace(" ", "-").replace(".", "")}-${related.state().toLowerCase()}" 
                        style="text-decoration: none; padding: 0.5rem 1rem; border: 1px solid var(--border-subtle); border-radius: 20px; font-size: 0.875rem; color: var(--text-secondary);">
                         ${related.city()}
                     </a>

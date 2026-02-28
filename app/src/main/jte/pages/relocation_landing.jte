@@ -6,6 +6,7 @@
 @import java.util.List
 @param CityPageContent pageData
 @param List<CityEntry> relatedCities = java.util.Collections.emptyList()
+@param List<String> topOriginStates = java.util.Collections.emptyList()
 @param String canonicalUrl = null
 @param String baseUrl = ""
 
@@ -16,7 +17,7 @@
 @template.layout.main(
     title = pageData.pageTitle(),
     description = pageData.metaDescription(),
-    canonical = (canonicalUrl != null ? canonicalUrl : baseUrl + "/RentVerdict/verdict/moving-to/" + pageData.city().toLowerCase().replace(" ", "-") + "-" + pageData.state().toLowerCase()),
+    canonical = (canonicalUrl != null ? canonicalUrl : baseUrl + "/RentVerdict/verdict/moving-to/" + pageData.city().toLowerCase().replace(" ", "-").replace(".", "") + "-" + pageData.state().toLowerCase()),
     content = @`
     
     <!-- FAQ Schema -->
@@ -46,7 +47,7 @@
       "@type": "BreadcrumbList",
       "itemListElement": [
         {"@type": "ListItem", "position": 1, "name": "Home", "item": "${baseUrl}/RentVerdict/"},
-        {"@type": "ListItem", "position": 2, "name": "${pageData.city()}", "item": "${baseUrl}/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}"},
+        {"@type": "ListItem", "position": 2, "name": "${pageData.city()}", "item": "${baseUrl}/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-").replace(".", "")}-${pageData.state().toLowerCase()}"},
         {"@type": "ListItem", "position": 3, "name": "Relocation Guide"}
       ]
     }
@@ -62,7 +63,7 @@
       "estimatedCost": {
         "@type": "MonetaryAmount",
         "currency": "USD",
-        "value": "${pageData.totalUpfrontEstimate() + 1500}"
+        "value": "${pageData.totalUpfrontEstimate()}"
       },
       "step": [
         {
@@ -89,7 +90,7 @@
         <nav style="margin-bottom: 2rem; font-size: 0.85rem; color: var(--text-tertiary);">
             <a href="/RentVerdict/" style="color: inherit; text-decoration: none;">Home</a> 
             <span style="margin: 0 0.5rem;">/</span> 
-            <a href="/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-")}-${pageData.state().toLowerCase()}" style="color: inherit; text-decoration: none;">${pageData.city()}</a> 
+            <a href="/RentVerdict/verdict/${pageData.city().toLowerCase().replace(" ", "-").replace(".", "")}-${pageData.state().toLowerCase()}" style="color: inherit; text-decoration: none;">${pageData.city()}</a> 
             <span style="margin: 0 0.5rem;">/</span> 
             <span style="color: var(--text-secondary);">Relocation Guide</span>
         </nav>
@@ -110,17 +111,17 @@
             </h1>
             
             <p style="font-size: 1.25rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
-                Relocating to ${pageData.city()} involves more than just rent. Between cross-country movers, utility deposits, and temporary housing, the <span style="color: var(--text-primary); font-weight: 600;">"hidden move factor"</span> can add $2,000+ to your budget.
+                Relocating to ${pageData.city()} involves more than just rent. Between long-distance movers and local setup costs, the <span style="color: var(--text-primary); font-weight: 600;">core move-in liquidity</span> is often higher than most renters expect.
             </p>
         </div>
 
         <!-- AEO: Quick Answer Box -->
         <div style="background: var(--bg-surface); padding: 1.5rem 2rem; border-radius: var(--radius-lg); margin-bottom: 4rem; border: 1px solid var(--border-subtle); display: flex; align-items: flex-start; gap: 1rem; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
-            <div style="font-size: 1.5rem; line-height: 1;">💡</div>
+            <div style="font-size: 1.5rem; line-height: 1;">Tip</div>
             <div>
                 <strong style="display: block; font-size: 0.9rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.5rem;">Quick Answer</strong>
                 <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-primary); font-weight: 500;">
-                    A standard interstate relocation to ${pageData.city()} generally costs about <strong style="color: var(--text-primary);">$${String.format("%,d", pageData.totalUpfrontEstimate() + 1500)}</strong> in total liquidity. This estimate accounts for long-distance movers ($${String.format("%,d", pageData.typicalMoving())}), your first month's rent ($${String.format("%,d", pageData.medianRent())}), security deposits, and a 14-day temporary housing buffer.
+                    A standard interstate relocation to ${pageData.city()} generally requires about <strong style="color: var(--text-primary);">$${String.format("%,d", pageData.totalUpfrontEstimate())}</strong> in move-in liquidity. This estimate accounts for long-distance movers ($${String.format("%,d", pageData.typicalMoving())}), your first month's rent ($${String.format("%,d", pageData.medianRent())}), and security deposits.
                 </p>
                 <div style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--text-tertiary);">Sources: US Census ACS, Local Rental Surveys</div>
             </div>
@@ -131,7 +132,7 @@
             <div class="card" style="padding: 1.5rem; border-left: 4px solid var(--primary);">
                 <div style="font-size: 0.9rem; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.5rem;">Est. Moving Cost</div>
                 <div style="font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">$${String.format("%,d", pageData.typicalMoving())}</div>
-                <div style="font-size: 0.9rem; color: var(--text-secondary);">Standard 2-bedroom relocation</div>
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">Engine-aligned long-distance estimate</div>
             </div>
             <div class="card" style="padding: 1.5rem; border-left: 4px solid var(--verdict-approved);">
                 <div style="font-size: 0.9rem; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.5rem;">Wait Time</div>
@@ -140,10 +141,35 @@
             </div>
             <div class="card" style="padding: 1.5rem; border-left: 4px solid var(--verdict-denied);">
                 <div style="font-size: 0.9rem; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 0.5rem;">Total Liquidity</div>
-                <div style="font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">$${String.format("%,d", pageData.totalUpfrontEstimate() + 1500)}</div>
-                <div style="font-size: 0.9rem; color: var(--text-secondary);">Including temp housing buffer</div>
+                <div style="font-size: 1.75rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.5rem;">$${String.format("%,d", pageData.totalUpfrontEstimate())}</div>
+                <div style="font-size: 0.9rem; color: var(--text-secondary);">Core move-in requirement</div>
             </div>
         </div>
+
+        @if(pageData.medianHouseholdIncome() != null || pageData.rentBurdenSharePct() != null)
+        <div style="margin-bottom: 4rem; padding: 1.25rem 1.5rem; border: 1px solid var(--border-subtle); border-radius: 12px; background: var(--bg-surface);">
+            <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 0.5rem;">Destination Demand Pressure</div>
+            <p style="margin: 0; color: var(--text-secondary); line-height: 1.6;">
+                @if(pageData.medianHouseholdIncome() != null)Median household income is <strong>$${String.format("%,d", pageData.medianHouseholdIncome())}</strong>. @endif
+                @if(pageData.rentBurdenSharePct() != null)<strong>${String.format("%.1f", pageData.rentBurdenSharePct())}%</strong> of renter households are already rent-burdened (35%+). @endif
+                Relocation risk level for this destination is <strong>${pageData.economicSignal()}</strong>.
+            </p>
+        </div>
+        @endif
+
+        @if(topOriginStates != null && !topOriginStates.isEmpty())
+        <div style="margin-bottom: 4rem; padding: 1.25rem 1.5rem; border: 1px solid var(--border-subtle); border-radius: 12px; background: var(--bg-panel);">
+            <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 0.75rem;">Top Inbound Origins to ${pageData.state()} (IRS 2021-2022)</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                @for(String stateCode : topOriginStates)
+                    <span class="benefit-pill">${stateCode}</span>
+                @endfor
+            </div>
+            <div style="margin-top: 0.75rem; font-size: 0.82rem; color: var(--text-tertiary);">
+                Source: IRS SOI state-to-state migration dataset (returns-based inflow corridors).
+            </div>
+        </div>
+        @endif
 
         <!-- Relocation Article Section -->
         <div style="margin-bottom: 4rem;">
@@ -153,18 +179,18 @@
                     Moving out-of-state to ${pageData.city()} means you are a "Cold Lead" to landlords. Without local employment verification or an in-person tour, you face higher scrutiny and a higher risk of rental scams.
                 </p>
                 <div style="background: var(--bg-surface); padding: 2rem; border-radius: 12px; margin-bottom: 1.5rem; border: 1px solid var(--border-subtle);">
-                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">🚚 Essential Relocation Checklist</h3>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">Essential Relocation Checklist</h3>
                     <ul style="list-style: none; padding: 0;">
                         <li style="margin-bottom: 1rem; display: flex; gap: 0.75rem;">
-                            <span style="font-size: 1.25rem;">📋</span>
+                            <span style="font-size: 1.25rem;">Step 1</span>
                             <span><strong>The 2-Week Airbnb Rule:</strong> Never sign a lease sight-unseen in ${pageData.city()}. Budget for a short-term rental while you tour actual units.</span>
                         </li>
                         <li style="margin-bottom: 1rem; display: flex; gap: 0.75rem;">
-                            <span style="font-size: 1.25rem;">📦</span>
+                            <span style="font-size: 1.25rem;">Step 2</span>
                             <span><strong>Transfer Proof:</strong> Have your offer letter or income transfer documents ready. ${pageData.state()} landlords won't wait for your first local paycheck.</span>
                         </li>
                         <li style="display: flex; gap: 0.75rem;">
-                            <span style="font-size: 1.25rem;">💰</span>
+                            <span style="font-size: 1.25rem;">Cash</span>
                             <span><strong>Utility Deposits:</strong> Many local utilities require a security deposit for new out-of-state residents without a local payment history.</span>
                         </li>
                     </ul>
@@ -182,7 +208,7 @@
                 Check My Move-In Costs
             </a>
             <div style="margin-top: 1.5rem; font-size: 0.875rem; opacity: 0.7;">
-                Free 2026 Market Data · Accurate Estimates
+                Free 2026 Market Data - Accurate Estimates
             </div>
         </div>
 
@@ -204,7 +230,7 @@
             <h3 style="font-size: 0.9rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 1.5rem;">Other Destinations in ${pageData.state()}</h3>
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
                 @for(CityEntry related : relatedCities)
-                    <a href="/RentVerdict/verdict/moving-to/${related.city().toLowerCase().replace(" ", "-")}-${related.state().toLowerCase()}" 
+                    <a href="/RentVerdict/verdict/moving-to/${related.city().toLowerCase().replace(" ", "-").replace(".", "")}-${related.state().toLowerCase()}" 
                        style="text-decoration: none; padding: 0.5rem 1rem; border: 1px solid var(--border-subtle); border-radius: 20px; font-size: 0.875rem; color: var(--text-secondary);">
                         ${related.city()}
                     </a>

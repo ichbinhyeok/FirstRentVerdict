@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -27,7 +29,9 @@ public class SitemapController {
     @GetMapping(value = { "/sitemap.xml", "/RentVerdict/sitemap.xml" }, produces = MediaType.APPLICATION_XML_VALUE)
     @ResponseBody
     public String sitemap() {
-        List<CitiesData.CityEntry> cities = repository.getAllCities();
+        List<CitiesData.CityEntry> cities = repository.getAllCities().stream()
+                .sorted(Comparator.comparing(CitiesData.CityEntry::state).thenComparing(CitiesData.CityEntry::city))
+                .toList();
         StringBuilder xml = new StringBuilder();
 
         xml.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -47,7 +51,7 @@ public class SitemapController {
 
         // 2. High-Intent pSEO Scenarios
         for (CitiesData.CityEntry city : cities) {
-            String slug = city.city().toLowerCase().replace(" ", "-") + "-" + city.state().toLowerCase();
+            String slug = toCanonicalSlug(city);
             String root = baseUrl + "/RentVerdict/verdict/";
 
             // Tier 1: Core Alignment (Target: ~2,600)
@@ -71,22 +75,101 @@ public class SitemapController {
             // Placeholders removed from sitemap (Salary Needed, No Cosigner)
 
             // - Moving Pairs (870 target)
-            cities.stream()
-                    .filter(c -> !c.city().equalsIgnoreCase(city.city()))
-                    .limit(9)
-                    .forEach(from -> {
-                        String fromSlug = from.city().toLowerCase().replace(" ", "-") + "-"
-                                + from.state().toLowerCase();
-                        addUrl(xml,
-                                baseUrl + "/RentVerdict/verdict/moving-from/" + fromSlug + "/to/" + slug,
-                                "0.8", monthlyMod);
-                    });
+            selectOriginCities(cities, city, 9).forEach(from -> {
+                String fromSlug = toCanonicalSlug(from);
+                addUrl(xml,
+                        baseUrl + "/RentVerdict/verdict/moving-from/" + fromSlug + "/to/" + slug,
+                        "0.8", monthlyMod);
+            });
 
             // Placeholders removed from sitemap (Compare Pairs)
         }
 
         xml.append("</urlset>");
         return xml.toString();
+    }
+
+    private String toCanonicalSlug(CitiesData.CityEntry city) {
+        return city.city().toLowerCase().replace(" ", "-").replace(".", "") + "-" + city.state().toLowerCase();
+    }
+
+    private boolean isSameCity(CitiesData.CityEntry a, CitiesData.CityEntry b) {
+        return a.city().equalsIgnoreCase(b.city()) && a.state().equalsIgnoreCase(b.state());
+    }
+
+    private List<CitiesData.CityEntry> selectOriginCities(
+            List<CitiesData.CityEntry> allCities,
+            CitiesData.CityEntry destination,
+            int limit) {
+
+        List<CitiesData.CityEntry> candidates = allCities.stream()
+                .filter(c -> !isSameCity(c, destination))
+                .toList();
+
+        if (candidates.isEmpty()) {
+            return List.of();
+        }
+
+        int selectionSize = Math.min(limit, candidates.size());
+        List<CitiesData.CityEntry> selected = new ArrayList<>(selectionSize);
+        java.util.Set<String> seen = new java.util.LinkedHashSet<>();
+
+        // Keep some same-state corridors, but reserve most slots for inbound IRS migration states.
+        int sameStateCap = Math.min(3, selectionSize);
+        addCandidatesForState(candidates, destination.state(), selected, seen, sameStateCap);
+
+        List<String> preferredStates = new ArrayList<>();
+
+        repository.getStateMigrationFlow(destination.state()).ifPresent(flow -> {
+            if (flow.topOrigins() != null) {
+                flow.topOrigins().stream()
+                        .map(origin -> origin.fromState() != null ? origin.fromState().toUpperCase() : null)
+                        .filter(code -> code != null && !code.equalsIgnoreCase(destination.state()))
+                        .forEach(preferredStates::add);
+            }
+        });
+
+        // Keep order stable while removing duplicates.
+        List<String> orderedStates = new ArrayList<>(new java.util.LinkedHashSet<>(preferredStates));
+
+        for (String stateCode : orderedStates) {
+            if (selected.size() >= selectionSize) {
+                break;
+            }
+            addCandidatesForState(candidates, stateCode, selected, seen, selectionSize);
+        }
+
+        if (selected.size() < selectionSize) {
+            List<CitiesData.CityEntry> remaining = candidates.stream()
+                    .filter(c -> seen.add(c.city().toLowerCase() + "|" + c.state().toLowerCase()))
+                    .toList();
+            if (!remaining.isEmpty()) {
+                int start = Math.floorMod((destination.city() + "|" + destination.state()).hashCode(), remaining.size());
+                for (int i = 0; i < remaining.size() && selected.size() < selectionSize; i++) {
+                    selected.add(remaining.get((start + i) % remaining.size()));
+                }
+            }
+        }
+
+        return selected;
+    }
+
+    private void addCandidatesForState(
+            List<CitiesData.CityEntry> candidates,
+            String stateCode,
+            List<CitiesData.CityEntry> selected,
+            java.util.Set<String> seen,
+            int targetSize) {
+        candidates.stream()
+                .filter(c -> c.state().equalsIgnoreCase(stateCode))
+                .forEach(c -> {
+                    if (selected.size() < targetSize) {
+                        String key = c.city().toLowerCase() + "|" + c.state().toLowerCase();
+                        if (seen.add(key)) {
+                            selected.add(c);
+                        }
+                    }
+                });
     }
 
     private void addUrl(StringBuilder xml, String loc, String priority, String lastmod) {

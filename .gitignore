@@ -40,5 +40,35 @@ out/
 
 ### Log Files ###
 *.log
+bootrun_output.txt
+build_full.txt
+build_log_debug.txt
+build_log_debug_2.txt
+build_output.txt
+full_log.txt
+gradle_out.txt
+jte_error.txt
+log.txt
+pwd_log.txt
+test_log.txt
+verify_sim_log_3.txt
 jte-classes/
 .java/
+
+### Local Environment ###
+.env
+*.env
+.env.*
+jdk21/
+jdk21.zip
+
+### Local Toolchains / E2E Artifacts ###
+tools/node-v*/
+e2e/node_modules/
+e2e/playwright-report/
+e2e/test-results/
+
+### Local Data Scratch ###
+stateinflow2122.csv
+stateoutflow2122.csv
+smoke_bg_test.txt

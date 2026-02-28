@@ -29,7 +29,7 @@
 
     String metaDesc = "";
     String cityState = input.city() + ", " + input.state();
-    String citySlug = input.city().toLowerCase().replace(" ", "-") + "-" + input.state().toLowerCase();
+    String citySlug = input.city().toLowerCase().replace(" ", "-").replace(".", "") + "-" + input.state().toLowerCase();
     int estDeposit = result.financials().totalUpfrontCost();
     int liquidityGap = Math.max(0, result.financials().totalUpfrontCost() - result.financials().availableCash());
     PersonaCta persona;
@@ -126,7 +126,7 @@
     <nav style="max-width: 900px; margin: 0 auto; padding: var(--space-4) var(--space-6) 0; font-size: 0.8125rem; color: var(--text-tertiary);">
         <a href="/RentVerdict/" style="color: inherit; text-decoration: none;">Home</a> 
         <span style="margin: 0 4px;">/</span> 
-        <a href="/RentVerdict/verdict/${input.city().toLowerCase().replace(" ", "-")}-${input.state().toLowerCase()}" style="color: inherit; text-decoration: none;">${input.city()}</a>
+        <a href="/RentVerdict/verdict/${input.city().toLowerCase().replace(" ", "-").replace(".", "")}-${input.state().toLowerCase()}" style="color: inherit; text-decoration: none;">${input.city()}</a>
         <span style="margin: 0 4px;">/</span>
         <span style="color: var(--text-secondary); font-weight: 500;">
             Analysis
@@ -146,11 +146,11 @@
         <!-- pSEO Engagement Hook (Behavioral Nudge) -->
         @if(!"GENERAL".equals(pageType))
             <div style="background: #fff8e1; border: 1px solid #ffe082; color: #5d4037; padding: var(--space-4); border-radius: var(--radius-sm); margin-bottom: var(--space-6); text-align: center; font-size: 0.95rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                <div style="font-weight: 600; margin-bottom: 4px;">⚠️ Estimate based on typical ${pageType.replace("CREDIT_", "").toLowerCase()} scenarios</div>
+                <div style="font-weight: 600; margin-bottom: 4px;">Estimate based on typical ${pageType.replace("CREDIT_", "").toLowerCase()} scenarios</div>
                 <div>
                    Results vary by exact rent & cash. 
                    <a href="#simulation-lab" style="color: #e65100; font-weight: 700; text-decoration: underline; margin-left: 4px;">
-                       👇 Customize your calculation below for accuracy.
+                       Customize your calculation below for accuracy.
                    </a>
                 </div>
             </div>
@@ -214,7 +214,7 @@
                 @if(result.regionalContext() != null && result.regionalContext().contextFactors() != null)
                    @for(String regionFactor : result.regionalContext().contextFactors())
                         <div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);">
-                            <span style="color: var(--text-tertiary); margin-right: var(--space-2);">📍</span>
+                            <span style="color: var(--text-tertiary); margin-right: var(--space-2);">Location</span>
                             ${regionFactor}
                         </div>
                    @endfor
@@ -276,7 +276,7 @@
             </div>
             <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
                 <div style="font-size: 0.75rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.625rem;">
-                    Approval Partner Options
+                    Demo Provider Links
                 </div>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                     <a href="https://www.theguarantors.com/" target="_blank" rel="noopener nofollow"
@@ -284,14 +284,14 @@
                        data-track-event="lead_submit"
                        data-track-category="monetization"
                        data-track-label="partner_theguarantors_click">
-                        Compare Guarantor Option A
+                        Demo Guarantor Option A
                     </a>
                     <a href="https://www.insurent.com/" target="_blank" rel="noopener nofollow"
                        class="btn btn-secondary btn-sm"
                        data-track-event="lead_submit"
                        data-track-category="monetization"
                        data-track-label="partner_insurent_click">
-                        Compare Guarantor Option B
+                        Demo Guarantor Option B
                     </a>
                 </div>
             </div>
@@ -381,12 +381,12 @@
                         <input type="range" id="rent-slider" 
                                style="width: 100%; cursor: grab;"
                                min="${Math.max(500, (int)(result.marketPosition().p25Rent() * 0.5))}" 
-                               max="${(int)Math.max(result.marketPosition().p75Rent() * 1.5, result.financials().monthlyRent() * 1.5)}" 
+                               max="${(int)Math.min(30000, Math.max(result.marketPosition().p75Rent() * 1.5, result.financials().monthlyRent() * 1.5))}" 
                                value="${result.financials().monthlyRent()}" 
                                step="50">
                         <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-tertiary); margin-top: 4px;">
                             <span>$${Math.max(500, (int)(result.marketPosition().p25Rent() * 0.5))}</span>
-                            <span>$${(int)Math.max(result.marketPosition().p75Rent() * 1.5, result.financials().monthlyRent() * 1.5)}</span>
+                            <span>$${(int)Math.min(30000, Math.max(result.marketPosition().p75Rent() * 1.5, result.financials().monthlyRent() * 1.5))}</span>
                         </div>
                      </div>
 
@@ -400,7 +400,7 @@
                         <input type="range" id="cash-slider" 
                                style="width: 100%; cursor: grab;"
                                min="0" 
-                               max="${(int)Math.max(result.financials().availableCash() + 5000, result.financials().availableCash() * 1.5)}" 
+                               max="${(int)Math.min(100000, Math.max(result.financials().availableCash() + 5000, result.financials().availableCash() * 1.5))}" 
                                value="${result.financials().availableCash()}" 
                                step="100">
                      </div>
@@ -459,10 +459,10 @@
                             </label>
                             <div class="credit-select-wrapper">
                                 <select id="sim-credit" class="credit-select">
-                                    <option value="EXCELLENT" selected="${input.creditTier() == CreditTier.EXCELLENT}">✅ Excellent (750+)</option>
-                                    <option value="GOOD" selected="${input.creditTier() == CreditTier.GOOD}">👍 Good (670-749)</option>
-                                    <option value="FAIR" selected="${input.creditTier() == CreditTier.FAIR}">📊 Fair (580-669)</option>
-                                    <option value="POOR" selected="${input.creditTier() == CreditTier.POOR}">⚠️ Poor (&lt; 580)</option>
+                                    <option value="EXCELLENT" selected="${input.creditTier() == CreditTier.EXCELLENT}">Excellent (750+)</option>
+                                    <option value="GOOD" selected="${input.creditTier() == CreditTier.GOOD}">Good (670-749)</option>
+                                    <option value="FAIR" selected="${input.creditTier() == CreditTier.FAIR}">Fair (580-669)</option>
+                                    <option value="POOR" selected="${input.creditTier() == CreditTier.POOR}">Poor (&lt; 580)</option>
                                 </select>
                             </div>
                         </div>
@@ -481,7 +481,11 @@
                             </label>
                         </div>
                      </div>
-                     
+
+                     <div id="sim-feedback" class="sim-feedback" style="display: none;">
+                        <span id="sim-feedback-text"></span>
+                     </div>
+                      
                      <!-- Inline Styles for Premium Controls -->
                      <style>
                          .sim-controls-panel {
@@ -493,7 +497,30 @@
                              margin-top: var(--space-4);
                              box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
                          }
-                         
+                         .sim-feedback {
+                             margin-top: var(--space-4);
+                             padding: 10px 12px;
+                             border-radius: var(--radius-sm);
+                             border: 1px solid var(--border-default);
+                             font-size: 0.8125rem;
+                             line-height: 1.4;
+                         }
+                         .sim-feedback.info {
+                             background: rgba(var(--accent-primary-rgb), 0.08);
+                             border-color: rgba(var(--accent-primary-rgb), 0.25);
+                             color: var(--text-secondary);
+                         }
+                         .sim-feedback.warning {
+                             background: rgba(245, 158, 11, 0.1);
+                             border-color: rgba(245, 158, 11, 0.35);
+                             color: #92400e;
+                         }
+                         .sim-feedback.error {
+                             background: rgba(239, 68, 68, 0.08);
+                             border-color: rgba(239, 68, 68, 0.35);
+                             color: #991b1b;
+                         }
+                          
                          .sim-control-group {
                              margin-bottom: var(--space-5);
                          }
@@ -743,12 +770,6 @@
                          }
                      </style>
                      
-                     <div id="sim-feedback" style="margin-top: var(--space-4); padding: var(--space-3); background: var(--bg-primary); border-radius: var(--radius-sm); font-size: 0.875rem; display: none; border-left: 3px solid var(--text-secondary);">
-                        <div style="display: flex; justify-content: space-between;">
-                             <span>New Buffer:</span>
-                             <strong id="sim-new-buffer">$0</strong>
-                        </div>
-                     </div>
                 </div>
 
                 <!-- Strategic Action Steps -->
@@ -804,7 +825,7 @@
                         }
 
                         function shareTwitter() {
-                            const text = "Checking my move-in costs for ${result.regionalContext().cityName()} with First Rent Verdict. The hidden costs are real! 📋🏠";
+                            const text = "Checking my move-in costs for ${result.regionalContext().cityName()} with First Rent Verdict. The hidden costs are real.";
                             const url = getShareUrl();
                             window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(url), "_blank");
                         }
@@ -1066,11 +1087,32 @@
             
             const radarMarker = document.getElementById('radar-marker');
             const radarLabel = document.getElementById('radar-label');
+            const simFeedback = document.getElementById('sim-feedback');
+            const simFeedbackText = document.getElementById('sim-feedback-text');
 
             if (!rentSlider || !cashSlider) return;
             
+            const SERVER_RENT_MIN = 1;
+            const SERVER_RENT_MAX = 30000;
+            const SERVER_CASH_MIN = 0;
+            const SERVER_CASH_MAX = 100000;
             const fmt = (n) => '$' + Math.floor(n).toLocaleString();
             let debounceTimer;
+            let latestRequestSeq = 0;
+            let activeController = null;
+
+            function setSimFeedback(type, message) {
+                if (!simFeedback || !simFeedbackText) return;
+                simFeedback.className = 'sim-feedback ' + type;
+                simFeedbackText.textContent = message;
+                simFeedback.style.display = 'block';
+            }
+
+            function clearSimFeedback() {
+                if (!simFeedback) return;
+                simFeedback.style.display = 'none';
+                simFeedback.className = 'sim-feedback';
+            }
 
             // -- Toggle Long Distance Inputs --
             Array.from(moveTypeRadios).forEach(r => {
@@ -1110,37 +1152,63 @@
                 const parts = cityState.split('|');
                 const selectedMoveType = document.querySelector('input[name="moveType"]:checked');
                 const isLongDist = selectedMoveType ? selectedMoveType.value === 'long' : false;
+                const rentValue = Math.min(SERVER_RENT_MAX, Math.max(SERVER_RENT_MIN, parseInt(rentSlider.value, 10) || SERVER_RENT_MIN));
+                const cashValue = Math.min(SERVER_CASH_MAX, Math.max(SERVER_CASH_MIN, parseInt(cashSlider.value, 10) || SERVER_CASH_MIN));
+                rentSlider.value = String(rentValue);
+                cashSlider.value = String(cashValue);
+                if (rentDisplay) rentDisplay.innerText = fmt(rentValue);
+                if (cashDisplay) cashDisplay.innerText = fmt(cashValue);
+
+                const fromCityVal = (isLongDist && simFromCity) ? simFromCity.value : null;
+                const fromStateVal = (isLongDist && simFromState) ? simFromState.value : null;
+                if (isLongDist && (!fromCityVal || !fromStateVal)) {
+                    setSimFeedback('warning', 'Select an origin city for long-distance simulation.');
+                    return;
+                }
+                clearSimFeedback();
                 
                 const payload = {
                     city: parts[0],
                     state: parts[1],
-                    monthlyRent: parseInt(rentSlider.value),
-                    availableCash: parseInt(cashSlider.value),
+                    monthlyRent: rentValue,
+                    availableCash: cashValue,
                     hasPet: simPet ? simPet.checked : false,
                     isLocalMove: !isLongDist,
                     creditTier: simCredit ? simCredit.value : 'GOOD',
-                    fromCity: (isLongDist && simFromCity) ? simFromCity.value : null,
-                    fromState: (isLongDist && simFromState) ? simFromState.value : null,
+                    fromCity: fromCityVal,
+                    fromState: fromStateVal,
                     moveInDate: null
                 };
 
                 // Visual Loading State
                 if(advisorText) advisorText.style.opacity = '0.5';
+                setSimFeedback('info', 'Recalculating scenario...');
+                const requestSeq = ++latestRequestSeq;
+                if (activeController) {
+                    activeController.abort();
+                }
+                activeController = new AbortController();
 
                 try {
                     const res = await fetch('/RentVerdict/api/simulate', {
                         method: 'POST',
                         headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify(payload),
+                        signal: activeController.signal
                     });
                     
-                    if (!res.ok) throw new Error("Sim failed");
+                    if (requestSeq !== latestRequestSeq) return;
+                    if (!res.ok) throw new Error("Simulation request failed: " + res.status);
                     const result = await res.json();
                     
                     updateUI(result);
+                    clearSimFeedback();
                     
                 } catch (e) {
+                    if (e.name === 'AbortError') return;
+                    if (requestSeq !== latestRequestSeq) return;
                     console.error("Simulation error:", e);
+                    setSimFeedback('error', 'Could not update simulation. Check inputs and try again.');
                 } finally {
                     if(advisorText) advisorText.style.opacity = '1';
                 }
@@ -1200,7 +1268,7 @@
                     });
                     if (result.regionalContext && result.regionalContext.contextFactors) {
                         result.regionalContext.contextFactors.forEach(rf => {
-                            html += '<div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);"><span style="color: var(--text-tertiary); margin-right: var(--space-2);">📍</span>' + rf + '</div>';
+                            html += '<div class="factor-item" style="background: rgba(var(--accent-primary-rgb), 0.05);"><span style="color: var(--text-tertiary); margin-right: var(--space-2);">Location</span>' + rf + '</div>';
                         });
                     }
                     factorsContainer.innerHTML = html;
@@ -1260,13 +1328,13 @@
                 let badgeColor, badgeText;
                 if (verdict === 'APPROVED') {
                     badgeColor = 'var(--success)';
-                    badgeText = '✅ APPROVED';
+                    badgeText = 'APPROVED';
                 } else if (verdict === 'BORDERLINE') {
                     badgeColor = 'var(--warning)';
-                    badgeText = '⚠️ BORDERLINE';
+                    badgeText = 'BORDERLINE';
                 } else {
                     badgeColor = 'var(--danger)';
-                    badgeText = '❌ DENIED';
+                    badgeText = 'DENIED';
                 }
                 stickyStatusBadge.style.background = badgeColor;
                 stickyStatusBadge.style.color = '#fff';

@@ -35,6 +35,18 @@ public class VerdictController {
     @Value("${app.base-url}")
     private String baseUrl;
 
+    private List<String> topOriginStates(String destinationState, int limit) {
+        return repository.getStateMigrationFlow(destinationState)
+                .map(flow -> flow.topOrigins() == null ? List.<String>of()
+                        : flow.topOrigins().stream()
+                                .map(origin -> origin.fromState())
+                                .filter(state -> state != null && !state.isBlank())
+                                .filter(state -> !state.equalsIgnoreCase(destinationState))
+                                .limit(limit)
+                                .toList())
+                .orElse(List.of());
+    }
+
     public VerdictController(
             VerdictDataRepository repository,
             VerdictService verdictService,
@@ -87,6 +99,8 @@ public class VerdictController {
         String city = parts[0];
         String state = parts[1];
 
+        validateFormVerdictInput(city, state, monthlyRent, availableCash);
+
         VerdictInput input = new VerdictInput(
                 city, state, monthlyRent, availableCash, hasPet, isLocalMove,
                 firstrentverdict.model.verdict.CreditTier.GOOD, null);
@@ -102,6 +116,41 @@ public class VerdictController {
         model.addAttribute("noindex", true);
 
         return "pages/result";
+    }
+
+    private void validateFormVerdictInput(String city, String state, int monthlyRent, int availableCash) {
+        if (!repository.isValidCity(city, state)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unsupported city: " + city + ", " + state);
+        }
+        if (monthlyRent < 1 || monthlyRent > 30000 || availableCash < 0 || availableCash > 100000) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid form parameters");
+        }
+    }
+
+    private String toCanonicalSlug(String city, String state) {
+        return city.toLowerCase().replace(" ", "-").replace(".", "") + "-" + state.toLowerCase();
+    }
+
+    private org.springframework.web.servlet.ModelAndView permanentRedirect(String path) {
+        org.springframework.web.servlet.view.RedirectView rv = new org.springframework.web.servlet.view.RedirectView(path);
+        rv.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
+        rv.setExposeModelAttributes(false);
+        return new org.springframework.web.servlet.ModelAndView(rv);
+    }
+
+    private record CityResolution(String city, String state, String canonicalSlug) {
+    }
+
+    private CityResolution resolveCityOr404(String slug) {
+        String[] location = parseCitySlug(slug);
+        String city = location[0];
+        String state = location[1];
+
+        if (!repository.isValidCity(city, state)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found in database");
+        }
+
+        return new CityResolution(city, state, toCanonicalSlug(city, state));
     }
 
     private String[] parseCitySlug(String slug) {
@@ -129,13 +178,13 @@ public class VerdictController {
     }
 
     @GetMapping("/verdict/{slug}")
-    public String cityPage(@PathVariable("slug") String slug, Model model) {
-        String[] location = parseCitySlug(slug);
-        String city = location[0];
-        String state = location[1];
+    public Object cityPage(@PathVariable("slug") String slug, Model model) {
+        CityResolution cityResolution = resolveCityOr404(slug);
+        String city = cityResolution.city();
+        String state = cityResolution.state();
 
-        if (!repository.isValidCity(city, state)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found in database");
+        if (!slug.equals(cityResolution.canonicalSlug())) {
+            return permanentRedirect("/RentVerdict/verdict/" + cityResolution.canonicalSlug());
         }
 
         // Fetch Data for SEO Landing
@@ -148,9 +197,10 @@ public class VerdictController {
         var movingData = repository.getMoving(city, state).orElse(null);
         var petData = repository.getPet(city, state).orElse(null);
         var insight = repository.getCityInsight(city, state).orElse(null);
+        var economicFact = repository.getCityEconomicFact(city, state).orElse(null);
 
         var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
-                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.GENERAL, null);
+                insight, economicFact, firstrentverdict.service.seo.CityContentGenerator.Intent.GENERAL, null);
 
         // Get related cities in same state
         List<CitiesData.CityEntry> relatedCities = repository.getAllCities().stream()
@@ -160,23 +210,24 @@ public class VerdictController {
 
         model.addAttribute("pageData", pageContent);
         model.addAttribute("relatedCities", relatedCities);
-        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/" + slug);
+        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/" + cityResolution.canonicalSlug());
 
         return "pages/city_landing";
     }
 
     @GetMapping("/verdict/credit/{tier:poor|fair}/{slug}")
-    public String creditPage(
+    public Object creditPage(
             @PathVariable("tier") String tier,
             @PathVariable("slug") String slug,
             Model model) {
 
-        String[] location = parseCitySlug(slug);
-        String city = location[0];
-        String state = location[1];
+        CityResolution cityResolution = resolveCityOr404(slug);
+        String city = cityResolution.city();
+        String state = cityResolution.state();
 
-        if (!repository.isValidCity(city, state)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
+        if (!slug.equals(cityResolution.canonicalSlug())) {
+            return permanentRedirect(
+                    "/RentVerdict/verdict/credit/" + tier.toLowerCase() + "/" + cityResolution.canonicalSlug());
         }
 
         // Fetch Data for SEO Landing
@@ -188,9 +239,10 @@ public class VerdictController {
         var movingData = repository.getMoving(city, state).orElse(null);
         var petData = repository.getPet(city, state).orElse(null);
         var insight = repository.getCityInsight(city, state).orElse(null);
+        var economicFact = repository.getCityEconomicFact(city, state).orElse(null);
 
         var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
-                insight,
+                insight, economicFact,
                 tier.equalsIgnoreCase("poor") ? firstrentverdict.service.seo.CityContentGenerator.Intent.CREDIT_POOR
                         : firstrentverdict.service.seo.CityContentGenerator.Intent.CREDIT_FAIR,
                 null);
@@ -205,22 +257,22 @@ public class VerdictController {
         model.addAttribute("relatedCities", relatedCities);
         model.addAttribute("tier", Character.toUpperCase(tier.charAt(0)) + tier.substring(1).toLowerCase());
         model.addAttribute("canonicalUrl",
-                baseUrl + "/RentVerdict/verdict/credit/" + tier.toLowerCase() + "/" + slug);
+                baseUrl + "/RentVerdict/verdict/credit/" + tier.toLowerCase() + "/" + cityResolution.canonicalSlug());
 
         return "pages/credit_landing";
     }
 
     @GetMapping("/verdict/credit/good/{slug}")
-    public String creditGoodPage(
+    public Object creditGoodPage(
             @PathVariable("slug") String slug,
             Model model) {
 
-        String[] location = parseCitySlug(slug);
-        String city = location[0];
-        String state = location[1];
+        CityResolution cityResolution = resolveCityOr404(slug);
+        String city = cityResolution.city();
+        String state = cityResolution.state();
 
-        if (!repository.isValidCity(city, state)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
+        if (!slug.equals(cityResolution.canonicalSlug())) {
+            return permanentRedirect("/RentVerdict/verdict/credit/good/" + cityResolution.canonicalSlug());
         }
 
         // Fetch Data for SEO Landing
@@ -233,9 +285,10 @@ public class VerdictController {
         var movingData = repository.getMoving(city, state).orElse(null);
         var petData = repository.getPet(city, state).orElse(null);
         var insight = repository.getCityInsight(city, state).orElse(null);
+        var economicFact = repository.getCityEconomicFact(city, state).orElse(null);
 
         var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
-                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.CREDIT_GOOD, null);
+                insight, economicFact, firstrentverdict.service.seo.CityContentGenerator.Intent.CREDIT_GOOD, null);
 
         // Get related cities in same state
         List<CitiesData.CityEntry> relatedCities = repository.getAllCities().stream()
@@ -246,19 +299,19 @@ public class VerdictController {
         model.addAttribute("pageData", pageContent);
         model.addAttribute("relatedCities", relatedCities);
         model.addAttribute("tier", "Good");
-        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/credit/good/" + slug);
+        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/credit/good/" + cityResolution.canonicalSlug());
 
         return "pages/credit_landing";
     }
 
     @GetMapping("/verdict/moving-to/{slug}")
-    public String relocationPage(@PathVariable("slug") String slug, Model model) {
-        String[] location = parseCitySlug(slug);
-        String city = location[0];
-        String state = location[1];
+    public Object relocationPage(@PathVariable("slug") String slug, Model model) {
+        CityResolution cityResolution = resolveCityOr404(slug);
+        String city = cityResolution.city();
+        String state = cityResolution.state();
 
-        if (!repository.isValidCity(city, state)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
+        if (!slug.equals(cityResolution.canonicalSlug())) {
+            return permanentRedirect("/RentVerdict/verdict/moving-to/" + cityResolution.canonicalSlug());
         }
 
         // Fetch Data for SEO Landing
@@ -271,9 +324,10 @@ public class VerdictController {
         var movingData = repository.getMoving(city, state).orElse(null);
         var petData = repository.getPet(city, state).orElse(null);
         var insight = repository.getCityInsight(city, state).orElse(null);
+        var economicFact = repository.getCityEconomicFact(city, state).orElse(null);
 
         var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
-                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.RELOCATION, null);
+                insight, economicFact, firstrentverdict.service.seo.CityContentGenerator.Intent.RELOCATION, null);
 
         // Get related cities in same state
         List<CitiesData.CityEntry> relatedCities = repository.getAllCities().stream()
@@ -283,19 +337,20 @@ public class VerdictController {
 
         model.addAttribute("pageData", pageContent);
         model.addAttribute("relatedCities", relatedCities);
-        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/moving-to/" + slug);
+        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/moving-to/" + cityResolution.canonicalSlug());
+        model.addAttribute("topOriginStates", topOriginStates(state, 6));
 
         return "pages/relocation_landing";
     }
 
     @GetMapping("/verdict/with-pet/{slug}")
-    public String petPage(@PathVariable("slug") String slug, Model model) {
-        String[] location = parseCitySlug(slug);
-        String city = location[0];
-        String state = location[1];
+    public Object petPage(@PathVariable("slug") String slug, Model model) {
+        CityResolution cityResolution = resolveCityOr404(slug);
+        String city = cityResolution.city();
+        String state = cityResolution.state();
 
-        if (!repository.isValidCity(city, state)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
+        if (!slug.equals(cityResolution.canonicalSlug())) {
+            return permanentRedirect("/RentVerdict/verdict/with-pet/" + cityResolution.canonicalSlug());
         }
 
         var rentData = repository.getRent(city, state).orElse(null);
@@ -303,9 +358,10 @@ public class VerdictController {
         var movingData = repository.getMoving(city, state).orElse(null);
         var petData = repository.getPet(city, state).orElse(null);
         var insight = repository.getCityInsight(city, state).orElse(null);
+        var economicFact = repository.getCityEconomicFact(city, state).orElse(null);
 
         var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
-                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.PET_FRIENDLY, null);
+                insight, economicFact, firstrentverdict.service.seo.CityContentGenerator.Intent.PET_FRIENDLY, null);
 
         // Get related cities in same state
         List<CitiesData.CityEntry> relatedCities = repository.getAllCities().stream()
@@ -315,20 +371,22 @@ public class VerdictController {
         model.addAttribute("relatedCities", relatedCities);
 
         model.addAttribute("pageData", pageContent);
-        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/with-pet/" + slug);
+        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/with-pet/" + cityResolution.canonicalSlug());
         return "pages/landing_pet";
     }
 
     @GetMapping("/verdict/pet-friendly-apartments/{slug}")
     public org.springframework.web.servlet.view.RedirectView petRedirect(@PathVariable("slug") String slug) {
+        CityResolution cityResolution = resolveCityOr404(slug);
         org.springframework.web.servlet.view.RedirectView rv = new org.springframework.web.servlet.view.RedirectView(
-                "/RentVerdict/verdict/with-pet/" + slug);
+                "/RentVerdict/verdict/with-pet/" + cityResolution.canonicalSlug());
         rv.setStatusCode(org.springframework.http.HttpStatus.MOVED_PERMANENTLY);
+        rv.setExposeModelAttributes(false);
         return rv;
     }
 
     @GetMapping("/verdict/can-i-move-with/{amount}/to/{slug}")
-    public String savingsPage(
+    public Object savingsPage(
             @PathVariable("amount") int amount,
             @PathVariable("slug") String slug,
             Model model) {
@@ -338,12 +396,13 @@ public class VerdictController {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Amount must be 3000, 5000, or 10000");
         }
 
-        String[] location = parseCitySlug(slug);
-        String city = location[0];
-        String state = location[1];
+        CityResolution cityResolution = resolveCityOr404(slug);
+        String city = cityResolution.city();
+        String state = cityResolution.state();
 
-        if (!repository.isValidCity(city, state)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
+        if (!slug.equals(cityResolution.canonicalSlug())) {
+            return permanentRedirect(
+                    "/RentVerdict/verdict/can-i-move-with/" + amount + "/to/" + cityResolution.canonicalSlug());
         }
 
         var rentData = repository.getRent(city, state).orElse(null);
@@ -351,9 +410,10 @@ public class VerdictController {
         var movingData = repository.getMoving(city, state).orElse(null);
         var petData = repository.getPet(city, state).orElse(null);
         var insight = repository.getCityInsight(city, state).orElse(null);
+        var economicFact = repository.getCityEconomicFact(city, state).orElse(null);
 
         var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
-                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.SAVINGS_BASED, amount);
+                insight, economicFact, firstrentverdict.service.seo.CityContentGenerator.Intent.SAVINGS_BASED, amount);
 
         // Get related cities in same state
         List<CitiesData.CityEntry> relatedCities = repository.getAllCities().stream()
@@ -365,41 +425,45 @@ public class VerdictController {
         model.addAttribute("pageData", pageContent);
         model.addAttribute("savings", amount);
         model.addAttribute("canonicalUrl",
-                baseUrl + "/RentVerdict/verdict/can-i-move-with/" + amount + "/to/" + slug);
+                baseUrl + "/RentVerdict/verdict/can-i-move-with/" + amount + "/to/" + cityResolution.canonicalSlug());
         return "pages/landing_savings";
     }
 
     @GetMapping("/verdict/moving-from/{from}/to/{to}")
-    public String relocationPairPage(
+    public Object relocationPairPage(
             @PathVariable("from") String from,
             @PathVariable("to") String to,
             Model model) {
 
-        String[] fromLocation = parseCitySlug(from);
-        if (!repository.isValidCity(fromLocation[0], fromLocation[1])) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Origin city not found");
+        CityResolution fromResolution = resolveCityOr404(from);
+        CityResolution toResolution = resolveCityOr404(to);
+
+        if (!from.equals(fromResolution.canonicalSlug()) || !to.equals(toResolution.canonicalSlug())) {
+            return permanentRedirect(
+                    "/RentVerdict/verdict/moving-from/" + fromResolution.canonicalSlug() + "/to/"
+                            + toResolution.canonicalSlug());
         }
 
-        String[] location = parseCitySlug(to);
-        String city = location[0];
-        String state = location[1];
-
-        if (!repository.isValidCity(city, state)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Destination city not found");
-        }
+        String city = toResolution.city();
+        String state = toResolution.state();
 
         var rentData = repository.getRent(city, state).orElse(null);
         var depositData = repository.getSecurityDeposit(city, state).orElse(null);
         var movingData = repository.getMoving(city, state).orElse(null);
         var petData = repository.getPet(city, state).orElse(null);
         var insight = repository.getCityInsight(city, state).orElse(null);
+        var economicFact = repository.getCityEconomicFact(city, state).orElse(null);
 
         var pageContent = cityContentGenerator.generate(city, state, rentData, depositData, movingData, petData,
-                insight, firstrentverdict.service.seo.CityContentGenerator.Intent.RELOCATION_PAIR, from);
+                insight, economicFact, firstrentverdict.service.seo.CityContentGenerator.Intent.RELOCATION_PAIR,
+                fromResolution.canonicalSlug());
 
         model.addAttribute("pageData", pageContent);
         model.addAttribute("canonicalUrl",
-                baseUrl + "/RentVerdict/verdict/moving-from/" + from + "/to/" + to);
+                baseUrl + "/RentVerdict/verdict/moving-from/" + fromResolution.canonicalSlug() + "/to/"
+                        + toResolution.canonicalSlug());
+        model.addAttribute("fromState", fromResolution.state());
+        model.addAttribute("topOriginStates", topOriginStates(state, 6));
         return "pages/city_landing";
     }
 
@@ -423,45 +487,8 @@ public class VerdictController {
     }
 
     @GetMapping("/verdict/compare/{compareSlug}")
-    public Object comparePage(@PathVariable("compareSlug") String compareSlug, Model model) {
-        String[] slugs = compareSlug.split("-vs-");
-        if (slugs.length != 2) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid compare format");
-        }
-
-        String slug1 = slugs[0];
-        String slug2 = slugs[1];
-
-        String[] loc1 = parseCitySlug(slug1);
-        String[] loc2 = parseCitySlug(slug2);
-
-        if (loc1 == null || loc2 == null || !repository.isValidCity(loc1[0], loc1[1])
-                || !repository.isValidCity(loc2[0], loc2[1])) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "City not found");
-        }
-
-        if (slug1.equalsIgnoreCase(slug2)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Self-compare not allowed");
-        }
-
-        if (slug1.compareToIgnoreCase(slug2) > 0) {
-            org.springframework.web.servlet.view.RedirectView rv = new org.springframework.web.servlet.view.RedirectView(
-                    "/RentVerdict/verdict/compare/" + slug2 + "-vs-" + slug1);
-            rv.setStatusCode(HttpStatus.MOVED_PERMANENTLY);
-            return new org.springframework.web.servlet.ModelAndView(rv);
-        }
-
-        var rent1 = repository.getRent(loc1[0], loc1[1]).orElse(null);
-        var pageContent1 = cityContentGenerator.generate(loc1[0], loc1[1], rent1, null, null, null, null,
-                firstrentverdict.service.seo.CityContentGenerator.Intent.GENERAL, null); // Placeholder
-        var rent2 = repository.getRent(loc2[0], loc2[1]).orElse(null);
-        var pageContent2 = cityContentGenerator.generate(loc2[0], loc2[1], rent2, null, null, null, null,
-                firstrentverdict.service.seo.CityContentGenerator.Intent.GENERAL, null); // Placeholder
-
-        model.addAttribute("pageData1", pageContent1);
-        model.addAttribute("pageData2", pageContent2);
-        model.addAttribute("canonicalUrl", baseUrl + "/RentVerdict/verdict/compare/" + compareSlug);
-        return "pages/compare_shell";
+    public String comparePage(@PathVariable("compareSlug") String compareSlug) {
+        throw new ResponseStatusException(HttpStatus.GONE, "This placeholder content has been permanently removed.");
     }
 
     @GetMapping("/cities")
@@ -491,35 +518,75 @@ public class VerdictController {
     public WhatIfResponse whatIfSimulation(
             @RequestBody WhatIfRequest whatIf,
             HttpSession session) {
+        try {
+            VerdictInput originalInput = (VerdictInput) session.getAttribute(SESSION_KEY_ORIGINAL_INPUT);
+            VerdictResult originalResult = (VerdictResult) session.getAttribute(SESSION_KEY_ORIGINAL_RESULT);
 
-        VerdictInput originalInput = (VerdictInput) session.getAttribute(SESSION_KEY_ORIGINAL_INPUT);
-        VerdictResult originalResult = (VerdictResult) session.getAttribute(SESSION_KEY_ORIGINAL_RESULT);
+            if (originalInput == null || originalResult == null) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "No original verdict found in session. Please submit an initial verdict first.");
+            }
 
-        if (originalInput == null || originalResult == null) {
-            throw new ResponseStatusException(
-                    HttpStatus.BAD_REQUEST,
-                    "No original verdict found in session. Please submit an initial verdict first.");
+            VerdictResult newResult = whatIfService.recalculate(originalInput, whatIf);
+
+            String prevBottleneck = originalResult.primaryBottleneck();
+            String currBottleneck = newResult.primaryBottleneck();
+
+            return new WhatIfResponse(
+                    newResult,
+                    prevBottleneck,
+                    currBottleneck,
+                    !prevBottleneck.equals(currBottleneck) || !originalResult.verdict().equals(newResult.verdict()));
+        } catch (IllegalArgumentException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage(), ex);
+        }
+    }
+
+    private void validateSimulationInput(SimulationInput input) {
+        if (input == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Simulation payload is required");
+        }
+        if (input.monthlyRent() < 1 || input.monthlyRent() > 30000 || input.availableCash() < 0
+                || input.availableCash() > 100000) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid simulation parameters");
+        }
+        if (input.city() == null || input.city().isBlank() || input.state() == null || input.state().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "City and state are required");
+        }
+        if (input.creditTier() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "creditTier is required");
+        }
+        if (!repository.isValidCity(input.city(), input.state())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unsupported city: " + input.city() + ", " + input.state());
         }
 
-        VerdictResult newResult = whatIfService.recalculate(originalInput, whatIf);
-
-        String prevBottleneck = originalResult.primaryBottleneck();
-        String currBottleneck = newResult.primaryBottleneck();
-
-        return new WhatIfResponse(
-                newResult,
-                prevBottleneck,
-                currBottleneck,
-                !prevBottleneck.equals(currBottleneck) || !originalResult.verdict().equals(newResult.verdict()));
+        if (!input.isLocalMove()) {
+            boolean hasFromCity = input.fromCity() != null && !input.fromCity().isBlank();
+            boolean hasFromState = input.fromState() != null && !input.fromState().isBlank();
+            if (!hasFromCity && !hasFromState) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "fromCity and fromState are required for long-distance simulations");
+            }
+            if (hasFromCity != hasFromState) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "Both fromCity and fromState are required for long-distance simulations");
+            }
+            if (hasFromCity && !repository.isValidCity(input.fromCity(), input.fromState())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                        "Unsupported origin city: " + input.fromCity() + ", " + input.fromState());
+            }
+        }
     }
 
     @PostMapping("/api/simulate")
     @ResponseBody
     public VerdictResult simulateVerdict(@RequestBody SimulationInput input) {
-        if (input.monthlyRent() < 1 || input.monthlyRent() > 30000 || input.availableCash() < 0
-                || input.availableCash() > 100000) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid simulation parameters");
+        validateSimulationInput(input);
+        try {
+            return verdictService.simulateVerdict(input);
+        } catch (IllegalArgumentException ex) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage(), ex);
         }
-        return verdictService.simulateVerdict(input);
     }
 }

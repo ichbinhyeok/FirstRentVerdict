@@ -6,8 +6,8 @@
 @param String baseUrl = ""
 
 @template.layout.main(
-    title = "Available Jurisdictions - First Rent Verdict",
-    description = "Complete index of supported cities for rent affordability analysis.",
+    title = "Rent Affordability by City: 100 US Markets (2026 Data)",
+    description = "Compare move-in costs, rent pressure, and approval barriers across 100 US cities using audited 2026 market data.",
     canonical = baseUrl + "/RentVerdict/cities",
     content = @`
     <div style="max-width: 1000px; margin: 4rem auto; padding: 0 2rem;">
@@ -20,28 +20,28 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
             <a href="/RentVerdict/verdict/with-pet/new-york-ny" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">
                 <div style="padding: 2rem 1.5rem; background: var(--bg-surface); border: 2px solid var(--border-subtle); border-radius: 16px; text-align: center;">
-                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">🐾</div>
+                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">Pet</div>
                     <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Pet Audit Guide</div>
                     <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 0.5rem;">New York Pet Rules</div>
                 </div>
             </a>
             <a href="/RentVerdict/verdict/credit/poor/atlanta-ga" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">
                 <div style="padding: 2rem 1.5rem; background: var(--bg-surface); border: 2px solid var(--border-subtle); border-radius: 16px; text-align: center;">
-                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">💳</div>
+                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">Credit</div>
                     <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Poor Credit Guide</div>
                     <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 0.5rem;">Atlanta Approval Strategy</div>
                 </div>
             </a>
             <a href="/RentVerdict/verdict/moving-to/austin-tx" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">
                 <div style="padding: 2rem 1.5rem; background: var(--bg-surface); border: 2px solid var(--border-subtle); border-radius: 16px; text-align: center;">
-                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">🚚</div>
+                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">Move</div>
                     <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Relocation Audit</div>
                     <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 0.5rem;">Austin Cost Breakdown</div>
                 </div>
             </a>
             <a href="/RentVerdict/verdict/can-i-move-with/5000/to/miami-fl" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">
                 <div style="padding: 2rem 1.5rem; background: var(--bg-surface); border: 2px solid var(--border-subtle); border-radius: 16px; text-align: center;">
-                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">💰</div>
+                    <div style="font-size: 2.25rem; margin-bottom: 0.75rem;">Cash</div>
                     <div style="font-weight: 800; font-size: 1.1rem; color: var(--text-primary);">Savings Analysis</div>
                     <div style="font-size: 0.85rem; color: var(--text-tertiary); margin-top: 0.5rem;">Miami with $5,000</div>
                 </div>
@@ -73,7 +73,7 @@
                         <ul style="list-style: none; padding: 0;">
                             @for(CityEntry city : citiesByState.get(state))
                                 <li style="margin-bottom: 0.5rem;">
-                                    <a href="/RentVerdict/verdict/${city.city().toLowerCase().replace(" ", "-")}-${city.state().toLowerCase()}" 
+                                    <a href="/RentVerdict/verdict/${city.city().toLowerCase().replace(" ", "-").replace(".", "")}-${city.state().toLowerCase()}" 
                                        style="text-decoration: none; color: var(--text-primary); font-size: 0.95rem; display: block; padding: 0.25rem 0;">
                                         ${city.city()}
                                     </a>
