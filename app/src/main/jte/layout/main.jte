@@ -63,12 +63,12 @@
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- GA4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5YQX4VQ8ZT"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MK941K4W3S"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-5YQX4VQ8ZT');
+        gtag('config', 'G-MK941K4W3S');
 
         // Centralized analytics helper used across templates.
         window.frvTrack = function(eventName, params) {
