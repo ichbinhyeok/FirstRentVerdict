@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/RentVerdict")
@@ -35,6 +37,12 @@ public class VerdictController {
     @Value("${app.base-url}")
     private String baseUrl;
 
+    @Value("${seo.indexing.noindex.relocation-pairs:true}")
+    private boolean noindexRelocationPairs;
+
+    @Value("${seo.indexing.noindex.savings-amounts:3000,10000}")
+    private String noindexSavingsAmountsCsv;
+
     private List<String> topOriginStates(String destinationState, int limit) {
         return repository.getStateMigrationFlow(destinationState)
                 .map(flow -> flow.topOrigins() == null ? List.<String>of()
@@ -45,6 +53,24 @@ public class VerdictController {
                                 .limit(limit)
                                 .toList())
                 .orElse(List.of());
+    }
+
+    private Set<Integer> parseIntegerCsvToSet(String csv) {
+        if (csv == null || csv.isBlank()) {
+            return Set.of();
+        }
+        return java.util.Arrays.stream(csv.split(","))
+                .map(String::trim)
+                .filter(s -> !s.isBlank())
+                .map(s -> {
+                    try {
+                        return Integer.valueOf(s);
+                    } catch (NumberFormatException ignored) {
+                        return null;
+                    }
+                })
+                .filter(java.util.Objects::nonNull)
+                .collect(Collectors.toSet());
     }
 
     public VerdictController(
@@ -424,6 +450,7 @@ public class VerdictController {
 
         model.addAttribute("pageData", pageContent);
         model.addAttribute("savings", amount);
+        model.addAttribute("noindex", parseIntegerCsvToSet(noindexSavingsAmountsCsv).contains(amount));
         model.addAttribute("canonicalUrl",
                 baseUrl + "/RentVerdict/verdict/can-i-move-with/" + amount + "/to/" + cityResolution.canonicalSlug());
         return "pages/landing_savings";
@@ -464,6 +491,7 @@ public class VerdictController {
                         + toResolution.canonicalSlug());
         model.addAttribute("fromState", fromResolution.state());
         model.addAttribute("topOriginStates", topOriginStates(state, 6));
+        model.addAttribute("noindex", noindexRelocationPairs);
         return "pages/city_landing";
     }
 

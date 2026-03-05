@@ -1,8 +1,8 @@
 @param String baseUrl = ""
 
 @template.layout.main(
-    title = "Methodology: How First Rent Verdict Works (50/30/20 Rule)",
-    description = "Learn how we calculate your rent affordability using the 50/30/20 budgeting rule, upfront costs, and cash buffer analysis. Transparent methodology with cited data sources.",
+    title = "Rent Affordability Methodology (2026): Formula, Data, and Assumptions",
+    description = "Review the exact affordability formula: rent, deposit multipliers, moving costs, and safety-buffer thresholds used in our city audits.",
     canonical = baseUrl + "/RentVerdict/methodology",
     content = @`
     <div style="max-width: 800px; margin: 4rem auto; padding: 0 1.5rem;">

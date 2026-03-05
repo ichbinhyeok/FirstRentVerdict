@@ -140,13 +140,21 @@ class DataIntegrationTest {
     }
 
     @Test
-    void verifySitemapMovingPairsUseMixedOrigins() {
+    void verifySitemapFocusedDefaults() {
         String xml = sitemapController.sitemap();
-        assertTrue(xml.contains("/to/austin-tx"), "Sitemap should include Austin destination moving pairs");
-        assertTrue(xml.contains("-tx/to/austin-tx"),
-                "Sitemap should keep same-state origins for Austin routes");
-        assertTrue(xml.contains("-ca/to/austin-tx"),
-                "Sitemap should include IRS-priority inbound states (CA -> TX)");
+        int locCount = xml.split("<loc>").length - 1;
+        assertTrue(locCount <= 250,
+                "Focused sitemap should stay compact for indexation waves, but got " + locCount + " URLs");
+        assertFalse(xml.contains("/RentVerdict/verdict/moving-from/"),
+                "Sitemap should exclude relocation-pair combinations by default");
+        assertTrue(xml.contains("/RentVerdict/verdict/can-i-move-with/5000/to/austin-tx"),
+                "Sitemap should keep only the focused savings amount");
+        assertFalse(xml.contains("/RentVerdict/verdict/can-i-move-with/3000/to/austin-tx"),
+                "Sitemap should omit non-focused savings amounts");
+        assertFalse(xml.contains("/RentVerdict/verdict/credit/good/austin-tx"),
+                "Sitemap should omit credit-good pages by default");
+        assertTrue(xml.contains("/RentVerdict/research/move-in-cost-index"),
+                "Sitemap should include the research asset page");
     }
 
     @Test

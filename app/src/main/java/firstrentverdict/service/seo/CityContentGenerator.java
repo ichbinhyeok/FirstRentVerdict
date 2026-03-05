@@ -143,15 +143,15 @@ public class CityContentGenerator {
                 String localInsight = "";
                 List<QnA> qnaList = new ArrayList<>();
 
-                // High-CTR Suffixes
-                String ctrSuffix = " ✓ Free 2026 Analysis";
+                // Meta suffix kept concise for search snippets.
+                String ctrSuffix = " Updated for 2026.";
 
                 switch (intent) {
                         case PET_FRIENDLY -> {
                                 pageTitle = String.format("Moving to %s with Pets: $%,d Deposit & Fee Audit (2026)",
                                                 city, petDeposit);
                                 metaDescription = String.format(
-                                                "How much is a pet deposit in %s? Average is $%,d plus $%,d/mo. [2026 Rental Calculator] Total move-in cost: $%,d.%s",
+                                                "How much is a pet deposit in %s? Typical one-time cost is $%,d plus about $%,d/month. Estimated move-in cash: $%,d.%s",
                                                 city, petDeposit, petRentMonthly, upfrontTotal, ctrSuffix);
                                 localInsight = String.format("In %s, %s Monthly pet rent is typically $%,d.", city,
                                                 petNotes, petRentMonthly);
@@ -165,10 +165,10 @@ public class CityContentGenerator {
                         }
                         case SAVINGS_BASED -> {
                                 int savings = (contextValue instanceof Integer) ? (Integer) contextValue : 5000;
-                                pageTitle = String.format("Can I move to %s with $%s in Savings?", city,
+                                pageTitle = String.format("Can I Move to %s with $%s? (2026 Cash Check)", city,
                                                 String.format("%,d", savings));
                                 metaDescription = String.format(
-                                                "Is $%s enough for %s? [Calculator] You need at least $%,d upfront for rent, deposit, and moving. Check your approval odds.%s",
+                                                "Is $%s enough for %s? Typical move-in cash is about $%,d for rent, deposit, and moving. Compare your buffer before applying.%s",
                                                 String.format("%,d", savings), city, upfrontTotal, ctrSuffix);
                                 localInsight = (savings >= upfrontTotal)
                                                 ? String.format("Safe: Your $%s exceeds the $%,d entry cost. You'll have a $%,d cushion.",
@@ -190,7 +190,7 @@ public class CityContentGenerator {
 
                                 pageTitle = String.format("Renting in %s with Poor Credit (2026 Approval Guide)", city);
                                 metaDescription = String.format(
-                                                "Credit under 600? In %s, expect to pay up to %sx deposit ($%,d). [2026 Audit] Get the approval blueprint for low scores.%s",
+                                                "Credit under 600 in %s? Expect higher deposit pressure (up to %sx, around $%,d). Use this approval checklist before you apply.%s",
                                                 city, multStr, deposit, ctrSuffix);
                                 localInsight = String.format(
                                                 "Credit Update: %s High-risk applicants in %s should prepare for higher upfront liquidity.",
@@ -204,7 +204,7 @@ public class CityContentGenerator {
                                 pageTitle = String.format(
                                                 "Renting in %s with Fair Credit (600-660): 2026 Approval Odds", city);
                                 metaDescription = String.format(
-                                                "Have a 640 score? See how to avoid high deposits in %s. [2026 Rent Verdict] 3 strategies to secure a lease with fair credit.%s",
+                                                "Have a 640 score in %s? See realistic deposit expectations and the 3 steps that improve lease approval odds.%s",
                                                 city, ctrSuffix);
                                 localInsight = "Fair Credit Tip: Most corporate landlords here will approve a 620+ score but may request a full month's security deposit.";
 
@@ -215,12 +215,21 @@ public class CityContentGenerator {
                                 pageTitle = String.format(
                                                 "Renting in %s with Good Credit (700+): Priority Move-In Guide", city);
                                 metaDescription = String.format(
-                                                "Leverage your 750+ score for $0 deposits in %s. [2026 Market Report] How to find the best rental incentives for high-credit tenants.%s",
+                                                "Use your 700+ score in %s to target low-deposit listings, fee waivers, and stronger move-in incentives.%s",
                                                 city, ctrSuffix);
                                 localInsight = "Good Credit Power: With a 700+ score, you have high leverage to negotiate $0 security deposit or waived application fees.";
 
                                 qnaList.add(new QnA("Can I get a $0 deposit in " + city + " with 750 credit?",
                                                 "Yes, many luxury buildings and national property managers offer 'Deposit-Free' options for top-tier credit profiles."));
+                        }
+                        case RELOCATION -> {
+                                pageTitle = String.format("Moving to %s, %s: Full Move-In Cost Guide (2026)", city, state);
+                                metaDescription = String.format(
+                                                "Planning a move to %s? Typical move-in cash is about $%,d, including rent, deposit, and relocation costs. Use the local checklist before signing.%s",
+                                                city, upfrontTotal, ctrSuffix);
+                                localInsight = String.format(
+                                                "Relocation snapshot: Most first-month movers into %s should plan for around $%,d in total liquidity before lease signing.",
+                                                city, upfrontTotal);
                         }
                         case RELOCATION_PAIR -> {
                                 String fromCitySlug = (String) contextValue;
@@ -236,7 +245,7 @@ public class CityContentGenerator {
                                 }
                                 pageTitle = String.format("Moving from %s to %s Cost Audit (2026)", fromCity, city);
                                 metaDescription = String.format(
-                                                "Relocating from %s to %s? We found a $%,d move-in barrier. [2026 Cost Index] Calculate your specific relocation budget.%s",
+                                                "Relocating from %s to %s? Expected move-in cash is about $%,d when rent, deposit, and distance costs are combined.%s",
                                                 fromCity, city, upfrontTotal, ctrSuffix);
                                 localInsight = String.format(
                                                 "Cost Shift: Median rent in %s is $%,d. Moving from %s typically adds $%,d to the bill.",
@@ -247,10 +256,9 @@ public class CityContentGenerator {
                                                                 + ". Compare this to your current costs."));
                         }
                         default -> {
-                                pageTitle = String.format("%s %s Rent Breakdown: $%,d/mo + $%,d Move-In", city, state,
-                                                avgRent, upfrontTotal);
+                                pageTitle = String.format("Average Rent in %s, %s + Move-In Cost (2026)", city, state);
                                 metaDescription = String.format(
-                                                "Total cost to rent in %s: $%s/mo rent plus $%s move-in. [2026 Audited Data] See if you qualify for a 1BR apartment today.%s",
+                                                "Average 1BR rent in %s is $%s, and typical move-in cash is about $%s (rent + deposit + moving). Check if your cash buffer is enough.%s",
                                                 city, String.format("%,d", avgRent), String.format("%,d", upfrontTotal),
                                                 ctrSuffix);
                                 localInsight = String.format(

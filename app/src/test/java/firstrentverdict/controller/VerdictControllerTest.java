@@ -97,18 +97,44 @@ class VerdictControllerTest {
     }
 
     @Test
+    void testCityUrlTrailingSlashRedirectsToCanonical() throws Exception {
+        mockMvc.perform(get("/RentVerdict/verdict/new-york-ny/"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/RentVerdict/verdict/new-york-ny"));
+    }
+
+    @Test
+    void testSavings3000PageIsNoindexBut5000IsIndexable() throws Exception {
+        mockMvc.perform(get("/RentVerdict/verdict/can-i-move-with/3000/to/new-york-ny"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("<meta name=\"robots\" content=\"noindex, nofollow\">")));
+
+        mockMvc.perform(get("/RentVerdict/verdict/can-i-move-with/5000/to/new-york-ny"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(not(containsString("<meta name=\"robots\" content=\"noindex, nofollow\">"))));
+    }
+
+    @Test
+    void testRelocationPairPageIsNoindexByDefault() throws Exception {
+        mockMvc.perform(get("/RentVerdict/verdict/moving-from/austin-tx/to/new-york-ny"))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("<meta name=\"robots\" content=\"noindex, nofollow\">")));
+    }
+
+    @Test
     void testCompareRouteIsGone() throws Exception {
         mockMvc.perform(get("/RentVerdict/verdict/compare/austin-tx-vs-new-york-ny"))
                 .andExpect(status().isGone());
     }
 
     @Test
-    void testSitemapExcludesCompareAndUsesCanonicalStLouisSlug() throws Exception {
+    void testSitemapExcludesCompareAndLegacyDottedSlug() throws Exception {
         mockMvc.perform(get("/sitemap.xml"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("/RentVerdict/verdict/st-louis-mo")))
                 .andExpect(content().string(not(containsString("/RentVerdict/verdict/st.-louis-mo"))))
-                .andExpect(content().string(not(containsString("/verdict/compare/"))));
+                .andExpect(content().string(not(containsString("/verdict/compare/"))))
+                .andExpect(content().string(containsString("/RentVerdict/research/move-in-cost-index")))
+                .andExpect(content().string(containsString("/RentVerdict/guide/rent-affordability-rule")));
     }
 
     @Test
@@ -123,6 +149,14 @@ class VerdictControllerTest {
         mockMvc.perform(get("/robots.txt"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Sitemap: ")));
+    }
+
+    @Test
+    void testResearchPageLoads() throws Exception {
+        mockMvc.perform(get("/RentVerdict/research/move-in-cost-index"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/research_move_in_index"))
+                .andExpect(content().string(containsString("Move-In Cost Index")));
     }
 
     @Test

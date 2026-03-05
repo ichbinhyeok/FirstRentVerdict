@@ -28,6 +28,17 @@
             </p>
         </header>
 
+        <section style="margin-bottom: 2rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 12px; padding: 1rem 1.25rem;">
+            <h2 style="font-size: 0.95rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary);">Core Decision Links</h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="/RentVerdict/" class="btn btn-intent">Run Calculator</a>
+                <a href="/RentVerdict/cities" class="btn btn-intent">Browse Cities</a>
+                <a href="/RentVerdict/research/move-in-cost-index" class="btn btn-intent">Monthly Cost Index</a>
+                <a href="/RentVerdict/verdict/new-york-ny" class="btn btn-intent">NY Audit</a>
+                <a href="/RentVerdict/verdict/seattle-wa" class="btn btn-intent">Seattle Audit</a>
+            </div>
+        </section>
+
         <section style="margin-bottom: 2rem;">
             <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;" id="intent-filters">
                 <button type="button" data-intent-filter="all" class="btn btn-primary btn-sm">All</button>

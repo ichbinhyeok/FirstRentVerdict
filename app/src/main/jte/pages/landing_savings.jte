@@ -6,12 +6,14 @@
 @param List<CityEntry> relatedCities = java.util.Collections.emptyList()
 @param Integer savings = null
 @param String canonicalUrl = null
+@param boolean noindex = false
 @param String baseUrl = ""
 
 @template.layout.main(
     title = pageData.pageTitle(),
     description = pageData.metaDescription(),
     canonical = (canonicalUrl != null ? canonicalUrl : baseUrl + "/RentVerdict/verdict/" + pageData.city().toLowerCase().replace(" ", "-").replace(".", "") + "-" + pageData.state().toLowerCase()),
+    noindex = noindex,
     content = @`
     
     <!-- FAQ Schema -->

@@ -63,18 +63,79 @@
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- GA4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MK941K4W3S"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-MK941K4W3S');
+        (function() {
+            const measurementId = 'G-MK941K4W3S';
+            const storageKey = 'frv_analytics_disabled';
+            const params = new URLSearchParams(window.location.search);
 
-        // Centralized analytics helper used across templates.
-        window.frvTrack = function(eventName, params) {
-            if (typeof gtag !== 'function') return;
-            gtag('event', eventName, params || {});
-        };
+            try {
+                if (params.get('frv_analytics') === 'off') {
+                    window.localStorage.setItem(storageKey, '1');
+                } else if (params.get('frv_analytics') === 'on') {
+                    window.localStorage.removeItem(storageKey);
+                }
+            } catch (err) {
+                // Ignore storage access errors in restricted browser contexts.
+            }
+
+            const hostname = (window.location.hostname || '').toLowerCase();
+            const isLocalHost = hostname === 'localhost' || hostname === '127.0.0.1' || hostname === '0.0.0.0';
+            const isAutomation = navigator.webdriver === true;
+            const hasTestFlag = params.get('frv_test') === '1';
+            let userOptOut = false;
+
+            try {
+                userOptOut = window.localStorage.getItem(storageKey) === '1';
+            } catch (err) {
+                userOptOut = false;
+            }
+
+            const disableAnalytics = isLocalHost || isAutomation || hasTestFlag || userOptOut;
+            window.__FRV_ANALYTICS_DISABLED__ = disableAnalytics;
+
+            window.frvDisableAnalytics = function() {
+                try {
+                    window.localStorage.setItem(storageKey, '1');
+                } catch (err) {
+                    // no-op
+                }
+                window['ga-disable-' + measurementId] = true;
+                window.__FRV_ANALYTICS_DISABLED__ = true;
+            };
+
+            window.frvEnableAnalytics = function() {
+                try {
+                    window.localStorage.removeItem(storageKey);
+                } catch (err) {
+                    // no-op
+                }
+                window['ga-disable-' + measurementId] = false;
+                window.__FRV_ANALYTICS_DISABLED__ = false;
+            };
+
+            if (disableAnalytics) {
+                window['ga-disable-' + measurementId] = true;
+                window.frvTrack = function() {};
+                return;
+            }
+
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function(){ window.dataLayer.push(arguments); };
+            window.gtag('js', new Date());
+            window.gtag('config', measurementId);
+
+            const gaScript = document.createElement('script');
+            gaScript.async = true;
+            gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(measurementId);
+            document.head.appendChild(gaScript);
+
+            // Centralized analytics helper used across templates.
+            window.frvTrack = function(eventName, params) {
+                if (typeof window.gtag !== 'function') return;
+                window.gtag('event', eventName, params || {});
+            };
+        })();
 
         document.addEventListener('click', function(e) {
             const link = e.target.closest('a');

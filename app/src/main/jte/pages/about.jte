@@ -1,8 +1,8 @@
 @param String baseUrl = ""
 
 @template.layout.main(
-    title = "About Verdict Labs - First Rent Verdict Team",
-    description = "Meet Verdict Labs, the data analysts behind First Rent Verdict. We use objective market data to protect renters from financial risk.",
+    title = "About First Rent Verdict: Team, Data Sources, and Review Standards",
+    description = "See who built First Rent Verdict, where city rental data comes from, and how our analysts review move-in cost estimates.",
     canonical = baseUrl + "/RentVerdict/about",
     content = @`
     <div style="max-width: 800px; margin: 4rem auto; padding: 0 1.5rem;">

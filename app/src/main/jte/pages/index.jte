@@ -5,8 +5,8 @@
 @param String baseUrl = ""
 
 @template.layout.main(
-    title = "First Rent Verdict: Can You Afford That Apartment? Free Calculator (2026)",
-    description = "Free rent affordability calculator using 2026 market data. Calculate your move-in costs, security deposit, and cash buffer for 100+ US cities.",
+    title = "Rent Affordability Calculator (2026): Move-In Cost by City | First Rent Verdict",
+    description = "Check rent, deposit, moving cost, and safe cash buffer in 100 US cities. Get a move-in affordability verdict in under a minute.",
     canonical = baseUrl + "/RentVerdict/",
     content = @`
     <!-- WebApplication Schema -->
@@ -204,6 +204,15 @@
                         Second-Chance Qualification Guide
                     </a>
                 </div>
+            </div>
+
+            <div style="margin-top: var(--space-10);">
+                <h3 style="font-size: 1rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-4);">
+                    Research Snapshot
+                </h3>
+                <a href="/RentVerdict/research/move-in-cost-index" class="btn btn-intent" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+                    Monthly Move-In Cost Index (Top Markets)
+                </a>
             </div>
 
             <div style="margin-top: var(--space-12); text-align: center;">

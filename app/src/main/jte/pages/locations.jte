@@ -16,6 +16,18 @@
             <p class="hero-subtitle" style="margin: 0 auto;">Select your city to begin the affordability audit.</p>
         </div>
 
+        <div style="margin-bottom: 3rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 1.25rem 1.5rem;">
+            <h2 style="font-size: 1rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary);">Core Hubs</h2>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                <a href="/RentVerdict/" class="btn btn-intent">Calculator</a>
+                <a href="/RentVerdict/guides" class="btn btn-intent">Approval Guides</a>
+                <a href="/RentVerdict/research/move-in-cost-index" class="btn btn-intent">Monthly Cost Index</a>
+                <a href="/RentVerdict/verdict/new-york-ny" class="btn btn-intent">New York Audit</a>
+                <a href="/RentVerdict/verdict/los-angeles-ca" class="btn btn-intent">Los Angeles Audit</a>
+                <a href="/RentVerdict/verdict/austin-tx" class="btn btn-intent">Austin Audit</a>
+            </div>
+        </div>
+
         <!-- Specialized Intent Hub -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
             <a href="/RentVerdict/verdict/with-pet/new-york-ny" style="text-decoration: none; color: inherit; transition: all 0.2s ease;" class="intent-card">

@@ -8,12 +8,14 @@
 @param List<String> topOriginStates = java.util.Collections.emptyList()
 @param Integer savings = null
 @param String canonicalUrl = null
+@param boolean noindex = false
 @param String baseUrl = ""
 
 @template.layout.main(
     title = pageData.pageTitle(),
     description = pageData.metaDescription(),
     canonical = (canonicalUrl != null ? canonicalUrl : baseUrl + "/RentVerdict/verdict/" + pageData.city().toLowerCase().replace(" ", "-").replace(".", "") + "-" + pageData.state().toLowerCase()),
+    noindex = noindex,
     content = @`
     
     <!-- FAQ Schema -->
@@ -93,6 +95,15 @@
                 </p>
             </div>
         </div>
+
+        <section style="margin-bottom: 4rem; background: var(--bg-panel); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: 1.5rem 1.75rem;">
+            <h2 style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--text-primary);">Quick Cost Facts: ${pageData.city()}, ${pageData.state()}</h2>
+            <ul style="list-style: none; padding: 0; margin: 0; display: grid; gap: 0.75rem;">
+                <li><strong>Average 1BR rent:</strong> $${String.format("%,d", pageData.medianRent())} per month.</li>
+                <li><strong>Typical move-in cash:</strong> around $${String.format("%,d", pageData.totalUpfrontEstimate())} (rent + deposit + moving).</li>
+                <li><strong>Target gross income:</strong> about $${String.format("%,d", pageData.monthlyIncomeReq())}/month for standard 3x rent screening.</li>
+            </ul>
+        </section>
 
         <!-- Specialized Intent Blocks -->
         @if(savings != null)
