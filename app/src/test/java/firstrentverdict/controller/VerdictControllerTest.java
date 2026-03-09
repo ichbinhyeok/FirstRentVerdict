@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
+
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
@@ -153,10 +155,21 @@ class VerdictControllerTest {
 
     @Test
     void testResearchPageLoads() throws Exception {
+        String reportDate = LocalDate.now().withDayOfMonth(1).toString();
+
         mockMvc.perform(get("/RentVerdict/research/move-in-cost-index"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("pages/research_move_in_index"))
-                .andExpect(content().string(containsString("Move-In Cost Index")));
+                .andExpect(content().string(containsString("Move-In Cost Index")))
+                .andExpect(content().string(containsString("\"datePublished\": \"" + reportDate + "\"")))
+                .andExpect(content().string(not(containsString(reportDate.replace("-", "\\-")))));
+    }
+
+    @Test
+    void testFirstMonthCostRedirectsToResearchIndex() throws Exception {
+        mockMvc.perform(get("/RentVerdict/first-month-cost/3000/ny"))
+                .andExpect(status().isMovedPermanently())
+                .andExpect(redirectedUrl("/RentVerdict/research/move-in-cost-index"));
     }
 
     @Test

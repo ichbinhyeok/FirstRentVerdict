@@ -24,7 +24,7 @@ $tests = @(
     @{ name = "Guide Article (Bad Credit No Cosigner)"; url = "$BaseUrl/RentVerdict/guides/rent-with-bad-credit-no-cosigner"; expected = 200; method = "GET" }
     @{ name = "Guide Article (Invalid Slug)"; url = "$BaseUrl/RentVerdict/guides/not-found-guide"; expected = 404; method = "GET" }
 
-    @{ name = "Deleted Rent State Page (410 GONE)"; url = "$BaseUrl/RentVerdict/first-month-cost/3000/ny"; expected = 410; method = "GET" }
+    @{ name = "Legacy Rent State Page Redirect"; url = "$BaseUrl/RentVerdict/first-month-cost/3000/ny"; expected = 301; method = "GET" }
     @{ name = "Compare Page Placeholder Removed (410 GONE)"; url = "$BaseUrl/RentVerdict/verdict/compare/austin-tx-vs-new-york-ny"; expected = 410; method = "GET" }
 
     @{ name = "Robots TXT"; url = "$BaseUrl/robots.txt"; expected = 200; method = "GET" }

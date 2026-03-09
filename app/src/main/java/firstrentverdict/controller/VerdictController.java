@@ -496,12 +496,10 @@ public class VerdictController {
     }
 
     @GetMapping("/first-month-cost/{rent}/{state}")
-    public String firstMonthCostPage(
+    public Object firstMonthCostPage(
             @PathVariable("rent") int rent,
-            @PathVariable("state") String state,
-            Model model) {
-
-        throw new ResponseStatusException(HttpStatus.GONE, "This content has been permanently removed.");
+            @PathVariable("state") String state) {
+        return permanentRedirect("/RentVerdict/research/move-in-cost-index");
     }
 
     @GetMapping("/verdict/salary-needed/{slug}")

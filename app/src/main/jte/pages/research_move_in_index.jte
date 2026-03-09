@@ -13,6 +13,21 @@
 !{
     String monthLabel = reportMonth.format(DateTimeFormatter.ofPattern("MMMM yyyy"));
     String reportDateIso = reportMonth.toString();
+    String articleHeadline = ("Monthly Move-In Cost Index - " + monthLabel)
+        .replace("\\", "\\\\")
+        .replace("\"", "\\\"")
+        .replace("\n", "\\n")
+        .replace("\r", "");
+    String articleDate = reportDateIso
+        .replace("\\", "\\\\")
+        .replace("\"", "\\\"")
+        .replace("\n", "\\n")
+        .replace("\r", "");
+    String articleUrl = (baseUrl + "/RentVerdict/research/move-in-cost-index")
+        .replace("\\", "\\\\")
+        .replace("\"", "\\\"")
+        .replace("\n", "\\n")
+        .replace("\r", "");
 }
 
 @template.layout.main(
@@ -24,9 +39,9 @@
     {
       "@context": "https://schema.org",
       "@type": "Article",
-      "headline": "Monthly Move-In Cost Index - ${monthLabel}",
-      "datePublished": "${reportDateIso}",
-      "dateModified": "${reportDateIso}",
+      "headline": "$unsafe{articleHeadline}",
+      "datePublished": "$unsafe{articleDate}",
+      "dateModified": "$unsafe{articleDate}",
       "author": {
         "@type": "Organization",
         "name": "First Rent Verdict"
@@ -35,7 +50,7 @@
         "@type": "Organization",
         "name": "First Rent Verdict"
       },
-      "mainEntityOfPage": "${baseUrl}/RentVerdict/research/move-in-cost-index"
+      "mainEntityOfPage": "$unsafe{articleUrl}"
     }
     </script>
 
