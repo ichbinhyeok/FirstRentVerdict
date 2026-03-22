@@ -148,10 +148,11 @@ public class CityContentGenerator {
 
                 switch (intent) {
                         case PET_FRIENDLY -> {
-                                pageTitle = String.format("Moving to %s with Pets: $%,d Deposit & Fee Audit (2026)",
-                                                city, petDeposit);
+                                pageTitle = String.format(
+                                                "Average Pet Deposit in %s: Fees, Pet Rent, and Move-In Cost (2026)",
+                                                city);
                                 metaDescription = String.format(
-                                                "How much is a pet deposit in %s? Typical one-time cost is $%,d plus about $%,d/month. Estimated move-in cash: $%,d.%s",
+                                                "Average pet deposit in %s is about $%,d, with pet rent near $%,d/month. See the full pet-friendly move-in cost before you apply.%s",
                                                 city, petDeposit, petRentMonthly, upfrontTotal, ctrSuffix);
                                 localInsight = String.format("In %s, %s Monthly pet rent is typically $%,d.", city,
                                                 petNotes, petRentMonthly);
@@ -256,9 +257,9 @@ public class CityContentGenerator {
                                                                 + ". Compare this to your current costs."));
                         }
                         default -> {
-                                pageTitle = String.format("Average Rent in %s, %s + Move-In Cost (2026)", city, state);
+                                pageTitle = String.format("Average Rent in %s, %s + Rental Market and Move-In Cost (2026)", city, state);
                                 metaDescription = String.format(
-                                                "Average 1BR rent in %s is $%s, and typical move-in cash is about $%s (rent + deposit + moving). Check if your cash buffer is enough.%s",
+                                                "See the %s rental market snapshot: average 1BR rent is $%s and typical move-in cash is about $%s. Check local affordability before you apply.%s",
                                                 city, String.format("%,d", avgRent), String.format("%,d", upfrontTotal),
                                                 ctrSuffix);
                                 localInsight = String.format(

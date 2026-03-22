@@ -24,6 +24,7 @@
 |---|---|---:|---:|---:|---:|---:|---:|---:|---|
 | 2026-03-05 | 2026-01-23 ~ 2026-01-31 (GSC export) | 80 | 1 | 1.25% | 9.28 | 17 | 92 | 89 | 라이브 점검: robots/sitemap 200, sitemap URL 1,810개 |
 | 2026-03-09 | 2026-02-06 ~ 2026-03-06 (GSC API) | 241 | 4 | 1.66% | 5.87 | - | - | - | 최근 28일 자체는 개선. 다만 최근 7일은 표본이 작고, 재크롤 반영이 섞여 있음 |
+| 2026-03-22 | 2026-02-19 ~ 2026-03-19 (GSC MCP) | 290 | 4 | 1.38% | 10.09 | 대표 URL indexed | sitemap 제출 192 | moving-from 샘플 unknown | 최근 7일은 전주 대비 하락. research 허브는 2026-03-21 크롤, legacy `first-month-cost` 샘플은 아직 구 상태 잔존 |
 
 ## 4) 현재 문제 진단 (2026-03-05)
 
@@ -59,6 +60,26 @@
 5. 레거시 `first-month-cost` 경로는 410보다 301이 더 실용적  
 구 URL이 아직 검색 노출 흔적을 남기고 있어, 관련 신호를 리서치 허브로 모으기 위해 `/RentVerdict/research/move-in-cost-index` 로 영구 리다이렉트 전환.
 
+## 4-2) 추가 진단 업데이트 (2026-03-22)
+
+1. Search Console MCP 연결 복구 후 실측 확인  
+`sc-domain:movecostinfo.com` 기준 최근 28일은 `4 clicks / 290 impressions / CTR 1.38% / avg position 10.09`.
+
+2. 최근 7일은 실제로 악화  
+`2026-03-12 ~ 2026-03-19` 는 직전 7일 대비 클릭 `1 -> 0`, 노출 `47 -> 25`, 평균 순위 `21.77 -> 37.60` 으로 악화. 다만 절대 표본이 작아 변동성도 큼.
+
+3. 대표 research 허브는 정상 색인  
+`/RentVerdict/research/move-in-cost-index` 는 `Submitted and indexed`, 마지막 크롤은 `2026-03-21`, Google/User canonical 일치.
+
+4. noindex / 크롤 억제 전략은 의도대로 작동 중  
+`moving-from` 샘플은 `URL is unknown to Google`. 이는 현재 noindex + sitemap 제외 전략과 일치.
+
+5. 레거시 `first-month-cost` 신호는 아직 완전히 정리되지 않음  
+샘플 `https://movecostinfo.com/RentVerdict/first-month-cost/1000/dc` 는 GSC URL 검사 기준 아직 `Submitted and indexed`, 마지막 크롤 `2026-02-10`. 즉 라이브 301 변경은 반영됐지만 Google 재처리는 아직 덜 끝남.
+
+6. 현재 병목은 “CTR” 하나가 아니라 “미국 타깃 랭킹 부족 + 레거시 잔존 + 표본 부족”  
+국가별로는 한국 `3 clicks / 126 impressions / position 1.40`, 미국 `1 click / 127 impressions / position 19.02`. 미국 타깃 쿼리 다수는 아직 `60~90위` 구간에 머묾.
+
 ## 5) 개선 백로그 (우선순위)
 
 | Priority | Task | Expected Impact | Status | Target Date |
@@ -66,12 +87,15 @@
 | P0 | Sitemap 축소/재우선순위 (핵심 URL 우선) | 크롤/인덱싱 집중 | DONE (2026-03-05) | 2026-03-10 |
 | P0 | URL 정규화 (slash 정책 통일 + 301) | 중복/404 변형 감소 | DONE (2026-03-05) | 2026-03-10 |
 | P0 | 저효율 조합형 페이지 단계적 noindex 검토 | 인덱싱 신호 집중 | DONE (1차, 2026-03-05) | 2026-03-12 |
-| P0 | 대표 URL 재색인 요청 (`/RentVerdict/research/move-in-cost-index`) | 수정 반영 가속 | TODO | 2026-03-10 |
+| P0 | 대표 URL 재색인 요청 (`/RentVerdict/research/move-in-cost-index`, `/RentVerdict/`, `/RentVerdict/cities`) | 수정 반영 가속 | TODO (manual UI) | 2026-03-22 |
 | P0 | 레거시 `first-month-cost` -> research 301 배포 확인 | 구 URL 신호 회수 | DONE (code, 2026-03-09) | 2026-03-10 |
 | P0 | 리서치 페이지 JSON-LD 오류 수정 배포 확인 | Rich result 파싱 정상화 | DONE (code, 2026-03-09) | 2026-03-10 |
+| P0 | legacy `first-month-cost` 샘플 재처리 확인 | 구 URL 잔존 신호 제거 | DOING | 2026-04-05 |
 | P1 | 상위 노출 무클릭 페이지 title/meta 개편 | CTR 개선 | DONE (1차, 2026-03-05) | 2026-03-12 |
 | P1 | 내부링크 강화 (핵심 허브 -> 핵심 랜딩) | 크롤 경로 개선 | DONE (1차, 2026-03-05) | 2026-03-14 |
 | P1 | 링크 가능한 리서치 자산 발행 (월간 Move-In Index) | E-E-A-T/외부 인용 자산 | DONE (2026-03-05) | 2026-03-14 |
+| P1 | 미국 실쿼리 대응용 랜딩 정렬 (`pet deposit`, `rental market`, `average rent`) | 미국 타깃 랭킹 개선 | DOING (code, 2026-03-22) | 2026-04-05 |
+| P1 | Wichita / St. Petersburg sitemap 우선 편입 | 실쿼리 도시 크롤 집중 | DONE (code, 2026-03-22) | 2026-03-22 |
 | P2 | GA4 리포트 자동 집계 연결 | 행동 데이터 확인 | BLOCKED (권한) | 2026-03-14 |
 
 ## 6) 적용 이력 (Changes Log)
@@ -87,6 +111,9 @@
 | 2026-03-05 | 리서치 페이지 추가: `/RentVerdict/research/move-in-cost-index` | Authority Asset | Yes (test pass) |
 | 2026-03-09 | 리서치 페이지 JSON-LD escape 수정 (`datePublished`, `dateModified`, `mainEntityOfPage`) | Structured Data | Yes (`VerdictControllerTest`) |
 | 2026-03-09 | 레거시 `/RentVerdict/first-month-cost/{rent}/{state}` 를 research 허브로 301 전환 | Legacy URL Consolidation | Yes (`VerdictControllerTest`) |
+| 2026-03-22 | GSC MCP 연결 복구 및 `sc-domain:movecostinfo.com` 실측 점검 | Search Console Ops | Yes (live MCP query) |
+| 2026-03-22 | `Average Pet Deposit` / `Rental Market` 중심 메타 정렬 | Query Alignment | Pending deploy |
+| 2026-03-22 | sitemap 우선 도시에 `st-petersburg-fl`, `wichita-ks` 추가 | Crawl Focus | Pending deploy |
 
 ## 7) 실험 추적 (Experiment Log)
 
@@ -94,22 +121,26 @@
 |---|---|---|---|---|---|
 | 2026-03-05 | P0 실행 전 베이스라인 확보 | 개선 후 인덱싱/노출 상승 | Indexed 상승, Discovered-Not-Indexed 하락 | 2026-03-19 | Pending |
 | 2026-03-09 | 리서치 허브 신호 집중 (JSON-LD + legacy redirect) | 대표 research URL의 재크롤/재색인/노출 안정화 | 대표 URL 크롤 갱신, Rich Result 오류 해소 | 2026-03-19 | Pending |
+| 2026-03-22 | 미국 실쿼리 정렬 (`average pet deposit`, `rental market`, `average rent`) | 도시/펫 랜딩이 미국 쿼리에서 2페이지 안쪽으로 접근 | 미국 기준 노출 증가, 해당 URL 재크롤, 평균순위 개선 | 2026-04-05 | Pending |
 
 ## 8) 업데이트 루틴 (권장)
 
 매주 2회(예: 화/금) 아래 순서로 갱신:
 
-1. GSC 성과(최근 28일) 갱신: Impr/Clicks/CTR/Pos
-2. GSC 색인 리포트 갱신: Indexed/Not Indexed/Discovered
-3. 라이브 체크: robots, sitemap, 샘플 URL 상태코드
-4. 이번 주 배포 변경사항과 KPI 변화를 연결 기록
-5. 백로그 상태(`TODO -> DOING -> DONE`) 갱신
+1. GSC MCP 최근 28일 갱신: Impr/Clicks/CTR/Pos
+2. GSC MCP 최근 7일 vs 직전 7일 비교
+3. URL 검사: research 허브, legacy 샘플, noindex 샘플, moving-from 샘플
+4. sitemap 제출 수 / 다운로드 일시 / indexed 상태 기록
+5. 국가 분리(`usa`, `kor`)로 타깃 노출 왜곡 여부 확인
+6. 이번 주 배포 변경사항과 KPI 변화를 연결 기록
+7. 백로그 상태(`TODO -> DOING -> DONE`) 갱신
 
 ## 9) 다음 체크 포인트
 
-- 2026-03-10: 대표 URL 재색인 요청 + 배포본 라이브 재확인
-- 2026-03-19: 첫 번째 반영 지연 구간(약 2주) 결과 확인
-- 2026-03-26: legacy `first-month-cost` 노출 잔존 여부 재확인
+- 2026-03-22: Search Console UI에서 대표 URL 재색인 요청
+- 2026-04-05: meta/query alignment 배포 후 첫 반영 구간 확인
+- 2026-04-05: legacy `first-month-cost` 샘플이 여전히 indexed 인지 재확인
+- 2026-04-12: 미국(`usa`) 기준 쿼리/페이지 노출이 실제로 늘었는지 재확인
 
 ## 10) 페르소나 검증 로그
 

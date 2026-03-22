@@ -260,7 +260,7 @@
             city = pageData.city(),
             state = pageData.state(),
             relatedCities = relatedCities,
-            intentCategory = "approval",
+            intentCategory = "cost",
             baseUrl = baseUrl
         )
 
