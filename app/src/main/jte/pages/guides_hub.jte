@@ -32,10 +32,12 @@
             <h2 style="font-size: 0.95rem; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary);">Core Decision Links</h2>
             <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
                 <a href="/RentVerdict/" class="btn btn-intent">Run Calculator</a>
-                <a href="/RentVerdict/cities" class="btn btn-intent">Browse Cities</a>
+                <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner" class="btn btn-intent">Bad Credit + No Cosigner</a>
+                <a href="/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment" class="btn btn-intent">Move-In Cash Guide</a>
+                <a href="/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit" class="btn btn-intent">Guarantor vs Deposit</a>
+                <a href="/RentVerdict/guides/pet-deposit-and-pet-rent-negotiation-guide" class="btn btn-intent">Pet Fee Negotiation</a>
                 <a href="/RentVerdict/research/move-in-cost-index" class="btn btn-intent">Monthly Cost Index</a>
-                <a href="/RentVerdict/verdict/new-york-ny" class="btn btn-intent">NY Audit</a>
-                <a href="/RentVerdict/verdict/seattle-wa" class="btn btn-intent">Seattle Audit</a>
+                <a href="/RentVerdict/cities" class="btn btn-intent">Supporting Cities</a>
             </div>
         </section>
 

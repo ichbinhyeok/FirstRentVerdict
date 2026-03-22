@@ -27,22 +27,32 @@
             String secondaryPath) {
     }
 
+    record ActionStep(
+            String eyebrow,
+            String title,
+            String body,
+            String ctaLabel,
+            String ctaPath) {
+    }
+
     String metaDesc = "";
     String cityState = input.city() + ", " + input.state();
     String citySlug = input.city().toLowerCase().replace(" ", "-").replace(".", "") + "-" + input.state().toLowerCase();
     int estDeposit = result.financials().totalUpfrontCost();
     int liquidityGap = Math.max(0, result.financials().totalUpfrontCost() - result.financials().availableCash());
+    String coreQuestion = "Can you get approved, and how much cash do you need to move in?";
     PersonaCta persona;
+    List<ActionStep> actionPlan = new java.util.ArrayList<>();
     
     if ("GENERAL".equals(pageType)) {
-        metaDesc = "True cost of renting in " + cityState + ". See hidden fees, deposit requirements (" + String.format("$%,d", estDeposit) + "), and market strictness.";
+        metaDesc = "Can you get approved in " + cityState + "? Estimate move-in cash, buffer risk, and approval pressure before you apply.";
     } else if (pageType.startsWith("CREDIT_")) {
         String tierName = pageType.replace("CREDIT_", ""); 
-        metaDesc = "Renting in " + cityState + " with " + tierName + " Credit? We analyzed local risks. Expect ~" + String.format("$%,d", estDeposit) + " upfront. See approval strategy.";
+        metaDesc = "Can you get approved in " + cityState + " with " + tierName + " credit? Estimate move-in cash and compare approval backstops before you apply.";
     } else if ("RELOCATION".equals(pageType)) {
-        metaDesc = "Moving to " + cityState + "? Essential relocation cost breakdown. See how much cash you really need before you move. 2026 update.";
+        metaDesc = "Moving to " + cityState + "? Estimate move-in cash, relocation buffer, and approval pressure before you sign.";
     } else {
-        metaDesc = "First Rent Verdict analysis for " + cityState + ". Check your approval odds.";
+        metaDesc = "First Rent Verdict for " + cityState + ": approval odds, move-in cash threshold, and the next move to make before you apply.";
     }
 
     if (input.creditTier() == CreditTier.POOR || input.creditTier() == CreditTier.FAIR) {
@@ -54,42 +64,132 @@
                 "/RentVerdict/guides/rent-with-bad-credit-no-cosigner",
                 "View City Credit Route",
                 "/RentVerdict/verdict/credit/poor/" + citySlug);
+        actionPlan.add(new ActionStep(
+                "Step 1",
+                "Build an approval packet before spending more fees",
+                "Lead with income proof, bank statements, and references so your application is stronger before screening starts.",
+                "Open Approval Playbook",
+                "/RentVerdict/guides/rent-with-bad-credit-no-cosigner"));
+        actionPlan.add(new ActionStep(
+                "Step 2",
+                "Pre-clear a guarantor or deposit fallback",
+                "Ask which backstops the property accepts before you apply. Approval options only matter if the building allows them.",
+                "Compare Approval Backstops",
+                "/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit"));
+        actionPlan.add(new ActionStep(
+                "Step 3",
+                "Shrink the target until your buffer survives move-in",
+                "A slightly cheaper unit is usually better than repeated denials with zero post-move cash.",
+                "Estimate My Cash Floor",
+                "/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment"));
     } else if (liquidityGap > 0 || result.financials().remainingBuffer() < result.financials().recommendedBuffer()) {
         persona = new PersonaCta(
                 "Cash Gap",
                 "Your bottleneck is move-in liquidity, not search volume.",
                 "Close the cash gap first, then apply in higher-fit inventory. This reduces denial loops and fee leakage.",
                 "Open Cash Planning Playbook",
-                "/RentVerdict/guides/first-time-renter-budget",
+                "/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment",
                 "Test $5,000 Scenario",
                 "/RentVerdict/verdict/can-i-move-with/5000/to/" + citySlug);
+        actionPlan.add(new ActionStep(
+                "Step 1",
+                "Price the full move-in invoice, not just the rent",
+                "Add first month, deposit, utility setup, and moving friction before choosing a target unit.",
+                "Open Cash Planning Playbook",
+                "/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment"));
+        actionPlan.add(new ActionStep(
+                "Step 2",
+                "Use a backstop only if it lowers total failure cost",
+                "Compare guarantor fees, larger deposits, and prepaid rent against the cost of more rejections.",
+                "Compare Approval Options",
+                "/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit"));
+        actionPlan.add(new ActionStep(
+                "Step 3",
+                "Cut avoidable fee leakage before you apply",
+                "If pets or long-distance logistics are part of the move, reduce those frictions before locking in a unit.",
+                input.hasPet() ? "Lower Pet Friction" : "Run the Scenario Again",
+                input.hasPet() ? "/RentVerdict/guides/pet-deposit-and-pet-rent-negotiation-guide" : "/RentVerdict/"));
     } else if (!input.isLocalMove()) {
         persona = new PersonaCta(
                 "Relocation",
                 "Long-distance moves fail when logistics are underbudgeted.",
                 "Plan for temporary housing and transfer verification early so strong listings do not fail at final screening.",
                 "Open Relocation Cost Playbook",
-                "/RentVerdict/guides/apartment-guarantor-cost-breakdown",
+                "/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment",
                 "View Relocation Route",
                 "/RentVerdict/verdict/moving-to/" + citySlug);
+        actionPlan.add(new ActionStep(
+                "Step 1",
+                "Budget the move as a relocation event, not a local lease",
+                "Temporary housing, transport, and setup costs can kill the buffer even when rent looks reasonable.",
+                "Estimate Relocation Cash",
+                "/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment"));
+        actionPlan.add(new ActionStep(
+                "Step 2",
+                "Pre-clear how the building handles your profile remotely",
+                "Confirm documentation, transfer timing, and whether you need a guarantor or larger deposit before traveling.",
+                "Compare Approval Backstops",
+                "/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit"));
+        actionPlan.add(new ActionStep(
+                "Step 3",
+                "Keep one fallback route in the destination city",
+                "Do not let one premium listing decide the whole move. Keep a second route with lower approval friction.",
+                "View Relocation Route",
+                "/RentVerdict/verdict/moving-to/" + citySlug));
     } else if (input.hasPet()) {
         persona = new PersonaCta(
                 "Pet Move",
                 "Pet policy variance can erase your safety buffer if unchecked.",
                 "Compare pet-related deposit and monthly fee exposure before committing to any application sequence.",
                 "Open Hidden Cost Playbook",
-                "/RentVerdict/guides/first-time-renter-budget",
+                "/RentVerdict/guides/pet-deposit-and-pet-rent-negotiation-guide",
                 "View Pet-Focused Route",
                 "/RentVerdict/verdict/with-pet/" + citySlug);
+        actionPlan.add(new ActionStep(
+                "Step 1",
+                "Get pet deposit and pet rent in writing first",
+                "Do not evaluate listings on headline rent alone when pet policy can move the invoice materially.",
+                "Open Pet Fee Playbook",
+                "/RentVerdict/guides/pet-deposit-and-pet-rent-negotiation-guide"));
+        actionPlan.add(new ActionStep(
+                "Step 2",
+                "Protect the move-in buffer before you negotiate extras",
+                "A lower upfront pet charge is usually more valuable than a tiny monthly savings when cash is tight.",
+                "Estimate the Cash Threshold",
+                "/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment"));
+        actionPlan.add(new ActionStep(
+                "Step 3",
+                "Keep an approval fallback if the first unit says no",
+                "Have a second route ready so pet restrictions do not force a rushed, expensive decision.",
+                "Compare Approval Backstops",
+                "/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit"));
     } else {
         persona = new PersonaCta(
                 "Stable Profile",
                 "Your next move is optimizing decision quality, not adding more random applications.",
                 "Use a focused playbook to lower fee waste and keep a safety buffer before lease signing.",
-                "Open First-Time Budget Playbook",
-                "/RentVerdict/guides/first-time-renter-budget",
+                "Open Move-In Cash Playbook",
+                "/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment",
                 "Compare More City Markets",
                 "/RentVerdict/cities");
+        actionPlan.add(new ActionStep(
+                "Step 1",
+                "Freeze your move-in budget before touring more units",
+                "You are close enough to apply, so the priority is avoiding a bad commitment rather than chasing more listings.",
+                "Review the Cash Playbook",
+                "/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment"));
+        actionPlan.add(new ActionStep(
+                "Step 2",
+                "Keep one approval fallback ready anyway",
+                "Even strong profiles lose time when a building adds stricter screening or asks for more upfront cash.",
+                "Compare Approval Backstops",
+                "/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit"));
+        actionPlan.add(new ActionStep(
+                "Step 3",
+                "Use city data as supporting evidence, not the main decision",
+                "The question is not just where rent is lower. It is where your cash and approval odds survive the move-in invoice.",
+                "Review Supporting City Data",
+                "/RentVerdict/research/move-in-cost-index"));
     }
 }
 
@@ -113,7 +213,7 @@
         }
       }, {
         "@type": "Question",
-        "name": "Can I rent in ${cityState} with ${pageType.startsWith("CREDIT_") ? pageType.replace("CREDIT_", "").toLowerCase() + " credit" : "bad credit"}?",
+        "name": "Can I get approved for an apartment in ${cityState}?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, but it requires preparation. Our analysis shows a ${result.verdict() == firstrentverdict.model.verdict.Verdict.APPROVED ? "high" : "moderate to low"} likelihood of approval based on your financials, provided you have a safety buffer."
@@ -155,6 +255,18 @@
                 </div>
             </div>
         @endif
+
+        <section class="card fade-in-up" style="animation-delay: 0.05s; margin-bottom: var(--space-6); border: 1px solid var(--border-default); background: linear-gradient(135deg, rgba(255,255,255,0.98) 0%, rgba(248,250,252,0.94) 100%);">
+            <div style="display: inline-flex; align-items: center; padding: 0.25rem 0.625rem; border-radius: var(--radius-full); background: var(--bg-secondary); color: var(--text-tertiary); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.75rem;">
+                Core Question
+            </div>
+            <h2 style="font-size: 1.35rem; color: var(--text-primary); margin-bottom: 0.5rem;">
+                ${coreQuestion}
+            </h2>
+            <p style="color: var(--text-secondary); line-height: 1.6; margin: 0;">
+                This page is not just a rent lookup. It is an approval-and-cash audit for ${cityState}, built to show whether your move survives screening and the move-in invoice.
+            </p>
+        </section>
 
 
 
@@ -294,6 +406,40 @@
                         Demo Guarantor Option B
                     </a>
                 </div>
+            </div>
+        </section>
+
+        <section class="card fade-in-up" style="animation-delay: 0.18s; margin-bottom: var(--space-10); border: 1px solid var(--border-default);">
+            <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; flex-wrap: wrap; margin-bottom: 1rem;">
+                <div>
+                    <div style="font-size: 0.75rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem;">
+                        Adaptive Action Plan
+                    </div>
+                    <h3 style="font-size: 1.25rem; color: var(--text-primary); margin: 0 0 0.5rem;">
+                        Solve the bottleneck before you pay another fee
+                    </h3>
+                    <p style="color: var(--text-secondary); margin: 0;">
+                        Use this as your next-three-moves checklist. It maps approval pressure and move-in cash pressure into one route.
+                    </p>
+                </div>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="copyActionPlan()">Copy My Plan</button>
+                    <a href="/RentVerdict/guides" class="btn btn-secondary btn-sm">Browse Playbooks</a>
+                </div>
+            </div>
+            <div id="action-steps-container" class="step-list">
+                @for(ActionStep step : actionPlan)
+                    <div class="step-item action-plan-step" data-plan-title="${step.title()}" data-plan-body="${step.body()}" data-plan-link="${step.ctaLabel()} | ${step.ctaPath()}">
+                        <div class="step-number">${step.eyebrow().replace("Step ", "")}</div>
+                        <div class="step-content">
+                            <h4>${step.title()}</h4>
+                            <p>${step.body()}</p>
+                            <a href="${step.ctaPath()}" style="display: inline-flex; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 700; color: var(--accent-primary); text-decoration: none;">
+                                ${step.ctaLabel()} &rarr;
+                            </a>
+                        </div>
+                    </div>
+                @endfor
             </div>
         </section>
 
@@ -772,27 +918,6 @@
                      
                 </div>
 
-                <!-- Strategic Action Steps -->
-                <div id="action-steps-container" class="step-list">
-                    @if(result.verdict() != Verdict.APPROVED)
-                        <div class="step-item">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h4>Bridge the Gap</h4>
-                                <p id="action-step-desc">You are approximately <strong>$${String.format("%,d", Math.abs(result.financials().remainingBuffer()))}</strong> short of a comfortable move. Consider a co-signer.</p>
-                            </div>
-                        </div>
-                    @else
-                        <div class="step-item">
-                            <div class="step-number" style="background: var(--success);">&#10003;</div>
-                            <div class="step-content">
-                                <h4>Application Ready</h4>
-                                <p id="action-step-desc">This rent is within your <strong>safe financial zone</strong>. Proceed with documentation.</p>
-                            </div>
-                        </div>
-                    @endif
-                </div>
-
                 <!-- Share This Insight (Viral Loop) -->
                 <div style="margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--border-default);">
                     <h4 style="font-size: 0.875rem; font-weight: 600; color: var(--text-secondary); margin-bottom: var(--space-3); text-transform: uppercase; letter-spacing: 0.05em;">Share This Tool</h4>
@@ -1200,7 +1325,11 @@
                     if (requestSeq !== latestRequestSeq) return;
                     if (!res.ok) throw new Error("Simulation request failed: " + res.status);
                     const result = await res.json();
-                    
+                    currentScenarioContext = {
+                        creditTier: payload.creditTier,
+                        isLocalMove: payload.isLocalMove,
+                        hasPet: payload.hasPet
+                    };
                     updateUI(result);
                     clearSimFeedback();
                     
@@ -1274,19 +1403,7 @@
                     factorsContainer.innerHTML = html;
                 }
 
-                // Action Steps
-                const actionContainer = document.getElementById('action-steps-container');
-                if (actionContainer) {
-                    const isApproved = result.verdict === 'APPROVED';
-                    const gap = Math.abs(fin.remainingBuffer);
-                    const fmtGap = '$' + gap.toLocaleString();
-                    
-                    if (!isApproved) {
-                        actionContainer.innerHTML = '<div class="step-item"><div class="step-number">1</div><div class="step-content"><h4>Bridge the Gap</h4><p id="action-step-desc">You are approximately <strong>' + fmtGap + '</strong> short of a comfortable move. Consider a co-signer.</p></div></div>';
-                    } else {
-                        actionContainer.innerHTML = '<div class="step-item"><div class="step-number" style="background: var(--success);">&#10003;</div><div class="step-content"><h4>Application Ready</h4><p id="action-step-desc">This rent is within your <strong>safe financial zone</strong>. Proceed with documentation.</p></div></div>';
-                    }
-                }
+                renderActionPlan(buildActionPlan(result, currentScenarioContext));
                 
                 // Toggle Rescue Plan Visibility
                 const rescuePlanCard = document.getElementById('rescue-plan-card');
@@ -1315,6 +1432,184 @@
             const stickyBufferVal = document.getElementById('sticky-buffer-val');
             const stickyStatusBadge = document.getElementById('sticky-status-badge');
             const heroSection = document.querySelector('.verdict-hero');
+            const pageContext = {
+                creditTier: "${input.creditTier().name()}",
+                isLocalMove: ${input.isLocalMove()},
+                hasPet: ${input.hasPet()}
+            };
+            let currentScenarioContext = pageContext;
+
+            function buildActionPlan(currentResult, currentContext) {
+                const fin = currentResult.financials;
+                const plan = [];
+                const poorCredit = currentContext.creditTier === 'POOR' || currentContext.creditTier === 'FAIR';
+                const cashGap = Math.max(0, fin.totalUpfrontCost - fin.availableCash);
+                const thinBuffer = fin.remainingBuffer < fin.recommendedBuffer;
+
+                if (poorCredit) {
+                    plan.push({
+                        step: '1',
+                        title: 'Build an approval packet before spending more fees',
+                        body: 'Lead with income proof, bank statements, and references so your application is stronger before screening starts.',
+                        label: 'Open Approval Playbook',
+                        path: '/RentVerdict/guides/rent-with-bad-credit-no-cosigner'
+                    });
+                    plan.push({
+                        step: '2',
+                        title: 'Pre-clear a guarantor or deposit fallback',
+                        body: 'Ask which backstops the property accepts before you apply. Approval options only matter if the building allows them.',
+                        label: 'Compare Approval Backstops',
+                        path: '/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit'
+                    });
+                    plan.push({
+                        step: '3',
+                        title: 'Shrink the target until your buffer survives move-in',
+                        body: 'A slightly cheaper unit is usually better than repeated denials with zero post-move cash.',
+                        label: 'Estimate My Cash Floor',
+                        path: '/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment'
+                    });
+                    return plan;
+                }
+
+                if (cashGap > 0 || thinBuffer) {
+                    plan.push({
+                        step: '1',
+                        title: 'Price the full move-in invoice, not just the rent',
+                        body: 'Add first month, deposit, utility setup, and moving friction before choosing a target unit.',
+                        label: 'Open Cash Planning Playbook',
+                        path: '/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment'
+                    });
+                    plan.push({
+                        step: '2',
+                        title: 'Use a backstop only if it lowers total failure cost',
+                        body: 'Compare guarantor fees, larger deposits, and prepaid rent against the cost of more rejections.',
+                        label: 'Compare Approval Options',
+                        path: '/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit'
+                    });
+                    plan.push({
+                        step: '3',
+                        title: currentContext.hasPet ? 'Cut pet fee leakage before you apply' : 'Run a cheaper scenario before you commit',
+                        body: currentContext.hasPet
+                                ? 'Pet deposits and pet rent can be the hidden difference between a safe move and a broken buffer.'
+                                : 'A lower target unit is often the fastest way to recover a stable post-move buffer.',
+                        label: currentContext.hasPet ? 'Lower Pet Friction' : 'Re-run the Calculator',
+                        path: currentContext.hasPet
+                                ? '/RentVerdict/guides/pet-deposit-and-pet-rent-negotiation-guide'
+                                : '/RentVerdict/'
+                    });
+                    return plan;
+                }
+
+                if (!currentContext.isLocalMove) {
+                    plan.push({
+                        step: '1',
+                        title: 'Budget the move as a relocation event, not a local lease',
+                        body: 'Temporary housing, transport, and setup costs can kill the buffer even when rent looks reasonable.',
+                        label: 'Estimate Relocation Cash',
+                        path: '/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment'
+                    });
+                    plan.push({
+                        step: '2',
+                        title: 'Pre-clear how the building handles your profile remotely',
+                        body: 'Confirm documentation, transfer timing, and whether you need a guarantor or larger deposit before traveling.',
+                        label: 'Compare Approval Backstops',
+                        path: '/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit'
+                    });
+                    plan.push({
+                        step: '3',
+                        title: 'Keep one fallback route in the destination city',
+                        body: 'Do not let one premium listing decide the whole move. Keep a second route with lower approval friction.',
+                        label: 'View Relocation Route',
+                        path: '/RentVerdict/verdict/moving-to/${citySlug}'
+                    });
+                    return plan;
+                }
+
+                if (currentContext.hasPet) {
+                    plan.push({
+                        step: '1',
+                        title: 'Get pet deposit and pet rent in writing first',
+                        body: 'Do not evaluate listings on headline rent alone when pet policy can move the invoice materially.',
+                        label: 'Open Pet Fee Playbook',
+                        path: '/RentVerdict/guides/pet-deposit-and-pet-rent-negotiation-guide'
+                    });
+                    plan.push({
+                        step: '2',
+                        title: 'Protect the move-in buffer before you negotiate extras',
+                        body: 'A lower upfront pet charge is usually more valuable than a tiny monthly savings when cash is tight.',
+                        label: 'Estimate the Cash Threshold',
+                        path: '/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment'
+                    });
+                    plan.push({
+                        step: '3',
+                        title: 'Keep an approval fallback if the first unit says no',
+                        body: 'Have a second route ready so pet restrictions do not force a rushed, expensive decision.',
+                        label: 'Compare Approval Backstops',
+                        path: '/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit'
+                    });
+                    return plan;
+                }
+
+                plan.push({
+                    step: '1',
+                    title: 'Freeze your move-in budget before touring more units',
+                    body: 'You are close enough to apply, so the priority is avoiding a bad commitment rather than chasing more listings.',
+                    label: 'Review the Cash Playbook',
+                    path: '/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment'
+                });
+                plan.push({
+                    step: '2',
+                    title: 'Keep one approval fallback ready anyway',
+                    body: 'Even strong profiles lose time when a building adds stricter screening or asks for more upfront cash.',
+                    label: 'Compare Approval Backstops',
+                    path: '/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit'
+                });
+                plan.push({
+                    step: '3',
+                    title: 'Use city data as supporting evidence, not the main decision',
+                    body: 'The question is not just where rent is lower. It is where your cash and approval odds survive the move-in invoice.',
+                    label: 'Review Supporting City Data',
+                    path: '/RentVerdict/research/move-in-cost-index'
+                });
+                return plan;
+            }
+
+            function renderActionPlan(plan) {
+                const actionContainer = document.getElementById('action-steps-container');
+                if (!actionContainer) return;
+                let html = '';
+                plan.forEach(item => {
+                    html += '<div class="step-item action-plan-step" data-plan-title="' + item.title.replace(/"/g, '&quot;') + '" data-plan-body="' + item.body.replace(/"/g, '&quot;') + '" data-plan-link="' + item.label.replace(/"/g, '&quot;') + ' | ' + item.path + '">' +
+                        '<div class="step-number">' + item.step + '</div>' +
+                        '<div class="step-content">' +
+                            '<h4>' + item.title + '</h4>' +
+                            '<p>' + item.body + '</p>' +
+                            '<a href="' + item.path + '" style="display: inline-flex; margin-top: 0.75rem; font-size: 0.875rem; font-weight: 700; color: var(--accent-primary); text-decoration: none;">' + item.label + ' &rarr;</a>' +
+                        '</div>' +
+                    '</div>';
+                });
+                actionContainer.innerHTML = html;
+            }
+
+            window.copyActionPlan = function () {
+                const steps = Array.from(document.querySelectorAll('.action-plan-step'));
+                if (!steps.length) return;
+                const lines = [
+                    'First Rent Verdict Action Plan',
+                    '${coreQuestion}',
+                    ''
+                ];
+                steps.forEach((step, index) => {
+                    const title = step.getAttribute('data-plan-title') || '';
+                    const body = step.getAttribute('data-plan-body') || '';
+                    const link = step.getAttribute('data-plan-link') || '';
+                    lines.push((index + 1) + '. ' + title);
+                    lines.push(body);
+                    lines.push(link);
+                    lines.push('');
+                });
+                navigator.clipboard.writeText(lines.join('\n'));
+            };
             
             function updateStickyBar(verdict, buffer, recBuffer) {
                 if (!stickyBufferVal || !stickyStatusBadge) return;
@@ -1347,6 +1642,15 @@
                 ${result.financials().remainingBuffer()},
                 ${result.financials().recommendedBuffer()}
             );
+            renderActionPlan(buildActionPlan({
+                verdict: '${result.verdict().name()}',
+                financials: {
+                    totalUpfrontCost: ${result.financials().totalUpfrontCost()},
+                    availableCash: ${result.financials().availableCash()},
+                    remainingBuffer: ${result.financials().remainingBuffer()},
+                    recommendedBuffer: ${result.financials().recommendedBuffer()}
+                }
+            }, pageContext));
             
             // Show/hide sticky bar on scroll (mobile only)
             if (stickyBar && heroSection) {

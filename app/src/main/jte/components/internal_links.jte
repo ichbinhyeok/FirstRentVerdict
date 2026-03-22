@@ -56,6 +56,20 @@
     </div>
 </section>
 
+<section style="margin-bottom: 4rem; padding: 2rem; background: var(--bg-surface); border-radius: var(--radius-lg); border: 1px solid var(--border-default);">
+    <h3 style="font-size: 0.9rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">Solve the Bottleneck First</h3>
+    <div style="display: grid; gap: 0.75rem;">
+        <a href="/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment" style="padding: 1rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); text-decoration: none; color: inherit; background: var(--bg-secondary);">
+            <div style="font-size: 0.875rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem;">How much cash do I need before I sign?</div>
+            <div style="font-size: 0.8125rem; color: var(--text-secondary);">Use the move-in cash checklist before you burn an application fee.</div>
+        </a>
+        <a href="/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit" style="padding: 1rem; border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); text-decoration: none; color: inherit; background: var(--bg-secondary);">
+            <div style="font-size: 0.875rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem;">Should you pay for a guarantor or raise the deposit?</div>
+            <div style="font-size: 0.8125rem; color: var(--text-secondary);">Compare approval paths before you spend on the wrong one.</div>
+        </a>
+    </div>
+</section>
+
 <!-- Related Cities -->
 <footer style="padding-top: 3rem; border-top: 1px solid var(--border-default);">
     <div style="font-size: 0.85rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1.5rem;">Compare with Nearby Markets in ${state}</div>

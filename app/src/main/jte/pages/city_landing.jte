@@ -102,6 +102,7 @@
                 <li><strong>Average 1BR rent:</strong> $${String.format("%,d", pageData.medianRent())} per month.</li>
                 <li><strong>Typical move-in cash:</strong> around $${String.format("%,d", pageData.totalUpfrontEstimate())} (rent + deposit + moving).</li>
                 <li><strong>Target gross income:</strong> about $${String.format("%,d", pageData.monthlyIncomeReq())}/month for standard 3x rent screening.</li>
+                <li><strong>Main question:</strong> can you clear the full upfront cash requirement without wiping out your buffer?</li>
             </ul>
         </section>
 
@@ -217,9 +218,9 @@
         <section style="margin-bottom: 6rem;">
             <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); padding: 4rem 2rem; border-radius: var(--radius-xl); text-align: center; color: white; box-shadow: 0 40px 60px -15px rgba(0,0,0,0.3);">
                 <div class="badge-accent" style="margin-bottom: 1.5rem; background: rgba(99, 102, 241, 0.2); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.4);">THE VERDICT ENGINE</div>
-                <h2 style="font-size: 2.25rem; font-weight: 800; color: white; margin-bottom: 1.5rem; letter-spacing: -0.02em;">Should you move to ${pageData.city()}?</h2>
+                <h2 style="font-size: 2.25rem; font-weight: 800; color: white; margin-bottom: 1.5rem; letter-spacing: -0.02em;">Can you clear ${pageData.city()}'s move-in threshold?</h2>
                 <p style="font-size: 1.15rem; color: rgba(255,255,255,0.7); max-width: 600px; margin: 0 auto 3rem; line-height: 1.6;">
-                    Analyzing $${String.format("%,d", pageData.medianRent())} rent is just the start. Our simulator checks your actual savings vs. regional liquidity risks to give you a definitive Approved or Denied judgment.
+                    Rent alone is not the decision. Our simulator checks whether your cash, pet status, and screening pressure are enough to survive application and move-in day.
                 </p>
                 <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
                     <a href="/RentVerdict/" class="btn btn-primary btn-lg" onclick="gtag('event', 'cta_click_audit', {'event_category': 'acquisition', 'page_type': 'city_landing'});" style="padding: 1.25rem 3.5rem; font-size: 1.25rem; font-weight: 800; width: 100%; max-width: 420px; box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);">
@@ -260,7 +261,7 @@
             city = pageData.city(),
             state = pageData.state(),
             relatedCities = relatedCities,
-            intentCategory = "cost",
+            intentCategory = "approval",
             baseUrl = baseUrl
         )
 

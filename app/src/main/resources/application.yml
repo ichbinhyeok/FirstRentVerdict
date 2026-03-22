@@ -12,8 +12,8 @@ app:
   base-url: ${APP_BASE_URL:https://movecostinfo.com}
 seo:
   sitemap:
-    city-limit: 32
-    priority-city-slugs: new-york-ny,los-angeles-ca,chicago-il,houston-tx,phoenix-az,philadelphia-pa,san-antonio-tx,san-diego-ca,dallas-tx,austin-tx,miami-fl,seattle-wa,atlanta-ga,denver-co,boston-ma,washington-dc,las-vegas-nv,portland-or,orlando-fl,charlotte-nc,san-francisco-ca,sacramento-ca,raleigh-nc,nashville-tn,columbus-oh,indianapolis-in,kansas-city-mo,minneapolis-mn,salt-lake-city-ut,detroit-mi,st-petersburg-fl,wichita-ks
+    city-limit: 12
+    priority-city-slugs: new-york-ny,los-angeles-ca,chicago-il,houston-tx,austin-tx,miami-fl,seattle-wa,atlanta-ga,boston-ma,washington-dc,st-petersburg-fl,wichita-ks
     include-credit-good: false
     include-relocation-pairs: false
     moving-pair-origins-per-city: 3

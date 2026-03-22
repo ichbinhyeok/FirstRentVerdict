@@ -6,14 +6,14 @@
 @param String baseUrl = ""
 
 @template.layout.main(
-    title = "Rent Affordability by City: 100 US Markets (2026 Data)",
-    description = "Compare move-in costs, rent pressure, and approval barriers across 100 US cities using audited 2026 market data.",
+    title = "Supporting City Audits for Move-In Cost and Approval Risk",
+    description = "Browse supporting city audits for move-in cash, deposit pressure, and approval friction. Start with guides if you need a faster answer.",
     canonical = baseUrl + "/RentVerdict/cities",
     content = @`
     <div style="max-width: 1000px; margin: 4rem auto; padding: 0 2rem;">
         <div style="text-align: center; margin-bottom: 4rem;">
-            <h1 class="hero-title" style="font-size: 2.5rem;">Supported Jurisdictions</h1>
-            <p class="hero-subtitle" style="margin: 0 auto;">Select your city to begin the affordability audit.</p>
+            <h1 class="hero-title" style="font-size: 2.5rem;">Supporting City Audits</h1>
+            <p class="hero-subtitle" style="margin: 0 auto;">Use a city audit to pressure-test costs after you identify your main approval bottleneck.</p>
         </div>
 
         <div style="margin-bottom: 3rem; background: var(--bg-surface); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 1.25rem 1.5rem;">
@@ -21,10 +21,10 @@
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
                 <a href="/RentVerdict/" class="btn btn-intent">Calculator</a>
                 <a href="/RentVerdict/guides" class="btn btn-intent">Approval Guides</a>
+                <a href="/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment" class="btn btn-intent">Move-In Cash Guide</a>
                 <a href="/RentVerdict/research/move-in-cost-index" class="btn btn-intent">Monthly Cost Index</a>
-                <a href="/RentVerdict/verdict/new-york-ny" class="btn btn-intent">New York Audit</a>
-                <a href="/RentVerdict/verdict/los-angeles-ca" class="btn btn-intent">Los Angeles Audit</a>
-                <a href="/RentVerdict/verdict/austin-tx" class="btn btn-intent">Austin Audit</a>
+                <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner" class="btn btn-intent">Bad Credit Guide</a>
+                <a href="/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit" class="btn btn-intent">Guarantor Guide</a>
             </div>
         </div>
 

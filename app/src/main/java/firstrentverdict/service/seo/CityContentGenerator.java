@@ -257,16 +257,16 @@ public class CityContentGenerator {
                                                                 + ". Compare this to your current costs."));
                         }
                         default -> {
-                                pageTitle = String.format("Average Rent in %s, %s + Rental Market and Move-In Cost (2026)", city, state);
+                                pageTitle = String.format("Can You Afford an Apartment in %s, %s? Move-In Cash Guide (2026)", city, state);
                                 metaDescription = String.format(
-                                                "See the %s rental market snapshot: average 1BR rent is $%s and typical move-in cash is about $%s. Check local affordability before you apply.%s",
+                                                "Need to move into %s? Typical upfront cash is about $%s between rent, deposit, and moving. Check the real approval threshold before you apply.%s",
                                                 city, String.format("%,d", avgRent), String.format("%,d", upfrontTotal),
                                                 ctrSuffix);
                                 localInsight = String.format(
-                                                "Market Trend: %s Median rent for a 1BR in %s is currently $%,d.",
+                                                "Approval Snapshot: %s Median 1BR rent in %s is $%,d, but the bigger hurdle is clearing the full move-in cash requirement.",
                                                 depositNotes, city, avgRent);
 
-                                qnaList.add(new QnA("What is the '3x Rule' in " + city + "?",
+                                qnaList.add(new QnA("What income do I usually need to rent in " + city + "?",
                                                 "Landlords require gross income to be 3x rent. In " + city
                                                                 + ", you'll need around $"
                                                                 + String.format("%,d", avgRent * 3) + "/mo."));
@@ -357,7 +357,7 @@ public class CityContentGenerator {
                                 (int) (avgRent * 0.8), (int) (avgRent * 1.2), avgRent * 3, avgRent * 36,
                                 deposit, moving, (int) (moving * 0.6), (int) (moving * 1.4), upfrontTotal,
                                 qualitativeStory.isEmpty() ? String.format(
-                                                "The rental market in %s requires significant upfront liquidity.", city)
+                                                "Moving into %s requires significant upfront liquidity.", city)
                                                 : qualitativeStory,
                                 String.format("Income Verification: You need $%,d/mo to pass the standard 3x income test.",
                                                 avgRent * 3),

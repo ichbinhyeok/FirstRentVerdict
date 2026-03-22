@@ -1,5 +1,52 @@
 # SEO Growth Tracking (FirstRentVerdict)
 
+## 2026-03-22 Execution Snapshot
+
+- Search Console live readback confirmed that broad `average rent` / `rental market` city SEO should not be the main growth bet.
+- The product/message was repositioned around one question:
+  - `Can you get approved, and how much cash do you need to move in?`
+- The following surfaces were rewritten or realigned to that question:
+  - home
+  - guides hub
+  - research hub
+  - locations hub
+  - city landing defaults
+  - result page
+- Core guide surface promoted:
+  - `/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment`
+  - `/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit`
+  - `/RentVerdict/guides/pet-deposit-and-pet-rent-negotiation-guide`
+  - `/RentVerdict/guides/rent-with-bad-credit-no-cosigner`
+- IA update shipped in templates:
+  - `Approval Check`
+  - `Move-In Cash`
+  - `Get Approved`
+  - `City Signals`
+- Result page UX update shipped:
+  - added `Core Question`
+  - added `Adaptive Action Plan`
+  - action plan now updates with simulator inputs
+  - added `Copy My Plan`
+- Rescue plan module was rewritten to route users into:
+  - approval backstops
+  - flexible-screening inventory
+  - move-in cash repair
+- Verification:
+  - `./gradlew test` passed on 2026-03-22 after all SEO pivot + IA + result-page edits
+
+## 2026-03-22 Manual Index Queue
+
+Submit only the new strategic surfaces first.
+
+1. `https://movecostinfo.com/RentVerdict/research/move-in-cost-index`
+2. `https://movecostinfo.com/RentVerdict/`
+3. `https://movecostinfo.com/RentVerdict/guides`
+4. `https://movecostinfo.com/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment`
+5. `https://movecostinfo.com/RentVerdict/guides/rent-with-bad-credit-no-cosigner`
+6. `https://movecostinfo.com/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit`
+
+Do not manually submit legacy `first-month-cost` URLs. Let the 301s consolidate and re-check those around 2026-04-05.
+
 이 문서는 Search Console/Analytics/라이브 점검 결과를 날짜별로 추적하고, 개선 작업과 결과를 연결하기 위한 운영 로그다.
 
 ## 1) 목표와 판단 기준
@@ -114,6 +161,7 @@
 | 2026-03-22 | GSC MCP 연결 복구 및 `sc-domain:movecostinfo.com` 실측 점검 | Search Console Ops | Yes (live MCP query) |
 | 2026-03-22 | `Average Pet Deposit` / `Rental Market` 중심 메타 정렬 | Query Alignment | Pending deploy |
 | 2026-03-22 | sitemap 우선 도시에 `st-petersburg-fl`, `wichita-ks` 추가 | Crawl Focus | Pending deploy |
+| 2026-03-22 | 미국 SEO 전략을 `rental market` 확장 대신 `approval + move-in cash` 가이드 축으로 피벗 | Content Strategy | Yes (GSC + SERP review) |
 
 ## 7) 실험 추적 (Experiment Log)
 
@@ -122,6 +170,7 @@
 | 2026-03-05 | P0 실행 전 베이스라인 확보 | 개선 후 인덱싱/노출 상승 | Indexed 상승, Discovered-Not-Indexed 하락 | 2026-03-19 | Pending |
 | 2026-03-09 | 리서치 허브 신호 집중 (JSON-LD + legacy redirect) | 대표 research URL의 재크롤/재색인/노출 안정화 | 대표 URL 크롤 갱신, Rich Result 오류 해소 | 2026-03-19 | Pending |
 | 2026-03-22 | 미국 실쿼리 정렬 (`average pet deposit`, `rental market`, `average rent`) | 도시/펫 랜딩이 미국 쿼리에서 2페이지 안쪽으로 접근 | 미국 기준 노출 증가, 해당 URL 재크롤, 평균순위 개선 | 2026-04-05 | Pending |
+| 2026-03-22 | 일반 city-market 축소 + 해결형 가이드 강화 | guides / calculator가 미국 비브랜드 클릭을 먼저 확보 | 미국 비브랜드 노출/클릭 증가, guide URL 재크롤 | 2026-04-19 | Pending |
 
 ## 8) 업데이트 루틴 (권장)
 
@@ -134,6 +183,14 @@
 5. 국가 분리(`usa`, `kor`)로 타깃 노출 왜곡 여부 확인
 6. 이번 주 배포 변경사항과 KPI 변화를 연결 기록
 7. 백로그 상태(`TODO -> DOING -> DONE`) 갱신
+
+## 8-1) 전략 피벗 메모 (2026-03-22)
+
+- GSC 미국 필터 기준 최근 28일은 `127 impressions / 1 click / avg position 19.02`였고, 실제 쿼리-페이지 조합은 7개 수준으로 매우 얇다.
+- 미국 노출 쿼리는 `st petersburg rental market`, `average pet deposit in houston`, `average rent in wichita ks` 등인데 평균 순위가 `66~91위`로 아직 경쟁권 밖이다.
+- 더 큰 문제는 쿼리와 랜딩 타입 불일치다. `average rent` 쿼리에 `first-month-cost` 또는 placeholder 성격 URL이 잡히고 있어 검색 의도 정렬이 약하다.
+- 반대로 `/RentVerdict/guides`는 같은 기간 `14 impressions / 3 clicks / avg position 1.5`로 상대적으로 강했다.
+- 따라서 일반 city-market pSEO 확장은 중단하고, `approval barrier + move-in cash + guarantor + pet fee` 중심 가이드와 계산기 허브를 메인 성장축으로 전환한다.
 
 ## 9) 다음 체크 포인트
 

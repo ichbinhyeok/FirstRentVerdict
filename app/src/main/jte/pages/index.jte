@@ -5,8 +5,8 @@
 @param String baseUrl = ""
 
 @template.layout.main(
-    title = "Rent Affordability Calculator (2026): Move-In Cost by City | First Rent Verdict",
-    description = "Check rent, deposit, moving cost, and safe cash buffer in 100 US cities. Get a move-in affordability verdict in under a minute.",
+    title = "Apartment Approval and Move-In Cash Calculator (2026) | First Rent Verdict",
+    description = "Check whether you can actually qualify and move in. Estimate rent, deposit, pet fees, moving cost, and the cash buffer you need before you apply.",
     canonical = baseUrl + "/RentVerdict/",
     content = @`
     <!-- WebApplication Schema -->
@@ -16,7 +16,7 @@
       "@type": "WebApplication",
       "name": "First Rent Verdict",
       "url": "${baseUrl}/RentVerdict/",
-      "description": "Free rent affordability calculator using 2026 market data for 100+ US cities.",
+      "description": "Free apartment approval and move-in cash calculator using 2026 market data for US cities.",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -39,19 +39,18 @@
     </script>
 
     <div class="split-layout">
-        <!-- LEFT: Hero -->
         <div class="split-left">
             <div style="max-width: 480px; position: relative; z-index: 1;" class="animate-in">
                 <div class="badge badge-accent" style="margin-bottom: var(--space-6);">
-                    2026 Market Data
+                    2026 Approval + Cost Data
                 </div>
                 <h1 class="hero-title">
-                    Know Your<br>True Move-In Cost
+                    Can You Actually<br>Get Approved?
                 </h1>
                 <p class="hero-subtitle">
-                    Don't just check if you can pay the rent. Check if you can survive move-in day.
+                    Check the real move-in cash, deposit pressure, and approval friction before you waste an application.
                 </p>
-                
+
                 <div style="margin-top: var(--space-12); padding-top: var(--space-6); border-top: 1px solid var(--border-default);">
                     <div style="display: flex; gap: var(--space-8); color: var(--text-tertiary); font-size: 0.875rem;">
                         <div>
@@ -59,23 +58,21 @@
                             <div>US Cities</div>
                         </div>
                         <div>
-                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">Free</div>
-                            <div>No Sign-up</div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">Guides</div>
+                            <div>Approval Playbooks</div>
                         </div>
                         <div>
-                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">2026</div>
-                            <div>Data</div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">Free</div>
+                            <div>No Sign-up</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- RIGHT: Calculator Form -->
         <div class="split-right">
             <div class="card animate-in animate-delay-1" style="width: 100%; max-width: 420px; padding: var(--space-8);">
                 <form action="/RentVerdict/verdict" method="post" data-track-event="cta_click" data-track-category="engagement" data-track-label="verdict_form_submit">
-                    
                     <div class="form-group">
                         <label for="cityState" class="form-label">Target City</label>
                         <select id="cityState" name="cityState" class="form-select" required aria-required="true">
@@ -101,17 +98,16 @@
                             <input type="checkbox" name="hasPet" value="true">
                             <span>I have a pet</span>
                         </label>
-
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-lg btn-full">
                         Get My Verdict
                     </button>
-                    
+
                     <script>
                         document.addEventListener('DOMContentLoaded', () => {
                             const currencyInputs = ['monthlyRent', 'availableCash'];
-                            
+
                             currencyInputs.forEach(id => {
                                 const input = document.getElementById(id);
                                 if (!input) return;
@@ -128,7 +124,7 @@
                                 });
                             });
 
-                            document.querySelector('form').addEventListener('submit', (e) => {
+                            document.querySelector('form').addEventListener('submit', () => {
                                 currencyInputs.forEach(id => {
                                     const input = document.getElementById(id);
                                     if (input) {
@@ -143,48 +139,44 @@
         </div>
     </div>
 
-    <!-- Market Explorer Hub -->
     <div style="background: var(--bg-secondary); border-top: 1px solid var(--border-default); padding: var(--space-20) var(--space-6);">
         <div style="max-width: 1000px; margin: 0 auto;">
             <div style="text-align: center; margin-bottom: var(--space-12);">
-                <h2 class="section-title">Analyze Local Rental Markets</h2>
-                <p style="color: var(--text-tertiary); margin-top: var(--space-4);">Real-time liquidity audits for 100+ US cities based on 2026 data.</p>
+                <h2 class="section-title">Solve the Approval Bottleneck First</h2>
+                <p style="color: var(--text-tertiary); margin-top: var(--space-4);">Use the calculator, then jump into the playbook that matches your real blocker.</p>
             </div>
-            
+
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-8);">
-                <!-- Cluster: Major Markets -->
                 <div class="card" style="padding: var(--space-8); border-top: 4px solid var(--accent-primary);">
                     <h3 style="font-size: 1.25rem; margin-bottom: var(--space-6); color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
-                        <span>🏙️</span> Major Markets
+                        <span>Cash</span> Move-In Cash
                     </h3>
                     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <a href="/RentVerdict/verdict/new-york-ny" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">Audit New York, NY</a>
-                        <a href="/RentVerdict/verdict/los-angeles-ca" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">Audit Los Angeles, CA</a>
-                        <a href="/RentVerdict/verdict/chicago-il" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">Audit Chicago, IL</a>
+                        <a href="/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">How Much Cash Do I Need?</a>
+                        <a href="/RentVerdict/research/move-in-cost-index" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">Monthly Move-In Cost Index</a>
+                        <a href="/RentVerdict/verdict/can-i-move-with/5000/to/miami-fl" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">Can I Move With $5,000?</a>
                     </div>
                 </div>
 
-                <!-- Cluster: Case Studies -->
                 <div class="card" style="padding: var(--space-8); border-top: 4px solid #f59e0b;">
                     <h3 style="font-size: 1.25rem; margin-bottom: var(--space-6); color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
-                        <span>🐾</span> Special Intent
+                        <span>Approval</span> Approval Barriers
                     </h3>
                     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-                        <a href="/RentVerdict/verdict/with-pet/new-york-ny" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #f59e0b; color: #d97706;">Pet-Friendly NY Audit</a>
-                        <a href="/RentVerdict/verdict/moving-to/austin-tx" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #f59e0b; color: #d97706;">Moving to Austin Guide</a>
-                        <a href="/RentVerdict/verdict/can-i-move-with/5000/to/miami-fl" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #f59e0b; color: #d97706;">$5,000 Miami Savings</a>
+                        <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #f59e0b; color: #d97706;">Bad Credit + No Cosigner</a>
+                        <a href="/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #f59e0b; color: #d97706;">Guarantor vs Deposit</a>
+                        <a href="/RentVerdict/guides/second-chance-apartments-qualification" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #f59e0b; color: #d97706;">Second-Chance Qualification</a>
                     </div>
                 </div>
 
-                <!-- Cluster: Credit Approval -->
                 <div class="card" style="padding: var(--space-8); border-top: 4px solid #ef4444;">
                     <h3 style="font-size: 1.25rem; margin-bottom: var(--space-6); color: var(--text-primary); display: flex; align-items: center; gap: 0.75rem;">
-                        <span>💳</span> Credit Strategy
+                        <span>Friction</span> Fee and Pet Friction
                     </h3>
                     <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <a href="/RentVerdict/guides/pet-deposit-and-pet-rent-negotiation-guide" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #ef4444; color: #dc2626;">Pet Fee Negotiation</a>
+                        <a href="/RentVerdict/verdict/with-pet/new-york-ny" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #ef4444; color: #dc2626;">Pet-Friendly NY Audit</a>
                         <a href="/RentVerdict/verdict/credit/poor/atlanta-ga" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #ef4444; color: #dc2626;">Poor Credit Atlanta</a>
-                        <a href="/RentVerdict/verdict/credit/fair/houston-tx" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #ef4444; color: #dc2626;">Fair Credit Houston</a>
-                        <a href="/RentVerdict/verdict/credit/good/seattle-wa" class="btn btn-intent" style="justify-content: flex-start; text-align: left; border-color: #ef4444; color: #dc2626;">Good Credit Seattle</a>
                     </div>
                 </div>
             </div>
@@ -197,11 +189,11 @@
                     <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">
                         Bad Credit + No Cosigner Plan
                     </a>
-                    <a href="/RentVerdict/guides/apartment-guarantor-cost-breakdown" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">
-                        Guarantor Cost Breakdown
+                    <a href="/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">
+                        Guarantor vs Deposit
                     </a>
-                    <a href="/RentVerdict/guides/second-chance-apartments-qualification" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">
-                        Second-Chance Qualification Guide
+                    <a href="/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">
+                        Move-In Cash Guide
                     </a>
                 </div>
             </div>
@@ -217,10 +209,9 @@
 
             <div style="margin-top: var(--space-12); text-align: center;">
                 <a href="/RentVerdict/cities" class="btn btn-secondary">
-                    Browse All Supporting Cities & States →
+                    Browse Supporting Cities
                 </a>
             </div>
         </div>
     </div>
 `)
-

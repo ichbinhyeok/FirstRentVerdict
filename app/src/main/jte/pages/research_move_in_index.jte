@@ -31,8 +31,8 @@
 }
 
 @template.layout.main(
-    title = "Monthly Move-In Cost Index (" + monthLabel + "): Top US Rental Markets",
-    description = "See the latest city-level move-in cost index: average rent, deposit, and moving cash requirements across major US rental markets.",
+    title = "Monthly Move-In Cost Index (" + monthLabel + "): Apartment Approval and Cash Pressure",
+    description = "See the latest city-level move-in cost index: rent, deposit, and upfront cash requirements across major US cities.",
     canonical = baseUrl + "/RentVerdict/research/move-in-cost-index",
     content = @`
     <script type="application/ld+json">

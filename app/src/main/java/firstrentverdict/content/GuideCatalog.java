@@ -54,6 +54,90 @@ public final class GuideCatalog {
 
     private static final List<GuideEntry> GUIDES = List.of(
             new GuideEntry(
+                    "how-much-cash-do-i-need-to-move-into-an-apartment",
+                    "How Much Cash Do I Need to Move Into an Apartment?",
+                    "A renter-first breakdown of first month, deposit, utility setup, moving, and the buffer you need before you sign.",
+                    "Cash-tight renter trying to avoid a failed move-in",
+                    "Estimate the real cash threshold before applying",
+                    "cost",
+                    "how much cash do i need to move into an apartment",
+                    "Run My Move-In Audit",
+                    "/RentVerdict/",
+                    List.of(
+                            new GuideFaq(
+                                    "How much cash do I need before moving into an apartment?",
+                                    "Most renters need more than first month and deposit. Plan for utility setup, moving logistics, and a first-60-day cash buffer."),
+                            new GuideFaq(
+                                    "What costs are easiest to underestimate?",
+                                    "Utility deposits, moving truck help, pet fees, broker fees, and temporary housing are the most common misses."),
+                            new GuideFaq(
+                                    "Should I apply if I only have deposit money?",
+                                    "Usually no. If move-in wipes out your remaining cash, one small surprise can push you into missed-rent risk.")),
+                    List.of(
+                            "Add first month, deposit, and moving cost before you apply anywhere.",
+                            "Keep a post-move buffer for at least 30 to 60 days of volatility.",
+                            "Use city-level median rent to pressure-test your target unit."),
+                    List.of(
+                            "Treating rent and deposit as the full move-in budget.",
+                            "Ignoring utility setup, pet fees, and broker fees.",
+                            "Spending emergency cash on move-in day and starting at zero.")),
+            new GuideEntry(
+                    "apartment-guarantor-services-vs-larger-security-deposit",
+                    "Apartment Guarantor Service vs Larger Security Deposit",
+                    "Decide when a guarantor fee improves approval odds and when a higher deposit or prepaid rent is the cheaper move.",
+                    "Applicant comparing fee-based guarantor help with cash alternatives",
+                    "Choose the cheapest approval path that actually changes the outcome",
+                    "approval",
+                    "apartment guarantor service",
+                    "Compare My Approval Options",
+                    "/RentVerdict/",
+                    List.of(
+                            new GuideFaq(
+                                    "Is a guarantor service better than paying a bigger deposit?",
+                                    "Only if the building accepts both paths and the guarantor meaningfully raises approval probability."),
+                            new GuideFaq(
+                                    "Can prepaid rent replace a guarantor?",
+                                    "Sometimes, but not every landlord accepts prepaid rent as a substitute for weak screening factors."),
+                            new GuideFaq(
+                                    "What should I verify before paying a guarantor fee?",
+                                    "Confirm the property accepts that provider, the fee structure, and whether the coverage is valid for renewals.")),
+                    List.of(
+                            "Ask the property which approval alternatives they explicitly accept.",
+                            "Compare guarantor cost with higher deposit or prepaid rent scenarios.",
+                            "Use the option that changes approval odds at the lowest total cost."),
+                    List.of(
+                            "Paying a guarantor provider before confirming property acceptance.",
+                            "Comparing monthly rent only and ignoring one-time fees.",
+                            "Assuming guarantor approval guarantees lease approval.")),
+            new GuideEntry(
+                    "pet-deposit-and-pet-rent-negotiation-guide",
+                    "Pet Deposit and Pet Rent: What Renters Can Actually Negotiate",
+                    "A practical guide to pet deposits, monthly pet rent, and the documents that help reduce pet-related move-in charges.",
+                    "Pet owner trying to reduce move-in friction",
+                    "Lower pet-related move-in charges without getting blindsided",
+                    "cost",
+                    "pet deposit and pet rent",
+                    "Check My Pet Move-In Cost",
+                    "/RentVerdict/",
+                    List.of(
+                            new GuideFaq(
+                                    "Can renters negotiate a pet deposit?",
+                                    "Sometimes. Documentation like vaccination records, renter references, and pet insurance can improve your position."),
+                            new GuideFaq(
+                                    "What is the difference between pet deposit and pet rent?",
+                                    "Pet deposit is usually a one-time upfront charge, while pet rent is a recurring monthly fee."),
+                            new GuideFaq(
+                                    "Should I prioritize lower pet rent or lower pet deposit?",
+                                    "If cash is tight, a lower upfront deposit usually matters more than a small monthly pet-rent difference.")),
+                    List.of(
+                            "Ask for both the upfront pet charge and the recurring pet-rent amount in writing.",
+                            "Bring vet records and prior landlord references before negotiating.",
+                            "Optimize for total move-in cash if liquidity is your main bottleneck."),
+                    List.of(
+                            "Only comparing monthly pet rent and ignoring the upfront fee.",
+                            "Assuming every building treats pet fees the same way.",
+                            "Applying before understanding breed, weight, or quantity restrictions.")),
+            new GuideEntry(
                     "rent-with-bad-credit-no-cosigner",
                     "Renting with Bad Credit and No Cosigner (2026 Playbook)",
                     "A practical approval path for renters with low credit and no family backup. Focus on documents, target inventory, and realistic cash thresholds.",

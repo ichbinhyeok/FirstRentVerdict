@@ -16,9 +16,9 @@ public class GuideController {
     @GetMapping({ "", "/" })
     public String guidesHub(Model model) {
         model.addAttribute("guides", GuideCatalog.all());
-        model.addAttribute("pageTitle", "Renting Guides (2026): Credit, Cosigner, Guarantor, and Move-In Cash");
+        model.addAttribute("pageTitle", "Apartment Approval and Move-In Cash Guides (2026)");
         model.addAttribute("metaDescription",
-                "Actionable renter playbooks for approval, guarantor cost, eviction recovery, and move-in cash planning across US markets.");
+                "Practical renter playbooks for bad credit, no cosigner, guarantor services, pet fees, and the real cash required to move in.");
         return "pages/guides_hub";
     }
 

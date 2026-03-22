@@ -5,14 +5,14 @@ import firstrentverdict.model.verdict.Verdict;
 
 /**
  * Generates contextual, narrative-driven "Why This Verdict" text.
- * 
+ *
  * DESIGN PRINCIPLES:
  * - Maximum 250 characters per explanation
  * - Judge-like authoritative tone (explains decision, not advice)
  * - City-specific context included
  * - Relatable scenarios (car repair, medical bills) for emotional resonance
  * - NO raw numbers - narrative only
- * 
+ *
  * ENHANCED: Uses city name, state, market tier, and deposit context
  * for personalized, persuasive explanations users can trust.
  */
@@ -23,7 +23,7 @@ public class VerdictTextGenerator {
 
     /**
      * Generates verdict explanation text.
-     * 
+     *
      * @throws IllegalStateException if generated text exceeds 250 chars
      */
     public String generate(VerdictContext ctx) {
@@ -46,7 +46,7 @@ public class VerdictTextGenerator {
 
         if (ctx.hasPet()) {
             return String.format(
-                    "You can cover all move-in costs in %s and still maintain a healthy emergency cushion—even with pet fees factored in. %s",
+                    "You can cover all move-in costs in %s and still maintain a healthy emergency cushion, even with pet fees factored in. %s",
                     ctx.cityName(), marketDesc);
         }
 
@@ -77,7 +77,6 @@ public class VerdictTextGenerator {
     }
 
     private String generateInsolvencyText(VerdictContext ctx) {
-        // Emphasize the concrete problem without showing exact numbers
         String depositContext = "";
         if (ctx.depositLegalNote() != null && !ctx.depositLegalNote().isEmpty()) {
             depositContext = " Note: " + truncateNote(ctx.depositLegalNote());
@@ -94,7 +93,7 @@ public class VerdictTextGenerator {
                 : "One car repair or medical bill";
 
         return String.format(
-                "You could hand over the move-in money, but you'd be left dangerously exposed. %s could trigger a financial spiral in %s's rental market.",
+                "You could hand over the move-in money, but you'd be left dangerously exposed. %s could trigger a financial spiral right after move-in in %s.",
                 scenario, ctx.cityName());
     }
 
@@ -123,10 +122,12 @@ public class VerdictTextGenerator {
      * Truncates long legal notes for inline use
      */
     private String truncateNote(String note) {
-        if (note == null)
+        if (note == null) {
             return "";
-        if (note.length() <= 60)
+        }
+        if (note.length() <= 60) {
             return note;
+        }
         return note.substring(0, 57) + "...";
     }
 }
