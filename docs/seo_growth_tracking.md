@@ -1,38 +1,39 @@
 # SEO Growth Tracking (FirstRentVerdict)
 
-## 2026-03-22 Execution Snapshot
+## Current Thesis
 
-- Search Console live readback confirmed that broad `average rent` / `rental market` city SEO should not be the main growth bet.
-- The product/message was repositioned around one question:
+- Broad `city rent info` SEO is not the main growth path.
+- The surviving wedge is:
+  - `bad credit + no cosigner approval`
+- The supporting wedge is:
+  - `move-in cash`
+- City pages and research pages now act as supporting evidence, not the main promise.
+
+## 2026-03-22 Baseline
+
+- Search Console live readback confirmed that broad `average rent` / `rental market` city SEO should not be the main bet.
+- The product/message was repositioned around:
   - `Can you get approved, and how much cash do you need to move in?`
-- The following surfaces were rewritten or realigned to that question:
-  - home
-  - guides hub
-  - research hub
-  - locations hub
-  - city landing defaults
-  - result page
-- Core guide surface promoted:
+- Strategic surfaces promoted:
+  - `/RentVerdict/`
+  - `/RentVerdict/guides`
+  - `/RentVerdict/research/move-in-cost-index`
   - `/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment`
   - `/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit`
   - `/RentVerdict/guides/pet-deposit-and-pet-rent-negotiation-guide`
   - `/RentVerdict/guides/rent-with-bad-credit-no-cosigner`
-- IA update shipped in templates:
+- IA update that shipped:
   - `Approval Check`
   - `Move-In Cash`
   - `Get Approved`
   - `City Signals`
-- Result page UX update shipped:
-  - added `Core Question`
-  - added `Adaptive Action Plan`
-  - action plan now updates with simulator inputs
-  - added `Copy My Plan`
-- Rescue plan module was rewritten to route users into:
-  - approval backstops
-  - flexible-screening inventory
-  - move-in cash repair
-- Verification:
-  - `./gradlew test` passed on 2026-03-22 after all SEO pivot + IA + result-page edits
+- Result-page UX update that shipped:
+  - `Core Question`
+  - `Adaptive Action Plan`
+  - simulator-linked action plan updates
+  - `Copy My Plan`
+- Verification on 2026-03-22:
+  - `./gradlew test` passed after the first pivot pass
 
 ## 2026-03-22 Manual Index Queue
 
@@ -45,174 +46,136 @@ Submit only the new strategic surfaces first.
 5. `https://movecostinfo.com/RentVerdict/guides/rent-with-bad-credit-no-cosigner`
 6. `https://movecostinfo.com/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit`
 
-Do not manually submit legacy `first-month-cost` URLs. Let the 301s consolidate and re-check those around 2026-04-05.
+Do not manually submit legacy `first-month-cost` URLs. Let the 301s consolidate and re-check those around `2026-04-05`.
 
-이 문서는 Search Console/Analytics/라이브 점검 결과를 날짜별로 추적하고, 개선 작업과 결과를 연결하기 위한 운영 로그다.
+## 2026-04-01 Regular Check
 
-## 1) 목표와 판단 기준
+- Compared against the 2026-03-22 baseline, the last 28 days got weaker overall.
+  - `2026-03-04 ~ 2026-03-31`: `2 clicks / 116 impressions / CTR 1.72% / avg position 19.64`
+  - prior 28 days `2026-02-04 ~ 2026-03-03`: `3 clicks / 231 impressions / CTR 1.30% / avg position 5.61`
+- Short-term signal is mixed, not dead.
+  - `2026-03-25 ~ 2026-03-31`: `0 clicks / 29 impressions / avg position 4.41`
+  - previous 7 days `2026-03-18 ~ 2026-03-24`: `1 click / 17 impressions / avg position 12.29`
+  - interpretation: visibility quality may be stabilizing on a tiny sample, but click volume is still too small to trust.
+- US-only footprint is still the main bottleneck.
+  - `usa`: `2 clicks / 76 impressions / avg position 25.91`
+  - page/query footprint is still concentrated in old city-market or legacy-style URLs:
+    - `/RentVerdict/verdict/st-petersburg-fl`
+    - `/RentVerdict/first-month-cost/1400/ks`
+    - `/RentVerdict/verdict/salary-needed/pittsburgh-pa`
+  - interpretation: the approval-first pivot has not propagated into GSC query-page matches yet.
+- Indexation check on priority surfaces:
+  - research hub: PASS, submitted and indexed, last crawl `2026-03-31T19:39:14Z`
+  - cash guide: PASS, submitted and indexed, last crawl `2026-03-24T05:19:20Z`, FAQ rich results PASS
+  - bad-credit guide: `URL is unknown to Google`
+  - legacy `first-month-cost/1000/dc`: still PASS + indexed with last crawl `2026-02-10T19:24:16Z`
+- Sitemap report still does not look clean.
+  - `https://movecostinfo.com/sitemap.xml`
+  - submitted `204`
+  - indexed `0`
+  - last submitted/downloaded `2026-03-22`
+- No striking-distance keywords were found on `2026-04-01`.
 
-- 목표: `노출 -> 클릭 -> 상호작용` 흐름을 안정적으로 늘린다.
-- 현재 판단: 주제 실패보다는 `인덱싱/크롤 분산/CTR` 실행 이슈가 우선 병목이다.
-- 기대 효과: 개선안을 모두 적용하면 **개선 확률은 높다**. 다만 검색 반영은 보통 2~8주 지연이 발생할 수 있다.
+## 2026-04-01 Verdict
 
-## 2) 핵심 KPI 정의
+- The project is not dead, but the first pivot is not validated yet.
+- What worked:
+  - research hub remains indexed and recrawled
+  - cash guide entered the index and rich results
+  - 7-day average position improved on a very small sample
+- What did not work yet:
+  - bad-credit guide is still undiscovered
+  - US queries are still mapped to old city-market or legacy URLs
+  - legacy `first-month-cost` still survives in the index
+- Immediate next actions from the check:
+  1. manually inspect and request indexing again for the bad-credit guide
+  2. keep the manual index queue limited to the new strategic surfaces
+  3. re-check legacy `first-month-cost` around `2026-04-05`
+  4. if `2026-04-19` still shows no US query expansion into the new guides, treat the first pivot as unvalidated and cut SEO scope again
 
-- `Impressions`: Search Console 검색 노출
-- `Clicks`: Search Console 클릭
-- `CTR`: 클릭률
-- `Avg Position`: 평균 게재 순위
-- `Indexed`: 색인 생성됨 페이지 수
-- `Not Indexed`: 색인 제외 페이지 수
-- `Discovered - currently not indexed`: 발견되었으나 미색인 페이지 수
+## 2026-04-01 Follow-up Build
 
-## 3) 스냅샷 로그
+- Strengthened internal-link concentration toward the approval-first cluster instead of city-style exploration.
+- Updated city-page internal links so the strongest reusable routes now point to:
+  - `/RentVerdict/guides/rent-with-bad-credit-no-cosigner`
+  - `/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment`
+  - `/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit`
+- Added a `Start Here` block on the guides hub to force the intended sequence:
+  - bad-credit playbook
+  - guarantor vs deposit
+  - calculator
+- Added an approval-first cross-link module to guide article pages so every guide reinforces the same cluster.
+- Added direct `bad-credit` and `guarantor` CTA links to:
+  - credit landing pages
+  - research hub
+- Build verification:
+  - `./gradlew test` initially hit a Gradle configuration-cache classloading issue
+  - `./gradlew test --no-configuration-cache` passed on `2026-04-01`
 
-| Date | Data Window | Impr. | Clicks | CTR | Avg Pos | Indexed | Not Indexed | Discovered-Not-Indexed | Notes |
-|---|---|---:|---:|---:|---:|---:|---:|---:|---|
-| 2026-03-05 | 2026-01-23 ~ 2026-01-31 (GSC export) | 80 | 1 | 1.25% | 9.28 | 17 | 92 | 89 | 라이브 점검: robots/sitemap 200, sitemap URL 1,810개 |
-| 2026-03-09 | 2026-02-06 ~ 2026-03-06 (GSC API) | 241 | 4 | 1.66% | 5.87 | - | - | - | 최근 28일 자체는 개선. 다만 최근 7일은 표본이 작고, 재크롤 반영이 섞여 있음 |
-| 2026-03-22 | 2026-02-19 ~ 2026-03-19 (GSC MCP) | 290 | 4 | 1.38% | 10.09 | 대표 URL indexed | sitemap 제출 192 | moving-from 샘플 unknown | 최근 7일은 전주 대비 하락. research 허브는 2026-03-21 크롤, legacy `first-month-cost` 샘플은 아직 구 상태 잔존 |
+## 2026-04-01 Second Pivot Pass
 
-## 4) 현재 문제 진단 (2026-03-05)
+This pass makes the wedge narrower than the 2026-03-22 version.
 
-1. 인덱싱 병목이 큼  
-`Indexed 17` 대비 `Not Indexed 92`, 그중 `Discovered - currently not indexed 89`.
+- Home page narrowed from broad `approval + move-in cash` language to:
+  - `bad credit + no cosigner approval`
+- Home page changes:
+  - hero headline now leads with the bad-credit / no-cosigner question
+  - added a `Start Here` rescue strip
+  - added direct CTA to manual route support
+  - moved research lower as supporting evidence
+- Result page changes:
+  - weak-credit scenarios now use the narrower core question:
+    - `Can you still get approved with bad credit and no cosigner?`
+  - added direct `Request Manual Route` CTA in the persona card
+  - added direct `Request Manual Route` CTA in the adaptive action-plan header
+- Contact page changes:
+  - repurposed from generic contact page to `Manual Approval Support`
+  - added a prefilled support email flow
+  - explicitly asks for city, rent, cash, credit tier, cosigner, pet, and move timeline
+  - keeps data-correction and partnership routes as secondary paths
+- Strategic meaning:
+  - the site is no longer positioned as a general rent-information destination
+  - it is now closer to an `apartment approval rescue tool`
 
-2. Sitemap이 큰 편 (초기 사이트 대비)  
-총 1,810 URL 중 `moving-from` 유형이 900개로 절반 비중.
+## Operating Rule
 
-3. URL 정규화 일관성 부족  
-일부 경로는 trailing slash에서 200, 일부는 404.
+- Do not expand city SEO right now.
+- Do not create new broad rent-market content right now.
+- Keep shipping only pages and CTAs that reinforce:
+  - weak credit
+  - no cosigner
+  - guarantor vs deposit
+  - move-in cash
 
-4. 레거시 라우트 재크롤 가능성  
-`no-cosigner`, `salary-needed`, `compare` 등은 410 처리되어 있으나, 구 URL 유입이 계속되면 크롤 예산 소모.
+## 2026-04-01 Deployment State
 
-5. CTR 병목  
-상위권(약 5~10위) 근처 페이지 중 무클릭 페이지 다수.
+- Current state after today's work:
+  - deploy this narrower approval-rescue version
+  - manually request indexing for the bad-credit guide again
+  - observe, do not widen scope
+- Interpretation:
+  - this is now a short observation window, not another large rewrite window
+  - only small corrective edits should happen before the `2026-04-19` decision point
 
-## 4-1) 추가 진단 업데이트 (2026-03-09)
+## Next Check Dates
 
-1. 2026-03-05 배포는 라이브에 이미 반영됨  
-`/RentVerdict/research/move-in-cost-index` 200, `/sitemap.xml` 200, `/robots.txt` 200, `3000 savings`와 `moving-from` 샘플은 라이브 HTML 기준 noindex 확인.
+- `2026-04-05`
+  - inspect legacy `first-month-cost` again
+  - inspect sitemap report again
+- `2026-04-12`
+  - check whether US query/page matches begin to include the bad-credit guide
+- `2026-04-19`
+  - make the go/no-go decision on SEO scope
 
-2. 구글 반영은 아직 부분적  
-리서치 페이지는 Search Console URL 검사 기준 `2026-03-05`에 이미 크롤 및 색인됨. 반면 `3000 savings` 샘플은 마지막 크롤이 `2026-02-25`라 noindex 변경을 아직 못 봤고, `moving-from` 샘플은 `URL is unknown to Google`.
+## Go / No-Go Criteria for 2026-04-19
 
-3. 최근 저노출은 “실패”보다 “재크롤 지연 + 적은 표본” 가능성이 큼  
-최근 28일은 이전 28일 대비 개선(클릭 1 -> 4, 노출 89 -> 240, 평균 순위 10.74 -> 5.86). 하지만 최근 7일은 노출이 작아 일별 변동성이 큼.
+- Positive:
+  - the bad-credit guide is indexed
+  - at least one new guide begins showing up in US query-page matches
+  - clicks and impressions stop concentrating only on legacy or city-style pages
+- Negative:
+  - bad-credit guide still undiscovered
+  - US footprint still dominated by legacy or city-market pages
+  - no real query expansion into the new approval cluster
 
-4. 기술 보정 포인트 발견  
-리서치 페이지 JSON-LD에서 `Bad escape sequence in string` 오류가 확인됨. 원인은 날짜/URL 문자열 escape 방식이며 2026-03-09 코드 수정으로 보정.
-
-5. 레거시 `first-month-cost` 경로는 410보다 301이 더 실용적  
-구 URL이 아직 검색 노출 흔적을 남기고 있어, 관련 신호를 리서치 허브로 모으기 위해 `/RentVerdict/research/move-in-cost-index` 로 영구 리다이렉트 전환.
-
-## 4-2) 추가 진단 업데이트 (2026-03-22)
-
-1. Search Console MCP 연결 복구 후 실측 확인  
-`sc-domain:movecostinfo.com` 기준 최근 28일은 `4 clicks / 290 impressions / CTR 1.38% / avg position 10.09`.
-
-2. 최근 7일은 실제로 악화  
-`2026-03-12 ~ 2026-03-19` 는 직전 7일 대비 클릭 `1 -> 0`, 노출 `47 -> 25`, 평균 순위 `21.77 -> 37.60` 으로 악화. 다만 절대 표본이 작아 변동성도 큼.
-
-3. 대표 research 허브는 정상 색인  
-`/RentVerdict/research/move-in-cost-index` 는 `Submitted and indexed`, 마지막 크롤은 `2026-03-21`, Google/User canonical 일치.
-
-4. noindex / 크롤 억제 전략은 의도대로 작동 중  
-`moving-from` 샘플은 `URL is unknown to Google`. 이는 현재 noindex + sitemap 제외 전략과 일치.
-
-5. 레거시 `first-month-cost` 신호는 아직 완전히 정리되지 않음  
-샘플 `https://movecostinfo.com/RentVerdict/first-month-cost/1000/dc` 는 GSC URL 검사 기준 아직 `Submitted and indexed`, 마지막 크롤 `2026-02-10`. 즉 라이브 301 변경은 반영됐지만 Google 재처리는 아직 덜 끝남.
-
-6. 현재 병목은 “CTR” 하나가 아니라 “미국 타깃 랭킹 부족 + 레거시 잔존 + 표본 부족”  
-국가별로는 한국 `3 clicks / 126 impressions / position 1.40`, 미국 `1 click / 127 impressions / position 19.02`. 미국 타깃 쿼리 다수는 아직 `60~90위` 구간에 머묾.
-
-## 5) 개선 백로그 (우선순위)
-
-| Priority | Task | Expected Impact | Status | Target Date |
-|---|---|---|---|---|
-| P0 | Sitemap 축소/재우선순위 (핵심 URL 우선) | 크롤/인덱싱 집중 | DONE (2026-03-05) | 2026-03-10 |
-| P0 | URL 정규화 (slash 정책 통일 + 301) | 중복/404 변형 감소 | DONE (2026-03-05) | 2026-03-10 |
-| P0 | 저효율 조합형 페이지 단계적 noindex 검토 | 인덱싱 신호 집중 | DONE (1차, 2026-03-05) | 2026-03-12 |
-| P0 | 대표 URL 재색인 요청 (`/RentVerdict/research/move-in-cost-index`, `/RentVerdict/`, `/RentVerdict/cities`) | 수정 반영 가속 | TODO (manual UI) | 2026-03-22 |
-| P0 | 레거시 `first-month-cost` -> research 301 배포 확인 | 구 URL 신호 회수 | DONE (code, 2026-03-09) | 2026-03-10 |
-| P0 | 리서치 페이지 JSON-LD 오류 수정 배포 확인 | Rich result 파싱 정상화 | DONE (code, 2026-03-09) | 2026-03-10 |
-| P0 | legacy `first-month-cost` 샘플 재처리 확인 | 구 URL 잔존 신호 제거 | DOING | 2026-04-05 |
-| P1 | 상위 노출 무클릭 페이지 title/meta 개편 | CTR 개선 | DONE (1차, 2026-03-05) | 2026-03-12 |
-| P1 | 내부링크 강화 (핵심 허브 -> 핵심 랜딩) | 크롤 경로 개선 | DONE (1차, 2026-03-05) | 2026-03-14 |
-| P1 | 링크 가능한 리서치 자산 발행 (월간 Move-In Index) | E-E-A-T/외부 인용 자산 | DONE (2026-03-05) | 2026-03-14 |
-| P1 | 미국 실쿼리 대응용 랜딩 정렬 (`pet deposit`, `rental market`, `average rent`) | 미국 타깃 랭킹 개선 | DOING (code, 2026-03-22) | 2026-04-05 |
-| P1 | Wichita / St. Petersburg sitemap 우선 편입 | 실쿼리 도시 크롤 집중 | DONE (code, 2026-03-22) | 2026-03-22 |
-| P2 | GA4 리포트 자동 집계 연결 | 행동 데이터 확인 | BLOCKED (권한) | 2026-03-14 |
-
-## 6) 적용 이력 (Changes Log)
-
-| Date | Change | Type | Verified |
-|---|---|---|---|
-| 2026-03-05 | 테스트 트래픽 GA4 차단 가드 추가 (`localhost`, 자동화 브라우저, `frv_test`, `frv_analytics=off`) | Analytics Hygiene | Yes (test pass) |
-| 2026-03-05 | Sitemap 기본 정책 축소: relocation-pair 제외, credit-good 제외, savings는 5000만 포함 | Crawl/Index Focus | Yes (test pass) |
-| 2026-03-05 | Wave Sitemap 2차: city-limit(30) + priority-city-slugs 적용, 핵심 파형 크롤 전략 반영 | Crawl/Index Focus | Yes (test pass) |
-| 2026-03-05 | trailing slash URL 301 정규화 필터 추가 (`/`, `/RentVerdict/` 제외) | URL Canonicalization | Yes (test pass) |
-| 2026-03-05 | `moving-from` 페이지 기본 noindex, savings는 `3000/10000` noindex | Indexing Control | Yes (test pass) |
-| 2026-03-05 | 홈/소개/방법론/도시 랜딩 메타 카피 개선 + 허브 내부링크 강화 | CTR & Internal Linking | Yes (test pass) |
-| 2026-03-05 | 리서치 페이지 추가: `/RentVerdict/research/move-in-cost-index` | Authority Asset | Yes (test pass) |
-| 2026-03-09 | 리서치 페이지 JSON-LD escape 수정 (`datePublished`, `dateModified`, `mainEntityOfPage`) | Structured Data | Yes (`VerdictControllerTest`) |
-| 2026-03-09 | 레거시 `/RentVerdict/first-month-cost/{rent}/{state}` 를 research 허브로 301 전환 | Legacy URL Consolidation | Yes (`VerdictControllerTest`) |
-| 2026-03-22 | GSC MCP 연결 복구 및 `sc-domain:movecostinfo.com` 실측 점검 | Search Console Ops | Yes (live MCP query) |
-| 2026-03-22 | `Average Pet Deposit` / `Rental Market` 중심 메타 정렬 | Query Alignment | Pending deploy |
-| 2026-03-22 | sitemap 우선 도시에 `st-petersburg-fl`, `wichita-ks` 추가 | Crawl Focus | Pending deploy |
-| 2026-03-22 | 미국 SEO 전략을 `rental market` 확장 대신 `approval + move-in cash` 가이드 축으로 피벗 | Content Strategy | Yes (GSC + SERP review) |
-
-## 7) 실험 추적 (Experiment Log)
-
-| Start Date | Experiment | Hypothesis | Success Metric | Check Date | Result |
-|---|---|---|---|---|---|
-| 2026-03-05 | P0 실행 전 베이스라인 확보 | 개선 후 인덱싱/노출 상승 | Indexed 상승, Discovered-Not-Indexed 하락 | 2026-03-19 | Pending |
-| 2026-03-09 | 리서치 허브 신호 집중 (JSON-LD + legacy redirect) | 대표 research URL의 재크롤/재색인/노출 안정화 | 대표 URL 크롤 갱신, Rich Result 오류 해소 | 2026-03-19 | Pending |
-| 2026-03-22 | 미국 실쿼리 정렬 (`average pet deposit`, `rental market`, `average rent`) | 도시/펫 랜딩이 미국 쿼리에서 2페이지 안쪽으로 접근 | 미국 기준 노출 증가, 해당 URL 재크롤, 평균순위 개선 | 2026-04-05 | Pending |
-| 2026-03-22 | 일반 city-market 축소 + 해결형 가이드 강화 | guides / calculator가 미국 비브랜드 클릭을 먼저 확보 | 미국 비브랜드 노출/클릭 증가, guide URL 재크롤 | 2026-04-19 | Pending |
-
-## 8) 업데이트 루틴 (권장)
-
-매주 2회(예: 화/금) 아래 순서로 갱신:
-
-1. GSC MCP 최근 28일 갱신: Impr/Clicks/CTR/Pos
-2. GSC MCP 최근 7일 vs 직전 7일 비교
-3. URL 검사: research 허브, legacy 샘플, noindex 샘플, moving-from 샘플
-4. sitemap 제출 수 / 다운로드 일시 / indexed 상태 기록
-5. 국가 분리(`usa`, `kor`)로 타깃 노출 왜곡 여부 확인
-6. 이번 주 배포 변경사항과 KPI 변화를 연결 기록
-7. 백로그 상태(`TODO -> DOING -> DONE`) 갱신
-
-## 8-1) 전략 피벗 메모 (2026-03-22)
-
-- GSC 미국 필터 기준 최근 28일은 `127 impressions / 1 click / avg position 19.02`였고, 실제 쿼리-페이지 조합은 7개 수준으로 매우 얇다.
-- 미국 노출 쿼리는 `st petersburg rental market`, `average pet deposit in houston`, `average rent in wichita ks` 등인데 평균 순위가 `66~91위`로 아직 경쟁권 밖이다.
-- 더 큰 문제는 쿼리와 랜딩 타입 불일치다. `average rent` 쿼리에 `first-month-cost` 또는 placeholder 성격 URL이 잡히고 있어 검색 의도 정렬이 약하다.
-- 반대로 `/RentVerdict/guides`는 같은 기간 `14 impressions / 3 clicks / avg position 1.5`로 상대적으로 강했다.
-- 따라서 일반 city-market pSEO 확장은 중단하고, `approval barrier + move-in cash + guarantor + pet fee` 중심 가이드와 계산기 허브를 메인 성장축으로 전환한다.
-
-## 9) 다음 체크 포인트
-
-- 2026-03-22: Search Console UI에서 대표 URL 재색인 요청
-- 2026-04-05: meta/query alignment 배포 후 첫 반영 구간 확인
-- 2026-04-05: legacy `first-month-cost` 샘플이 여전히 indexed 인지 재확인
-- 2026-04-12: 미국(`usa`) 기준 쿼리/페이지 노출이 실제로 늘었는지 재확인
-
-## 10) 페르소나 검증 로그
-
-### 2026-03-05 (자동 검증)
-
-- Playwright `persona-beta.spec.ts` 실행: Desktop + Mobile 총 8/8 PASS
-- API 시뮬레이션 페르소나 매트릭스: 8개 케이스 중 7개 정상 응답, 1개 의도된 validation 400
-
-| Persona Case | Input Summary | Expected Direction | Result |
-|---|---|---|---|
-| A_HighCash_Local_NYC_Good | NYC, high cash, local, good credit | 승인 | APPROVED |
-| B_LowCash_Local_NYC_Good | NYC, low cash, local, good credit | 거절 | DENIED |
-| C_MidCash_Local_Austin_Fair | Austin, mid cash, fair credit | 승인/경계 | APPROVED |
-| D_Pet_Local_SF_Good | SF, pet=true | 반려동물 비용 반영 승인 가능 | APPROVED |
-| E_LongDistance_Seattle_Poor_WithOrigin | Seattle, long-distance, poor credit, origin 제공 | 계산 성공 | APPROVED |
-| F_LongDistance_Seattle_Poor_NoOrigin | Seattle, long-distance, poor credit, origin 없음 | 입력 오류 | 400 Bad Request (정상) |
-| G_LowRent_HighCash_Wichita_Good | Wichita, 저임대/고현금 | 승인 | APPROVED |
-| H_HighRent_LowCash_Miami_Fair | Miami, 고임대/저현금, fair credit | 거절 | DENIED |
+If the negative case holds on `2026-04-19`, reduce SEO scope again and treat SEO as a background channel rather than the primary growth engine.

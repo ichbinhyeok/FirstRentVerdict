@@ -5,8 +5,8 @@
 @param String baseUrl = ""
 
 @template.layout.main(
-    title = "Apartment Approval and Move-In Cash Calculator (2026) | First Rent Verdict",
-    description = "Check whether you can actually qualify and move in. Estimate rent, deposit, pet fees, moving cost, and the cash buffer you need before you apply.",
+    title = "Bad Credit Apartment Approval Calculator (2026) | First Rent Verdict",
+    description = "Check whether you can get approved with bad credit and no cosigner. Estimate move-in cash, deposits, and the safest approval route before you apply.",
     canonical = baseUrl + "/RentVerdict/",
     content = @`
     <!-- WebApplication Schema -->
@@ -16,7 +16,7 @@
       "@type": "WebApplication",
       "name": "First Rent Verdict",
       "url": "${baseUrl}/RentVerdict/",
-      "description": "Free apartment approval and move-in cash calculator using 2026 market data for US cities.",
+      "description": "Free apartment approval rescue tool for renters with bad credit, no cosigner, and move-in cash pressure.",
       "applicationCategory": "FinanceApplication",
       "operatingSystem": "Any",
       "offers": {
@@ -42,23 +42,40 @@
         <div class="split-left">
             <div style="max-width: 480px; position: relative; z-index: 1;" class="animate-in">
                 <div class="badge badge-accent" style="margin-bottom: var(--space-6);">
-                    2026 Approval + Cost Data
+                    2026 Approval Rescue Tool
                 </div>
                 <h1 class="hero-title">
-                    Can You Actually<br>Get Approved?
+                    Can You Get Approved<br>With Bad Credit<br>and No Cosigner?
                 </h1>
                 <p class="hero-subtitle">
-                    Check the real move-in cash, deposit pressure, and approval friction before you waste an application.
+                    Run the approval check first. Then use the right playbook for weak credit, no cosigner, and move-in cash pressure before you waste another application fee.
                 </p>
+
+                <div style="margin-top: var(--space-8); padding: var(--space-5); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: var(--radius-md); background: rgba(245, 158, 11, 0.06);">
+                    <div style="font-size: 0.75rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem;">
+                        Start Here
+                    </div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                        <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner" class="btn btn-secondary btn-sm" style="border-color: #f59e0b; color: #d97706;">
+                            Bad Credit + No Cosigner
+                        </a>
+                        <a href="/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit" class="btn btn-secondary btn-sm" style="border-color: #f59e0b; color: #d97706;">
+                            Guarantor vs Deposit
+                        </a>
+                        <a href="/RentVerdict/contact" class="btn btn-secondary btn-sm" style="border-color: #f59e0b; color: #d97706;">
+                            Request Manual Route
+                        </a>
+                    </div>
+                </div>
 
                 <div style="margin-top: var(--space-12); padding-top: var(--space-6); border-top: 1px solid var(--border-default);">
                     <div style="display: flex; gap: var(--space-8); color: var(--text-tertiary); font-size: 0.875rem;">
                         <div>
-                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">100+</div>
-                            <div>US Cities</div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">1</div>
+                            <div>Main Wedge</div>
                         </div>
                         <div>
-                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">Guides</div>
+                            <div style="font-size: 1.5rem; font-weight: 700; color: var(--text-primary);">3</div>
                             <div>Approval Playbooks</div>
                         </div>
                         <div>
@@ -101,7 +118,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-lg btn-full">
-                        Get My Verdict
+                        Run Approval Check
                     </button>
 
                     <script>
@@ -142,8 +159,8 @@
     <div style="background: var(--bg-secondary); border-top: 1px solid var(--border-default); padding: var(--space-20) var(--space-6);">
         <div style="max-width: 1000px; margin: 0 auto;">
             <div style="text-align: center; margin-bottom: var(--space-12);">
-                <h2 class="section-title">Solve the Approval Bottleneck First</h2>
-                <p style="color: var(--text-tertiary); margin-top: var(--space-4);">Use the calculator, then jump into the playbook that matches your real blocker.</p>
+                <h2 class="section-title">Start With the Approval Rescue Route</h2>
+                <p style="color: var(--text-tertiary); margin-top: var(--space-4);">The site is now organized around one question: can you still get approved if your profile is weaker than the listing wants?</p>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-8);">
@@ -195,12 +212,15 @@
                     <a href="/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">
                         Move-In Cash Guide
                     </a>
+                    <a href="/RentVerdict/contact" class="btn btn-intent" style="justify-content: flex-start; text-align: left;">
+                        Request Manual Approval Route
+                    </a>
                 </div>
             </div>
 
             <div style="margin-top: var(--space-10);">
                 <h3 style="font-size: 1rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: var(--space-4);">
-                    Research Snapshot
+                    Supporting Evidence
                 </h3>
                 <a href="/RentVerdict/research/move-in-cost-index" class="btn btn-intent" style="display: inline-flex; align-items: center; gap: 0.5rem;">
                     Monthly Move-In Cost Index (Top Markets)

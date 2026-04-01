@@ -41,6 +41,18 @@
             </div>
         </section>
 
+        <section style="margin-bottom: 2rem; background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(251, 191, 36, 0.04) 100%); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 12px; padding: 1.25rem 1.5rem;">
+            <div style="font-size: 0.8rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; color: #b45309; font-weight: 700;">Start Here</div>
+            <h2 style="font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text-primary);">If credit is the blocker, do not start with city pages.</h2>
+            <p style="margin: 0 0 1rem; color: var(--text-secondary); line-height: 1.6;">
+                Start with the approval playbook, then compare guarantor vs deposit, then run the calculator. This is the shortest route to a real yes.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner" class="btn btn-primary">Open Bad Credit Playbook</a>
+                <a href="/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit" class="btn btn-secondary">Compare Approval Backstops</a>
+            </div>
+        </section>
+
         <section style="margin-bottom: 2rem;">
             <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;" id="intent-filters">
                 <button type="button" data-intent-filter="all" class="btn btn-primary btn-sm">All</button>

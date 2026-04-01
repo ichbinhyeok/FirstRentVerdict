@@ -2,6 +2,12 @@
 @param GuideEntry guide
 @param String baseUrl = ""
 
+!{
+    boolean isBadCreditGuide = "rent-with-bad-credit-no-cosigner".equals(guide.slug());
+    boolean isCashGuide = "how-much-cash-do-i-need-to-move-into-an-apartment".equals(guide.slug());
+    boolean isBackstopGuide = "apartment-guarantor-services-vs-larger-security-deposit".equals(guide.slug());
+}
+
 @template.layout.main(
     title = guide.title(),
     description = guide.excerpt(),
@@ -50,6 +56,22 @@
             </div>
         </header>
 
+        <section style="margin-bottom: 2rem; padding: 1.25rem 1.5rem; border-radius: 12px; border: 1px solid var(--border-subtle); background: var(--bg-surface);">
+            <div style="font-size: 0.8rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-tertiary); font-weight: 700;">Approval-First Route</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                @if(!isBadCreditGuide)
+                    <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner" class="btn btn-intent">Bad Credit + No Cosigner</a>
+                @endif
+                @if(!isCashGuide)
+                    <a href="/RentVerdict/guides/how-much-cash-do-i-need-to-move-into-an-apartment" class="btn btn-intent">Move-In Cash Guide</a>
+                @endif
+                @if(!isBackstopGuide)
+                    <a href="/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit" class="btn btn-intent">Guarantor vs Deposit</a>
+                @endif
+                <a href="/RentVerdict/" class="btn btn-intent">Run Calculator</a>
+            </div>
+        </section>
+
         <article style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 6rem; font-size: 1.125rem;">
             <div style="background: var(--bg-surface); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid var(--border-subtle);">
                 <h2 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">Who This Is For</h2>
@@ -87,6 +109,9 @@
             <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem;">
                 <a href="${guide.ctaPath()}" class="btn btn-primary">${guide.ctaLabel()}</a>
                 <a href="/RentVerdict/cities" class="btn btn-outline-primary">Browse All City Audits</a>
+                @if(!isBadCreditGuide)
+                    <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner" class="btn btn-secondary">Open Bad Credit Playbook</a>
+                @endif
             </div>
         </article>
     </div>

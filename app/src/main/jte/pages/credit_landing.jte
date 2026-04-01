@@ -136,6 +136,14 @@
                 Demo provider links are shown for UX testing only. Use the contact form for manual support.
             </p>
             <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner"
+                   class="btn btn-secondary btn-sm">
+                    Open Bad Credit + No Cosigner Playbook
+                </a>
+                <a href="/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit"
+                   class="btn btn-secondary btn-sm">
+                    Compare Guarantor vs Deposit
+                </a>
                 <a href="https://www.theguarantors.com/" target="_blank" rel="noopener nofollow"
                    class="btn btn-secondary btn-sm"
                    data-track-event="lead_submit"
@@ -157,6 +165,10 @@
         <div style="margin-top: 4rem; padding: 2rem; border: 1px solid var(--border-subtle); border-radius: 14px; background: var(--bg-surface); margin-bottom: 4rem;">
             <h3 style="font-size: 0.9rem; font-weight: 700; color: var(--text-tertiary); text-transform: uppercase; margin-bottom: 1rem;">Approval Playbooks</h3>
             <div style="display: grid; gap: 0.75rem;">
+                <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner" style="display: block; text-decoration: none; border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 10px; padding: 0.9rem 1rem; background: rgba(245, 158, 11, 0.05);">
+                    <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.2rem;">Renting with Bad Credit and No Cosigner</div>
+                    <div style="font-size: 0.8rem; color: var(--text-secondary);">Primary approval playbook for weak-credit applicants.</div>
+                </a>
                 @for(GuideEntry guide : recommendedGuides)
                     <a href="/RentVerdict/guides/${guide.slug()}" style="display: block; text-decoration: none; border: 1px solid var(--border-subtle); border-radius: 10px; padding: 0.9rem 1rem; background: var(--bg-panel);">
                         <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.2rem;">${guide.title()}</div>

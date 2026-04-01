@@ -181,6 +181,8 @@
 
         <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
             <a href="/RentVerdict/" class="btn btn-primary">Run Your Own Affordability Check</a>
+            <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner" class="btn btn-secondary">Open Bad Credit Playbook</a>
+            <a href="/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit" class="btn btn-secondary">Compare Approval Backstops</a>
             <a href="/RentVerdict/cities" class="btn btn-secondary">Browse All City Audits</a>
         </div>
     </div>

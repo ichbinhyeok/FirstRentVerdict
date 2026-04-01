@@ -40,7 +40,9 @@
     String citySlug = input.city().toLowerCase().replace(" ", "-").replace(".", "") + "-" + input.state().toLowerCase();
     int estDeposit = result.financials().totalUpfrontCost();
     int liquidityGap = Math.max(0, result.financials().totalUpfrontCost() - result.financials().availableCash());
-    String coreQuestion = "Can you get approved, and how much cash do you need to move in?";
+    String coreQuestion = (input.creditTier() == CreditTier.POOR || input.creditTier() == CreditTier.FAIR)
+            ? "Can you still get approved with bad credit and no cosigner?"
+            : "Can you get approved, and how much cash do you need to move in?";
     PersonaCta persona;
     List<ActionStep> actionPlan = new java.util.ArrayList<>();
     
@@ -385,12 +387,20 @@
             <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
                 <a href="${persona.primaryPath()}" class="btn btn-primary">${persona.primaryLabel()}</a>
                 <a href="${persona.secondaryPath()}" class="btn btn-secondary">${persona.secondaryLabel()}</a>
+                <a href="/RentVerdict/contact" class="btn btn-secondary">Request Manual Route</a>
             </div>
             <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
                 <div style="font-size: 0.75rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.625rem;">
-                    Demo Provider Links
+                    Next Step
                 </div>
                 <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    <a href="/RentVerdict/contact"
+                       class="btn btn-secondary btn-sm"
+                       data-track-event="lead_submit"
+                       data-track-category="monetization"
+                       data-track-label="result_contact_manual_route_click">
+                        Request Manual Approval Support
+                    </a>
                     <a href="https://www.theguarantors.com/" target="_blank" rel="noopener nofollow"
                        class="btn btn-secondary btn-sm"
                        data-track-event="lead_submit"
@@ -424,6 +434,7 @@
                 </div>
                 <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
                     <button type="button" class="btn btn-secondary btn-sm" onclick="copyActionPlan()">Copy My Plan</button>
+                    <a href="/RentVerdict/contact" class="btn btn-secondary btn-sm">Request Manual Route</a>
                     <a href="/RentVerdict/guides" class="btn btn-secondary btn-sm">Browse Playbooks</a>
                 </div>
             </div>
