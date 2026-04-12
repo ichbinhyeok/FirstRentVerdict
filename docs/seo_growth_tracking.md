@@ -157,6 +157,65 @@ This pass makes the wedge narrower than the 2026-03-22 version.
   - this is now a short observation window, not another large rewrite window
   - only small corrective edits should happen before the `2026-04-19` decision point
 
+## 2026-04-12 Regular Check
+
+- Compared against the prior 28-day window, the site lost volume but improved ranking quality.
+  - `2026-03-16 ~ 2026-04-12`: `1 click / 182 impressions / avg position 7.70`
+  - `2026-02-16 ~ 2026-03-15`: `4 clicks / 283 impressions / avg position 8.98`
+- Recent 7-day signal improved on position, not on clicks.
+  - `2026-04-06 ~ 2026-04-12`: `0 clicks / 67 impressions / avg position 2.09`
+  - `2026-03-30 ~ 2026-04-05`: `0 clicks / 61 impressions / avg position 8.75`
+- Main interpretation:
+  - the pivot is now indexed
+  - the click problem is not just ranking anymore
+  - the next bottleneck is CTR, snippet fit, and offer clarity
+- Key page movement:
+  - home: `23 impressions / position 1.83`
+  - guides hub: `31 impressions / position 2.61`
+  - cash guide: `21 impressions / position 4.24`
+  - bad-credit guide: `24 impressions / position 3.96`
+  - only click in the 28-day window came from a scenario page:
+    - `/RentVerdict/verdict/can-i-move-with/5000/to/philadelphia-pa`
+- US-only read:
+  - `1 click / 78 impressions / avg position 12.37`
+  - visible US query footprint is still thin
+  - confirmed sample:
+    - `st petersburg rental market` -> `4 impressions / position 71.5`
+    - `average deposit for apartment rentals in seattle` -> `1 impression / position 1`
+- Indexation check:
+  - research hub: PASS, last crawl `2026-04-12T00:03:44Z`
+  - cash guide: PASS, last crawl `2026-04-03T11:22:02Z`, FAQ PASS
+  - bad-credit guide: PASS, last crawl `2026-04-03T11:20:02Z`, FAQ PASS
+  - legacy `first-month-cost/1000/dc`: still indexed, last crawl `2026-02-14T10:58:10Z`
+- Sitemap report remains suspicious:
+  - `https://movecostinfo.com/sitemap.xml`
+  - submitted `87`
+  - indexed `0`
+  - last submitted/downloaded `2026-04-01`
+
+## 2026-04-12 Verdict
+
+- The pivot is working at the indexing and visibility layer.
+- The pivot is not yet working at the click or demand-capture layer.
+- Practical interpretation:
+  - do not expand scope
+  - do not publish new broad pages
+  - compress harder around one money page and one scenario promise
+
+## 2026-04-12 Focused Build
+
+- Chosen money page:
+  - `/RentVerdict/guides/rent-with-bad-credit-no-cosigner`
+- Changes shipped on 2026-04-12:
+  - tightened the title and excerpt to sound more like a direct approval page
+  - changed the primary CTA from calculator-first to manual-route-first
+  - added a dedicated manual approval support block above the article body
+  - made the guides hub CTA more explicit:
+    - `Get Approved With Bad Credit`
+    - `Request Manual Route`
+- Goal of this pass:
+  - test whether a more transactional bad-credit promise can convert impressions into actual clicks or support requests before `2026-04-19`
+
 ## Next Check Dates
 
 - `2026-04-05`

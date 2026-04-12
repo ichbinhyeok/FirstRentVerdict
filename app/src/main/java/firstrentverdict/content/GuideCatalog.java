@@ -139,14 +139,14 @@ public final class GuideCatalog {
                             "Applying before understanding breed, weight, or quantity restrictions.")),
             new GuideEntry(
                     "rent-with-bad-credit-no-cosigner",
-                    "Renting with Bad Credit and No Cosigner (2026 Playbook)",
-                    "A practical approval path for renters with low credit and no family backup. Focus on documents, target inventory, and realistic cash thresholds.",
+                    "How to Rent With Bad Credit and No Cosigner in 2026",
+                    "A direct approval playbook for renters who need a realistic yes this month. Focus on documents, target inventory, and the cheapest fallback that actually changes the outcome.",
                     "Credit-challenged renter without support network",
-                    "Get approved this month despite low score",
+                    "Get approved this month with bad credit and no cosigner",
                     "approval",
                     "rent with bad credit no cosigner",
-                    "Run My Approval Audit",
-                    "/RentVerdict/",
+                    "Request My Approval Route",
+                    "/RentVerdict/contact",
                     List.of(
                             new GuideFaq(
                                     "Can I rent with bad credit and no cosigner?",
@@ -158,13 +158,13 @@ public final class GuideCatalog {
                                     "Should I apply everywhere to increase odds?",
                                     "No. Broad low-fit applications burn fees and create churn. Start with inventory that explicitly reviews non-standard profiles.")),
                     List.of(
-                            "Prepare proof of income plus 3 months bank statements.",
-                            "Target private landlords and older managed stock first.",
-                            "Offer larger upfront liquidity only when lease terms are clear."),
+                            "Prepare proof of income, 3 months of bank statements, and a short explanation before paying any screening fee.",
+                            "Target private landlords, older managed stock, and second-chance inventory before premium buildings.",
+                            "Use a guarantor, higher deposit, or prepaid rent only after the property confirms it accepts that fallback."),
                     List.of(
-                            "Applying to premium buildings first and burning application fees.",
-                            "Paying non-refundable screening fees without clear criteria.",
-                            "Signing without confirming deposit refund terms.")),
+                            "Applying to premium buildings first and burning fees on low-fit inventory.",
+                            "Paying non-refundable screening fees before asking how exceptions are handled.",
+                            "Offering more upfront cash without confirming the lease terms and refund rules.")),
             new GuideEntry(
                     "apartment-guarantor-cost-breakdown",
                     "Apartment Guarantor Cost Breakdown: When It Is Worth Paying",

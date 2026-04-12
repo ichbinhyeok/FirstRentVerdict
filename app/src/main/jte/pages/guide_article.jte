@@ -72,6 +72,20 @@
             </div>
         </section>
 
+        @if(isBadCreditGuide)
+            <section style="margin-bottom: 2rem; padding: 1.25rem 1.5rem; border-radius: 12px; border: 1px solid rgba(245, 158, 11, 0.28); background: linear-gradient(135deg, rgba(245, 158, 11, 0.08) 0%, rgba(255, 255, 255, 0.98) 100%);">
+                <div style="font-size: 0.8rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; color: #b45309; font-weight: 700;">Manual Route</div>
+                <h2 style="font-size: 1.2rem; color: var(--text-primary); margin-bottom: 0.5rem;">Need a realistic approval route, not generic advice?</h2>
+                <p style="margin: 0 0 1rem; color: var(--text-secondary); line-height: 1.6;">
+                    Send your city, rent, cash, credit tier, and cosigner status. The manual route is the fastest way to compare whether you should try a flexible landlord, a guarantor, or a different price point first.
+                </p>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
+                    <a href="/RentVerdict/contact" class="btn btn-primary">Request Manual Approval Route</a>
+                    <a href="/RentVerdict/" class="btn btn-secondary">Run Approval Check</a>
+                </div>
+            </section>
+        @endif
+
         <article style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 6rem; font-size: 1.125rem;">
             <div style="background: var(--bg-surface); padding: 2rem; border-radius: 12px; margin-bottom: 2rem; border: 1px solid var(--border-subtle);">
                 <h2 style="font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.75rem;">Who This Is For</h2>
@@ -108,7 +122,12 @@
             <p>Move from content to decision by running your numbers with live city-level cost data and approval logic.</p>
             <div style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem;">
                 <a href="${guide.ctaPath()}" class="btn btn-primary">${guide.ctaLabel()}</a>
-                <a href="/RentVerdict/cities" class="btn btn-outline-primary">Browse All City Audits</a>
+                @if(isBadCreditGuide)
+                    <a href="/RentVerdict/" class="btn btn-secondary">Run My Approval Check</a>
+                    <a href="/RentVerdict/guides/apartment-guarantor-services-vs-larger-security-deposit" class="btn btn-secondary">Compare Guarantor vs Deposit</a>
+                @else
+                    <a href="/RentVerdict/cities" class="btn btn-outline-primary">Browse All City Audits</a>
+                @endif
                 @if(!isBadCreditGuide)
                     <a href="/RentVerdict/guides/rent-with-bad-credit-no-cosigner" class="btn btn-secondary">Open Bad Credit Playbook</a>
                 @endif
