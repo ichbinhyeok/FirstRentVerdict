@@ -18,6 +18,16 @@ public class AboutController {
         return "pages/methodology";
     }
 
+    @GetMapping("/data-sources")
+    public String dataSources(Model model) {
+        return "pages/data_sources";
+    }
+
+    @GetMapping("/corrections")
+    public String corrections(Model model) {
+        return "pages/corrections";
+    }
+
     @GetMapping("/guide/rent-affordability-rule")
     public String anchorGuide(Model model) {
         return "pages/guide_rent_rule";

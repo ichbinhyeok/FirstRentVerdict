@@ -1,0 +1,32 @@
+{
+  "version": "2026-04-24",
+  "dataset": "v3_screening_income_assumptions",
+  "last_checked": "2026-04-24",
+  "usage_note": "These are common screening assumptions, not laws. Always allow user override and label results as assumption-based.",
+  "assumptions": [
+    {
+      "threshold_label": "2.5x rent",
+      "rent_to_income_multiplier": 2.5,
+      "risk_band": "flexible",
+      "description": "Useful as a lower screening threshold for smaller landlords, lower-cost markets, or exception-based review.",
+      "is_law": false,
+      "confidence": "medium"
+    },
+    {
+      "threshold_label": "3x rent",
+      "rent_to_income_multiplier": 3.0,
+      "risk_band": "standard",
+      "description": "Default assumption for initial V3 income-to-rent pressure checks.",
+      "is_law": false,
+      "confidence": "medium"
+    },
+    {
+      "threshold_label": "3.5x rent",
+      "rent_to_income_multiplier": 3.5,
+      "risk_band": "strict",
+      "description": "Useful as a stricter screening scenario for premium managed buildings or high-demand units.",
+      "is_law": false,
+      "confidence": "medium"
+    }
+  ]
+}

@@ -12,7 +12,7 @@ app:
   base-url: ${APP_BASE_URL:https://movecostinfo.com}
 seo:
   sitemap:
-    city-limit: 12
+    city-limit: 50
     priority-city-slugs: new-york-ny,los-angeles-ca,chicago-il,houston-tx,austin-tx,miami-fl,seattle-wa,atlanta-ga,boston-ma,washington-dc,st-petersburg-fl,wichita-ks
     include-credit-good: false
     include-relocation-pairs: false

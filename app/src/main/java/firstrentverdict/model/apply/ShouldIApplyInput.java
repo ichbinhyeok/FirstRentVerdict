@@ -1,0 +1,31 @@
+package firstrentverdict.model.apply;
+
+public record ShouldIApplyInput(
+        String city,
+        String state,
+        int monthlyRent,
+        int availableCash,
+        Integer grossMonthlyIncome,
+        int applicantCount,
+        int applicationFee,
+        int adminFee,
+        int holdingDeposit,
+        int moveInFee,
+        int brokerFee,
+        Integer securityDeposit,
+        boolean securityDepositConfirmed,
+        int prepaidRent,
+        Integer leaseTermMonths,
+        boolean hasPet,
+        int petFee,
+        int petDeposit,
+        int monthlyPetRent,
+        int utilityDeposit,
+        boolean applicationFeeRefundable,
+        boolean adminFeeRefundable,
+        boolean holdingDepositRefundable,
+        boolean moveInFeeRefundable,
+        boolean brokerFeeRefundable,
+        String moveInDate,
+        String incomeRule) {
+}

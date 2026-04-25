@@ -23,6 +23,10 @@ public class VerdictDataRepository {
     private final Map<String, CityInsightData.CityInsight> cityInsights = new ConcurrentHashMap<>();
     private final Map<String, CityEconomicFactsData.CityEconomicFact> cityEconomicFacts = new ConcurrentHashMap<>();
     private final Map<String, StateMigrationFlowsData.StateFlow> stateMigrationFlows = new ConcurrentHashMap<>();
+    private final Map<String, ApplicationFeeRulesData.ApplicationFeeRule> applicationFeeRules = new ConcurrentHashMap<>();
+    private final Map<String, DepositPrepaidRulesData.DepositPrepaidRule> depositPrepaidRules = new ConcurrentHashMap<>();
+    private final Map<String, ScreeningIncomeAssumptionsData.IncomeAssumption> incomeAssumptions = new ConcurrentHashMap<>();
+    private final Map<String, ApplicationRiskVocabularyData.RiskTerm> riskVocabulary = new ConcurrentHashMap<>();
 
     // Valid cities set
     private final Map<String, CitiesData.CityEntry> validCities = new ConcurrentHashMap<>();
@@ -82,6 +86,30 @@ public class VerdictDataRepository {
         }
     }
 
+    public void addApplicationFeeRule(ApplicationFeeRulesData.ApplicationFeeRule rule) {
+        if (rule.state() != null) {
+            applicationFeeRules.put(rule.state().toUpperCase(), rule);
+        }
+    }
+
+    public void addDepositPrepaidRule(DepositPrepaidRulesData.DepositPrepaidRule rule) {
+        if (rule.state() != null) {
+            depositPrepaidRules.put(rule.state().toUpperCase(), rule);
+        }
+    }
+
+    public void addIncomeAssumption(ScreeningIncomeAssumptionsData.IncomeAssumption assumption) {
+        if (assumption.thresholdLabel() != null) {
+            incomeAssumptions.put(assumption.thresholdLabel().toLowerCase(), assumption);
+        }
+    }
+
+    public void addRiskTerm(ApplicationRiskVocabularyData.RiskTerm term) {
+        if (term.term() != null) {
+            riskVocabulary.put(term.term().toLowerCase(), term);
+        }
+    }
+
     // Accessors
     public Optional<RentData.CityRent> getRent(String city, String state) {
         return Optional.ofNullable(rentMap.get(generateKey(city, state)));
@@ -136,5 +164,34 @@ public class VerdictDataRepository {
             return Optional.empty();
         }
         return Optional.ofNullable(stateMigrationFlows.get(toState.toUpperCase()));
+    }
+
+    public Optional<ApplicationFeeRulesData.ApplicationFeeRule> getApplicationFeeRule(String state) {
+        if (state == null) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(applicationFeeRules.get(state.toUpperCase()));
+    }
+
+    public Optional<DepositPrepaidRulesData.DepositPrepaidRule> getDepositPrepaidRule(String state) {
+        if (state == null) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(depositPrepaidRules.get(state.toUpperCase()));
+    }
+
+    public Optional<ScreeningIncomeAssumptionsData.IncomeAssumption> getIncomeAssumption(String thresholdLabel) {
+        if (thresholdLabel == null) {
+            return Optional.empty();
+        }
+        return Optional.ofNullable(incomeAssumptions.get(thresholdLabel.toLowerCase()));
+    }
+
+    public java.util.List<ScreeningIncomeAssumptionsData.IncomeAssumption> getIncomeAssumptions() {
+        return new java.util.ArrayList<>(incomeAssumptions.values());
+    }
+
+    public java.util.List<ApplicationRiskVocabularyData.RiskTerm> getRiskVocabulary() {
+        return new java.util.ArrayList<>(riskVocabulary.values());
     }
 }

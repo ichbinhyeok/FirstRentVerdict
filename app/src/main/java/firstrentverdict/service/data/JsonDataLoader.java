@@ -37,6 +37,10 @@ public class JsonDataLoader implements CommandLineRunner {
         loadCityInsights();
         loadCityEconomicFacts();
         loadStateMigrationFlows();
+        loadApplicationFeeRules();
+        loadDepositPrepaidRules();
+        loadScreeningIncomeAssumptions();
+        loadApplicationRiskVocabulary();
 
         log.info("Data loading complete. Total cities supported: {}", repository.getAllCities().size());
     }
@@ -170,5 +174,65 @@ public class JsonDataLoader implements CommandLineRunner {
 
         data.states().forEach(repository::addStateMigrationFlow);
         log.info("Loaded migration flows for {} destination states.", data.states().size());
+    }
+
+    private void loadApplicationFeeRules() throws Exception {
+        ApplicationFeeRulesData data = readOptional(
+                "V3 application fee rules",
+                ApplicationFeeRulesData.class,
+                "data/application_fee_rules.json");
+
+        if (data == null || data.rules() == null || data.rules().isEmpty()) {
+            log.warn("V3 application fee rules were not loaded; checker will use unknown-state fee guidance.");
+            return;
+        }
+
+        data.rules().forEach(repository::addApplicationFeeRule);
+        log.info("Loaded V3 application fee rules for {} states.", data.rules().size());
+    }
+
+    private void loadDepositPrepaidRules() throws Exception {
+        DepositPrepaidRulesData data = readOptional(
+                "V3 deposit and prepaid rent rules",
+                DepositPrepaidRulesData.class,
+                "data/deposit_prepaid_rules.json");
+
+        if (data == null || data.rules() == null || data.rules().isEmpty()) {
+            log.warn("V3 deposit/prepaid rules were not loaded; checker will use city practice only.");
+            return;
+        }
+
+        data.rules().forEach(repository::addDepositPrepaidRule);
+        log.info("Loaded V3 deposit/prepaid rules for {} states.", data.rules().size());
+    }
+
+    private void loadScreeningIncomeAssumptions() throws Exception {
+        ScreeningIncomeAssumptionsData data = readOptional(
+                "V3 screening income assumptions",
+                ScreeningIncomeAssumptionsData.class,
+                "data/screening_income_assumptions.json");
+
+        if (data == null || data.assumptions() == null || data.assumptions().isEmpty()) {
+            log.warn("V3 income assumptions were not loaded; checker will use a 3x fallback.");
+            return;
+        }
+
+        data.assumptions().forEach(repository::addIncomeAssumption);
+        log.info("Loaded V3 income assumptions: {}.", data.assumptions().size());
+    }
+
+    private void loadApplicationRiskVocabulary() throws Exception {
+        ApplicationRiskVocabularyData data = readOptional(
+                "V3 application risk vocabulary",
+                ApplicationRiskVocabularyData.class,
+                "data/application_risk_vocabulary.json");
+
+        if (data == null || data.terms() == null || data.terms().isEmpty()) {
+            log.warn("V3 risk vocabulary was not loaded; templates will use built-in labels.");
+            return;
+        }
+
+        data.terms().forEach(repository::addRiskTerm);
+        log.info("Loaded V3 risk vocabulary terms: {}.", data.terms().size());
     }
 }

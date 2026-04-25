@@ -1,0 +1,104 @@
+{
+  "version": "2026-04-24",
+  "dataset": "v3_application_risk_vocabulary",
+  "last_checked": "2026-04-24",
+  "usage_note": "Use these terms for V3 tool labels, result explanations, and tool-first SEO surfaces.",
+  "terms": [
+    {
+      "term": "application fee",
+      "category": "pre_application_cost",
+      "user_question": "Will I lose this money if I am denied?",
+      "tool_prompt": "Application fee"
+    },
+    {
+      "term": "screening fee",
+      "category": "pre_application_cost",
+      "user_question": "Is this only covering credit/background screening?",
+      "tool_prompt": "Screening fee"
+    },
+    {
+      "term": "admin fee",
+      "category": "pre_application_cost",
+      "user_question": "Is this refundable or applied to move-in costs?",
+      "tool_prompt": "Admin fee"
+    },
+    {
+      "term": "holding deposit",
+      "category": "pre_lease_cost",
+      "user_question": "What happens if I am denied or do not sign?",
+      "tool_prompt": "Holding deposit"
+    },
+    {
+      "term": "move-in fee",
+      "category": "move_in_cost",
+      "user_question": "Is this separate from the security deposit?",
+      "tool_prompt": "Move-in fee"
+    },
+    {
+      "term": "security deposit",
+      "category": "move_in_cost",
+      "user_question": "How many months of rent is required upfront?",
+      "tool_prompt": "Security deposit"
+    },
+    {
+      "term": "first month's rent",
+      "category": "move_in_cost",
+      "user_question": "Is this due at application, approval, or lease signing?",
+      "tool_prompt": "First month's rent"
+    },
+    {
+      "term": "last month's rent",
+      "category": "move_in_cost",
+      "user_question": "Is last month required in addition to the deposit?",
+      "tool_prompt": "Last month's rent"
+    },
+    {
+      "term": "income requirement",
+      "category": "screening_criteria",
+      "user_question": "Do I meet the stated rent-to-income rule?",
+      "tool_prompt": "Income requirement"
+    },
+    {
+      "term": "3x rent",
+      "category": "screening_criteria",
+      "user_question": "Do I earn at least three times the monthly rent?",
+      "tool_prompt": "3x rent requirement"
+    },
+    {
+      "term": "tenant selection criteria",
+      "category": "screening_criteria",
+      "user_question": "Can I review denial criteria before paying?",
+      "tool_prompt": "Tenant selection criteria"
+    },
+    {
+      "term": "portable tenant screening report",
+      "category": "screening_criteria",
+      "user_question": "Can I reuse a screening report instead of paying again?",
+      "tool_prompt": "Reusable screening report"
+    },
+    {
+      "term": "broker fee",
+      "category": "market_specific_fee",
+      "user_question": "Who hired the broker and who is required to pay?",
+      "tool_prompt": "Broker fee"
+    },
+    {
+      "term": "pet fee",
+      "category": "pet_cost",
+      "user_question": "Is this one-time, monthly, refundable, or included in the deposit cap?",
+      "tool_prompt": "Pet fee"
+    },
+    {
+      "term": "renters insurance",
+      "category": "move_in_cost",
+      "user_question": "Is proof of insurance required before keys?",
+      "tool_prompt": "Renters insurance"
+    },
+    {
+      "term": "utility deposit",
+      "category": "move_in_cost",
+      "user_question": "Will utility setup require extra cash before move-in?",
+      "tool_prompt": "Utility deposit"
+    }
+  ]
+}

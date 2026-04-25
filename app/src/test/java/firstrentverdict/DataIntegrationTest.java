@@ -94,6 +94,14 @@ class DataIntegrationTest {
     }
 
     @Test
+    void verifyV3RiskRulesLoaded() {
+        assertTrue(repository.getApplicationFeeRule("NY").isPresent(), "NY application fee rule should load");
+        assertTrue(repository.getDepositPrepaidRule("CA").isPresent(), "CA deposit/prepaid rule should load");
+        assertTrue(repository.getIncomeAssumption("3x rent").isPresent(), "3x income assumption should load");
+        assertFalse(repository.getRiskVocabulary().isEmpty(), "V3 risk vocabulary should load");
+    }
+
+    @Test
     void verifyCityContentEstimatesIncludeBrokerAndPetMonthlyForNewYork() {
         var rent = repository.getRent("New York", "NY").orElseThrow();
         var deposit = repository.getSecurityDeposit("New York", "NY").orElseThrow();
@@ -143,8 +151,8 @@ class DataIntegrationTest {
     void verifySitemapFocusedDefaults() {
         String xml = sitemapController.sitemap();
         int locCount = xml.split("<loc>").length - 1;
-        assertTrue(locCount <= 250,
-                "Focused sitemap should stay compact for indexation waves, but got " + locCount + " URLs");
+        assertTrue(locCount <= 1000,
+                "V3 tool-state sitemap should stay below the first-wave ceiling, but got " + locCount + " URLs");
         assertFalse(xml.contains("/RentVerdict/verdict/moving-from/"),
                 "Sitemap should exclude relocation-pair combinations by default");
         assertTrue(xml.contains("/RentVerdict/verdict/can-i-move-with/5000/to/austin-tx"),

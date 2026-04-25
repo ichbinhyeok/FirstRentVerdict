@@ -1,0 +1,222 @@
+{
+  "version": "2026-04-24",
+  "dataset": "v3_application_fee_rules",
+  "last_checked": "2026-04-24",
+  "scope": "Seed state-level rental application fee and tenant screening charge rules for the V3 pre-application checker.",
+  "usage_note": "Use for risk flagging and questions-to-ask output. Do not present as legal advice.",
+  "rules": [
+    {
+      "jurisdiction_type": "state",
+      "state": "CA",
+      "city": null,
+      "fee_type": "application_screening_fee",
+      "cap_type": "actual_cost_with_statutory_base_cap",
+      "cap_amount": 30,
+      "cap_currency": "USD",
+      "cap_formula": "Fee may not exceed actual out-of-pocket screening cost plus reasonable processing time; statutory base cap is $30 and may be adjusted annually by CPI from January 1, 1998.",
+      "refund_required_when": [
+        "Fee collected but application is not actually considered under the ordered application process.",
+        "Landlord or agent does not obtain a consumer credit report or personal reference check; unused amount must be returned."
+      ],
+      "disclosure_required": [
+        "Written screening criteria with the application form.",
+        "Receipt itemizing out-of-pocket expenses and time spent."
+      ],
+      "portable_screening_report_rule": "Landlord may accept a reusable screening report under California Civil Code section 1950.1; this seed rule does not treat acceptance as mandatory.",
+      "exceptions": [
+        "The $30 amount is a base statutory amount, not the current CPI-adjusted dollar ceiling."
+      ],
+      "product_risk_note": "If the entered fee is materially above the CPI-adjusted cap or no unit is available, flag as ask-before-paying.",
+      "source_url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1950.6.",
+      "source_type": "official_state_statute",
+      "source_citation": "California Civil Code section 1950.6",
+      "effective_date": "2026-01-01",
+      "last_checked": "2026-04-24",
+      "confidence": "high"
+    },
+    {
+      "jurisdiction_type": "state",
+      "state": "NY",
+      "city": null,
+      "fee_type": "background_credit_check_fee",
+      "cap_type": "lesser_of_actual_cost_or_fixed_cap",
+      "cap_amount": 20,
+      "cap_currency": "USD",
+      "cap_formula": "Background and credit check fees may not exceed the actual cost or $20, whichever is less.",
+      "refund_required_when": [],
+      "disclosure_required": [
+        "Landlord must provide the applicant a copy of the background or credit check and the receipt or invoice from the entity conducting the check."
+      ],
+      "portable_screening_report_rule": "Fee must be waived if the potential tenant provides a background check or credit check conducted within the past 30 days.",
+      "exceptions": [
+        "Cooperative housing corporations have special rules."
+      ],
+      "product_risk_note": "If a NY applicant is asked for more than $20 for an application/background/credit check, flag as high ask-before-paying risk.",
+      "source_url": "https://law.justia.com/codes/new-york/rpp/article-7/238-a/",
+      "source_type": "state_statute_mirror",
+      "source_citation": "New York Real Property Law section 238-a",
+      "effective_date": null,
+      "last_checked": "2026-04-24",
+      "confidence": "high"
+    },
+    {
+      "jurisdiction_type": "state",
+      "state": "WA",
+      "city": null,
+      "fee_type": "tenant_screening_charge",
+      "cap_type": "actual_or_customary_screening_cost",
+      "cap_amount": null,
+      "cap_currency": "USD",
+      "cap_formula": "Charge may cover costs incurred in obtaining a tenant screening report, or actual screening costs, but may not exceed customary screening-service costs in the general area.",
+      "refund_required_when": [],
+      "disclosure_required": [
+        "Written or posted notice of screening information accessed.",
+        "Criteria that may result in denial.",
+        "Consumer reporting agency details if a consumer report is used.",
+        "Whether comprehensive reusable tenant screening reports are accepted."
+      ],
+      "portable_screening_report_rule": "Landlord website must state whether the landlord accepts a comprehensive reusable tenant screening report.",
+      "exceptions": [],
+      "product_risk_note": "If screening criteria or reusable-report policy is not disclosed before payment, flag as ask-before-paying.",
+      "source_url": "https://app.leg.wa.gov/rcw/default.aspx?cite=59.18.257",
+      "source_type": "official_state_statute",
+      "source_citation": "RCW 59.18.257",
+      "effective_date": null,
+      "last_checked": "2026-04-24",
+      "confidence": "high"
+    },
+    {
+      "jurisdiction_type": "state",
+      "state": "OR",
+      "city": null,
+      "fee_type": "applicant_screening_charge",
+      "cap_type": "actual_or_customary_screening_cost",
+      "cap_amount": null,
+      "cap_currency": "USD",
+      "cap_formula": "Charge must not exceed the landlord's average actual screening cost or customary screening-company or credit-reporting-agency cost for comparable screening.",
+      "refund_required_when": [
+        "Vacant dwelling unit is filled before screening the applicant.",
+        "Screening has not been conducted or ordered before the applicant withdraws the application in writing."
+      ],
+      "disclosure_required": [
+        "Written screening or admission criteria.",
+        "Amount of the screening charge.",
+        "Typical screening process.",
+        "Deposit and rent information.",
+        "Renter liability insurance requirement if applicable.",
+        "Approximate availability and applications under consideration."
+      ],
+      "portable_screening_report_rule": null,
+      "exceptions": [
+        "Only one applicant screening charge may be required within a 60-day period for the same landlord."
+      ],
+      "product_risk_note": "If the applicant has already paid this landlord in the last 60 days or no availability context is disclosed, flag as ask-before-paying.",
+      "source_url": "https://oregon.public.law/statutes/ors_90.295",
+      "source_type": "state_statute_mirror",
+      "source_citation": "ORS 90.295",
+      "effective_date": null,
+      "last_checked": "2026-04-24",
+      "confidence": "high"
+    },
+    {
+      "jurisdiction_type": "state",
+      "state": "CO",
+      "city": null,
+      "fee_type": "rental_application_fee",
+      "cap_type": "processing_cost_only",
+      "cap_amount": null,
+      "cap_currency": "USD",
+      "cap_formula": "Fee must be used entirely to cover the landlord's costs in processing the rental application.",
+      "refund_required_when": [
+        "Unused portion of the application fee should be refunded with good-faith effort within 20 days."
+      ],
+      "disclosure_required": [
+        "Disclosure of anticipated expenses or itemization of actual expenses."
+      ],
+      "portable_screening_report_rule": null,
+      "exceptions": [],
+      "product_risk_note": "If the fee appears to include non-screening profit or no expense disclosure is provided, flag as ask-before-paying.",
+      "source_url": "https://leg.colorado.gov/bills/HB19-1106",
+      "source_type": "official_state_legislature_summary",
+      "source_citation": "Colorado HB19-1106 Rental Application Fees",
+      "effective_date": "2019-08-02",
+      "last_checked": "2026-04-24",
+      "confidence": "high"
+    },
+    {
+      "jurisdiction_type": "state",
+      "state": "VA",
+      "city": null,
+      "fee_type": "application_fee",
+      "cap_type": "fixed_cap_plus_third_party_costs",
+      "cap_amount": 50,
+      "cap_currency": "USD",
+      "cap_formula": "Application fee may not exceed $50, exclusive of actual out-of-pocket third-party background, credit, or other pre-occupancy check expenses. HUD-regulated units use a $32 cap, exclusive of those third-party costs.",
+      "refund_required_when": [
+        "Application deposit rules require refund of sums above actual expenses and damages when the applicant fails to rent or is rejected."
+      ],
+      "disclosure_required": [],
+      "portable_screening_report_rule": null,
+      "exceptions": [
+        "HUD-regulated public or regulated housing unit cap is $32 before third-party costs."
+      ],
+      "product_risk_note": "If a VA application fee exceeds $50 before third-party pass-through costs, flag as ask-before-paying.",
+      "source_url": "https://law.lis.virginia.gov/vacode/title55.1/chapter12/section55.1-1203/",
+      "source_type": "official_state_statute",
+      "source_citation": "Code of Virginia section 55.1-1203",
+      "effective_date": null,
+      "last_checked": "2026-04-24",
+      "confidence": "high"
+    },
+    {
+      "jurisdiction_type": "state",
+      "state": "TX",
+      "city": null,
+      "fee_type": "application_fee",
+      "cap_type": "no_amount_cap_in_seed_rule",
+      "cap_amount": null,
+      "cap_currency": "USD",
+      "cap_formula": "Application fee is defined as a nonrefundable sum to offset screening costs; seed source does not provide a dollar cap.",
+      "refund_required_when": [
+        "If the landlord rejects an applicant and did not make required tenant selection criteria notice available, the landlord must return the application fee and any application deposit."
+      ],
+      "disclosure_required": [
+        "Tenant selection criteria and grounds for denial must be made available when the application is provided."
+      ],
+      "portable_screening_report_rule": null,
+      "exceptions": [],
+      "product_risk_note": "In TX, the strongest pre-apply question is whether written tenant selection criteria were made available before payment.",
+      "source_url": "https://statutes.capitol.texas.gov/Docs/PR/htm/PR.92.htm#92.3515",
+      "source_type": "official_state_statute",
+      "source_citation": "Texas Property Code section 92.3515",
+      "effective_date": null,
+      "last_checked": "2026-04-24",
+      "confidence": "high"
+    },
+    {
+      "jurisdiction_type": "state",
+      "state": "MA",
+      "city": null,
+      "fee_type": "application_or_broker_fee",
+      "cap_type": "special_restrictions_requires_review",
+      "cap_amount": null,
+      "cap_currency": "USD",
+      "cap_formula": "Massachusetts restricts amounts charged at or before tenancy commencement and has special broker/finder fee rules; do not reduce to a single application-fee cap without jurisdiction review.",
+      "refund_required_when": [],
+      "disclosure_required": [
+        "Broker/finder fee responsibility and agency relationship should be clarified before payment."
+      ],
+      "portable_screening_report_rule": null,
+      "exceptions": [
+        "Licensed broker/finder-fee scenarios require separate treatment from landlord application fees."
+      ],
+      "product_risk_note": "For MA, show 'ask before paying' if the fee is labeled application, broker, finder, holding, or admin fee and the payer/agent relationship is unclear.",
+      "source_url": "https://www.mass.gov/info-details/apartment-finders-fees-brokers-fees-and-signing-a-lease",
+      "source_type": "official_state_guidance",
+      "source_citation": "Mass.gov apartment finder fees, broker fees, and signing a lease guidance",
+      "effective_date": null,
+      "last_checked": "2026-04-24",
+      "confidence": "medium"
+    }
+  ]
+}

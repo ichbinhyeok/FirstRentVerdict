@@ -31,7 +31,7 @@
                         <p style="color: var(--text-secondary); margin-bottom: 1rem;">
                             Include your target city, monthly rent, cash on hand, credit tier, whether you have a cosigner, pet status, and move timeline.
                         </p>
-                        <a href="mailto:spainhyeok@gmail.com?subject=Manual%20Approval%20Support%20Request&body=Target%20city%3A%0AMonthly%20rent%3A%0ACash%20on%20hand%3A%0ACredit%20tier%3A%0AHave%20a%20cosigner%3F%3A%0AHave%20a%20pet%3F%3A%0AMove%20timeline%3A%0ABiggest%20approval%20blocker%3A"
+                        <a href="mailto:shinhyeok22@gmail.com?subject=Manual%20Approval%20Support%20Request&body=Target%20city%3A%0AMonthly%20rent%3A%0ACash%20on%20hand%3A%0ACredit%20tier%3A%0AHave%20a%20cosigner%3F%3A%0AHave%20a%20pet%3F%3A%0AMove%20timeline%3A%0ABiggest%20approval%20blocker%3A"
                            data-track-event="lead_submit"
                            data-track-category="monetization"
                            data-track-label="contact_manual_approval_support_mailto"
@@ -52,8 +52,8 @@
                     <div>
                         <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">General Contact</h3>
                         <p style="color: var(--text-secondary); margin-bottom: 1rem;">For general questions, feedback, or support that is not tied to an approval scenario.</p>
-                        <a href="mailto:spainhyeok@gmail.com" style="color: var(--text-primary); font-weight: 600; text-decoration: underline;">
-                            spainhyeok@gmail.com
+                        <a href="mailto:shinhyeok22@gmail.com" style="color: var(--text-primary); font-weight: 600; text-decoration: underline;">
+                            shinhyeok22@gmail.com
                         </a>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                             Found an error in our rent data, deposit laws, or moving cost estimates? 
                             We take data accuracy seriously and appreciate corrections.
                         </p>
-                        <a href="mailto:spainhyeok@gmail.com?subject=Data%20Correction%20Request" 
+                        <a href="mailto:shinhyeok22@gmail.com?subject=Data%20Correction%20Request" 
                            style="color: var(--text-primary); font-weight: 600; text-decoration: underline;">
                             Submit a Correction ->
                         </a>
@@ -87,7 +87,7 @@
                             Interested in integrating First Rent Verdict into your platform, 
                             or exploring data licensing opportunities?
                         </p>
-                        <a href="mailto:spainhyeok@gmail.com?subject=Partnership%20Inquiry"
+                        <a href="mailto:shinhyeok22@gmail.com?subject=Partnership%20Inquiry"
                            data-track-event="lead_submit"
                            data-track-category="monetization"
                            data-track-label="contact_partnership_mailto"

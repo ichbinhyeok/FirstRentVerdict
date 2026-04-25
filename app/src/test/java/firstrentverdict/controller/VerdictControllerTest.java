@@ -135,8 +135,126 @@ class VerdictControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(not(containsString("/RentVerdict/verdict/st.-louis-mo"))))
                 .andExpect(content().string(not(containsString("/verdict/compare/"))))
+                .andExpect(content().string(containsString("/RentVerdict/should-i-apply")))
+                .andExpect(content().string(containsString("/RentVerdict/application-fee-risk-checker")))
+                .andExpect(content().string(containsString("/RentVerdict/can-i-move-with/5000/to/austin-tx")))
+                .andExpect(content().string(containsString("/RentVerdict/application-fee/150/in/austin-tx")))
+                .andExpect(content().string(containsString("/RentVerdict/admin-fee/300/in/austin-tx")))
+                .andExpect(content().string(containsString("/RentVerdict/first-last-security-deposit-in/austin-tx")))
                 .andExpect(content().string(containsString("/RentVerdict/research/move-in-cost-index")))
                 .andExpect(content().string(containsString("/RentVerdict/guide/rent-affordability-rule")));
+    }
+
+    @Test
+    void testShouldIApplyToolPagesLoad() throws Exception {
+        mockMvc.perform(get("/RentVerdict/should-i-apply"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/should_i_apply"))
+                .andExpect(content().string(containsString("Run gates")))
+                .andExpect(content().string(containsString("/RentVerdict/data-sources")));
+
+        mockMvc.perform(get("/RentVerdict/application-fee-risk-checker"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/should_i_apply"))
+                .andExpect(content().string(containsString("Fee gate")));
+
+        mockMvc.perform(get("/RentVerdict/should-i-apply-in/austin-tx"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/should_i_apply"))
+                .andExpect(content().string(containsString("Austin, TX")));
+    }
+
+    @Test
+    void testTrustPagesLoad() throws Exception {
+        mockMvc.perform(get("/RentVerdict/about"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/about"))
+                .andExpect(content().string(containsString("virtual product and data team")));
+
+        mockMvc.perform(get("/RentVerdict/methodology"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/methodology"))
+                .andExpect(content().string(containsString("not a law firm")));
+
+        mockMvc.perform(get("/RentVerdict/data-sources"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/data_sources"))
+                .andExpect(content().string(containsString("Where the tool gets its assumptions")));
+
+        mockMvc.perform(get("/RentVerdict/corrections"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/corrections"))
+                .andExpect(content().string(containsString("Correction policy")));
+    }
+
+    @Test
+    void testShouldIApplyScenarioUrlPrefillsCashAndRent() throws Exception {
+        mockMvc.perform(get("/RentVerdict/can-i-apply-with/5000/for/1800/in/austin-tx"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/should_i_apply"))
+                .andExpect(content().string(containsString("value=\"1800\"")))
+                .andExpect(content().string(containsString("value=\"5000\"")));
+    }
+
+    @Test
+    void testShouldIApplyFeeIncomeAndDepositScenarioPagesLoad() throws Exception {
+        mockMvc.perform(get("/RentVerdict/application-fee/150/in/austin-tx"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/should_i_apply"))
+                .andExpect(content().string(containsString("Application fee scenario")))
+                .andExpect(content().string(containsString("$150 application fee before approval")))
+                .andExpect(content().string(containsString("TX fee rule loaded")))
+                .andExpect(content().string(containsString("Related scenarios")))
+                .andExpect(content().string(containsString("name=\"applicationFee\"")))
+                .andExpect(content().string(containsString("value=\"150\"")));
+
+        mockMvc.perform(get("/RentVerdict/admin-fee/300/in/austin-tx"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/should_i_apply"))
+                .andExpect(content().string(containsString("Admin fee scenario")))
+                .andExpect(content().string(containsString("value=\"300\"")));
+
+        mockMvc.perform(get("/RentVerdict/can-i-apply-with/4500/income-for/1500/rent-in/austin-tx"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/should_i_apply"))
+                .andExpect(content().string(containsString("Income screen scenario")))
+                .andExpect(content().string(containsString("3.0x")))
+                .andExpect(content().string(containsString("value=\"4500\"")));
+
+        mockMvc.perform(get("/RentVerdict/first-last-security-deposit-in/boston-ma"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/should_i_apply"))
+                .andExpect(content().string(containsString("Deposit stack scenario")));
+    }
+
+    @Test
+    void testShouldIApplySubmissionProducesNoindexResult() throws Exception {
+        mockMvc.perform(post("/RentVerdict/should-i-apply")
+                .param("cityState", "Austin|TX")
+                .param("monthlyRent", "1800")
+                .param("availableCash", "5000")
+                .param("grossMonthlyIncome", "6000")
+                .param("applicationFee", "75")
+                .param("adminFee", "150")
+                .param("holdingDeposit", "0")
+                .param("moveInFee", "0")
+                .param("securityDeposit", "1800")
+                .param("prepaidRent", "0")
+                .param("hasPet", "false")
+                .param("petFee", "0")
+                .param("utilityDeposit", "100")
+                .param("incomeRule", "3x rent")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+                .andExpect(status().isOk())
+                .andExpect(view().name("pages/should_i_apply_result"))
+                .andExpect(model().attribute("result", notNullValue()))
+                .andExpect(content().string(containsString("<meta name=\"robots\" content=\"noindex, nofollow\">")))
+                .andExpect(content().string(containsString("Action plan")))
+                .andExpect(content().string(containsString("Levers to test")))
+                .andExpect(content().string(containsString("What would make this apply-safe?")))
+                .andExpect(content().string(containsString("This is a risk screen, not legal, financial, or approval advice.")))
+                .andExpect(content().string(containsString("data-copy-message")))
+                .andExpect(content().string(containsString("Gate Output")));
     }
 
     @Test

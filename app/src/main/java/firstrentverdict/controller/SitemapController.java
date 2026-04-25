@@ -60,7 +60,16 @@ public class SitemapController {
 
         // 1. Static Pages
         addUrl(xml, baseUrl + "/RentVerdict/", "1.0", monthlyMod);
+        addUrl(xml, baseUrl + "/RentVerdict/should-i-apply", "1.0", monthlyMod);
+        addUrl(xml, baseUrl + "/RentVerdict/application-fee-risk-checker", "0.9", monthlyMod);
+        addUrl(xml, baseUrl + "/RentVerdict/move-in-cash-gap-calculator", "0.9", monthlyMod);
+        addUrl(xml, baseUrl + "/RentVerdict/security-deposit-calculator", "0.8", monthlyMod);
+        addUrl(xml, baseUrl + "/RentVerdict/pet-fee-move-in-cost-calculator", "0.8", monthlyMod);
         addUrl(xml, baseUrl + "/RentVerdict/cities", "0.9", monthlyMod);
+        addUrl(xml, baseUrl + "/RentVerdict/about", "0.6", monthlyMod);
+        addUrl(xml, baseUrl + "/RentVerdict/methodology", "0.7", monthlyMod);
+        addUrl(xml, baseUrl + "/RentVerdict/data-sources", "0.6", monthlyMod);
+        addUrl(xml, baseUrl + "/RentVerdict/corrections", "0.5", monthlyMod);
 
         // 1b. Guides
         addUrl(xml, baseUrl + "/RentVerdict/guides", "0.9", monthlyMod);
@@ -79,6 +88,20 @@ public class SitemapController {
             // - City Landing & Relocation (200)
             addUrl(xml, root + slug, "0.8", monthlyMod);
             addUrl(xml, root + "moving-to/" + slug, "0.9", monthlyMod);
+            addUrl(xml, baseUrl + "/RentVerdict/should-i-apply-in/" + slug, "0.9", monthlyMod);
+            addUrl(xml, baseUrl + "/RentVerdict/city/" + slug + "/move-in-cost-calculator", "0.8", monthlyMod);
+            addUrl(xml, baseUrl + "/RentVerdict/can-i-apply-with/5000/for/" + medianRentSafe(city) + "/in/" + slug, "0.8", monthlyMod);
+            addUrl(xml, baseUrl + "/RentVerdict/can-i-apply-with/4000/for/" + medianRentSafe(city) + "/in/" + slug, "0.8", monthlyMod);
+            addUrl(xml, baseUrl + "/RentVerdict/can-i-apply-with/6000/for/" + medianRentSafe(city) + "/in/" + slug, "0.8", monthlyMod);
+
+            // Tool-state pages: fee, income, and deposit-stack families.
+            addUrl(xml, baseUrl + "/RentVerdict/application-fee/75/in/" + slug, "0.8", monthlyMod);
+            addUrl(xml, baseUrl + "/RentVerdict/application-fee/150/in/" + slug, "0.8", monthlyMod);
+            addUrl(xml, baseUrl + "/RentVerdict/admin-fee/300/in/" + slug, "0.8", monthlyMod);
+            addUrl(xml, baseUrl + "/RentVerdict/holding-deposit/" + medianRentSafe(city) + "/in/" + slug, "0.8", monthlyMod);
+            addUrl(xml, baseUrl + "/RentVerdict/can-i-apply-with/" + Math.max(1, medianRentSafe(city) * 3) + "/income-for/" + medianRentSafe(city) + "/rent-in/" + slug, "0.8", monthlyMod);
+            addUrl(xml, baseUrl + "/RentVerdict/can-i-apply-with/" + Math.max(1, (int) Math.round(medianRentSafe(city) * 2.5)) + "/income-for/" + medianRentSafe(city) + "/rent-in/" + slug, "0.7", monthlyMod);
+            addUrl(xml, baseUrl + "/RentVerdict/first-last-security-deposit-in/" + slug, "0.8", monthlyMod);
 
             // - Credit (3 tiers x 100 cities = 300)
             addUrl(xml, root + "credit/poor/" + slug, "0.8", monthlyMod);
@@ -93,6 +116,7 @@ public class SitemapController {
             // - Savings Based
             for (int savings : sitemapSavingsAmounts) {
                 addUrl(xml, root + "can-i-move-with/" + savings + "/to/" + slug, "0.9", monthlyMod);
+                addUrl(xml, baseUrl + "/RentVerdict/can-i-move-with/" + savings + "/to/" + slug, "0.8", monthlyMod);
             }
 
             // Placeholders removed from sitemap (Salary Needed, No Cosigner)

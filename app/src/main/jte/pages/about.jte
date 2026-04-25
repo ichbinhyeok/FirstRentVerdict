@@ -1,83 +1,70 @@
 @param String baseUrl = ""
 
 @template.layout.main(
-    title = "About First Rent Verdict: Team, Data Sources, and Review Standards",
-    description = "See who built First Rent Verdict, where city rental data comes from, and how our analysts review move-in cost estimates.",
+    title = "About First Rent Verdict: Team, Standards, and Trust Policy",
+    description = "First Rent Verdict is an independent renter decision tool. Learn how the virtual operating team, data checks, and review standards work.",
     canonical = baseUrl + "/RentVerdict/about",
     content = @`
-    <div style="max-width: 800px; margin: 4rem auto; padding: 0 1.5rem;">
-        
-        <!-- Header -->
-        <div style="text-align: center; margin-bottom: 4rem;">
-            <div style="font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-tertiary); margin-bottom: 0.5rem;">
-                The Team Behind The Verdict
-            </div>
-            <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem;">About Verdict Labs</h1>
-            <p style="font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.6;">
-                We are data analysts and engineers dedicated to solving the rental affordability crisis through mathematical transparency.
-            </p>
-        </div>
+    <main class="trust-page">
+        <section class="trust-hero">
+            <span>About First Rent Verdict</span>
+            <h1>A renter risk tool, not an approval promise.</h1>
+            <p>First Rent Verdict helps renters slow down before paying application fees, admin fees, holding deposits, and move-in cash. The product turns listing numbers into a practical risk screen: apply, pause, or do not pay yet.</p>
+        </section>
 
-        <!-- Mission -->
-        <div style="margin-bottom: 4rem;">
-            <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">Our Mission</h2>
-            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                <strong>First Rent Verdict</strong> was built with a single goal: to protect tenants from financial insolvency. 
-            </p>
-            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary);">
-                Too many renters sign leases based on "monthly rent" alone, ignoring the hidden dangers of upfront liquidity requirements (security deposits, moving costs) and post-move cash buffers. We exist to visualize these hidden risks before you sign.
-            </p>
-        </div>
+        <section class="trust-grid">
+            <article>
+                <span>Operating model</span>
+                <h2>Built by a virtual product and data team</h2>
+                <p>First Rent Verdict is operated as an independent software project by a small virtual team model. The named functions below describe the review roles used to build and maintain the product. They are not claims that licensed attorneys, financial advisors, brokers, or property managers reviewed each result.</p>
+            </article>
+            <article>
+                <span>Boundary</span>
+                <h2>Guidance, not legal or financial advice</h2>
+                <p>The tool does not guarantee approval, rental availability, refund rights, or legal outcomes. It highlights risk factors to verify with the property manager, lease documents, local authority, or a qualified professional.</p>
+            </article>
+        </section>
 
-        <!-- Data Sources (E-E-A-T Authority) -->
-        <div style="background: var(--bg-surface); padding: 2.5rem; border-radius: 12px; border: 1px solid var(--border-subtle); margin-bottom: 4rem;">
-            <h2 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1.5rem;">Data Integrity & Sources</h2>
-            <p style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 1.5rem;">
-                Our verdicts are not opinions. They are calculated using real-time market data aggregated from trusted public and private sources:
-            </p>
-            <ul style="list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-                <li style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); font-weight: 500;">
-                    <span style="color: var(--primary);">&#10003;</span> <a href="https://www.zillow.com/research/data/" target="_blank" rel="nofollow" style="color: inherit; text-decoration: underline; text-decoration-color: var(--border-subtle);">Zillow Research Data</a>
-                </li>
-                <li style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); font-weight: 500;">
-                    <span style="color: var(--primary);">&#10003;</span> <a href="https://www.apartmentlist.com/research/category/data-rent-estimates" target="_blank" rel="nofollow" style="color: inherit; text-decoration: underline; text-decoration-color: var(--border-subtle);">Apartment List Trends</a>
-                </li>
-                <li style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); font-weight: 500;">
-                    <span style="color: var(--primary);">&#10003;</span> <a href="https://www.census.gov/topics/housing/data.html" target="_blank" rel="nofollow" style="color: inherit; text-decoration: underline; text-decoration-color: var(--border-subtle);">US Census Bureau</a>
-                </li>
-                <li style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); font-weight: 500;">
-                    <span style="color: var(--primary);">&#10003;</span> State Housing Authorities
-                </li>
-            </ul>
-        </div>
-
-        <!-- Contact & Team -->
-        <div style="margin-bottom: 4rem;">
-            <h2 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1.5rem;">Contact Us</h2>
-            <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); margin-bottom: 2rem;">
-                Feedback, data correction requests, or partnership inquiries? We'd love to hear from you.
-            </p>
-            
-            <div style="display: flex; flex-direction: column; gap: 1rem;">
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                    <div style="font-weight: 600; min-width: 100px;">Email</div>
-                    <a href="mailto:spainhyeok@gmail.com" style="color: var(--primary);">spainhyeok@gmail.com</a>
+        <section class="trust-panel">
+            <span>Virtual team roles</span>
+            <div class="trust-role-list">
+                <div>
+                    <strong>Product desk</strong>
+                    <p>Defines the renter decision flow and keeps pages focused on before-you-pay actions.</p>
                 </div>
-                <div style="display: flex; align-items: center; gap: 1rem;">
-                    <div style="font-weight: 600; min-width: 100px;">Location</div>
-                    <div style="color: var(--text-secondary);">Seoul, Republic of Korea & Global Remote Team</div>
+                <div>
+                    <strong>Data desk</strong>
+                    <p>Maintains city rent, fee, deposit, and screening assumptions from documented sources.</p>
+                </div>
+                <div>
+                    <strong>Risk desk</strong>
+                    <p>Reviews wording so the product flags uncertainty instead of making legal or approval claims.</p>
+                </div>
+                <div>
+                    <strong>User review desk</strong>
+                    <p>Uses test cases and renter feedback to find confusing outputs, missing inputs, and weak explanations.</p>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <div style="margin-top: 4rem; text-align: center; border-top: 1px solid var(--border-subtle); padding-top: 2rem;">
-            <p style="font-size: 0.9rem; color: var(--text-tertiary);">
-                <strong>Disclaimer:</strong> Verdict Labs is an independent analytical entity. We are not a lender, broker, or financial advisor.
-            </p>
-            <div style="margin-top: 2rem;">
-                <a href="/RentVerdict/" class="btn-primary">Back to Calculator</a>
-            </div>
-        </div>
-    </div>
+        <section class="trust-grid">
+            <article>
+                <span>What we optimize for</span>
+                <h2>Clear next questions before payment</h2>
+                <p>The best output is not a dramatic verdict. It is a short list of numbers and written confirmations the renter should get before paying.</p>
+            </article>
+            <article>
+                <span>What we avoid</span>
+                <h2>No fake certainty</h2>
+                <p>We avoid claims like approved, illegal, guaranteed refundable, or financially safe unless the user supplied enough verified facts. Most outputs are risk screens, not final answers.</p>
+            </article>
+        </section>
+
+        <section class="trust-links">
+            <a href="/RentVerdict/methodology">Methodology</a>
+            <a href="/RentVerdict/data-sources">Data sources</a>
+            <a href="/RentVerdict/corrections">Correction policy</a>
+            <a href="/RentVerdict/terms">Terms</a>
+        </section>
+    </main>
 `)
-

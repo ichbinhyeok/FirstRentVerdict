@@ -2,12 +2,13 @@
 
 ## Current Thesis
 
-- Broad `city rent info` SEO is not the main growth path.
-- The surviving wedge is:
-  - `bad credit + no cosigner approval`
-- The supporting wedge is:
-  - `move-in cash`
-- City pages and research pages now act as supporting evidence, not the main promise.
+- `bad credit + no cosigner approval` as the primary SEO wedge is retired as of `2026-04-24`.
+- The original data asset remains useful, but the V2 SEO/content framing is not the main growth path.
+- V3 moves from information-style SEO surfaces to programmatic tool surfaces:
+  - `Should I Apply? Apartment Risk Checker`
+  - `application fee waste risk`
+  - `move-in cash gap before applying`
+- City pages and research pages must support tool entry, not behave like broad rent-market content.
 
 ## 2026-03-22 Baseline
 
@@ -238,3 +239,112 @@ This pass makes the wedge narrower than the 2026-03-22 version.
   - no real query expansion into the new approval cluster
 
 If the negative case holds on `2026-04-19`, reduce SEO scope again and treat SEO as a background channel rather than the primary growth engine.
+
+## 2026-04-24 V2 Retirement Decision
+
+V2 thesis retired:
+
+- `bad credit + no cosigner approval`
+- support wedge: `move-in cash`
+- operating shape: guide/content pages plus calculator CTAs
+
+Search Console readback for `sc-domain:movecostinfo.com`:
+
+- recent 28 days `2026-03-27 ~ 2026-04-23`:
+  - `0 clicks / 217 impressions / CTR 0% / avg position 7.71`
+- prior 28 days `2026-02-27 ~ 2026-03-26`:
+  - `5 clicks / 117 impressions / CTR 4.27% / avg position 22.21`
+- focused build window after `2026-04-12`:
+  - `2026-04-13 ~ 2026-04-23`: `0 clicks / 52 impressions / avg position 14.85`
+  - prior window `2026-04-02 ~ 2026-04-12`: `0 clicks / 101 impressions / avg position 5.05`
+- chosen money page:
+  - `/RentVerdict/guides/rent-with-bad-credit-no-cosigner`
+  - recent 28 days: `0 clicks / 24 impressions / avg position 3.96`
+  - those impressions were concentrated on `2026-04-09 ~ 2026-04-10`
+  - `2026-04-13 ~ 2026-04-23`: `0 impressions`
+- explicit query filters returned no meaningful footprint:
+  - `bad credit`: `0 impressions`
+  - `cosigner`: `0 impressions`
+  - `guarantor`: `0 impressions`
+  - `approval`: `0 impressions`
+  - `cash`: `0 impressions`
+- US-only strategic surfaces did not show meaningful query/page expansion into the new guides.
+
+Why V2 failed:
+
+- The wedge became clearer, but the exposure surface became too narrow.
+- The pages that expanded exposure were mostly information-style guides, so Google could treat the site as a rent-information site rather than a tool.
+- The surfaced demand remained scattered across city, rent, pet, and legacy verdict URLs instead of the approval-rescue cluster.
+- The product ended at advice and contact intent, not a strong pre-application decision event.
+- The first bottleneck remained acquisition, not calculation accuracy.
+
+What this does not mean:
+
+- The original decision-engine problem is not dead.
+- The local data asset is not dead.
+- The tool thesis is not dead.
+- The failed assumption was that guide/content SEO could validate the wedge and pull demand into the tool.
+
+Locked learning:
+
+- Do not expand generic city SEO.
+- Do not publish more broad rent-market guides.
+- Do not treat `bad credit + no cosigner` as the main SEO wedge unless a separate paid/direct-channel test proves demand first.
+- Keep SEO as a background channel until tool-surface demand is proven.
+
+## V3 Direction
+
+V3 thesis:
+
+- A renter does not primarily want another guide.
+- A renter wants to know whether they should apply before they waste an application fee, deposit, admin fee, or moving cash.
+- The original move-in cash pressure engine should be reframed as a pre-application risk checker.
+
+V3 product promise:
+
+- `Should I apply for this apartment, or am I about to waste money?`
+
+V3 primary surface:
+
+- `Should I Apply? Apartment Risk Checker`
+
+Core verdict language:
+
+- `Apply`
+- `Pause`
+- `Do Not Apply`
+
+Core risk modules:
+
+- application fee waste risk
+- move-in cash gap
+- deposit pressure
+- income-to-rent risk
+- pet fee pressure
+- post-move buffer risk
+- questions to ask before applying
+
+V3 wedge:
+
+- avoid wasting application fees and move-in cash before applying
+
+V3 exposure rule:
+
+- broad exposure is allowed only through tool-first pages.
+- Every strategic page must begin with a calculator, checker, prefilled scenario, or result-style surface.
+- Supporting explanation can exist below the tool, but the page must not read as a generic article first.
+
+Example V3 tool surfaces:
+
+- `/RentVerdict/should-i-apply`
+- `/RentVerdict/application-fee-risk-checker`
+- `/RentVerdict/move-in-cash-gap-calculator`
+- `/RentVerdict/security-deposit-calculator`
+- `/RentVerdict/pet-fee-move-in-cost-calculator`
+- `/RentVerdict/can-i-move-with/5000/to/miami-fl`
+- `/RentVerdict/city/miami-fl/move-in-cost-calculator`
+
+Next operating rule:
+
+- Before redesigning large parts of the product, verify and enrich the data needed for the V3 risk checker.
+- The next build should reduce information-style pages and increase tool-surface clarity.

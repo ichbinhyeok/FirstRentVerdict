@@ -33,7 +33,7 @@
 
             <h2 style="font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem;">4. Contact Us</h2>
             <p style="font-size: 1rem; line-height: 1.7; color: var(--text-secondary);">
-                If you have questions about this policy, please contact us at: <a href="mailto:spainhyeok@gmail.com" style="color: var(--primary);">spainhyeok@gmail.com</a>
+                If you have questions about this policy, please contact us at: <a href="mailto:shinhyeok22@gmail.com" style="color: var(--primary);">shinhyeok22@gmail.com</a>
             </p>
         </div>
     </div>
